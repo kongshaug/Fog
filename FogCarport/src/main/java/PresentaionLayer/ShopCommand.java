@@ -13,8 +13,19 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author sofieamalielandt
  */
-public interface Command
+public class ShopCommand implements Command
 {
-    String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException;
+    private String target;
+    
+    public ShopCommand(String target)
+    {
+        this.target = target;
+    }
 
+    @Override
+    public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException
+    {
+        return target;
+    }
+  
 }
