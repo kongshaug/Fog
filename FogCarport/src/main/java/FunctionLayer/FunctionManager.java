@@ -31,7 +31,16 @@ public class FunctionManager
             instance = new FunctionManager();
         }
         return instance;
-    }  
+    }
+    
+    public void calCarport(int depth, int width) throws DataException
+    {
+        Material pole = db.getMaterial(3);
+        Material rem = db.getMaterial(4);
+        Material bolts = db.getMaterial(27);
+        Material discs = db.getMaterial(28);
+    }
+    
     
   
 }

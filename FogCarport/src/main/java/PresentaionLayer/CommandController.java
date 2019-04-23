@@ -21,7 +21,7 @@ public class CommandController
     {
       //Command shop = new ShopCommand("shop.jsp");
       commands.put("shop", new ShopCommand("shop.jsp"));
-//      commands.put("createuser", new CreateUserCommand("index.jsp"));
+      commands.put("calculate", new PartlistCommand("partlist.jsp"));
 //      commands.put("shoppingcart", new ShoppingcartCommand("shoppingcart.jsp"));
 //      commands.put("placeorder", new PlaceOrderCommand("placeorder.jsp"));
 //      commands.put("back", shop);
