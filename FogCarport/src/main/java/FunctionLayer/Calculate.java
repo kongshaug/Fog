@@ -14,22 +14,58 @@ import java.util.HashMap;
  */
 public class Calculate {
     
-    Carport carport = new Carport(1000,1000, null);
-    HashMap map = carport.getMaterials();
     
     
-  public void caluclatePostes(int depth)
+  public void caluclateCarport(Carport carport)
 {
+    int depth = carport.getDepth();
+    HashMap map = carport.getMaterials();
     //a pole is placed for each 2.5 meter on the right and left side of the carport
     int numberOfPoles = depth / 250 * 2;
     HashMap poles = null;
     
-    poles.put("navn", "25x200	mm.	trykimp.	Brædt");
+    poles.put("navn", "97x97	mm.	trykimp.	Stolpe");
     poles.put("Længde", "300");
     poles.put("Antal", numberOfPoles);
     poles.put("Enhed", "stk");
-    poles.put("Beskrivelse", "understernbrædder	til	for	&	bag	ende");
+    poles.put("Beskrivelse", "Stolper	nedgraves	90	cm.	i	jord");
     map.put("poles", poles);
+    
+    //calculate rem and put in map
+    
+    HashMap rem = null;
+    
+    int remmen = depth;
+    
+    rem.put("navn", "45x195	mm.	spærtræ	ubh.");
+    rem.put("Længde", remmen);
+    rem.put("Antal", 2);
+    rem.put("Enhed", "stk");
+    rem.put("Beskrivelse", "Remme	i	sider,	sadles	ned	i	stolper");
+    map.put("rem", rem);
+    
+    //calculate Bræddebolte, skive og møtrik 
+    
+      HashMap bolts = null;
+      HashMap skive = null;
+   
+    
+    int boltParts = numberOfPoles * 4;
+    
+    bolts.put("navn", "bræddebolt	10	x	120	mm.");
+    bolts.put("Længde", null);
+    bolts.put("Antal", boltParts);
+    bolts.put("Enhed", "stk");
+    bolts.put("Beskrivelse", "Til	montering	af	rem	på	stolper");
+    bolts.put("bolts", bolts);
+ 
+    skive.put("navn", "firkantskiver	40x40x11mm");
+    skive.put("Længde", null);
+    skive.put("Antal", boltParts);
+    skive.put("Enhed", "stk");
+    skive.put("Beskrivelse", "Til montering	af	rem	på	stolper");
+    skive.put("skive", skive);
+    
  
 }  
   
