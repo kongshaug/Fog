@@ -31,19 +31,12 @@ public class FrontController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet FrontController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet FrontController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+         Command action = Command.from(request);
+            String view = action.execute(request, response);
         }
     }
 
