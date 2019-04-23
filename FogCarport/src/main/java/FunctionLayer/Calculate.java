@@ -23,12 +23,12 @@ public class Calculate {
     //a pole is placed for each 2.5 meter on the right and left side of the carport
     int numberOfPoles = depth / 250 * 2;
     HashMap poles = null;
-    poles.put("Beskrivelse", "25x200	mm.	trykimp.	Brædt");
+    
+    poles.put("navn", "25x200	mm.	trykimp.	Brædt");
     poles.put("Længde", "300");
     poles.put("Antal", numberOfPoles);
     poles.put("Enhed", "stk");
     poles.put("Beskrivelse", "understernbrædder	til	for	&	bag	ende");
-    
     map.put("poles", poles);
  
 }  
