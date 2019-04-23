@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package FunctionLayer;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -15,6 +16,7 @@ public class Carport
     private int width;
     private int depth;
     private HashMap<String, HashMap<String, String>> materials;
+    private ArrayList parts;
     private roof roof;
     private shed shed;
 
@@ -55,6 +57,14 @@ public class Carport
 
     public void setMaterials(HashMap<String, HashMap<String, String>> materials) {
         this.materials = materials;
+    }
+
+    public ArrayList getParts() {
+        return parts;
+    }
+
+    public void setParts(ArrayList parts) {
+        this.parts = parts;
     }
     
     
