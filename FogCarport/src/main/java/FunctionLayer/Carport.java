@@ -16,31 +16,33 @@ import java.util.HashMap;
  */
 public class Carport
 {
-    private int length;
-    private int hight;
+    private int widgh;
+    private int depth;
     private HashMap<String, HashMap<String, String>> materials;
     private roof roof;
     private shed shed;
 
-    public Carport(int length, int hight, roof roof, shed shed) {
-        this.length = length;
-        this.hight = hight;
+    public Carport(int widgh, int depth, roof roof, shed shed) {
+        this.widgh = widgh;
+        this.depth = depth;
         this.roof = roof;
         this.shed = shed;
+     
     }
-        public Carport(int length, int hight, roof roof) {
-        this.length = length;
-        this.hight = hight;
+
+    public Carport(int widgh, int depth, roof roof) {
+        this.widgh = widgh;
+        this.depth = depth;
         this.roof = roof;
-       
     }
 
-    public int getLength() {
-        return length;
+
+    public int getWidgh() {
+        return widgh;
     }
 
-    public int getHight() {
-        return hight;
+    public int getDepth() {
+        return depth;
     }
 
     public HashMap<String, HashMap<String, String>> getMaterials() {
