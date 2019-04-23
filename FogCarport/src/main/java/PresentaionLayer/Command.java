@@ -14,13 +14,14 @@ abstract class Command {
 
     }
 
-    static Command from( HttpServletRequest request ) {
-        String commandName = request.getParameter( "command" );
-        if ( commands == null ) {
-            initCommands();
-        }
-        return commands.getOrDefault(commandName, new CMD_UnknownCommand() );
-    }
+//    static Command from( HttpServletRequest request ) {
+//        String commandName = request.getParameter( "command" );
+//        if ( commands == null ) {
+//            initCommands();
+//        }
+//        return commands.getOrDefault(commandName, new CMD_UnknownCommand() );
+//        
+//    }
 
     abstract String execute( HttpServletRequest request, HttpServletResponse response ) 
             throws Exception;
