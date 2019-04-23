@@ -4,11 +4,7 @@
  * and open the template in the editor.
  */
 package FunctionLayer;
-
-
 import java.util.HashMap;
-
-
 
 /**
  *
@@ -16,29 +12,29 @@ import java.util.HashMap;
  */
 public class Carport
 {
-    private int widgh;
+    private int width;
     private int depth;
     private HashMap<String, HashMap<String, String>> materials;
     private roof roof;
     private shed shed;
 
-    public Carport(int widgh, int depth, roof roof, shed shed) {
-        this.widgh = widgh;
+    public Carport(int width, int depth, roof roof, shed shed) {
+        this.width = width;
         this.depth = depth;
         this.roof = roof;
         this.shed = shed;
      
     }
 
-    public Carport(int widgh, int depth, roof roof) {
-        this.widgh = widgh;
+    public Carport(int width, int depth, roof roof) {
+        this.width = width;
         this.depth = depth;
         this.roof = roof;
     }
 
 
-    public int getWidgh() {
-        return widgh;
+    public int getWidth() {
+        return width;
     }
 
     public int getDepth() {

@@ -26,6 +26,42 @@ public class MaterialMapper
         this.dbc = dbc;
     }
 
+    public Material getMaterial(String material_name) throws DataException
+    {
+        try
+        {   
+            Material material = null;
+            
+            dbc.open();
+            String query = "SELECT * FROM Fog.`materials`"
+                    + "WHERE (`material_name` = ?);";
+            
+            int id = 0;
+            String name = "";
+            String unit = "";
+            
+            PreparedStatement statement = dbc.preparedStatement(query);
+            statement.setString(1, material_name);
+            ResultSet rs = statement.executeQuery();
+            
+            if (rs.next())
+            {
+                id = rs.getInt("material_id");
+                name = rs.getString("material_name");
+                unit = rs.getString("unit");
+              
+                
+                material = new Material(id, name, unit);
+            }
+            
+            dbc.close();
+            return material;
+            
+        } catch (SQLException ex)
+        {
+            throw new DataException(ex.getMessage());
+        }
+    }
     public Material getMaterial(int material_id) throws DataException
     {
         try
