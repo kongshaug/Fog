@@ -12,6 +12,7 @@ import java.util.HashMap;
  */
 public class Carport
 {
+    private int id;
     private int width;
     private int depth;
     private HashMap<String, HashMap<String, String>> materials;
@@ -31,8 +32,26 @@ public class Carport
         this.depth = depth;
         this.roof = roof;
     }
+    
+    public Carport(int id, int width, int depth, roof roof, shed shed) {
+        this.width = width;
+        this.depth = depth;
+        this.roof = roof;
+        this.shed = shed;
+     
+    }
+
+    public Carport(int id, int width, int depth, roof roof) {
+        this.width = width;
+        this.depth = depth;
+        this.roof = roof;
+    }
 
 
+    public int getId() {
+        return id;
+    }
+    
     public int getWidth() {
         return width;
     }
@@ -56,6 +75,10 @@ public class Carport
     public void setMaterials(HashMap<String, HashMap<String, String>> materials) {
         this.materials = materials;
     }
-    
+
+    public void setId(int id)
+    {
+        this.id = id;
+    }
     
 }

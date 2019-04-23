@@ -5,8 +5,11 @@
  */
 package PresentaionLayer;
 
+import DataLayer.DataException;
 import FunctionLayer.FunctionManager;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,8 +43,8 @@ public class FrontController extends HttpServlet
     {
         try
         {
-            //FunctionManager manager = FunctionManager.getInstance();
-            FunctionManager manager = new FunctionManager();
+            FunctionManager manager = FunctionManager.getInstance();
+
 
             String path = request.getParameter("command");
             Command command = CommandController.from(path);
@@ -56,12 +59,12 @@ public class FrontController extends HttpServlet
             RequestDispatcher dispatcher = request.getRequestDispatcher(ce.getTarget());
             dispatcher.forward(request, response);
             
-        } catch (IOException | ServletException e)
+        } catch (IOException | ServletException | DataException e)
         {
             request.setAttribute("message", e.getMessage());
             RequestDispatcher dispatcher = request.getRequestDispatcher("error.jsp");
             dispatcher.forward(request, response);
-        }
+        } 
         }
 
         // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
