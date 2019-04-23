@@ -16,8 +16,7 @@ public class Carport
     private int id;
     private int width;
     private int depth;
-    private HashMap<String, HashMap<String, String>> materials;
-    private ArrayList parts;
+    private ArrayList<Part> parts;
     private roof roof;
     private shed shed;
 
@@ -62,9 +61,6 @@ public class Carport
         return depth;
     }
 
-    public HashMap<String, HashMap<String, String>> getMaterials() {
-        return materials;
-    }
 
     public roof getRoof() {
         return roof;
@@ -72,10 +68,6 @@ public class Carport
 
     public shed getShed() {
         return shed;
-    }
-
-    public void setMaterials(HashMap<String, HashMap<String, String>> materials) {
-        this.materials = materials;
     }
 
     public void setId(int id)

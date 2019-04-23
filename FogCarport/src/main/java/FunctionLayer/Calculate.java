@@ -6,7 +6,6 @@
 package FunctionLayer;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  *
@@ -17,7 +16,7 @@ public class Calculate {
     public Carport caluclatepoles(Carport carport, Material pole, Material bolt, Material disc) {
         int depth = carport.getDepth();
 
-        ArrayList parts = carport.getParts();
+        ArrayList<Part> parts = carport.getParts();
         //a pole is placed for each 2.5 meter on the right and left side of the carport
         int numberOfPoles = depth / 200 * 2;
         int boltParts = numberOfPoles * 4;

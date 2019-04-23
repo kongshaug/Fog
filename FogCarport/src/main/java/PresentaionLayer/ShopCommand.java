@@ -23,7 +23,7 @@ public class ShopCommand implements Command
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException
+    public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataLayer.DataException
     {
         return target;
     }
