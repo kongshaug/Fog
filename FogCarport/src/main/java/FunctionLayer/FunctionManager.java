@@ -5,11 +5,42 @@
  */
 package FunctionLayer;
 
+import DataLayer.DataException;
+import DataLayer.DataFacade;
+
 /**
  *
  * @author sofieamalielandt
  */
 public class FunctionManager
 {
+    private static FunctionManager instance = null;
+    private DataFacade db;
+    private Calculate c;
+
+    public FunctionManager() throws DataException
+    {
+        db = DataFacade.getInstance();
+        c = new Calculate();
+    }
+
+    public static FunctionManager getInstance() throws DataException
+    {
+        if (instance == null)
+        {
+            instance = new FunctionManager();
+        }
+        return instance;
+    }
     
+    public void calCarport(int depth, int width) throws DataException
+    {
+        Material pole = db.getMaterial(3);
+        Material rem = db.getMaterial(4);
+        Material bolts = db.getMaterial(27);
+        Material discs = db.getMaterial(28);
+    }
+    
+    
+  
 }

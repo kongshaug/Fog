@@ -12,12 +12,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="Fog">
+        <form action="Fog" method="POST">
   width<br>
   <input type="text" name="firstname" value="100"><br>
   depth<br>
   <input type="text" name="lastname" value="100"><br><br>
-  <input type="submit" value="Submit">
+   <button name="command" value="calculate">Beregn carport</button>
 </form> 
         
     </body>
