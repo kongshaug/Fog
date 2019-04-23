@@ -12,11 +12,11 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="/action_page.php">
+        <form action="Fog">
   width<br>
-  <input type="text" name="firstname" value="Mickey"><br>
+  <input type="text" name="firstname" value="100"><br>
   depth<br>
-  <input type="text" name="lastname" value="Mouse"><br><br>
+  <input type="text" name="lastname" value="100"><br><br>
   <input type="submit" value="Submit">
 </form> 
         
