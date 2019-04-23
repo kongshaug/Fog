@@ -118,9 +118,9 @@ public class MaterialMapper
             
             while (rs.next())
             {
-                id = rs.getInt("order_id");
-                name = rs.getString("order_date");
-                unit = rs.getString("shipped");
+                id = rs.getInt("material_id");
+                name = rs.getString("material_name");
+                unit = rs.getString("unit");
                 
                 materials.add(new Material(id, name, unit));
             }
