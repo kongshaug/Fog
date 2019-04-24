@@ -99,6 +99,42 @@ public class MaterialMapper
         }
     }
 
+    private Material retrieveMaterial(int material_id) throws DataException
+    {
+        try
+        {
+            Material material = null;
+
+            dbc.open();
+            String query = "SELECT * FROM Fog.`materials`"
+                    + "WHERE (`material_id` = ?);";
+
+            int id = 0;
+            String name = "";
+            String unit = "";
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+            statement.setInt(1, material_id);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next())
+            {
+                id = rs.getInt("material_id");
+                name = rs.getString("material_name");
+                unit = rs.getString("unit");
+
+                material = new Material(id, name, unit);
+            }
+
+            //dbc.close();
+            return material;
+
+        } catch (SQLException ex)
+        {
+            throw new DataException(ex.getMessage());
+        }
+    }
+
     public List<Material> getMaterials() throws DataException
     {
         try
@@ -158,8 +194,8 @@ public class MaterialMapper
                 name = rs.getString("roof_type_name");
                 m1_id = rs.getInt("roof_material1");
                 m2_id = rs.getInt("roof_material2");
-                m1 = getMaterial(m1_id);
-                m2 = getMaterial(m2_id);
+                m1 = retrieveMaterial(m1_id);
+                m2 = retrieveMaterial(m2_id);
 
                 if (m2 == null)
                 {
@@ -179,4 +215,5 @@ public class MaterialMapper
             throw new DataException(ex.getMessage());
         }
     }
+
 }
