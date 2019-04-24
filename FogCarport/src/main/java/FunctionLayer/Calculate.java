@@ -118,8 +118,12 @@ public class Calculate {
          //calculate number of screws used to fit plastmo to lægter
          
          int NumberOfScrews = numberOfLægter * NumberOfSpær;
+         int PackagesOfScres = NumberOfScrews/250;
+         if (NumberOfScrews%250 != 0)
+         {PackagesOfScres ++;
+         }
          
-         Part Screws = new Part(RoofScrews, 0, NumberOfScrews, "til montering af tag på lægter");
+         Part Screws = new Part(RoofScrews, 0, PackagesOfScres, "til montering af tag på lægter");
          parts.add(Screws);
          
          
