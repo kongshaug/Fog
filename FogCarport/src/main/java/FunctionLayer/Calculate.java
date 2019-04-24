@@ -49,6 +49,56 @@ public class Calculate {
 
     }
 
+    public void caluclatFlatRoof(Carport carport, Material spær, Material beslag, Material BeslagSkruer, Material Plastmo) {
+        int depth = carport.getDepth();
+        int width = carport.getWidth();
+
+        ArrayList parts = carport.getParts();
+    //calculate spær and put in arraylist
+        int NumberOfSpær = depth/60;
+        if (depth%60 != 0)
+        {
+            NumberOfSpær ++;
+        }
+        
+
+        Part spærene = new Part(spær, width, NumberOfSpær, "spær monteres på tværs af de 2 remme");
+        parts.add(spærene);
+        carport.setParts(parts);
+
+        //for each spær there is 2 beslag
+        int NumberOfBeslag = NumberOfSpær *2;
+        
+        Part beslagene = new Part(beslag, 0, NumberOfBeslag, "til montering af spær på remmene");
+        parts.add(beslagene);
+        carport.setParts(parts);
+        //for each beslag you need 9 beslagskruer
+        
+        int NumberOfBeslagskruer = NumberOfBeslag *9;
+        
+
+        Part beslagskruer = new Part(BeslagSkruer, 0, NumberOfBeslagskruer, "til fastgørelse af beslag mellem spær og remmene");
+        parts.add(beslagskruer);
+        carport.setParts(parts);
+        
+        //on top of the roof is Plastmo Ecolite blåtonet 
+        
+        //plastmo is 120 wide and overlap with 20 cm which is why we devide with 100 insted of 120
+        
+        int numberOfPlastmo = width / 100;
+        if (width % 120 != 0)
+        {
+        numberOfPlastmo ++;
+        }
+
+        
+           Part Plastmoen = new Part(Plastmo, depth, numberOfPlastmo, "tagplader monteres på spær");
+        parts.add(Plastmoen);
+        carport.setParts(parts);
+        
+        
+        
+    }
  
 
 }
