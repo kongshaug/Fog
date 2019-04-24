@@ -50,7 +50,7 @@ public class Calculate {
     }
 
     public void caluclatFlatRoof(Carport carport, Material spær, Material beslag, Material BeslagSkruer,
-                                 Material Plastmo, Material Plastmotætning, Material lægte, Material RoofScrews) {
+                                 Material lægte, Material RoofScrews) {
         int depth = carport.getDepth();
         int width = carport.getWidth();
 
@@ -110,8 +110,7 @@ public class Calculate {
     }
     
     
-    public void caluclatFlatLastPartsRoof(Carport carport, Material spær, Material beslag, Material BeslagSkruer,
-                                 Material Plastmo, Material Plastmotætning, Material lægte, Material RoofScrews) {
+    public void caluclatFlatLastPartsRoof(Carport carport, Material Plastmo, Material Plastmotætning) {
         int depth = carport.getDepth();
         int width = carport.getWidth();
         ArrayList parts = carport.getParts();
@@ -149,8 +148,25 @@ public class Calculate {
         int slope = carport.getRoof().getSlope();
         ArrayList parts = carport.getParts();
         
+        //length of roof from edge to top
+        
+        //which one? --- find out in next episode
+        double halfRoofrad = (width/2) / Math.toRadians(slope);
+        
+        double halfRoof = (width/2) / Math.cos(slope);
+        
+        //calculate spær and put in arraylist
+        int NumberOfSpær = (int) (halfRoof /60 + 1) * 2;
+        if (depth%60 != 0)
+        {
+            NumberOfSpær += 2;
+        }
+
+        Part spærene = new Part(spær, depth, NumberOfSpær, "spær monteres på taglægtererne");
+        parts.add(spærene);
         
         
+         carport.setParts(parts);
  }
  
  
