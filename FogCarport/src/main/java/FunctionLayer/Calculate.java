@@ -119,7 +119,7 @@ public class Calculate {
     }
 
     public void caluclatSlopeRoof(Carport carport, Material spær, Material lægteBeslag, Material BeslagSkruer,
-             Material taglægte, Material beslagRemToTaglægte) {
+             Material taglægte, Material beslagRemToTaglægte, Material ScrewForRem, Material Tegl) {
         int depth = carport.getDepth();
         int width = carport.getWidth();
         int slope = carport.getRoof().getSlope();
@@ -134,9 +134,9 @@ public class Calculate {
         //hight of roof
         int hight = (int) (sqrt(halfRoof * halfRoof - width * width));
 
-        //calculate spær and put in arraylist
-        int NumberOfSpær = (int) (halfRoof / 60 + 1) * 2;
-        if (depth % 60 != 0) {
+        //calculate spær 
+        int NumberOfSpær = (int) (halfRoof / 30 + 1) * 2;
+        if (depth % 30 != 0) {
             NumberOfSpær += 2;
         }
 
@@ -150,6 +150,13 @@ public class Calculate {
         if (depth % 75 != 0) {
             numberOfTaglægter++;
         }
+        
+        //calculate number of screw to connect spær to taglægter
+        int numberOfScrewsForRem = NumberOfSpær * numberOfTaglægter;
+        
+        
+         Part ScrewsForRem = new Part(ScrewForRem, 0, numberOfScrewsForRem, "skruer til montering af lægter på taglægter");
+        parts.add(ScrewsForRem);
 
         //the buttom part of the taglægte is the width of the carport
         Part buttomTaglægtePart = new Part(taglægte, width, numberOfTaglægter, "bundstykke til taglægte");
@@ -185,6 +192,12 @@ public class Calculate {
          Part beslagTaglægteToRem = new Part(lægteBeslag, (int) halfRoof, numberOfTaglægter * 2, "beslag til at montere taglægte på rem");
         parts.add(beslagTaglægteToRem);
         
+        //teglsten (30 cm dækbrædte)
+        
+        int numberOfTegl = NumberOfSpær * depth/30;
+        
+        Part Teglene = new Part(Tegl, 0, numberOfTegl, "tegl til montering på taget");
+        parts.add(beslagTaglægteToRem);
         
         
         carport.setParts(parts);
