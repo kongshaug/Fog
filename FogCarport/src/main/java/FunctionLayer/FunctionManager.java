@@ -7,6 +7,7 @@ package FunctionLayer;
 
 import DataLayer.DataException;
 import DataLayer.DataFacade;
+import java.util.List;
 
 /**
  *
@@ -14,6 +15,7 @@ import DataLayer.DataFacade;
  */
 public class FunctionManager
 {
+
     private static FunctionManager instance = null;
     private DataFacade db;
     private Calculate c;
@@ -32,19 +34,32 @@ public class FunctionManager
         }
         return instance;
     }
-    
+
     public void calCarport(Carport carport) throws DataException
     {
         Material pole = db.getMaterial(3);
         Material rem = db.getMaterial(4);
         Material bolts = db.getMaterial(27);
         Material discs = db.getMaterial(28);
-        
+
         c.caluclatepoles(carport, pole, bolts, discs);
         c.caluclatRem(carport, rem);
-        
+
     }
-    
-    
-  
+
+    public List<RoofType> getRoofs() throws DataException
+    {
+        List<RoofType> rooftypes = db.getRoofs();
+        
+        for (RoofType rooftype : rooftypes)
+        {
+            if(rooftype.getName().equals("Plasttrapezplader"))
+            {
+                rooftypes.remove(rooftype);
+            }
+        }
+        
+        return db.getRoofs();
+    }
+
 }

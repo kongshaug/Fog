@@ -7,6 +7,7 @@ package DataLayer;
 
 import FunctionLayer.Carport;
 import FunctionLayer.Material;
+import FunctionLayer.RoofType;
 import java.util.List;
 
 /**
@@ -63,6 +64,11 @@ public class DataFacade
         
         res = "Tak for din ordre, nummer: " + carport.getId();
         return res;
+    }
+    
+    public List<RoofType> getRoofs() throws DataException
+    {
+        return mm.getRoofs();
     }
     
 }

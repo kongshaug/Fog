@@ -6,8 +6,11 @@
 package PresentaionLayer;
 
 import FunctionLayer.FunctionManager;
+import FunctionLayer.RoofType;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -25,6 +28,11 @@ public class ShopCommand implements Command
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataLayer.DataException
     {
+        HttpSession session = request.getSession();
+        List<RoofType> rooftypes = manager.getRoofs();
+        
+        session.setAttribute("roofs", rooftypes);
+        
         return target;
     }
   

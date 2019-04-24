@@ -29,6 +29,15 @@
                     }
                 %>
             </select>
+            <select name="roof">
+                <option disabled selected></option>
+                <%
+                    for (int i = 15; i <= 45; i = i + 5)
+                    {
+                        out.println("<option>" + i + "</option>");
+                    }
+                %>
+            </select>
             <button name="command" value="calculate">Beregn carport</button>
         </form> 
     </body>

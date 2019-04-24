@@ -17,17 +17,17 @@ public class Roof
     private int id;
     private int test;
     private int slope;
-    private Material type;
+    private RoofType type;
     private ArrayList<Part> parts;
 
-    public Roof(int id, int slope, Material type)
+    public Roof(int id, int slope, RoofType type)
     {
         this.id = id;
         this.slope = slope;
         this.type = type;
     }
 
-    public Roof(int slope, Material type)
+    public Roof(int slope, RoofType type)
     {
         this.slope = slope;
         this.type = type;
@@ -53,7 +53,7 @@ public class Roof
         return slope;
     }
 
-    public Material getType()
+    public RoofType getType()
     {
         return type;
     }
