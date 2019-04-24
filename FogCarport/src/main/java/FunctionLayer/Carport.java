@@ -5,7 +5,6 @@
  */
 package FunctionLayer;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  *
@@ -17,10 +16,10 @@ public class Carport
     private int width;
     private int depth;
     private ArrayList<Part> parts;
-    private roof roof;
-    private shed shed;
+    private Roof roof;
+    private Shed shed;
 
-    public Carport(int width, int depth, roof roof, shed shed) {
+    public Carport(int width, int depth, Roof roof, Shed shed) {
         this.width = width;
         this.depth = depth;
         this.roof = roof;
@@ -29,14 +28,14 @@ public class Carport
      
     }
 
-    public Carport(int width, int depth, roof roof) {
+    public Carport(int width, int depth, Roof roof) {
         this.width = width;
         this.depth = depth;
         this.roof = roof;
         this.parts = new ArrayList<>();
     }
     
-    public Carport(int id, int width, int depth, roof roof, shed shed) {
+    public Carport(int id, int width, int depth, Roof roof, Shed shed) {
         this.width = width;
         this.depth = depth;
         this.roof = roof;
@@ -45,7 +44,7 @@ public class Carport
      
     }
 
-    public Carport(int id, int width, int depth, roof roof) {
+    public Carport(int id, int width, int depth, Roof roof) {
         this.width = width;
         this.depth = depth;
         this.roof = roof;
@@ -66,11 +65,11 @@ public class Carport
     }
 
 
-    public roof getRoof() {
+    public Roof getRoof() {
         return roof;
     }
 
-    public shed getShed() {
+    public Shed getShed() {
         return shed;
     }
 
