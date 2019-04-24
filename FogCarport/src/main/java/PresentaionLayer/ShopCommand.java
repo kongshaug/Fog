@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 public class ShopCommand implements Command
 {
     private String target;
-    
+
     public ShopCommand(String target)
     {
         this.target = target;
@@ -30,10 +30,12 @@ public class ShopCommand implements Command
     {
         HttpSession session = request.getSession();
         List<RoofType> rooftypes = manager.getRoofs();
-        
+        RoofType roof = manager.getRoof();
+
         session.setAttribute("roofs", rooftypes);
-        
+        session.setAttribute("roof", roof);
+
         return target;
     }
-  
+
 }

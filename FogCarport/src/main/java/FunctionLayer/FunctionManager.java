@@ -49,17 +49,35 @@ public class FunctionManager
 
     public List<RoofType> getRoofs() throws DataException
     {
+        RoofType result = null;
         List<RoofType> rooftypes = db.getRoofs();
-        
+
         for (RoofType rooftype : rooftypes)
         {
-            if(rooftype.getName().equals("Plasttrapezplader"))
+            if (rooftype.getId() == 2)
             {
-                rooftypes.remove(rooftype);
+                result = rooftype;
+            }
+
+        }
+            rooftypes.remove(result);
+
+        return rooftypes;
+    }
+
+    public RoofType getRoof() throws DataException
+    {
+        List<RoofType> rooftypes = db.getRoofs();
+
+        for (RoofType rooftype : rooftypes)
+        {
+            if (rooftype.getId() == 2)
+            {
+                return rooftype;
             }
         }
-        
-        return db.getRoofs();
+
+        return null;
     }
 
 }
