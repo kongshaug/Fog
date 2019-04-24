@@ -10,6 +10,7 @@ import FunctionLayer.Carport;
 import FunctionLayer.FunctionManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class PartlistCommand implements Command
 {
+
     private String target;
 
     public PartlistCommand(String target)
@@ -27,14 +29,16 @@ public class PartlistCommand implements Command
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
+        HttpSession session = request.getSession();
         int depth = Integer.parseInt(request.getParameter("depth"));
         int width = Integer.parseInt(request.getParameter("width"));
         Carport carport = new Carport(width, depth, null);
-        
+
         manager.calCarport(carport);
-        
-        
+
+        session.setAttribute("carport", carport);
+
         return target;
     }
-    
+
 }

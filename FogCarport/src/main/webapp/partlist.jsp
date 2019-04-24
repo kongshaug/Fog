@@ -4,17 +4,47 @@
     Author     : aamandajuhl
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="FunctionLayer.Part"%>
+<%@page import="FunctionLayer.Carport"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Partlist</title>
     </head>
+    <%
+        Carport carport = (Carport) session.getAttribute("carport");
+    %>
     <body>
         <form action="Fog" method="POST">
             <table>
-                
+                <tr>
+                    <th><b>Materiale</b></th>
+                    <th><b>Længde</b></th>
+                    <th><b>Antal</b></th>
+                    <th><b>Enhed</b></th>
+                    <th><b>Beskrivelse</b></th>
+                </tr>
+                <%
+                    ArrayList<Part> parts = carport.getParts();
+                    for (Part p : parts)
+                    {
+                        out.println("<tr>");
+                        out.println("<td>" + p.getName() + "</td>");
+                        if (p.getLength() != 0)
+                        {
+                            out.println("<td>" + p.getLength() + "</td>");
+                        } else
+                        {
+                            out.println("<td> </td>");
+                        }
+                        out.println("<td>" + p.getQuantity() + "</td>");
+                        out.println("<td>" + p.getUnit() + "</td>");
+                        out.println("<td>" + p.getDescription() + "</td>");
+                    }
+                %>
             </table>
         </form>
     </body>

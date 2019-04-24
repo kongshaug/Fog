@@ -79,7 +79,7 @@ public class Carport
         this.id = id;
     }
 
-    public ArrayList getParts() {
+    public ArrayList<Part> getParts() {
         return parts;
     }
 
