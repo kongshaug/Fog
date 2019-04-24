@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Calculate {
 
-    public Carport caluclatepoles(Carport carport, Material pole, Material bolt, Material disc) {
+    public void caluclatepoles(Carport carport, Material pole, Material bolt, Material disc) {
         int depth = carport.getDepth();
 
         ArrayList<Part> parts = carport.getParts();
@@ -29,11 +29,11 @@ public class Calculate {
         parts.add(discs);
         carport.setParts(parts);
 
-        return carport;
+        
 
     }
 
-    public Carport caluclatRem(Carport carport, Material rem) {
+    public void caluclatRem(Carport carport, Material rem) {
         int depth = carport.getDepth();
 
         ArrayList parts = carport.getParts();
@@ -45,7 +45,7 @@ public class Calculate {
         parts.add(remmene);
         carport.setParts(parts);
 
-        return carport;
+        
 
     }
 
