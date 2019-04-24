@@ -81,28 +81,7 @@ public class Calculate {
         Part beslagskruer = new Part(BeslagSkruer, 0, NumberOfBeslagskruer, "til fastgørelse af beslag mellem spær og remmene");
         parts.add(beslagskruer);
    
-        
-        //on top of the roof is Plastmo Ecolite blåtonet 
-        
-        //plastmo is 120 wide and overlap with 20 cm which is why we devide with 100 insted of 120
-        
-        int numberOfPlastmo = width / 100;
-        if (width % 120 != 0)
-        {
-        numberOfPlastmo ++;
-        }
-
-        
-           Part Plastmoen = new Part(Plastmo, depth, numberOfPlastmo, "tagplader monteres på lægter");
-        parts.add(Plastmoen);
-       
-        
-        //at the end of the plastmo there is a tætningsprofil
-        
-        Part Plastmotætningen = new Part(Plastmotætning, depth, 2, "monteres i for og bagside af Plastmo til tætning for regnvand");
-         parts.add(Plastmotætningen);
-         
-         
+   
          //calculate number of lægter that goes acress the spær
          
          int numberOfLægter = width/70+1;
@@ -127,11 +106,52 @@ public class Calculate {
          parts.add(Screws);
          
          
-         
-         
-         
          carport.setParts(parts);
     }
- 
+    
+    
+    public void caluclatFlatLastPartsRoof(Carport carport, Material spær, Material beslag, Material BeslagSkruer,
+                                 Material Plastmo, Material Plastmotætning, Material lægte, Material RoofScrews) {
+        int depth = carport.getDepth();
+        int width = carport.getWidth();
+        ArrayList parts = carport.getParts();
+             
+        //on top of the roof is Plastmo Ecolite blåtonet 
+        
+        //plastmo is 120 wide and overlap with 20 cm which is why we devide with 100 insted of 120
+        
+        
+          int numberOfPlastmo = width / 100;
+        if (width % 120 != 0)
+        {
+        numberOfPlastmo ++;
+        }
 
+        
+           Part Plastmoen = new Part(Plastmo, depth, numberOfPlastmo, "tagplader monteres på lægter");
+        parts.add(Plastmoen);
+       
+        
+        //at the end of the plastmo there is a tætningsprofil
+        
+        Part Plastmotætningen = new Part(Plastmotætning, depth, 2, "monteres i for og bagside af Plastmo til tætning for regnvand");
+         parts.add(Plastmotætningen);
+        
+         carport.setParts(parts);
+    }
+
+        
+ 
+ public void caluclatSlopeRoof(Carport carport, Material spær, Material beslag, Material BeslagSkruer,
+                                 Material Plastmo, Material Plastmotætning, Material lægte, Material RoofScrews) {
+        int depth = carport.getDepth();
+        int width = carport.getWidth();
+        int slope = carport.getRoof().getSlope();
+        ArrayList parts = carport.getParts();
+        
+        
+        
+ }
+ 
+ 
 }
