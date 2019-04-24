@@ -44,13 +44,14 @@
                 function disable()
                 {
                     var options = document.querySelectorAll('option.s'), i = 0, l = options.length;
-                    for (; i < l; i++) 
+                    for (; i < l; i++)
                     {
                         options[i].disabled = true;
                     }
 
                     document.getElementsByClassName("s")
                     document.getElementById("f").disabled = false;
+                    document.getElementById("h").disabled = true;
 
                 }
 
@@ -58,19 +59,20 @@
                 {
                     document.getElementById("f").disabled = true;
                     document.getElementById("s").disabled = false;
-
+                    document.getElementById("h").disabled = false;
                 }
+               
             </script>
-
-
-            <select name="slope">
+            <select name="slope" id="h">
                 <option disabled selected>Vælg hældning</option>
-                <%                    for (int i = 15; i <= 45; i = i + 5)
+                <%                    
+                    for (int i = 15; i <= 45; i = i + 5)
                     {
-                        out.println("<option>" + i + "</option>");
+                        out.println("<option> " + i + "</option>");
                     }
                 %>
             </select>
+
             <button name="command" value="calculate">Beregn carport</button>
         </form> 
     </body>
