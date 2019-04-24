@@ -43,13 +43,13 @@
 
                 function disable()
                 {
-                    var options = document.querySelectorAll('option.s'), i = 0, l = options.length;
+                    var options = document.getElementById()("s"), i = 0, l = options.length;
                     for (; i < l; i++)
                     {
-                        options[i].disabled = true;
+                        options[i]. = true;
                     }
 
-                    document.getElementsByClassName("s")
+                    document.getElementsByTagName()
                     document.getElementById("f").disabled = false;
                     document.getElementById("h").disabled = true;
 
