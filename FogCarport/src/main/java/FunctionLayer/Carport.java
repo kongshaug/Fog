@@ -25,6 +25,7 @@ public class Carport
         this.depth = depth;
         this.roof = roof;
         this.shed = shed;
+        this.parts = new ArrayList<>();
      
     }
 
@@ -32,6 +33,7 @@ public class Carport
         this.width = width;
         this.depth = depth;
         this.roof = roof;
+        this.parts = new ArrayList<>();
     }
     
     public Carport(int id, int width, int depth, roof roof, shed shed) {
@@ -39,6 +41,7 @@ public class Carport
         this.depth = depth;
         this.roof = roof;
         this.shed = shed;
+        this.parts = new ArrayList<>();
      
     }
 
@@ -46,6 +49,7 @@ public class Carport
         this.width = width;
         this.depth = depth;
         this.roof = roof;
+        this.parts = new ArrayList<>();
     }
 
 
