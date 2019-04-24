@@ -119,7 +119,8 @@ public class Calculate {
     }
 
     public void caluclatSlopeRoof(Carport carport, Material spær, Material lægteBeslag, Material BeslagSkruer,
-             Material taglægte, Material beslagRemToTaglægte, Material ScrewForRem, Material Tegl) {
+             Material taglægte, Material beslagRemToTaglægte, Material ScrewForRem, Material Tegl,
+             Material Stern, Material MiddleTegl, Material vandbrædt) {
         int depth = carport.getDepth();
         int width = carport.getWidth();
         int slope = carport.getRoof().getSlope();
@@ -197,10 +198,49 @@ public class Calculate {
         int numberOfTegl = NumberOfSpær * depth/30;
         
         Part Teglene = new Part(Tegl, 0, numberOfTegl, "tegl til montering på taget");
-        parts.add(beslagTaglægteToRem);
+        parts.add(Teglene);
         
+        
+        //stern for the middle 5400 mm udhæng
+        
+        Part sternbræt = new Part(Stern, depth + 54, 1, "stern til Vindskeder på rejsning");
+        parts.add(sternbræt);
+        
+        
+        
+        
+        //teglsten for the middle top
+        
+        
+        
+        int numberOfMiddleTegl = depth / 30;
+        
+        if(depth%30 != 0)
+        {
+        numberOfMiddleTegl ++;
+        }
+            
+        Part TegleneMiddle = new Part(MiddleTegl, 0, numberOfMiddleTegl, "tegl til montering på midten af taget");
+        parts.add(TegleneMiddle);
+        
+        //screws for the MiddleTegl
+        
+                
+                 Part TegleneMiddleScrews = new Part(BeslagSkruer, 0, numberOfMiddleTegl *2, "skruer til tegl monteret på midten af taget");
+        parts.add(TegleneMiddleScrews);
         
         carport.setParts(parts);
+        
+        //calculate vandbræt they overlap with 3 cm
+        
+        int numberOfPlanks = width/2/7;
+        
+        Part vandbrædder = new Part(vandbrædt, hight, numberOfPlanks, "brædder til at bekæde tag for bag");
+        parts.add(TegleneMiddleScrews);
+        
+        
+        
+        
     }
 
 }
