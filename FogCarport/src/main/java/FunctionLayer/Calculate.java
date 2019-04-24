@@ -235,8 +235,19 @@ public class Calculate {
         
         int numberOfPlanks = width/2/7;
         
-        Part vandbrædder = new Part(vandbrædt, hight, numberOfPlanks, "brædder til at bekæde tag for bag");
-        parts.add(TegleneMiddleScrews);
+        if(carport.getShed() == null)
+        {
+        numberOfPlanks += numberOfPlanks;
+        }
+        
+        else
+        {
+        numberOfPlanks = numberOfPlanks * 3;
+        }
+  
+        
+        Part vandbrædder = new Part(vandbrædt, hight, numberOfPlanks, "brædder til at bekæde tag for og bag skæres til");
+        parts.add(vandbrædder);
         
         
         
