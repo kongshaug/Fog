@@ -47,6 +47,18 @@ public class FunctionManager
 
     }
 
+    public void calFlatroof(Carport carport) throws DataException
+    {
+        Material spær = db.getMaterial(4);
+        Material beslagH = db.getMaterial(19);
+        Material beslagV = db.getMaterial(20);
+        Material BeslagSkruer,
+        Material lægte
+        Material RoofScrews
+        
+        
+    }
+
     public List<RoofType> getRoofs() throws DataException
     {
         RoofType result = null;
@@ -60,7 +72,7 @@ public class FunctionManager
             }
 
         }
-            rooftypes.remove(result);
+        rooftypes.remove(result);
 
         return rooftypes;
     }
