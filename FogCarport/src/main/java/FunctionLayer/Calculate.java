@@ -226,7 +226,7 @@ public class Calculate
         Part TegleneMiddleScrews = new Part(BeslagSkruer, 0, numberOfMiddleTegl * 2, "skruer til tegl monteret på midten af taget");
         parts.add(TegleneMiddleScrews);
 
-        carport.setParts(parts);
+        
 
         //calculate vandbræt they overlap with 3 cm
         int numberOfPlanks = width / 2 / 7;
@@ -241,6 +241,8 @@ public class Calculate
 
         Part vandbrædder = new Part(vandbrædt, hight, numberOfPlanks, "brædder til at bekæde tag for og bag skæres til");
         parts.add(vandbrædder);
+        
+        carport.setParts(parts);
 
     }
 
