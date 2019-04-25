@@ -27,12 +27,15 @@
             <select name="type">
                 <option disabled selected>Vælg tagtype</option>            
                 <%
-                    List<RoofType> roofs = (List<RoofType>) session.getAttribute("roofs");
-                    RoofType ro = (RoofType) session.getAttribute("roof");
+                    List<RoofType> slopedroofs = (List<RoofType>) session.getAttribute("slopedroofs");
+                    List<RoofType> flatroofs = (List<RoofType>) session.getAttribute("flatroofs");
 
-                    out.println("<option id= \"fladt\" > " + ro.getName() + "</option>");
+                    for (RoofType ro : flatroofs)
+                    {
+                        out.println("<option class=\"fladt\">" + ro.getName() + "</option>");
+                    }
 
-                    for (RoofType r : roofs)
+                    for (RoofType r : slopedroofs)
                     {
                         out.println("<option class=\"rejsning\">" + r.getName() + "</option>");
                     }
@@ -43,8 +46,7 @@
             <br><br>
             <select name="slope" id="hældning">
                 <option disabled selected>Vælg hældning</option>
-                <%                    
-                    for (int i = 15; i <= 45; i = i + 5)
+                <%                    for (int i = 15; i <= 45; i = i + 5)
                     {
                         out.println("<option> " + i + "</option>");
                     }
@@ -58,26 +60,39 @@
 
                 function disable()
                 {
-                    document.getElementById("fladt").hidden = false;
-                    document.getElementById("hældning").disabled = true;
-                    var options = document.querySelectorAll(".rejsning");
-                    
-                    options.forEach(function(x)
+                    var flatoptions = document.querySelectorAll(".fladt");
+
+                    flatoptions.forEach(function (x)
+                    {
+                        x.hidden = false;
+                    });
+
+                    var slopeoptions = document.querySelectorAll(".rejsning");
+
+                    slopeoptions.forEach(function (x)
                     {
                         x.hidden = true;
                     });
+
+                    document.getElementById("hældning").disabled = true;
                 }
 
                 function enable()
                 {
-                    document.getElementById("fladt").hidden = true;
-                    document.getElementById("hældning").disabled = false;
-                    var options = document.querySelectorAll(".rejsning");
-                    
-                    options.forEach(function(x)
+                    var flatoptions = document.querySelectorAll(".fladt");
+
+                    flatoptions.forEach(function (x)
+                    {
+                        x.hidden = true;
+                    });
+                    var slopeoptions = document.querySelectorAll(".rejsning");
+
+                    slopeoptions.forEach(function (x)
                     {
                         x.hidden = false;
                     });
+
+                    document.getElementById("hældning").disabled = false;
                 }
 
             </script>

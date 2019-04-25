@@ -229,6 +229,7 @@ public class CarportMapper
 
             int id = 0;
             String name = "";
+            String roof_class = "";
             int m1_id = 0;
             int m2_id = 0;
             Material m1 = null;
@@ -242,6 +243,7 @@ public class CarportMapper
             {
                 id = rs.getInt("roof_type_id");
                 name = rs.getString("roof_type_name");
+                roof_class = rs.getString("roof_type_class");
                 m1_id = rs.getInt("roof_material1");
                 m2_id = rs.getInt("roof_material2");
                 m1 = getMaterial(m1_id);
@@ -249,10 +251,10 @@ public class CarportMapper
 
                 if (m2 == null)
                 {
-                    rooftype = new RoofType(id, name, m1);
+                    rooftype = new RoofType(id, name,roof_class, m1);
                 } else
                 {
-                    rooftype = new RoofType(id, name, m1, m2);
+                    rooftype = new RoofType(id, name, roof_class, m1, m2);
                 }
             }
 

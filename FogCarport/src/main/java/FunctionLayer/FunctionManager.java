@@ -7,6 +7,7 @@ package FunctionLayer;
 
 import DataLayer.DataException;
 import DataLayer.DataFacade;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -59,37 +60,40 @@ public class FunctionManager
         
     }
 
-    public List<RoofType> getRoofs() throws DataException
+    public List<RoofType> getSlopedRoofs() throws DataException
     {
-        RoofType result = null;
         List<RoofType> rooftypes = db.getRoofs();
+        List<RoofType> slopedRoofs = new ArrayList<>();
 
         for (RoofType rooftype : rooftypes)
         {
-            if (rooftype.getId() == 2)
+            if (rooftype.getRoof_class().equals("slope"))
             {
-                result = rooftype;
+                slopedRoofs.add(rooftype);
             }
 
         }
-        rooftypes.remove(result);
 
-        return rooftypes;
+        return slopedRoofs;
     }
-
-    public RoofType getRoof() throws DataException
+    
+    public List<RoofType> getFlatRoofs() throws DataException
     {
         List<RoofType> rooftypes = db.getRoofs();
+        List<RoofType> flatRoofs = new ArrayList<>();
 
         for (RoofType rooftype : rooftypes)
         {
-            if (rooftype.getId() == 2)
+            if (rooftype.getRoof_class().equals("flat"))
             {
-                return rooftype;
+                flatRoofs.add(rooftype);
             }
+
         }
 
-        return null;
+        return flatRoofs;
     }
+
+    
 
 }

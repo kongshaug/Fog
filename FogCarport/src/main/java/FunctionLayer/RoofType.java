@@ -14,21 +14,24 @@ public class RoofType
 
     private int id;
     private String name;
+    private String roof_class;
     private Material m1;
     private Material m2;
 
-    public RoofType(int id, String name, Material m1, Material m2)
+    public RoofType(int id, String name, String roof_class, Material m1, Material m2)
     {
         this.id = id;
         this.name = name;
+        this.roof_class = roof_class;
         this.m1 = m1;
         this.m2 = m2;
     }
 
-    public RoofType(int id, String name, Material m1)
+    public RoofType(int id, String name, String roof_class, Material m1)
     {
         this.id = id;
         this.name = name;
+        this.roof_class = roof_class;
         this.m1 = m1;
     }
 
@@ -40,6 +43,11 @@ public class RoofType
     public String getName()
     {
         return name;
+    }
+
+    public String getRoof_class()
+    {
+        return roof_class;
     }
 
     public Material getM1()
