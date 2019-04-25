@@ -140,7 +140,8 @@ public class Calculate
 
     public void caluclatSlopeRoof(Carport carport, Material spær, Material lægteBeslag, Material BeslagSkruer,
             Material taglægte, Material beslagRemToTaglægte, Material ScrewForRem, Material Tegl,
-            Material Stern, Material MiddleTegl, Material vandbrædt)
+            Material Stern, Material MiddleTegl, Material vandbrædt, Material ToplægteHolderen,
+            Material MiddleTeglBeslag)
     {
         int depth = carport.getDepth();
         int width = carport.getWidth();
@@ -217,6 +218,9 @@ public class Calculate
         //stern for the middle 5400 mm udhæng
         Part sternbræt = new Part(Stern, depth + 54, 1, "stern til Vindskeder på rejsning");
         parts.add(sternbræt);
+        
+        Part ToplægteHolder = new Part(ToplægteHolderen, depth + 54, 1, "monteres	på	toppen	af	spæret	(til	toplægte)");
+        parts.add(ToplægteHolder);
 
         //teglsten for the middle top
         int numberOfMiddleTegl = depth / 30;
@@ -228,6 +232,11 @@ public class Calculate
 
         Part TegleneMiddle = new Part(MiddleTegl, 0, numberOfMiddleTegl, "tegl til montering på midten af taget");
         parts.add(TegleneMiddle);
+        
+        //beslag for the middleTegl
+        
+         Part TegleneMiddleBeslagene = new Part(MiddleTeglBeslag, 0, numberOfMiddleTegl, "beslag til montering af midtertegl");
+        parts.add(TegleneMiddleBeslagene);
 
         //screws for the MiddleTegl
         Part TegleneMiddleScrews = new Part(BeslagSkruer, 0, numberOfMiddleTegl * 2, "skruer til tegl monteret på midten af taget");
