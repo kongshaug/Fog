@@ -78,9 +78,15 @@ public class Calculate
         parts.add(beslageneH);
 
         //for each beslag you need 9 beslagskruer
-        int NumberOfBeslagskruer = (NumberOfBeslagV + NumberOfBeslagH) * 9;
+        int NumberOfBeslagskruerPackages = ((NumberOfBeslagV + NumberOfBeslagH) * 9)/200;
+        
+        if (((NumberOfBeslagV + NumberOfBeslagH) * 9) % 200 != 0 || NumberOfBeslagskruerPackages == 0)
+        
+        {
+        NumberOfBeslagskruerPackages ++;
+        }
 
-        Part beslagskruer = new Part(BeslagSkruer, 0, NumberOfBeslagskruer, "til fastgørelse af beslag mellem spær og remmene");
+        Part beslagskruer = new Part(BeslagSkruer, 0, NumberOfBeslagskruerPackages, "til fastgørelse af beslag mellem spær og remmene");
         parts.add(beslagskruer);
 
         //calculate number of lægter that goes acress the spær
@@ -96,8 +102,8 @@ public class Calculate
 
         //calculate number of screws used to fit plastmo to lægter
         int NumberOfScrews = numberOfLægter * NumberOfSpær;
-        int PackagesOfScres = NumberOfScrews / 250;
-        if (NumberOfScrews % 250 != 0)
+        int PackagesOfScres = NumberOfScrews / 200;
+        if (NumberOfScrews % 200 != 0)
         {
             PackagesOfScres++;
         }
