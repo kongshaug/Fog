@@ -56,8 +56,29 @@ public class FunctionManager
         Material BeslagSkruer;
         Material lægte;
         //Material RoofScrews
-        
-        
+
+    }
+
+    public void calSlopeRoof(Carport carport) throws DataException
+    {
+        Material spær = db.getMaterial(4);
+        Material taglægter = db.getMaterial(8);
+        Material spærbeslag = db.getMaterial(44);
+        Material beslagSkruerSpær = db.getMaterial(25);
+        Material skruer = db.getMaterial(26);
+        Material universalV = db.getMaterial(20);
+        Material universalH = db.getMaterial(19);
+        Material toplægteholder = db.getMaterial(16);
+        Material tegl = carport.getRoof().getType().getM2();
+        Material rygsten = carport.getRoof().getType().getM1();
+        Material rygstensbeslag = db.getMaterial(17);
+        Material beklædning = db.getMaterial(6);
+        Material vandbræt = db.getMaterial(6);
+        Material trykimpbræt = db.getMaterial(1);
+        Material skruerTotal = db.getMaterial(24);
+
+        c.caluclatSlopeRoof(carport, spær, taglægter, spærbeslag, beslagSkruerSpær, skruer, universalV, universalH, toplægteholder, tegl, rygsten, rygstensbeslag, beklædning, vandbræt, trykimpbræt, skruerTotal);
+
     }
 
     public List<RoofType> getSlopedRoofs() throws DataException
@@ -76,7 +97,7 @@ public class FunctionManager
 
         return slopedRoofs;
     }
-    
+
     public List<RoofType> getFlatRoofs() throws DataException
     {
         List<RoofType> rooftypes = db.getRoofs();
@@ -93,7 +114,5 @@ public class FunctionManager
 
         return flatRoofs;
     }
-
-    
 
 }

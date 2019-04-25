@@ -15,7 +15,6 @@ public class Roof
 {
 
     private int id;
-    private int test;
     private int slope;
     private RoofType type;
     private ArrayList<Part> parts;
