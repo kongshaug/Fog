@@ -55,7 +55,7 @@ public class Calculate
         int depth = carport.getDepth();
         int width = carport.getWidth();
 
-        ArrayList<Part> parts = carport.getParts();
+        ArrayList<Part> parts = carport.getRoof().getParts();
         //calculate spær and put in arraylist
         int NumberOfSpær = depth / 60 + 1;
         if (depth % 60 != 0)
@@ -111,14 +111,14 @@ public class Calculate
         Part Screws = new Part(RoofScrews, 0, PackagesOfScres, "til montering af tag på lægter");
         parts.add(Screws);
 
-        carport.setParts(parts);
+        carport.getRoof().setParts(parts);
     }
 
     public void caluclatFlatLastPartsRoof(Carport carport, Material Plastmo, Material Plastmotætning)
     {
         int depth = carport.getDepth();
         int width = carport.getWidth();
-        ArrayList<Part> parts = carport.getParts();
+        ArrayList<Part> parts = carport.getRoof().getParts();
 
         //on top of the roof is Plastmo Ecolite blåtonet 
         //plastmo is 120 wide and overlap with 20 cm which is why we devide with 100 insted of 120
@@ -135,7 +135,7 @@ public class Calculate
         Part Plastmotætningen = new Part(Plastmotætning, depth, 2, "monteres i for og bagside af Plastmo til tætning for regnvand");
         parts.add(Plastmotætningen);
 
-        carport.setParts(parts);
+        carport.getRoof().setParts(parts);
     }
 
     public void caluclatSlopeRoof(Carport carport, Material spær, Material lægteBeslag, Material BeslagSkruer,
@@ -145,7 +145,8 @@ public class Calculate
         int depth = carport.getDepth();
         int width = carport.getWidth();
         int slope = carport.getRoof().getSlope();
-        ArrayList parts = carport.getParts();
+       
+        ArrayList<Part> parts = carport.getRoof().getParts();
 
         //length of roof from edge to top
         //which one? --- find out in next episode
@@ -248,7 +249,7 @@ public class Calculate
         Part vandbrædder = new Part(vandbrædt, hight, numberOfPlanks, "brædder til at bekæde tag for og bag skæres til");
         parts.add(vandbrædder);
         
-        carport.setParts(parts);
+        carport.getRoof().setParts(parts);
 
     }
 
