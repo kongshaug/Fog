@@ -52,9 +52,9 @@ public class FunctionManager
         Material spær = db.getMaterial(4);
         Material beslagH = db.getMaterial(19);
         Material beslagV = db.getMaterial(20);
-        Material BeslagSkruer,
-        Material lægte
-        Material RoofScrews
+        Material BeslagSkruer;
+        //Material lægte
+        //Material RoofScrews
         
         
     }
