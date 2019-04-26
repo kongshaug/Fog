@@ -40,6 +40,7 @@ public class MaterialMapper
             int id = 0;
             String name = "";
             String unit = "";
+            String material_class = "";
 
             PreparedStatement statement = dbc.preparedStatement(query);
             statement.setString(1, material_name);
@@ -50,8 +51,9 @@ public class MaterialMapper
                 id = rs.getInt("material_id");
                 name = rs.getString("material_name");
                 unit = rs.getString("unit");
+                material_class = rs.getString("material_class");
 
-                material = new Material(id, name, unit);
+                material = new Material(id, name, unit, material_class);
             }
 
             dbc.close();
@@ -76,6 +78,7 @@ public class MaterialMapper
             int id = 0;
             String name = "";
             String unit = "";
+            String material_class = "";
 
             PreparedStatement statement = dbc.preparedStatement(query);
             statement.setInt(1, material_id);
@@ -86,8 +89,9 @@ public class MaterialMapper
                 id = rs.getInt("material_id");
                 name = rs.getString("material_name");
                 unit = rs.getString("unit");
+                material_class = rs.getString("material_class");
 
-                material = new Material(id, name, unit);
+                material = new Material(id, name, unit, material_class);
             }
 
             dbc.close();
@@ -112,6 +116,7 @@ public class MaterialMapper
             int id = 0;
             String name = "";
             String unit = "";
+            String material_class = "";
 
             PreparedStatement statement = dbc.preparedStatement(query);
             statement.setInt(1, material_id);
@@ -122,8 +127,9 @@ public class MaterialMapper
                 id = rs.getInt("material_id");
                 name = rs.getString("material_name");
                 unit = rs.getString("unit");
+                material_class = rs.getString("material_class");
 
-                material = new Material(id, name, unit);
+                material = new Material(id, name, unit, material_class);
             }
 
             //dbc.close();
@@ -147,6 +153,7 @@ public class MaterialMapper
             int id = 0;
             String name = "";
             String unit = "";
+            String material_class = "";
 
             PreparedStatement statment = dbc.preparedStatement(query);
             ResultSet rs = statment.executeQuery();
@@ -156,8 +163,9 @@ public class MaterialMapper
                 id = rs.getInt("material_id");
                 name = rs.getString("material_name");
                 unit = rs.getString("unit");
+                material_class = rs.getString("material_class");
 
-                materials.add(new Material(id, name, unit));
+                materials.add(new Material(id, name, unit, material_class));
             }
 
             dbc.close();

@@ -38,47 +38,69 @@ public class FunctionManager
 
     public void calCarport(Carport carport) throws DataException
     {
-        Material pole = db.getMaterial(3);
-        Material rem = db.getMaterial(4);
-        Material bolts = db.getMaterial(27);
-        Material discs = db.getMaterial(28);
+        Material pole = getMaterial(2);
+        Material rem = getMaterial(3);
+        Material bolts = getMaterial(26);
+        Material discs = getMaterial(27);
 
-        c.caluclatepoles(carport, pole, bolts, discs);
-        c.caluclatRem(carport, rem);
+        c.calculatepoles(carport, pole, bolts, discs);
+        c.calculateRem(carport, rem);
 
     }
 
     public void calFlatroof(Carport carport) throws DataException
     {
-        Material spær = db.getMaterial(4);
-        Material beslagH = db.getMaterial(19);
-        Material beslagV = db.getMaterial(20);
-        Material BeslagSkruer;
-        Material lægte;
-        //Material RoofScrews
+        Material spær = getMaterial(3);
+        Material universalV = getMaterial(19);
+        Material universalH = getMaterial(18);
+        Material beslagSkruer = getMaterial(32);
+        Material lægte = getMaterial(7);
+        Material tagskruer = getMaterial(30);
+        Material understern = getMaterial(8);
+        Material overstern = getMaterial(9);
+        Material vandbræt = getMaterial(5);
+        Material skruer = getMaterial(23);
+        Material plastmo = getMaterial(12);
+        Material plastmotætning = getMaterial(42);
 
+        c.calculateFlatRoof(carport, spær, universalV, universalH, beslagSkruer, lægte, tagskruer, understern, overstern, vandbræt, skruer);
+        c.calculatePlatsmo(carport, plastmo, plastmotætning);
     }
 
     public void calSlopeRoof(Carport carport) throws DataException
     {
-        Material spær = db.getMaterial(4);
-        Material taglægter = db.getMaterial(8);
-        Material spærbeslag = db.getMaterial(44);
-        Material beslagSkruerSpær = db.getMaterial(25);
-        Material skruer = db.getMaterial(26);
-        Material universalV = db.getMaterial(20);
-        Material universalH = db.getMaterial(19);
-        Material toplægteholder = db.getMaterial(16);
+        Material spær = getMaterial(3);
+        Material taglægter = getMaterial(7);
+        Material spærbeslag = getMaterial(43);
+        Material beslagSkruerSpær = getMaterial(24);
+        Material skruer = getMaterial(25);
+        Material universalV = getMaterial(19);
+        Material universalH = getMaterial(18);
+        Material toplægteholder = getMaterial(15);
         Material tegl = carport.getRoof().getType().getM2();
         Material rygsten = carport.getRoof().getType().getM1();
-        Material rygstensbeslag = db.getMaterial(17);
-        Material beklædning = db.getMaterial(6);
-        Material vandbræt = db.getMaterial(6);
-        Material trykimpbræt = db.getMaterial(1);
-        Material skruerTotal = db.getMaterial(24);
+        Material rygstensbeslag = getMaterial(16);
+        Material beklædning = getMaterial(5);
+        Material vandbræt = getMaterial(5);
+        Material trykimpbræt = getMaterial(1);
+        Material skruerTotal = getMaterial(23);
 
-        c.caluclatSlopeRoof(carport, spær, taglægter, spærbeslag, beslagSkruerSpær, skruer, universalV, universalH, toplægteholder, tegl, rygsten, rygstensbeslag, beklædning, vandbræt, trykimpbræt, skruerTotal);
+        c.calculateSlopeRoof(carport, spær, taglægter, spærbeslag, beslagSkruerSpær, skruer, universalV, universalH, toplægteholder, tegl, rygsten, rygstensbeslag, beklædning, vandbræt, trykimpbræt, skruerTotal);
 
+    }
+
+    private Material getMaterial(int id) throws DataException
+    {
+        Material result = null;
+        List<Material> materials = db.getMaterials();
+        for (Material material : materials)
+        {
+            if (material.getId() == id)
+            {
+                result = material;
+            }
+        }
+        return result;
     }
 
     public List<RoofType> getSlopedRoofs() throws DataException

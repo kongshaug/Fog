@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Calculate
 {
 
-    public void caluclatepoles(Carport carport, Material pole, Material bolt, Material disc)
+    public void calculatepoles(Carport carport, Material pole, Material bolt, Material disc)
     {
         int depth = carport.getDepth();
 
@@ -34,7 +34,7 @@ public class Calculate
 
     }
 
-    public void caluclatRem(Carport carport, Material rem)
+    public void calculateRem(Carport carport, Material rem)
     {
         int depth = carport.getDepth();
 
@@ -49,8 +49,8 @@ public class Calculate
 
     }
 
-    public void caluclatFlatRoof(Carport carport, Material spær, Material beslagV, Material beslagH, Material BeslagSkruer,
-            Material lægte, Material RoofScrews)
+    public void calculateFlatRoof(Carport carport, Material spær, Material beslagV, Material beslagH, Material BeslagSkruer,
+            Material lægte, Material RoofScrews, Material understern, Material overstern, Material vandbræt, Material skruer)
     {
         int depth = carport.getDepth();
         int width = carport.getWidth();
@@ -78,9 +78,9 @@ public class Calculate
         parts.add(beslageneH);
 
         //for each beslag you need 9 beslagskruer
-        int NumberOfBeslagskruerPackages = ((NumberOfBeslagV + NumberOfBeslagH) * 9) / 200;
+        int NumberOfBeslagskruerPackages = ((NumberOfBeslagV + NumberOfBeslagH) * 9) / 250;
 
-        if (((NumberOfBeslagV + NumberOfBeslagH) * 9) % 200 != 0 || NumberOfBeslagskruerPackages == 0)
+        if (((NumberOfBeslagV + NumberOfBeslagH) * 9) % 250 != 0 || NumberOfBeslagskruerPackages == 0)
 
         {
             NumberOfBeslagskruerPackages++;
@@ -102,19 +102,61 @@ public class Calculate
 
         //calculate number of screws used to fit plastmo to lægter
         int NumberOfScrews = numberOfLægter * NumberOfSpær;
-        int PackagesOfScres = NumberOfScrews / 200;
+        int PackagesOfScrews = NumberOfScrews / 200;
         if (NumberOfScrews % 200 != 0)
         {
-            PackagesOfScres++;
+            PackagesOfScrews++;
         }
 
-        Part Screws = new Part(RoofScrews, 0, PackagesOfScres, "til montering af tag på lægter");
+        Part Screws = new Part(RoofScrews, 0, PackagesOfScrews, "til montering af tag på lægter");
         parts.add(Screws);
+        
+        calcStern(carport, NumberOfSpær, width, depth, parts, understern, overstern, vandbræt, skruer);
 
         carport.getRoof().setParts(parts);
     }
+    
+    private void calcStern(Carport carport, int numberOfSpær, int width, int depth, ArrayList<Part> parts, Material understern, Material overstern, Material vandbræt, Material Skruer)
+    {
+        Part understernFront = new Part(understern, width + 5, 1, "understernbræt til forenden");
+        parts.add(understernFront);
+        
+        Part understernSide = new Part(understern, depth, 2, "understernbræt til siderne");
+        parts.add(understernSide);
+        
+        Part understernBack = new Part(understern, width - 5, 1, "understernbræt til bagenden");
+        parts.add(understernBack);
+        
+        Part oversternFront = new Part(overstern, width + 5, 1, "oversternbræt til forenden");
+        parts.add(oversternFront);
+        
+        Part oversternSide = new Part(overstern, depth, 2, "oversternbræt til siderne");
+        parts.add(oversternSide);
+        
+        Part vandbrætFront = new Part(vandbræt, width + 5, 1, "vandbræt på stern til forenden");
+        parts.add(vandbrætFront);
+        
+        Part vandbrætSide = new Part(vandbræt, depth, 2, "vandbræt på stern til siderne");
+        parts.add(vandbrætSide);
+        
+        //2 screws pr spær, 4 understern + 3 overstern = 7
+        int skruerStern = (numberOfSpær * 2) * 7;
+        
+        // 1 screw pr spær, 3 vandbrædder
+        int skruerVandbræt = numberOfSpær * 3;
+    
+        int skruerPackage = (skruerStern + skruerVandbræt) / 200;
+        if ((skruerStern + skruerVandbræt) % 200 != 0)
+        {
+            skruerPackage++;
+        }
+        
+        Part skruer = new Part(Skruer, 0, skruerPackage, "til montering af stern og vandbrædder");
+        parts.add(skruer);
+        
+    }
 
-    public void caluclatFlatLastPartsRoof(Carport carport, Material Plastmo, Material Plastmotætning)
+    public void calculatePlatsmo(Carport carport, Material Plastmo, Material Plastmotætning)
     {
         int depth = carport.getDepth();
         int width = carport.getWidth();
@@ -138,7 +180,7 @@ public class Calculate
         carport.getRoof().setParts(parts);
     }
 
-    public void caluclatSlopeRoof(Carport carport, Material spær, Material taglægte, Material spærBeslag, Material BeslagSkruer, Material screws, Material universalV, Material universalH, 
+    public void calculateSlopeRoof(Carport carport, Material spær, Material taglægte, Material spærBeslag, Material BeslagSkruer, Material screws, Material universalV, Material universalH, 
               Material ToplægteHolderen,  Material Tegl, Material Rygsten, Material RygstensBeslag, Material Beklædning, Material vandBræt, Material trykImpBræt, Material sternScrews)
     {
         int depth = carport.getDepth();

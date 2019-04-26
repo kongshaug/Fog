@@ -14,12 +14,19 @@ public class Material
     private int id;
     private String name;
     private String unit;
+    private String material_class;
 
-    public Material(int id, String name, String unit)
+    public Material(int id, String name, String unit, String material_class)
     {
         this.id = id;
         this.name = name;
         this.unit = unit;
+        this.material_class = material_class;
+    }
+
+    public String getMaterial_class()
+    {
+        return material_class;
     }
 
     public int getId()

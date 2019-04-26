@@ -127,6 +127,7 @@ public class CarportMapper
             int id = 0;
             String name = "";
             String unit = "";
+            String material_class = "";
 
             PreparedStatement statement = dbc.preparedStatement(query);
             statement.setInt(1, material_id);
@@ -137,8 +138,9 @@ public class CarportMapper
                 id = rs.getInt("material_id");
                 name = rs.getString("material_name");
                 unit = rs.getString("unit");
+                material_class = rs.getString("material_class");
 
-                material = new Material(id, name, unit);
+                material = new Material(id, name, unit, material_class);
             }
 
             //dbc.close();
