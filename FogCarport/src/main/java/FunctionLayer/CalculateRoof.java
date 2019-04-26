@@ -273,8 +273,8 @@ public class CalculateRoof
         Part ToplægteHolder = new Part(ToplægteHolderen, depth + 54, 1, "Monteres på toppen af spærerne (til toplægte)");
         parts.add(ToplægteHolder);
 
-        //toplægte for the middle 5400 mm udhæng
-        Part toplægte = new Part(taglægte, depth + 54, 1, "Toplægte til	montering af rygsten");
+        //toplægte for the middle
+        Part toplægte = new Part(taglægte, depth, 1, "Toplægte til	montering af rygsten");
         parts.add(toplægte);
 
     }
