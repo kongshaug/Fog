@@ -32,12 +32,12 @@
 
                     for (RoofType ro : flatroofs)
                     {
-                        out.println("<option class=\"fladt\">" + ro.getName() + "</option>");
+                        out.println("<option value=\"" + ro.getId() + "\" class=\"fladt\">" + ro.getName() + "</option>");
                     }
 
                     for (RoofType r : slopedroofs)
                     {
-                        out.println("<option class=\"rejsning\">" + r.getName() + "</option>");
+                        out.println("<option value=\"" + r.getId() + "\" class=\"rejsning\">" + r.getName() + "</option>");
                     }
 
                 %>

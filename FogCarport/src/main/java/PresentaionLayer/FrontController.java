@@ -56,7 +56,7 @@ public class FrontController extends HttpServlet
             } catch (CommandException ce)
         {
             request.setAttribute("message", ce.getMessage());
-            RequestDispatcher dispatcher = request.getRequestDispatcher(ce.getTarget());
+            RequestDispatcher dispatcher = request.getRequestDispatcher("error.jsp");
             dispatcher.forward(request, response);
             
         } catch (IOException | ServletException | DataException e)

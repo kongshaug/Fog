@@ -24,12 +24,14 @@ public class Roof
         this.id = id;
         this.slope = slope;
         this.type = type;
+        this.parts = new ArrayList<>();
     }
 
     public Roof(int slope, RoofType type)
     {
         this.slope = slope;
         this.type = type;
+        this.parts = new ArrayList<>();
     }
 
     public void setId(int id)

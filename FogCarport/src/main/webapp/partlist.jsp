@@ -44,6 +44,23 @@
                         out.println("<td>" + p.getUnit() + "</td>");
                         out.println("<td>" + p.getDescription() + "</td>");
                     }
+
+                    ArrayList<Part> roof_parts = carport.getRoof().getParts();
+                    for (Part p : roof_parts)
+                    {
+                        out.println("<tr>");
+                        out.println("<td>" + p.getName() + "</td>");
+                        if (p.getLength() != 0)
+                        {
+                            out.println("<td>" + p.getLength() + "</td>");
+                        } else
+                        {
+                            out.println("<td> </td>");
+                        }
+                        out.println("<td>" + p.getQuantity() + "</td>");
+                        out.println("<td>" + p.getUnit() + "</td>");
+                        out.println("<td>" + p.getDescription() + "</td>");
+                    }
                 %>
             </table>
         </form>
