@@ -270,7 +270,7 @@ public class CalculateRoof
 
     private void calcToplægte(int depth, ArrayList<Part> parts, Material taglægte, Material ToplægteHolderen)
     {
-        Part ToplægteHolder = new Part(ToplægteHolderen, depth + 54, 1, "Monteres på toppen af spærerne (til toplægte)");
+        Part ToplægteHolder = new Part(ToplægteHolderen, 0, 1, "Monteres på toppen af spærerne (til toplægte)");
         parts.add(ToplægteHolder);
 
         //toplægte for the middle
