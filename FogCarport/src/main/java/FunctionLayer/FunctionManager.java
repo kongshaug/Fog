@@ -20,13 +20,15 @@ public class FunctionManager
     private static FunctionManager instance = null;
     private DataFacade db;
     private Calculate c;
+    private CalculateRoof cr;
     private CalculatePackages cp;
 
     public FunctionManager() throws DataException
     {
         db = DataFacade.getInstance();
         cp = new CalculatePackages();
-        c = new Calculate(cp);
+        cr = new CalculateRoof(cp);
+        c = new Calculate();
     }
 
     public static FunctionManager getInstance() throws DataException
@@ -65,8 +67,8 @@ public class FunctionManager
         Material plastmo = getMaterial(12);
         Material plastmotætning = getMaterial(42);
 
-        c.calculateFlatRoof(carport, spær, universalV, universalH, beslagSkruer, lægte, tagskruer, understern, overstern, vandbræt, skruer);
-        c.calculatePlatsmo(carport, plastmo, plastmotætning);
+        cr.calculateFlatRoof(carport, spær, universalV, universalH, beslagSkruer, lægte, tagskruer, understern, overstern, vandbræt, skruer);
+        cr.calculatePlatsmo(carport, plastmo, plastmotætning);
     }
 
     public void calSlopeRoof(Carport carport) throws DataException
@@ -89,7 +91,7 @@ public class FunctionManager
         Material skrue1 = getMaterial(28);
         Material skrue2 = getMaterial(29);
                 
-        c.calculateSlopeRoof(carport, spær, taglægter, spærbeslag, beslagSkruerSpær, skruer, universalV, universalH, toplægteholder, tegl, rygsten, rygstensbeslag, beklædning, vandbræt, trykimpbræt, skruerTotal, skrue1, skrue2);
+        cr.calculateSlopeRoof(carport, spær, taglægter, spærbeslag, beslagSkruerSpær, skruer, universalV, universalH, toplægteholder, tegl, rygsten, rygstensbeslag, beklædning, vandbræt, trykimpbræt, skruerTotal, skrue1, skrue2);
 
     }
 
