@@ -20,11 +20,13 @@ public class FunctionManager
     private static FunctionManager instance = null;
     private DataFacade db;
     private Calculate c;
+    private CalculatePackages cp;
 
     public FunctionManager() throws DataException
     {
         db = DataFacade.getInstance();
-        c = new Calculate();
+        cp = new CalculatePackages();
+        c = new Calculate(cp);
     }
 
     public static FunctionManager getInstance() throws DataException
@@ -84,8 +86,10 @@ public class FunctionManager
         Material vandbræt = getMaterial(5);
         Material trykimpbræt = getMaterial(1);
         Material skruerTotal = getMaterial(23);
-
-        c.calculateSlopeRoof(carport, spær, taglægter, spærbeslag, beslagSkruerSpær, skruer, universalV, universalH, toplægteholder, tegl, rygsten, rygstensbeslag, beklædning, vandbræt, trykimpbræt, skruerTotal);
+        Material skrue1 = getMaterial(28);
+        Material skrue2 = getMaterial(29);
+                
+        c.calculateSlopeRoof(carport, spær, taglægter, spærbeslag, beslagSkruerSpær, skruer, universalV, universalH, toplægteholder, tegl, rygsten, rygstensbeslag, beklædning, vandbræt, trykimpbræt, skruerTotal, skrue1, skrue2);
 
     }
 

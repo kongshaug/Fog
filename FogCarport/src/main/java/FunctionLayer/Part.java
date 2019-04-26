@@ -19,12 +19,14 @@ public class Part {
     private int id;
     private String name;
     private String unit;
+    private String material_class;
 
     public Part(Material material, int length, int quantity, String description) {
         this.material = material;
         this.id = material.getId();
         this.name = material.getName();
         this.unit = material.getUnit();
+        this.material_class = material.getMaterial_class();
         this.length = length;
         this.quantity = quantity;
         this.description = description;
@@ -36,6 +38,16 @@ public class Part {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public Material getMaterial()
+    {
+        return material;
+    }
+
+    public String getMaterial_class()
+    {
+        return material_class;
     }
 
     public String getDescription() {

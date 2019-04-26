@@ -14,6 +14,12 @@ import java.util.ArrayList;
  */
 public class Calculate
 {
+    private CalculatePackages cp;
+
+    public Calculate(CalculatePackages cp)
+    {
+        this.cp = cp;
+    }
 
     public void calculatepoles(Carport carport, Material pole, Material bolt, Material disc)
     {
@@ -43,7 +49,7 @@ public class Calculate
 
         int remmen = depth;
 
-        Part remmene = new Part(rem, remmen, 2, "Remme i sider, sadles ned	i stolper");
+        Part remmene = new Part(rem, remmen, 2, "Remme i sider, sadles ned i stolper");
         parts.add(remmene);
         carport.setParts(parts);
 
@@ -63,30 +69,25 @@ public class Calculate
             NumberOfSpær++;
         }
 
-        Part spærene = new Part(spær, width, NumberOfSpær, "spær monteres på tværs af de 2 remme");
+        Part spærene = new Part(spær, width, NumberOfSpær, "Spær monteres på tværs af de 2 remme");
         parts.add(spærene);
 
         //for each spær there is 2 beslag
         int NumberOfBeslagV = NumberOfSpær;
 
-        Part beslageneV = new Part(beslagV, 0, NumberOfBeslagV, "til montering af spær på remmene");
+        Part beslageneV = new Part(beslagV, 0, NumberOfBeslagV, "Til montering af spær på remmene");
         parts.add(beslageneV);
 
         int NumberOfBeslagH = NumberOfSpær;
 
-        Part beslageneH = new Part(beslagH, 0, NumberOfBeslagH, "til montering af spær på remmene");
+        Part beslageneH = new Part(beslagH, 0, NumberOfBeslagH, "Til montering af spær på remmene");
         parts.add(beslageneH);
 
         //for each beslag you need 9 beslagskruer
-        int NumberOfBeslagskruerPackages = ((NumberOfBeslagV + NumberOfBeslagH) * 9) / 250;
+        int numberOfBeslagskruer = ((NumberOfBeslagV + NumberOfBeslagH) * 9);
+        int NumberOfBeslagskruerPackages = cp.calcPackage250(numberOfBeslagskruer);
 
-        if (((NumberOfBeslagV + NumberOfBeslagH) * 9) % 250 != 0 || NumberOfBeslagskruerPackages == 0)
-
-        {
-            NumberOfBeslagskruerPackages++;
-        }
-
-        Part beslagskruer = new Part(BeslagSkruer, 0, NumberOfBeslagskruerPackages, "til fastgørelse af beslag mellem spær og remmene");
+        Part beslagskruer = new Part(BeslagSkruer, 0, NumberOfBeslagskruerPackages, "Til fastgørelse af beslag mellem spær og remmene");
         parts.add(beslagskruer);
 
         //calculate number of lægter that goes across the spær
@@ -97,46 +98,42 @@ public class Calculate
             numberOfLægter++;
         }
 
-        Part lægterne = new Part(lægte, depth, numberOfLægter, "lægges på tværs af spær");
+        Part lægterne = new Part(lægte, depth, numberOfLægter, "Lægges på tværs af spærene");
         parts.add(lægterne);
 
         //calculate number of screws used to fit plastmo to lægter
         int NumberOfScrews = numberOfLægter * NumberOfSpær;
-        int PackagesOfScrews = NumberOfScrews / 200;
-        if (NumberOfScrews % 200 != 0)
-        {
-            PackagesOfScrews++;
-        }
+        int PackagesOfScrews = cp.calcPackage200(NumberOfScrews);
 
-        Part Screws = new Part(RoofScrews, 0, PackagesOfScrews, "til montering af tag på lægter");
+        Part Screws = new Part(RoofScrews, 0, PackagesOfScrews, "Til montering af tag på lægter");
         parts.add(Screws);
         
-        calcStern(carport, NumberOfSpær, width, depth, parts, understern, overstern, vandbræt, skruer);
+        calcStern(NumberOfSpær, width, depth, parts, understern, overstern, vandbræt, skruer);
 
         carport.getRoof().setParts(parts);
     }
     
-    private void calcStern(Carport carport, int numberOfSpær, int width, int depth, ArrayList<Part> parts, Material understern, Material overstern, Material vandbræt, Material Skruer)
+    private void calcStern(int numberOfSpær, int width, int depth, ArrayList<Part> parts, Material understern, Material overstern, Material vandbræt, Material Skruer)
     {
-        Part understernFront = new Part(understern, width + 5, 1, "understernbræt til forenden");
+        Part understernFront = new Part(understern, width + 5, 1, "Understernbræt til forenden");
         parts.add(understernFront);
         
-        Part understernSide = new Part(understern, depth, 2, "understernbræt til siderne");
+        Part understernSide = new Part(understern, depth, 2, "Understernbræt til siderne");
         parts.add(understernSide);
         
-        Part understernBack = new Part(understern, width - 5, 1, "understernbræt til bagenden");
+        Part understernBack = new Part(understern, width - 5, 1, "Understernbræt til bagenden");
         parts.add(understernBack);
         
-        Part oversternFront = new Part(overstern, width + 5, 1, "oversternbræt til forenden");
+        Part oversternFront = new Part(overstern, width + 5, 1, "Oversternbræt til forenden");
         parts.add(oversternFront);
         
-        Part oversternSide = new Part(overstern, depth, 2, "oversternbræt til siderne");
+        Part oversternSide = new Part(overstern, depth, 2, "Oversternbræt til siderne");
         parts.add(oversternSide);
         
-        Part vandbrætFront = new Part(vandbræt, width + 5, 1, "vandbræt på stern til forenden");
+        Part vandbrætFront = new Part(vandbræt, width + 5, 1, "Vandbræt på stern til forenden");
         parts.add(vandbrætFront);
         
-        Part vandbrætSide = new Part(vandbræt, depth, 2, "vandbræt på stern til siderne");
+        Part vandbrætSide = new Part(vandbræt, depth, 2, "Vandbræt på stern til siderne");
         parts.add(vandbrætSide);
         
         //2 screws pr spær, 4 understern + 3 overstern = 7
@@ -145,13 +142,9 @@ public class Calculate
         // 1 screw pr spær, 3 vandbrædder
         int skruerVandbræt = numberOfSpær * 3;
     
-        int skruerPackage = (skruerStern + skruerVandbræt) / 200;
-        if ((skruerStern + skruerVandbræt) % 200 != 0)
-        {
-            skruerPackage++;
-        }
+        int skruerPackage = cp.calcPackage200((skruerStern + skruerVandbræt));
         
-        Part skruer = new Part(Skruer, 0, skruerPackage, "til montering af stern og vandbrædder");
+        Part skruer = new Part(Skruer, 0, skruerPackage, "Til montering af stern og vandbrædder");
         parts.add(skruer);
         
     }
@@ -170,18 +163,18 @@ public class Calculate
             numberOfPlastmo++;
         }
 
-        Part Plastmoen = new Part(Plastmo, depth, numberOfPlastmo, "tagplader monteres på lægter");
+        Part Plastmoen = new Part(Plastmo, depth, numberOfPlastmo, "Tagplader monteres på lægter");
         parts.add(Plastmoen);
 
         //at the end of the plastmo there is a tætningsprofil
-        Part Plastmotætningen = new Part(Plastmotætning, depth, 2, "monteres i for og bagside af Plastmo til tætning for regnvand");
+        Part Plastmotætningen = new Part(Plastmotætning, depth, 2, "Monteres i for- og bagside af Plastmo til tætning for regnvand");
         parts.add(Plastmotætningen);
 
         carport.getRoof().setParts(parts);
     }
 
     public void calculateSlopeRoof(Carport carport, Material spær, Material taglægte, Material spærBeslag, Material BeslagSkruer, Material screws, Material universalV, Material universalH, 
-              Material ToplægteHolderen,  Material Tegl, Material Rygsten, Material RygstensBeslag, Material Beklædning, Material vandBræt, Material trykImpBræt, Material sternScrews)
+              Material ToplægteHolderen,  Material Tegl, Material Rygsten, Material RygstensBeslag, Material Beklædning, Material vandBræt, Material trykImpBræt, Material sternScrews, Material Skrue1, Material Skrue2)
     {
         int depth = carport.getDepth();
         int width = carport.getWidth();
@@ -207,18 +200,15 @@ public class Calculate
 
         //calculate number of screw to connect Taglægter on to spær
         int numberOfScrewsForSpær = NumberOfTaglægter * numberOfSpær;
-        int PackagesOfScrews = numberOfScrewsForSpær/100;
-        if (numberOfScrewsForSpær % 100 != 0)
-        {
-            PackagesOfScrews++;
-        }
-        Part ScrewsForTaglægter = new Part(screws, 0, PackagesOfScrews, "skruer til montering af taglægter på spær");
+        int PackagesOfScrews = cp.calcPackage100(numberOfScrewsForSpær);
+        
+        Part ScrewsForTaglægter = new Part(screws, 0, PackagesOfScrews, "Skruer til montering af taglægter på spær");
         parts.add(ScrewsForTaglægter);
 
         //calculations for toplægte, tegl and beklædning 
         calcToplægte(depth, parts, taglægte, ToplægteHolderen);
         calcTegl(depth, NumberOfTaglægter, parts, Tegl, Rygsten, RygstensBeslag, BeslagSkruer);
-        calcBeklædning(width, height, carport, Beklædning, parts);
+        calcBeklædning(width, height, carport, Beklædning, Skrue1, Skrue2, parts);
 
         Part vindskeder = new Part(trykImpBræt, (int) halfRoof, 4, "Vindskeder på rejsning");
         parts.add(vindskeder);
@@ -233,12 +223,9 @@ public class Calculate
         int screwsForVandbræt = (NumberOfTaglægter * 2) * 2;
         int screwsForStern = (numberOfSpær * 2) * 2;
         int TotalScrews = screwsForVindskeder + screwsForVandbræt + screwsForStern;
-        int Packages = TotalScrews / 200;
-        if (Packages % 200 != 0)
-        {
-            Packages++;
-        }
-        Part sternscrews = new Part(sternScrews,0, Packages, "til montering af stern, vindskeder og vandbræt");
+        int Packages = cp.calcPackage200(TotalScrews);
+        
+        Part sternscrews = new Part(sternScrews,0, Packages, "Til montering af stern, vindskeder og vandbræt");
         parts.add(sternscrews);
         
         carport.getRoof().setParts(parts);
@@ -252,7 +239,7 @@ public class Calculate
         {
             NumberOfTaglægter += 2;
         }
-        Part taglægter = new Part(taglægte, depth, NumberOfTaglægter, "taglægterne monteres på spærene");
+        Part taglægter = new Part(taglægte, depth, NumberOfTaglægter, "Taglægterne monteres på spærene");
         parts.add(taglægter);
 
         return NumberOfTaglægter;
@@ -269,15 +256,15 @@ public class Calculate
         }
 
         //the buttom part of each spær is the width of the carport
-        Part buttomSpærPart = new Part(spær, width, numberOfSpær, "bundstykke til spær");
+        Part buttomSpærPart = new Part(spær, width, numberOfSpær, "Bundstykker til spær");
         parts.add(buttomSpærPart);
 
         //the middle part is the hight of the roof (maybe it shoud be minused with the thicknes of the wood)
-        Part middleSpærPart = new Part(spær, height, numberOfSpær, "midterstykke til spær");
+        Part middleSpærPart = new Part(spær, height, numberOfSpær, "Midterstykker til spær");
         parts.add(middleSpærPart);
 
         //the sides of each spær is the length of the roof and there is 2 of them pr. spær
-        Part sideSpærPart = new Part(spær, (int) halfRoof, numberOfSpær * 2, "siddestykker til spær");
+        Part sideSpærPart = new Part(spær, (int) halfRoof, numberOfSpær * 2, "Sidestykker til spær");
         parts.add(sideSpærPart);
 
         return numberOfSpær;
@@ -287,36 +274,33 @@ public class Calculate
     private void calcSpærBeslag(int numberOfSpær, ArrayList<Part> parts, Material spærBeslag, Material BeslagSkruer, Material universalH, Material universalV)
     {
         //there is 4 of the beslag for the spær pr. spær
-        Part beslagSpærPart = new Part(spærBeslag,0, numberOfSpær * 4, "beslag til at samle spær");
+        Part beslagSpærPart = new Part(spærBeslag,0, numberOfSpær * 4, "Beslag til at samle spær");
         parts.add(beslagSpærPart);
         
         //beslag to connect the spær to remmen
-        Part beslagSpærToRemH = new Part(universalH,0, numberOfSpær, "beslag til at montere spærene på remmmen");
+        Part beslagSpærToRemH = new Part(universalH,0, numberOfSpær, "Beslag til at montere spærene på remmmen");
         parts.add(beslagSpærToRemH);
 
-        Part beslagSpærToRemV = new Part(universalV,0, numberOfSpær, "beslag til at montere taglægte på rem");
+        Part beslagSpærToRemV = new Part(universalV,0, numberOfSpær, "Beslag til at montere spærene på remmen");
         parts.add(beslagSpærToRemV);
 
         //screws to mount the spær together with the beslag, and for the universalbeslag (3 screws pr. surface * 3 surfaces pr. beslag)
         int ScrewsForSpær = numberOfSpær * 36;
         int ScrewsForUniversal = (numberOfSpær * 2) * 9;
         int ScrewsTotal = ScrewsForSpær + ScrewsForUniversal;
-        int PackagesOfScrews = ScrewsTotal/250;
-        if (ScrewsTotal % 250 != 0)
-        {
-            PackagesOfScrews++;
-        }
-        Part beslagscrews = new Part(BeslagSkruer,0, PackagesOfScrews, "beslag til at samle spær og motering af universalbeslag");
+        int PackagesOfScrews = cp.calcPackage250(ScrewsTotal);
+        
+        Part beslagscrews = new Part(BeslagSkruer,0, PackagesOfScrews, "Skruer til at samle spær og montering af universalbeslag");
         parts.add(beslagscrews);
     }
 
     private void calcToplægte(int depth, ArrayList<Part> parts, Material taglægte, Material ToplægteHolderen)
     {
-        Part ToplægteHolder = new Part(ToplægteHolderen, depth + 54, 1, "monteres på toppen af spæret (til toplægte)");
+        Part ToplægteHolder = new Part(ToplægteHolderen, depth + 54, 1, "Monteres på toppen af spærerne (til toplægte)");
         parts.add(ToplægteHolder);
 
         //toplægte for the middle 5400 mm udhæng
-        Part toplægte = new Part(taglægte, depth + 54, 1, "toplægte til	montering af rygsten");
+        Part toplægte = new Part(taglægte, depth + 54, 1, "Toplægte til	montering af rygsten");
         parts.add(toplægte);
 
     }
@@ -326,7 +310,7 @@ public class Calculate
         //teglsten (30 cm dækbredde)
         int numberOfTegl = NumberOfTaglægter * depth / 30;
 
-        Part Teglene = new Part(Tegl, 0, numberOfTegl, "tegl til montering på taget");
+        Part Teglene = new Part(Tegl, 0, numberOfTegl, "Tegl til montering på taget");
         parts.add(Teglene);
 
         //Rygsten for the top
@@ -337,19 +321,16 @@ public class Calculate
             numberOfRygsten++;
         }
 
-        Part rygsten = new Part(Rygsten, 0, numberOfRygsten, "tegl til montering på midten af taget");
+        Part rygsten = new Part(Rygsten, 0, numberOfRygsten, "Rygsten til montering på toplægten");
         parts.add(rygsten);
 
         //beslag for rygsten
-        Part rygstensBeslag = new Part(RygstensBeslag, 0, numberOfRygsten, "beslag til montering af midtertegl");
+        Part rygstensBeslag = new Part(RygstensBeslag, 0, numberOfRygsten, "Beslag til montering af rygsten");
         parts.add(rygstensBeslag);
 
-//        //screws for the rygsten
-//        Part rygstensScrews = new Part(BeslagSkruer, 0, numberOfRygsten * 2, "skruer til montering af rygsten");
-//        parts.add(rygstensScrews);
     }
 
-    private void calcBeklædning(int width, int height, Carport carport, Material Beklædning, ArrayList<Part> parts)
+    private void calcBeklædning(int width, int height, Carport carport, Material Beklædning, Material Skrue1, Material Skrue2, ArrayList<Part> parts)
     {
         //calculate beklædning they overlap with 3 cm
         int numberOfPlanks = width / 2 / 7;
@@ -362,8 +343,24 @@ public class Calculate
             numberOfPlanks = numberOfPlanks * 3;
         }
 
-        Part beklædning = new Part(Beklædning, height, numberOfPlanks, "brædder til at beklæde tag for og bag skæres til");
+        Part beklædning = new Part(Beklædning, height, numberOfPlanks, "Brædder til beklædning af gavl for og bag (skal skæres til)");
         parts.add(beklædning);
+        
+        int skruerYderbræt = (numberOfPlanks / 2) * 6;
+        int packagesYderbræt = cp.calcPackage200(skruerYderbræt);
+        
+        Part yderbrætSkruer = new Part(Skrue1, 0, packagesYderbræt, "Til montering af yderbræt, ved beklædning af gavl");
+        parts.add(yderbrætSkruer);
+        
+        int skruerInderbræt = (numberOfPlanks / 2) * 3;
+        int packagesInderbræt = cp.calcPackage350(skruerInderbræt);
+        
+        Part inderbrætSkruer = new Part(Skrue2, 0, packagesInderbræt, "Til montering af inderbræt, ved beklædning af gavl");
+        parts.add(inderbrætSkruer);
+        
+        
+        
+        
     }
 
 }

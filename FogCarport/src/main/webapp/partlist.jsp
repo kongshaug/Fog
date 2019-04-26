@@ -19,7 +19,9 @@
     %>
     <body>
         <form action="Fog" method="POST">
+            <br><br>
             <table>
+                <caption>Træ</caption>
                 <tr>
                     <th><b>Materiale</b></th>
                     <th><b>Længde</b></th>
@@ -29,37 +31,144 @@
                 </tr>
                 <%
                     ArrayList<Part> parts = carport.getParts();
+
                     for (Part p : parts)
                     {
-                        out.println("<tr>");
-                        out.println("<td>" + p.getName() + "</td>");
-                        if (p.getLength() != 0)
+                        if (p.getMaterial_class().equals("træ"))
                         {
-                            out.println("<td>" + p.getLength() + "</td>");
-                        } else
-                        {
-                            out.println("<td> </td>");
+                            out.println("<tr>");
+                            out.println("<td>" + p.getName() + "</td>");
+                            if (p.getLength() != 0)
+                            {
+                                out.println("<td>" + p.getLength() + "</td>");
+                            } else
+                            {
+                                out.println("<td> </td>");
+                            }
+                            out.println("<td>" + p.getQuantity() + "</td>");
+                            out.println("<td>" + p.getUnit() + "</td>");
+                            out.println("<td>" + p.getDescription() + "</td>");
                         }
-                        out.println("<td>" + p.getQuantity() + "</td>");
-                        out.println("<td>" + p.getUnit() + "</td>");
-                        out.println("<td>" + p.getDescription() + "</td>");
                     }
 
                     ArrayList<Part> roof_parts = carport.getRoof().getParts();
                     for (Part p : roof_parts)
                     {
-                        out.println("<tr>");
-                        out.println("<td>" + p.getName() + "</td>");
-                        if (p.getLength() != 0)
+                        if (p.getMaterial_class().equals("træ"))
                         {
-                            out.println("<td>" + p.getLength() + "</td>");
-                        } else
-                        {
-                            out.println("<td> </td>");
+                            out.println("<tr>");
+                            out.println("<td>" + p.getName() + "</td>");
+                            if (p.getLength() != 0)
+                            {
+                                out.println("<td>" + p.getLength() + "</td>");
+                            } else
+                            {
+                                out.println("<td> </td>");
+                            }
+                            out.println("<td>" + p.getQuantity() + "</td>");
+                            out.println("<td>" + p.getUnit() + "</td>");
+                            out.println("<td>" + p.getDescription() + "</td>");
                         }
-                        out.println("<td>" + p.getQuantity() + "</td>");
-                        out.println("<td>" + p.getUnit() + "</td>");
-                        out.println("<td>" + p.getDescription() + "</td>");
+                    }
+                %>
+            </table>
+            <br><br>
+            <table>
+                <caption>Tag</caption>
+                <tr>
+                    <th><b>Materiale</b></th>
+                    <th><b>Længde</b></th>
+                    <th><b>Antal</b></th>
+                    <th><b>Enhed</b></th>
+                    <th><b>Beskrivelse</b></th>
+                </tr>
+                <%
+                    for (Part p : parts)
+                    {
+                        if (p.getMaterial_class().equals("tag"))
+                        {
+                            out.println("<tr>");
+                            out.println("<td>" + p.getName() + "</td>");
+                            if (p.getLength() != 0)
+                            {
+                                out.println("<td>" + p.getLength() + "</td>");
+                            } else
+                            {
+                                out.println("<td> </td>");
+                            }
+                            out.println("<td>" + p.getQuantity() + "</td>");
+                            out.println("<td>" + p.getUnit() + "</td>");
+                            out.println("<td>" + p.getDescription() + "</td>");
+                        }
+                    }
+
+                    for (Part p : roof_parts)
+                    {
+                        if (p.getMaterial_class().equals("tag"))
+                        {
+                            out.println("<tr>");
+                            out.println("<td>" + p.getName() + "</td>");
+                            if (p.getLength() != 0)
+                            {
+                                out.println("<td>" + p.getLength() + "</td>");
+                            } else
+                            {
+                                out.println("<td> </td>");
+                            }
+                            out.println("<td>" + p.getQuantity() + "</td>");
+                            out.println("<td>" + p.getUnit() + "</td>");
+                            out.println("<td>" + p.getDescription() + "</td>");
+                        }
+                    }
+                %>
+            </table>
+            <br><br>
+            <table>
+                <caption>Beslag og skruer</caption>
+                <tr>
+                    <th><b>Materiale</b></th>
+                    <th><b>Længde</b></th>
+                    <th><b>Antal</b></th>
+                    <th><b>Enhed</b></th>
+                    <th><b>Beskrivelse</b></th>
+                </tr>
+                <%
+                    for (Part p : parts)
+                    {
+                        if (p.getMaterial_class().equals("beslag og skruer"))
+                        {
+                            out.println("<tr>");
+                            out.println("<td>" + p.getName() + "</td>");
+                            if (p.getLength() != 0)
+                            {
+                                out.println("<td>" + p.getLength() + "</td>");
+                            } else
+                            {
+                                out.println("<td> </td>");
+                            }
+                            out.println("<td>" + p.getQuantity() + "</td>");
+                            out.println("<td>" + p.getUnit() + "</td>");
+                            out.println("<td>" + p.getDescription() + "</td>");
+                        }
+                    }
+
+                    for (Part p : roof_parts)
+                    {
+                        if (p.getMaterial_class().equals("beslag og skruer"))
+                        {
+                            out.println("<tr>");
+                            out.println("<td>" + p.getName() + "</td>");
+                            if (p.getLength() != 0)
+                            {
+                                out.println("<td>" + p.getLength() + "</td>");
+                            } else
+                            {
+                                out.println("<td> </td>");
+                            }
+                            out.println("<td>" + p.getQuantity() + "</td>");
+                            out.println("<td>" + p.getUnit() + "</td>");
+                            out.println("<td>" + p.getDescription() + "</td>");
+                        }
                     }
                 %>
             </table>
