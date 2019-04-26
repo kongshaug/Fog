@@ -151,10 +151,17 @@ public class CalculateRoof
 
         //length of roof from edge to top
         //which one? --- find out in next episode
-        double halfRoof = (width / 2) / Math.cos(slope);
+        //double angleinradians = slope * Math.PI / 180.0;
+      //  double halfRooff = (width / 2) / angleinradians;
+        //cos(A)/b=c HHHHEREre
+        double cosAngle = Math.cos(Math.toRadians(slope));
+        double halfRoofD  = (width / 2)/  cosAngle;
+        int halfRoof = (int) halfRoofD;
+        
 
         //hight of roof
-        int height = (int) (sqrt(halfRoof * halfRoof - width * width));
+        int height = (int) (sqrt(halfRoof * halfRoof -( (width/2) * (width/2))));
+    
 
         //calculate taglægter
         int NumberOfTaglægter = calcTaglægter(halfRoof, depth, taglægte, parts);

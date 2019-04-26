@@ -17,9 +17,9 @@
     <body>
         <form action="Fog" method="POST">
             Bredde: <br>
-            <input type="number" name="depth" value="200" min="200"><br>
+            <input type="number" pattern="[0-2000]*" name="depth" value="200" min="200"><br>
             Dybde: <br>
-            <input type="number" name="width" value="200" min="200"><br><br>
+            <input type="number" pattern="[0-2000]*" name="width" value="200" min="200"><br><br>
             <label> <input type="radio" name="roof" id="flat" value="flat" onclick="disable()"><span>Fladt tag</span></label>
             <label> <input type="radio" name="roof" id="sloped" value="sloped"onclick="enable()"><span>Tag med rejsning</span></label>
 
