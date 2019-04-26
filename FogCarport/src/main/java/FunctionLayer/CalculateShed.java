@@ -6,6 +6,7 @@
 
 package FunctionLayer;
 
+import static java.lang.Math.sqrt;
 import java.util.ArrayList;
 
 /**
@@ -19,12 +20,13 @@ public class CalculateShed {
     {
      
         
-        //CHANGE BELOW TO SHED WEN SHED HAS CONSTRUCTOR
-        int depth = carport.getDepth();
-        int width = carport.getWidth();
+        
+        int depth = carport.getShed().getDepth();
+        int width = carport.getShed().getWidth();
         int slope = carport.getRoof().getSlope();
+        int widthOfCarport = carport.getWidth();
        
-        ArrayList<Part> parts = carport.getParts();
+        ArrayList<Part> parts = carport.getShed().getParts();
         
         // PUT HERE:  caluclatdoorForShed();
 
@@ -63,14 +65,27 @@ public class CalculateShed {
         Part beklædningenSides = new Part(beklædning, 200, numberOfBræderForSides, "beklædning til skurets sider");
         parts.add(beklædningenSides);
         
+        //calculate the wood needed to cover the part of the shed from the top of the shed to the roof
+        
+        if(slope != 0 && width + 30 < widthOfCarport)
+        {
+            
+            double halfRoof = (width / 2) / Math.cos(slope);
 
-        carport.setParts(parts);
+        //hight of roof
+        int height = (int) (sqrt(halfRoof * halfRoof - width * width));
+        
+        Part beklædningenSidesToTop = new Part(beklædning, height, numberOfBræderForSides + numberOfBræderForFrontBack, "beklædning til skurets sider op til taget");
+        parts.add(beklædningenSidesToTop);
+        }
+
+        carport.getShed().setParts(parts);
     
 }
 
       public void caluclatdoorForShed(Carport carport, Material Lægte, Material stalddørsgrebene, Material hængselet, Material planker)
     {
-           ArrayList<Part> parts = carport.getParts();
+           ArrayList<Part> parts = carport.getShed().getParts();
 
         
         //here we calculate all the parts needed for a door
@@ -91,7 +106,7 @@ public class CalculateShed {
         parts.add(doorWood);
         
         
-        carport.setParts(parts);
+        carport.getShed().setParts(parts);
 
     }
 }
