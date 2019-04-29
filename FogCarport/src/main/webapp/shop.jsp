@@ -15,6 +15,16 @@
         <title>Shop</title>
     </head>
     <body>
+        <%
+        if(session.getAttribute("errorMessageShed") != null)
+        {
+        %>
+        
+        
+        
+        <%
+        }
+        %>
         <form action="Fog" method="POST">
             Bredde: <br>
             <input type="number" pattern="[0-2000]*" name="depth" value="200" min="200"><br>
@@ -55,7 +65,7 @@
 
             <br>
             <br>
-               <label> <input type="radio" name="shed" id="sloped" value="Shed"onclick="enable()"><span>skur</span></label> 
+               <label> <input type="radio" name="shed" id="withShed" value="Shed"onclick="enable()"><span>skur</span></label> 
                <br>
                <br>
                <p>OBS! Skuret skal have min. 15 cm udhæng på alle sider <br>

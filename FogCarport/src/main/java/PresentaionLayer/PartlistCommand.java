@@ -32,9 +32,24 @@ public class PartlistCommand implements Command
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession();        
         int depth = Integer.parseInt(request.getParameter("depth"));
         int width = Integer.parseInt(request.getParameter("width"));
+        
+           if ("shed".equals(request.getParameter("shed")))
+        {
+        int shedDepth = Integer.parseInt(request.getParameter("depth"));
+        int shedWidth = Integer.parseInt(request.getParameter("width"));
+        if (shedDepth > depth -30 || shedWidth > width -30)
+        {
+            session.setAttribute("errorMessageShed", "dit skur skal være mindst 30 cm smallere og kortere end dit skur. "
+                    + "Målene for dit skur er ligenu  " + (shedDepth - depth) + " for dybe og " +(shedWidth- width)+ " for bred. prøv igen.");
+        
+            return "shop.jsp";
+        }
+                
+        }
+        
         String roofkind = request.getParameter("roof");
         int typeId = Integer.parseInt(request.getParameter("type"));
         List<RoofType> rooftypes = null;
