@@ -87,9 +87,10 @@ public class Part
             return (material.getPrice() * quantity);
         } else
         {
-            //double length_meter = length / 100;
-            double total = ((quantity * length) / 100) * material.getPrice();
-            return total;
+            double length_meter = length;
+            double Qua = quantity;
+
+            return ((Qua * length_meter) / 100.0) * material.getPrice();
         }
     }
 
