@@ -11,7 +11,6 @@ import FunctionLayer.FunctionManager;
 import FunctionLayer.Roof;
 import FunctionLayer.RoofType;
 import FunctionLayer.Shed;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -36,36 +35,26 @@ public class PartlistCommand implements Command
         HttpSession session = request.getSession();
         int depth = Integer.parseInt(request.getParameter("depth"));
         int width = Integer.parseInt(request.getParameter("width"));
-        
+
         String rooftype = request.getParameter("roof");
-        int typeId = 0;
-        String typeIdGet = request.getParameter("type");
-        if (typeIdGet != null)
-        {
-            typeId = Integer.parseInt(typeIdGet);
-        }
-        int slope = 0;
-        String slopeGet = request.getParameter("slope");
-        if (slopeGet != null)
-        {
-            slope = Integer.parseInt(slopeGet);
-        }
+        String typeId = request.getParameter("type");
+        String slope = request.getParameter("slope");
 
         int shedDepth = Integer.parseInt(request.getParameter("shedDepth"));
         int shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
         String shedOrNot = request.getParameter("shed");
-        
-        if(typeIdGet == null)
+
+        if (typeId == null)
         {
             session.setAttribute("errormessage", "Vælg venligst tagtype!");
             return "shop.jsp";
         }
-        if(rooftype.equals("sloped") && slope == 0)
+        if (rooftype.equals("sloped") && slope == null)
         {
             session.setAttribute("errormessage", "Vælg venligst hældning!");
             return "shop.jsp";
         }
-        if(shedOrNot == null)
+        if (shedOrNot == null)
         {
             session.setAttribute("errormessage", "Vælg venligst om der ønskes skur eller ej!");
             return "shop.jsp";
@@ -82,11 +71,19 @@ public class PartlistCommand implements Command
             }
         }
 
-        if (depth != 0 && width != 0 && typeId != 0 && rooftype != null)
+        if (depth != 0 && width != 0)
         {
-            RoofType type = manager.getRoofType(rooftype, typeId);
-            Roof roof = new Roof(slope, type);
             Carport carport = null;
+            Roof roof = null;
+            RoofType type = manager.getRoofType(rooftype, Integer.parseInt(typeId));
+            
+            if (rooftype.equals("flat"))
+            {
+                roof = new Roof(0, type);
+            } else
+            {
+                roof = new Roof(Integer.parseInt(slope), type);
+            }
 
             if ("Uden skur".equals(shedOrNot))
             {
@@ -105,6 +102,7 @@ public class PartlistCommand implements Command
             session.setAttribute("carport", carport);
 
             return target;
+            
         } else
         {
             return target;
