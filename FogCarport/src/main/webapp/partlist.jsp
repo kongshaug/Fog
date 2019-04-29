@@ -111,8 +111,7 @@
                     <th><b>Beskrivelse</b></th>
                     <th><b>Pris</b></th>
                 </tr>
-                <%                    
-                    for (Part p : roof_parts)
+                <%                    for (Part p : roof_parts)
                     {
                         if (p.getMaterial_class().equals("tag"))
                         {
@@ -209,6 +208,8 @@
                     }
                 %>
             </table>
+            <h1><%=carport.getTotal_price()%></h1>
+
         </form>
     </body>
 </html>
