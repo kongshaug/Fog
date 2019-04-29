@@ -53,6 +53,18 @@
                 %>
             </select>
 
+            <br>
+            <br>
+               <label> <input type="radio" name="shed" id="sloped" value="Shed"onclick="enable()"><span>skur</span></label> 
+               <br>
+               <br>
+               <p>OBS! Skuret skal have min. 15 cm udhæng på alle sider <br>
+               og skal derfor være mindst 30 cm smallere og kortere end carporten</p>
+              Bredde af skur: <br>
+            <input type="number" pattern="[0-2000]*" name="shedDepth" value="200" min="200"><br>
+            Dybde afskur: <br>
+            <input type="number" pattern="[0-2000]*" name="shedWidth" value="200" min="200"><br><br>
+            
             <br><br>
             <button name="command" value="calculate">Beregn carport</button>
 
