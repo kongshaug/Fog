@@ -10,6 +10,7 @@ import FunctionLayer.Carport;
 import FunctionLayer.FunctionManager;
 import FunctionLayer.Roof;
 import FunctionLayer.RoofType;
+import FunctionLayer.Shed;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,11 +39,12 @@ public class PartlistCommand implements Command
         String roofkind = request.getParameter("roof");
         int typeId = Integer.parseInt(request.getParameter("type"));
         int slope = Integer.parseInt(request.getParameter("slope"));
+        int shedDepth = Integer.parseInt(request.getParameter("shedDepth"));
+        int shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
+        String shedOrNot = request.getParameter("shed");
 
-        if ("shed".equals(request.getParameter("shed")))
+        if ("shed".equals(shedOrNot))
         {
-            int shedDepth = Integer.parseInt(request.getParameter("shedDepth"));
-            int shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
             if (shedDepth > depth - 30 || shedWidth > width - 30)
             {
                 session.setAttribute("errorMessageShed", "Skuret skal være mindst 30 cm smallere og kortere end carporten. "
@@ -50,16 +52,24 @@ public class PartlistCommand implements Command
 
                 return "shop.jsp";
             }
-
         }
 
         if (depth != 0 && width != 0 && typeId != 0 && roofkind != null)
         {
-
             RoofType type = manager.getRoofType(roofkind, typeId);
-
             Roof roof = new Roof(slope, type);
-            Carport carport = new Carport(width, depth, roof);
+            Carport carport = null;
+
+            if (shedOrNot == null)
+            {
+                carport = new Carport(width, depth, roof);
+
+            } else if (shedDepth != 0 && shedWidth != 0)
+            {
+                Shed shed = new Shed(shedDepth, shedWidth);
+                carport = new Carport(width, depth, roof, shed);
+                manager.calcShed(carport);
+            }
 
             manager.calcCarport(carport);
             manager.calcRoof(carport);
@@ -71,6 +81,7 @@ public class PartlistCommand implements Command
         {
             return target;
         }
+
     }
 
 }

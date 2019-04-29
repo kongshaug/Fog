@@ -70,22 +70,12 @@
                             out.println("<td>" + p.getDescription() + "</td>");
                         }
                     }
-                %>
-            </table>
-            <br><br>
-            <table>
-                <caption>Tag</caption>
-                <tr>
-                    <th><b>Materiale</b></th>
-                    <th><b>Længde</b></th>
-                    <th><b>Antal</b></th>
-                    <th><b>Enhed</b></th>
-                    <th><b>Beskrivelse</b></th>
-                </tr>
-                <%
-                    for (Part p : parts)
+
+                    ArrayList<Part> shed_parts = carport.getShed().getParts();
+
+                    for (Part p : shed_parts)
                     {
-                        if (p.getMaterial_class().equals("tag"))
+                        if (p.getMaterial_class().equals("træ"))
                         {
                             out.println("<tr>");
                             out.println("<td>" + p.getName() + "</td>");
@@ -102,7 +92,19 @@
                         }
                     }
 
-                    for (Part p : roof_parts)
+                %>
+            </table>
+            <br><br>
+            <table>
+                <caption>Tag</caption>
+                <tr>
+                    <th><b>Materiale</b></th>
+                    <th><b>Længde</b></th>
+                    <th><b>Antal</b></th>
+                    <th><b>Enhed</b></th>
+                    <th><b>Beskrivelse</b></th>
+                </tr>
+                <%                    for (Part p : roof_parts)
                     {
                         if (p.getMaterial_class().equals("tag"))
                         {
@@ -153,6 +155,24 @@
                     }
 
                     for (Part p : roof_parts)
+                    {
+                        if (p.getMaterial_class().equals("beslag og skruer"))
+                        {
+                            out.println("<tr>");
+                            out.println("<td>" + p.getName() + "</td>");
+                            if (p.getLength() != 0)
+                            {
+                                out.println("<td>" + p.getLength() + "</td>");
+                            } else
+                            {
+                                out.println("<td> </td>");
+                            }
+                            out.println("<td>" + p.getQuantity() + "</td>");
+                            out.println("<td>" + p.getUnit() + "</td>");
+                            out.println("<td>" + p.getDescription() + "</td>");
+                        }
+                    }
+                    for (Part p : shed_parts)
                     {
                         if (p.getMaterial_class().equals("beslag og skruer"))
                         {
