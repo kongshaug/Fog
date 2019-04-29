@@ -304,6 +304,33 @@ public class CalculateRoof
 
     }
 
+    private void calcEtanit(int slope, int depth, int width, int NumberOfTaglægter, ArrayList<Part> parts, 
+                            Material Etanit, Material Rygsten, Material BeslagSkruer)
+    {
+        //plates mesurments 110 x 57 cm with 20 cm overlay they become 90 cm x 37 cm
+        int numberOfEtanit = width / 37 * depth / 90;
+
+        Part Etaniten = new Part(Etanit, 0, numberOfEtanit, "Etanit til montering på taget");
+        parts.add(Etaniten);
+
+        //etanit vinkel rygning
+        int numberOfRygsten = depth / 30;
+
+        if (depth % 30 != 0)
+        {
+            numberOfRygsten++;
+        }
+
+        Part rygsten = new Part(Rygsten, 0, numberOfRygsten, "Rygsten til montering på toplægten med en vinkel på: " + slope);
+        parts.add(rygsten);
+        
+        int numberOfScrews = ((numberOfEtanit  + numberOfRygsten) *4 )/ 250;
+
+        //screws for plates 4 pr. ry
+        Part rygstensskruer = new Part(BeslagSkruer, 0,numberOfScrews, "screws til montering af rygsten");
+        parts.add(rygstensskruer);
+
+    }
     private void calcBeklædning(int width, int height, Carport carport, Material Beklædning, Material Skrue1, Material Skrue2, ArrayList<Part> parts)
     {
         //calculate beklædning they overlap with 3 cm
