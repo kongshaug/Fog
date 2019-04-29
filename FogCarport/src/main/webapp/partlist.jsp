@@ -28,6 +28,7 @@
                     <th><b>Antal</b></th>
                     <th><b>Enhed</b></th>
                     <th><b>Beskrivelse</b></th>
+                    <th><b>Pris</b></th>
                 </tr>
                 <%
                     ArrayList<Part> parts = carport.getParts();
@@ -49,6 +50,7 @@
                             out.println("<td>" + p.getQuantity() + "</td>");
                             out.println("<td>" + p.getUnit() + "</td>");
                             out.println("<td>" + p.getDescription() + "</td>");
+                            out.println("<td>" + p.getTotal_price() + "</td>");
                         }
                     }
 
@@ -68,6 +70,7 @@
                             out.println("<td>" + p.getQuantity() + "</td>");
                             out.println("<td>" + p.getUnit() + "</td>");
                             out.println("<td>" + p.getDescription() + "</td>");
+                            out.println("<td>" + p.getTotal_price() + "</td>");
                         }
                     }
                     if (carport.getShed() != null)
@@ -90,6 +93,7 @@
                                 out.println("<td>" + p.getQuantity() + "</td>");
                                 out.println("<td>" + p.getUnit() + "</td>");
                                 out.println("<td>" + p.getDescription() + "</td>");
+                                out.println("<td>" + p.getTotal_price() + "</td>");
                             }
                         }
                     }
@@ -105,8 +109,10 @@
                     <th><b>Antal</b></th>
                     <th><b>Enhed</b></th>
                     <th><b>Beskrivelse</b></th>
+                    <th><b>Pris</b></th>
                 </tr>
-                <%                    for (Part p : roof_parts)
+                <%                    
+                    for (Part p : roof_parts)
                     {
                         if (p.getMaterial_class().equals("tag"))
                         {
@@ -122,6 +128,7 @@
                             out.println("<td>" + p.getQuantity() + "</td>");
                             out.println("<td>" + p.getUnit() + "</td>");
                             out.println("<td>" + p.getDescription() + "</td>");
+                            out.println("<td>" + p.getTotal_price() + "</td>");
                         }
                     }
                 %>
@@ -135,6 +142,7 @@
                     <th><b>Antal</b></th>
                     <th><b>Enhed</b></th>
                     <th><b>Beskrivelse</b></th>
+                    <th><b>Pris</b></th>
                 </tr>
                 <%
                     for (Part p : parts)
@@ -153,6 +161,7 @@
                             out.println("<td>" + p.getQuantity() + "</td>");
                             out.println("<td>" + p.getUnit() + "</td>");
                             out.println("<td>" + p.getDescription() + "</td>");
+                            out.println("<td>" + p.getTotal_price() + "</td>");
                         }
                     }
 
@@ -172,6 +181,7 @@
                             out.println("<td>" + p.getQuantity() + "</td>");
                             out.println("<td>" + p.getUnit() + "</td>");
                             out.println("<td>" + p.getDescription() + "</td>");
+                            out.println("<td>" + p.getTotal_price() + "</td>");
                         }
                     }
                     if (carport.getShed() != null)
@@ -193,6 +203,7 @@
                                 out.println("<td>" + p.getQuantity() + "</td>");
                                 out.println("<td>" + p.getUnit() + "</td>");
                                 out.println("<td>" + p.getDescription() + "</td>");
+                                out.println("<td>" + p.getTotal_price() + "</td>");
                             }
                         }
                     }

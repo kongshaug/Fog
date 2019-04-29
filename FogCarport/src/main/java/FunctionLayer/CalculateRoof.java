@@ -181,7 +181,15 @@ public class CalculateRoof
 
         //calculations for toplægte, tegl and beklædning 
         calcToplægte(depth, parts, taglægte, ToplægteHolderen);
-        calcTegl(depth, NumberOfTaglægter, parts, Tegl, Rygsten, RygstensBeslag, BeslagSkruer);
+        
+        if(carport.getRoof().getType().getName().contains("Betontagsten"))
+        {
+            calcTegl(depth, NumberOfTaglægter, parts, Tegl, Rygsten, RygstensBeslag);
+        } else
+        {
+            calcEternit(slope, depth, width, parts, Tegl, Rygsten, BeslagSkruer);
+        }
+        
         calcBeklædning(width, height, carport, Beklædning, Skrue1, Skrue2, parts);
 
         Part vindskeder = new Part(trykImpBræt, (int) halfRoof, 4, "Vindskeder på rejsning");
@@ -279,7 +287,7 @@ public class CalculateRoof
 
     }
 
-    private void calcTegl(int depth, int NumberOfTaglægter, ArrayList<Part> parts, Material Tegl, Material Rygsten, Material RygstensBeslag, Material BeslagSkruer)
+    private void calcTegl(int depth, int NumberOfTaglægter, ArrayList<Part> parts, Material Tegl, Material Rygsten, Material RygstensBeslag)
     {
         //teglsten (30 cm dækbredde)
         int numberOfTegl = NumberOfTaglægter * depth / 30;
@@ -304,30 +312,31 @@ public class CalculateRoof
 
     }
 
-    private void calcEtanit(int slope, int depth, int width, int NumberOfTaglægter, ArrayList<Part> parts, 
-                            Material Etanit, Material Rygsten, Material BeslagSkruer)
+    private void calcEternit(int slope, int depth, int width, ArrayList<Part> parts, 
+                            Material Eternit, Material Vinkelrygning, Material BeslagSkruer)
     {
         //plates mesurments 110 x 57 cm with 20 cm overlay they become 90 cm x 37 cm
-        int numberOfEtanit = width / 37 * depth / 90;
+        int numberOfEternit = (width / 37) * (depth / 90);
 
-        Part Etaniten = new Part(Etanit, 0, numberOfEtanit, "Etanit til montering på taget");
-        parts.add(Etaniten);
+        Part Eterniten = new Part(Eternit, 0, numberOfEternit, "Eternit til montering på taget");
+        parts.add(Eterniten);
 
-        //etanit vinkel rygning
-        int numberOfRygsten = depth / 30;
+        //eternit vinkel rygning (45 cm), 7,5 cm overlay on each side 
+        int numberOfVinkelrygning = depth / 30;
 
         if (depth % 30 != 0)
         {
-            numberOfRygsten++;
+            numberOfVinkelrygning++;
         }
 
-        Part rygsten = new Part(Rygsten, 0, numberOfRygsten, "Rygsten til montering på toplægten med en vinkel på: " + slope);
-        parts.add(rygsten);
+        Part vinkelrygning = new Part(Vinkelrygning, 0, numberOfVinkelrygning, "Vinkelrygning til montering på toplægten med en vinkel på: " + slope);
+        parts.add(vinkelrygning);
         
-        int numberOfScrews = ((numberOfEtanit  + numberOfRygsten) *4 )/ 250;
+        //screws for plates 4 pr. vinkelrygning or plate
+        int numberOfScrews = ((numberOfEternit  + numberOfVinkelrygning) * 4);
+        int packages = cp.calcPackage250(numberOfScrews);
 
-        //screws for plates 4 pr. ry
-        Part rygstensskruer = new Part(BeslagSkruer, 0,numberOfScrews, "screws til montering af rygsten");
+        Part rygstensskruer = new Part(BeslagSkruer, 0, packages, "Skruer til montering af vinkelrygning og eternitplader");
         parts.add(rygstensskruer);
 
     }

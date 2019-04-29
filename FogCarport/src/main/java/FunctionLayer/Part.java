@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package FunctionLayer;
 
 /**
  *
  * @author benja
  */
-public class Part {
-    
+public class Part
+{
+
     private Material material;
     private int length;
     private int quantity;
@@ -20,8 +20,10 @@ public class Part {
     private String name;
     private String unit;
     private String material_class;
+    private double total_price;
 
-    public Part(Material material, int length, int quantity, String description) {
+    public Part(Material material, int length, int quantity, String description)
+    {
         this.material = material;
         this.id = material.getId();
         this.name = material.getName();
@@ -30,13 +32,16 @@ public class Part {
         this.length = length;
         this.quantity = quantity;
         this.description = description;
+        this.total_price = calcTotalPrice();
     }
 
-    public int getLength() {
+    public int getLength()
+    {
         return length;
     }
 
-    public int getQuantity() {
+    public int getQuantity()
+    {
         return quantity;
     }
 
@@ -50,22 +55,42 @@ public class Part {
         return material_class;
     }
 
-    public String getDescription() {
+    public String getDescription()
+    {
         return description;
     }
 
-    public int getId() {
+    public int getId()
+    {
         return id;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public String getUnit() {
+    public String getUnit()
+    {
         return unit;
     }
-    
-     
-    
+
+    public double getTotal_price()
+    {
+        return total_price;
+    }
+
+    private double calcTotalPrice()
+    {
+        if (length == 0)
+        {
+            return (material.getPrice() * quantity);
+        } else
+        {
+            //double length_meter = length / 100;
+            double total = ((quantity * length) / 100) * material.getPrice();
+            return total;
+        }
+    }
+
 }
