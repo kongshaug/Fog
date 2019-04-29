@@ -23,12 +23,14 @@ public class Shed
         this.id = id;
         this.depth = depth;
         this.width = width;
+        this.parts = new ArrayList<>();
     }
 
     public Shed(int depth, int width)
     {
         this.depth = depth;
         this.width = width;
+        this.parts = new ArrayList<>();
     }
 
     public int getId()
