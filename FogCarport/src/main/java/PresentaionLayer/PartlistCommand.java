@@ -38,7 +38,13 @@ public class PartlistCommand implements Command
         int width = Integer.parseInt(request.getParameter("width"));
         String roofkind = request.getParameter("roof");
         int typeId = Integer.parseInt(request.getParameter("type"));
-        int slope = Integer.parseInt(request.getParameter("slope"));
+        int slope = 0;
+        String slopeGet = request.getParameter("slope");
+        if (slopeGet != null)
+        {
+            slope = Integer.parseInt(slopeGet);
+        }
+
         int shedDepth = Integer.parseInt(request.getParameter("shedDepth"));
         int shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
         String shedOrNot = request.getParameter("shed");

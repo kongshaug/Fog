@@ -31,6 +31,7 @@
                 </tr>
                 <%
                     ArrayList<Part> parts = carport.getParts();
+                    ArrayList<Part> roof_parts = carport.getRoof().getParts();
 
                     for (Part p : parts)
                     {
@@ -51,7 +52,6 @@
                         }
                     }
 
-                    ArrayList<Part> roof_parts = carport.getRoof().getParts();
                     for (Part p : roof_parts)
                     {
                         if (p.getMaterial_class().equals("træ"))
@@ -70,25 +70,27 @@
                             out.println("<td>" + p.getDescription() + "</td>");
                         }
                     }
-
-                    ArrayList<Part> shed_parts = carport.getShed().getParts();
-
-                    for (Part p : shed_parts)
+                    if (carport.getShed() != null)
                     {
-                        if (p.getMaterial_class().equals("træ"))
+
+                        ArrayList<Part> shed_parts = carport.getShed().getParts();
+                        for (Part p : shed_parts)
                         {
-                            out.println("<tr>");
-                            out.println("<td>" + p.getName() + "</td>");
-                            if (p.getLength() != 0)
+                            if (p.getMaterial_class().equals("træ"))
                             {
-                                out.println("<td>" + p.getLength() + "</td>");
-                            } else
-                            {
-                                out.println("<td> </td>");
+                                out.println("<tr>");
+                                out.println("<td>" + p.getName() + "</td>");
+                                if (p.getLength() != 0)
+                                {
+                                    out.println("<td>" + p.getLength() + "</td>");
+                                } else
+                                {
+                                    out.println("<td> </td>");
+                                }
+                                out.println("<td>" + p.getQuantity() + "</td>");
+                                out.println("<td>" + p.getUnit() + "</td>");
+                                out.println("<td>" + p.getDescription() + "</td>");
                             }
-                            out.println("<td>" + p.getQuantity() + "</td>");
-                            out.println("<td>" + p.getUnit() + "</td>");
-                            out.println("<td>" + p.getDescription() + "</td>");
                         }
                     }
 
@@ -172,22 +174,26 @@
                             out.println("<td>" + p.getDescription() + "</td>");
                         }
                     }
-                    for (Part p : shed_parts)
+                    if (carport.getShed() != null)
                     {
-                        if (p.getMaterial_class().equals("beslag og skruer"))
+                        ArrayList<Part> shed_parts = carport.getShed().getParts();
+                        for (Part p : shed_parts)
                         {
-                            out.println("<tr>");
-                            out.println("<td>" + p.getName() + "</td>");
-                            if (p.getLength() != 0)
+                            if (p.getMaterial_class().equals("beslag og skruer"))
                             {
-                                out.println("<td>" + p.getLength() + "</td>");
-                            } else
-                            {
-                                out.println("<td> </td>");
+                                out.println("<tr>");
+                                out.println("<td>" + p.getName() + "</td>");
+                                if (p.getLength() != 0)
+                                {
+                                    out.println("<td>" + p.getLength() + "</td>");
+                                } else
+                                {
+                                    out.println("<td> </td>");
+                                }
+                                out.println("<td>" + p.getQuantity() + "</td>");
+                                out.println("<td>" + p.getUnit() + "</td>");
+                                out.println("<td>" + p.getDescription() + "</td>");
                             }
-                            out.println("<td>" + p.getQuantity() + "</td>");
-                            out.println("<td>" + p.getUnit() + "</td>");
-                            out.println("<td>" + p.getDescription() + "</td>");
                         }
                     }
                 %>
