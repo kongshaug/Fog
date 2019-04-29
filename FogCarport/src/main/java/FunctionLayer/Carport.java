@@ -29,7 +29,7 @@ public class Carport
         this.roof = roof;
         this.shed = shed;
         this.parts = new ArrayList<>();
-        this.total_price = calcTotalPrice();
+        this.total_price = 0.0;
     }
 
     public Carport(int width, int depth, Roof roof)
@@ -38,7 +38,7 @@ public class Carport
         this.depth = depth;
         this.roof = roof;
         this.parts = new ArrayList<>();
-        this.total_price = calcTotalPrice();
+        this.total_price = 0.0;
     }
 
     public Carport(int id, int width, int depth, Roof roof, Shed shed)
@@ -48,7 +48,7 @@ public class Carport
         this.roof = roof;
         this.shed = shed;
         this.parts = new ArrayList<>();
-        this.total_price = calcTotalPrice();
+        this.total_price = 0.0;
     }
 
     public Carport(int id, int width, int depth, Roof roof)
@@ -57,7 +57,7 @@ public class Carport
         this.depth = depth;
         this.roof = roof;
         this.parts = new ArrayList<>();
-        this.total_price = calcTotalPrice();
+        this.total_price = 0.0;
     }
 
     public int getId()
@@ -98,7 +98,6 @@ public class Carport
     public void setParts(ArrayList parts)
     {
         this.parts = parts;
-        total_price = calcTotalPrice();
     }
 
     private double calcTotalPrice()
@@ -124,6 +123,7 @@ public class Carport
 
     public double getTotal_price()
     {
+        total_price = calcTotalPrice();
         return total_price;
     }
 
