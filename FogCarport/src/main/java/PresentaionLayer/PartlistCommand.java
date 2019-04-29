@@ -38,12 +38,12 @@ public class PartlistCommand implements Command
         
            if ("shed".equals(request.getParameter("shed")))
         {
-        int shedDepth = Integer.parseInt(request.getParameter("depth"));
-        int shedWidth = Integer.parseInt(request.getParameter("width"));
+        int shedDepth = Integer.parseInt(request.getParameter("shedDepth"));
+        int shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
         if (shedDepth > depth -30 || shedWidth > width -30)
         {
-            session.setAttribute("errorMessageShed", "dit skur skal være mindst 30 cm smallere og kortere end dit skur. "
-                    + "Målene for dit skur er ligenu  " + (shedDepth - depth) + " for dybe og " +(shedWidth- width)+ " for bred. prøv igen.");
+            session.setAttribute("errorMessageShed", "Skuret skal være mindst 30 cm smallere og kortere end carporten. "
+                    + "Målene for dit skur er lige nu  " + (shedDepth - (depth-30)) + " for dybe og " +(shedWidth- (width-30))+ " for bred. Prøv igen.");
         
             return "shop.jsp";
         }

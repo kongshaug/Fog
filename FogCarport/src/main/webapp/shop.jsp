@@ -65,7 +65,7 @@
 
             <br>
             <br>
-               <label> <input type="radio" name="shed" id="withShed" value="Shed"onclick="enable()"><span>skur</span></label> 
+               <label> <input type="radio" name="shed" id="withShed" value="Shed" onclick="enable()"><span>skur</span></label> 
                <br>
                <br>
                <p>OBS! Skuret skal have min. 15 cm udhæng på alle sider <br>
