@@ -42,7 +42,7 @@ public class FunctionManager
         return instance;
     }
 
-    public void calCarport(Carport carport) throws DataException
+    public void calcCarport(Carport carport) throws DataException
     {
         if (carport.getWidth() <= 750 && carport.getDepth() <= 800)
         {
@@ -56,7 +56,7 @@ public class FunctionManager
         }
     }
 
-    private void calFlatroof(Carport carport) throws DataException
+    private void calcFlatroof(Carport carport) throws DataException
     {
         Material spær = getMaterial(3);
         Material universalV = getMaterial(19);
@@ -75,7 +75,7 @@ public class FunctionManager
         cr.calculatePlatsmo(carport, plastmo, plastmotætning);
     }
 
-    private void calSlopeRoof(Carport carport) throws DataException
+    private void calcSlopeRoof(Carport carport) throws DataException
     {
         Material spær = getMaterial(3);
         Material taglægter = getMaterial(7);
@@ -207,10 +207,10 @@ public class FunctionManager
     {
         if (carport.getRoof().getType().getRoof_class().equals("flat"))
         {
-            calFlatroof(carport);
+            calcFlatroof(carport);
         } else
         {
-            calSlopeRoof(carport);
+            calcSlopeRoof(carport);
         }
     }
 

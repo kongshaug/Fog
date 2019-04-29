@@ -61,7 +61,7 @@ public class PartlistCommand implements Command
             Roof roof = new Roof(slope, type);
             Carport carport = new Carport(width, depth, roof);
 
-            manager.calCarport(carport);
+            manager.calcCarport(carport);
             manager.calcRoof(carport);
 
             session.setAttribute("carport", carport);
