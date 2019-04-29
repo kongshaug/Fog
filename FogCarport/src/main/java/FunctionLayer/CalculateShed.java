@@ -22,22 +22,19 @@ public class CalculateShed
         this.cp = cp;
     }
 
-    public void calcShed(Carport carport, Material stolpe, Material bræt, Material skruerne,
-            Material beklædning, Material skrue1, Material skrue2, Material vinkelbeslag)
+    public void calcShedFlatRoof(Carport carport, Material stolpe, Material bræt, Material vinkelbeslag, Material skruer, Material beklædning, Material skrue1, Material skrue2, Material Lægte, Material stalddørsgrebene, Material hængselet, Material planker)
     {
-
         int depth = carport.getShed().getDepth();
         int width = carport.getShed().getWidth();
-        int slope = carport.getRoof().getSlope();
-        int widthOfCarport = carport.getWidth();
 
         ArrayList<Part> parts = carport.getShed().getParts();
+        ArrayList<Integer> skruerForDoor = calculatedoorForShed(carport, Lægte, stalddørsgrebene, hængselet, planker);
 
         // PUT HERE:  caluclatdoorForShed();
         //calculate stolper, 1 in each corner and 1 by each door side
         Part LægteForDoor = new Part(stolpe, 300, 6, "Stolper til hjørner af skur og siderne af døren til skuret");
         parts.add(LægteForDoor);
-        
+
         //front and back on shed has 3 beans, sides have 2 going all the way across:25x150 mm. trykimp. Bræt
         Part LøsholterSides = new Part(bræt, depth, 4, "Løsholter til siderne af skuret");
         parts.add(LøsholterSides);
@@ -53,7 +50,7 @@ public class CalculateShed
         int beslagskruer = (20 * 4) * 2;
         int packageofbeslagskruer = cp.calcPackage250(beslagskruer);
 
-        Part packages = new Part(skruerne, 0, packageofbeslagskruer, "Til montering af vinkelbeslag");
+        Part packages = new Part(skruer, 0, packageofbeslagskruer, "Til montering af vinkelbeslag");
         parts.add(packages);
 
         // the beklædning uses  19x100 mm. trykimp. Bræt
@@ -70,37 +67,93 @@ public class CalculateShed
         parts.add(beklædningenSides);
 
         int skruerYderbræt = ((numberOfBræderForFrontBack + numberOfBræderForSides) / 2) * 6;
-        int packagesYderbræt = cp.calcPackage400(skruerYderbræt);
+        int packagesYderbræt = cp.calcPackage400(skruerYderbræt + skruerForDoor.get(0));
 
         Part yderbrætSkruer = new Part(skrue1, 0, packagesYderbræt, "Til montering af yderbræt, ved beklædning af gavl");
         parts.add(yderbrætSkruer);
 
         int skruerInderbræt = ((numberOfBræderForFrontBack + numberOfBræderForSides) / 2) * 3;
-        int packagesInderbræt = cp.calcPackage300(skruerInderbræt);
+        int packagesInderbræt = cp.calcPackage300(skruerInderbræt + skruerForDoor.get(1));
 
         Part inderbrætSkruer = new Part(skrue2, 0, packagesInderbræt, "Til montering af inderbræt, ved beklædning af gavl");
         parts.add(inderbrætSkruer);
+    }
 
-        //calculate the wood needed to cover the part of the shed from the top of the shed to the roof
-        if (slope != 0 && width + 30 < widthOfCarport)
-        {
+    public void calcShedSlopeRoof(Carport carport, Material stolpe, Material bræt, Material vinkelbeslag, Material skruer, Material beklædning, Material skrue1, Material skrue2, Material Lægte, Material stalddørsgrebene, Material hængselet, Material planker)
+    {
+        int depth = carport.getShed().getDepth();
+        int width = carport.getShed().getWidth();
+        int widthOfCarport = carport.getWidth();
+        int slope = carport.getRoof().getSlope();
 
-            double halfRoof = (width / 2) / Math.cos(slope);
+        double cosAngle = Math.cos(Math.toRadians(slope));
+        double halfRoofD = (widthOfCarport / 2) / cosAngle;
+        int halfRoof = (int) halfRoofD;
 
-            //height of roof
-            int height = (int) (sqrt(halfRoof * halfRoof - width * width));
+        //height of roof
+        int height = (int) (sqrt(halfRoof * halfRoof - ((widthOfCarport / 2) * (widthOfCarport / 2))));
 
-            Part beklædningenSidesToTop = new Part(beklædning, height, numberOfBræderForSides + numberOfBræderForFrontBack, "Beklædning til skurets gavl");
-            parts.add(beklædningenSidesToTop);
-        }
+        ArrayList<Part> parts = carport.getShed().getParts();
+        ArrayList<Integer> skruerForDoor = calculatedoorForShed(carport, Lægte, stalddørsgrebene, hængselet, planker);
+
+        // PUT HERE:  caluclatdoorForShed();
+        //calculate stolper, 1 in each corner and 1 by each door side
+        Part Stolpe = new Part(stolpe, 300, 6, "Stolper til hjørner af skur og siderne af døren til skuret");
+        parts.add(Stolpe);
+
+        // because of sloped roof, there is 2 extra løsholter 
+        //front and back on shed has 3 løsholter, sides have 3 løsholter going all the way across:25x150 mm. trykimp. Bræt
+        Part LøsholterSides = new Part(bræt, depth, 6, "Løsholter til siderne af skuret");
+        parts.add(LøsholterSides);
+
+        Part LøsholterFrontBack = new Part(bræt, width, 6, "Løsholter til for- og bagende af skuret");
+        parts.add(LøsholterFrontBack);
+
+        //there is 12 løsholter, 2 vinkelbeslag pr løsholte
+        Part vinkelslag = new Part(vinkelbeslag, 0, 24, "Til montering af løsholter");
+        parts.add(vinkelslag);
+
+        //There is 2 surfaces pr beslag, 4 skruer pr surface
+        int beslagskruer = (24 * 4) * 2;
+        int packageofbeslagskruer = cp.calcPackage250(beslagskruer);
+
+        Part packages = new Part(skruer, 0, packageofbeslagskruer, "Til montering af vinkelbeslag");
+        parts.add(packages);
+
+        // the beklædning uses  19x100 mm. trykimp. Bræt
+        // each bræt for BackFront and Sides is 10 cm, and each with a 3 cm overlay to the next one, therefor we divide with 7
+        // 42 is retracted because the material for the door has already been added, a door is 84 cm therefor half is removed 
+        int numberOfBræderForFrontBack = ((width - 42) / 7) * 2;
+
+        Part beklædningen = new Part(beklædning, 200, numberOfBræderForFrontBack, "beklædning til skurets for- og bagside");
+        parts.add(beklædningen);
+
+        int numberOfBræderForSides = (depth / 7) * 2;
+
+        //bekældning is same height as carport, so that the customer can choose where to place it
+        Part beklædningenSides = new Part(beklædning, 200 + height, numberOfBræderForSides, "Beklædning til skurets sider (skal skæres til efter ønsket placering)");
+        parts.add(beklædningenSides);
+
+        int skruerYderbræt = ((numberOfBræderForFrontBack + numberOfBræderForSides) / 2) * 6;
+        int packagesYderbræt = cp.calcPackage400(skruerYderbræt + skruerForDoor.get(0));
+
+        Part yderbrætSkruer = new Part(skrue1, 0, packagesYderbræt, "Til montering af yderbræt, ved beklædning af gavl");
+        parts.add(yderbrætSkruer);
+
+        int skruerInderbræt = ((numberOfBræderForFrontBack + numberOfBræderForSides) / 2) * 3;
+        int packagesInderbræt = cp.calcPackage300(skruerInderbræt + skruerForDoor.get(1));
+
+        Part inderbrætSkruer = new Part(skrue2, 0, packagesInderbræt, "Til montering af inderbræt, ved beklædning af gavl");
+        parts.add(inderbrætSkruer);
 
         carport.getShed().setParts(parts);
 
     }
 
-    public void calculatedoorForShed(Carport carport, Material Lægte, Material stalddørsgrebene, Material hængselet, Material planker)
+    private ArrayList<Integer> calculatedoorForShed(Carport carport, Material Lægte, Material stalddørsgrebene, Material hængselet, Material planker)
     {
         ArrayList<Part> parts = carport.getShed().getParts();
+        ArrayList<Integer> skruer = new ArrayList<>();
 
         //here we calculate all the parts needed for a door
         Part LægteForDoor = new Part(Lægte, 420, 1, "Til z på bagside af dør");
@@ -117,7 +170,15 @@ public class CalculateShed
         Part doorWood = new Part(planker, 198, NumberOfBrædder, "Brædder til at lave døren af sættes");
         parts.add(doorWood);
 
+        int skruerYderbræt = (NumberOfBrædder / 2) * 6;
+        int skruerInderbræt = (NumberOfBrædder / 2) * 3;
+
+        skruer.add(skruerYderbræt);
+        skruer.add(skruerInderbræt);
+
         carport.getShed().setParts(parts);
+
+        return skruer;
 
     }
 }
