@@ -56,7 +56,7 @@ public class FunctionManager
         }
     }
 
-    public void calFlatroof(Carport carport) throws DataException
+    private void calFlatroof(Carport carport) throws DataException
     {
         Material spær = getMaterial(3);
         Material universalV = getMaterial(19);
@@ -75,7 +75,7 @@ public class FunctionManager
         cr.calculatePlatsmo(carport, plastmo, plastmotætning);
     }
 
-    public void calSlopeRoof(Carport carport) throws DataException
+    private void calSlopeRoof(Carport carport) throws DataException
     {
         Material spær = getMaterial(3);
         Material taglægter = getMaterial(7);
@@ -172,6 +172,46 @@ public class FunctionManager
         }
 
         return flatRoofs;
+    }
+
+    public RoofType getRoofType(String roofkind, int typeId) throws DataException
+    {
+        RoofType type = null;
+
+        if (roofkind.equals("flat"))
+        {
+            List<RoofType> rooftypes = getFlatRoofs();
+            for (RoofType rooftype : rooftypes)
+            {
+                if (rooftype.getId() == typeId)
+                {
+                    type = rooftype;
+                }
+            }
+        } else
+        {
+            List<RoofType> rooftypes = getSlopedRoofs();
+            for (RoofType rooftype : rooftypes)
+            {
+                if (rooftype.getId() == typeId)
+                {
+                    type = rooftype;
+                }
+            }
+        }
+
+        return type;
+    }
+
+    public void calcRoof(Carport carport) throws DataException
+    {
+        if (carport.getRoof().getType().getRoof_class().equals("flat"))
+        {
+            calFlatroof(carport);
+        } else
+        {
+            calSlopeRoof(carport);
+        }
     }
 
 }

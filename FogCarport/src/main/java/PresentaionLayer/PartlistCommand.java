@@ -32,68 +32,45 @@ public class PartlistCommand implements Command
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
-        HttpSession session = request.getSession();        
+        HttpSession session = request.getSession();
         int depth = Integer.parseInt(request.getParameter("depth"));
         int width = Integer.parseInt(request.getParameter("width"));
-        
-           if ("shed".equals(request.getParameter("shed")))
-        {
-        int shedDepth = Integer.parseInt(request.getParameter("shedDepth"));
-        int shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
-        if (shedDepth > depth -30 || shedWidth > width -30)
-        {
-            session.setAttribute("errorMessageShed", "Skuret skal være mindst 30 cm smallere og kortere end carporten. "
-                    + "Målene for dit skur er lige nu  " + (shedDepth - (depth-30)) + " for dybe og " +(shedWidth- (width-30))+ " for bred. Prøv igen.");
-        
-            return "shop.jsp";
-        }
-                
-        }
-        
         String roofkind = request.getParameter("roof");
         int typeId = Integer.parseInt(request.getParameter("type"));
-        List<RoofType> rooftypes = null;
-        RoofType type = null;
-        int slope = 0;
+        int slope = Integer.parseInt(request.getParameter("slope"));
 
-        if (roofkind.equals("flat"))
+        if ("shed".equals(request.getParameter("shed")))
         {
-            rooftypes = manager.getFlatRoofs();
-            for (RoofType rooftype : rooftypes)
+            int shedDepth = Integer.parseInt(request.getParameter("shedDepth"));
+            int shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
+            if (shedDepth > depth - 30 || shedWidth > width - 30)
             {
-                if (rooftype.getId() == typeId)
-                {
-                    type = rooftype;
-                }
+                session.setAttribute("errorMessageShed", "Skuret skal være mindst 30 cm smallere og kortere end carporten. "
+                        + "Målene for dit skur er lige nu  " + (shedDepth - (depth - 30)) + " for dybe og " + (shedWidth - (width - 30)) + " for bred. Prøv igen.");
+
+                return "shop.jsp";
             }
-        } else
-        {
-            slope = Integer.parseInt(request.getParameter("slope"));
-            rooftypes = manager.getSlopedRoofs();
-            for (RoofType rooftype : rooftypes)
-            {
-                if (rooftype.getId() == typeId)
-                {
-                    type = rooftype;
-                }
-            }
+
         }
 
-        Roof roof = new Roof(slope, type);
-        Carport carport = new Carport(width, depth, roof);
-
-        manager.calCarport(carport);
-        if (carport.getRoof().getType().getRoof_class().equals("flat"))
+        if (depth != 0 && width != 0 && typeId != 0 && roofkind != null)
         {
-            manager.calFlatroof(carport);
+
+            RoofType type = manager.getRoofType(roofkind, typeId);
+
+            Roof roof = new Roof(slope, type);
+            Carport carport = new Carport(width, depth, roof);
+
+            manager.calCarport(carport);
+            manager.calcRoof(carport);
+
+            session.setAttribute("carport", carport);
+
+            return target;
         } else
         {
-            manager.calSlopeRoof(carport);
+            return target;
         }
-
-        session.setAttribute("carport", carport);
-
-        return target;
     }
 
 }
