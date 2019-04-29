@@ -36,8 +36,14 @@ public class PartlistCommand implements Command
         HttpSession session = request.getSession();
         int depth = Integer.parseInt(request.getParameter("depth"));
         int width = Integer.parseInt(request.getParameter("width"));
-        String roofkind = request.getParameter("roof");
-        int typeId = Integer.parseInt(request.getParameter("type"));
+        
+        String rooftype = request.getParameter("roof");
+        int typeId = 0;
+        String typeIdGet = request.getParameter("type");
+        if (typeIdGet != null)
+        {
+            typeId = Integer.parseInt(typeIdGet);
+        }
         int slope = 0;
         String slopeGet = request.getParameter("slope");
         if (slopeGet != null)
@@ -48,25 +54,41 @@ public class PartlistCommand implements Command
         int shedDepth = Integer.parseInt(request.getParameter("shedDepth"));
         int shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
         String shedOrNot = request.getParameter("shed");
+        
+        if(typeIdGet == null)
+        {
+            session.setAttribute("errormessage", "Vælg venligst tagtype!");
+            return "shop.jsp";
+        }
+        if(rooftype.equals("sloped") && slope == 0)
+        {
+            session.setAttribute("errormessage", "Vælg venligst hældning!");
+            return "shop.jsp";
+        }
+        if(shedOrNot == null)
+        {
+            session.setAttribute("errormessage", "Vælg venligst om der ønskes skur eller ej!");
+            return "shop.jsp";
+        }
 
-        if ("shed".equals(shedOrNot))
+        if ("Med skur".equals(shedOrNot))
         {
             if (shedDepth > depth - 30 || shedWidth > width - 30)
             {
-                session.setAttribute("errorMessageShed", "Skuret skal være mindst 30 cm smallere og kortere end carporten. "
+                session.setAttribute("errormessage", "Skuret skal være mindst 30 cm smallere og kortere end carporten. "
                         + "Målene for dit skur er lige nu  " + (shedDepth - (depth - 30)) + " for dybe og " + (shedWidth - (width - 30)) + " for bred. Prøv igen.");
 
                 return "shop.jsp";
             }
         }
 
-        if (depth != 0 && width != 0 && typeId != 0 && roofkind != null)
+        if (depth != 0 && width != 0 && typeId != 0 && rooftype != null)
         {
-            RoofType type = manager.getRoofType(roofkind, typeId);
+            RoofType type = manager.getRoofType(rooftype, typeId);
             Roof roof = new Roof(slope, type);
             Carport carport = null;
 
-            if (shedOrNot == null)
+            if ("Uden skur".equals(shedOrNot))
             {
                 carport = new Carport(width, depth, roof);
 

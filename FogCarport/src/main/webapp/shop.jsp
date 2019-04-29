@@ -17,12 +17,15 @@
     <body>
         <br>
         <%
-            if (session.getAttribute("errorMessageShed") != null)
+
+            String errormessage = (String) session.getAttribute("errormessage");
+
+            if (errormessage != null)
             {
         %>
-        <p><%=session.getAttribute("errorMessageShed")%></p>
+        <p><%=errormessage%></p>
         <%
-                session.removeAttribute("errorMessageShed");
+                session.removeAttribute("errormessage");
             }
         %>
 
@@ -32,7 +35,7 @@
             Dybde: <br>
             <input type="number" pattern="[0-2000]*" name="width" value="240" min="240" max="800"><br><br>
             <label> <input type="radio" name="roof" id="flat" value="flat" onclick="disable()"><span>Fladt tag</span></label>
-            <label> <input type="radio" name="roof" id="sloped" value="sloped"onclick="enable()"><span>Tag med rejsning</span></label>
+            <label> <input type="radio" name="roof" id="sloped" value="sloped"onclick="enable()" checked="checked"><span>Tag med rejsning</span></label>
 
             <br><br>
             <select name="type">
@@ -67,7 +70,13 @@
 
             <br>
             <br>
-            <label> <input type="radio" name="shed" id="withShed" value="shed"><span>skur</span></label> 
+
+            <select name="shed">
+                <option disabled selected>Vælg skur</option>
+                <option>Med skur</option>
+                <option>Uden skur</option>
+            </select>
+
             <br>
             <br>
             <p>OBS! Skuret skal have min. 15 cm udhæng på alle sider <br>
@@ -99,7 +108,7 @@
                     });
 
                     document.getElementById("hældning").disabled = true;
-                    
+
                 }
 
                 function enable()
