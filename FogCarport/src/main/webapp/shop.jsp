@@ -46,7 +46,7 @@
 
                     for (RoofType ro : flatroofs)
                     {
-                        out.println("<option value=\"" + ro.getId() + "\" class=\"fladt\">" + ro.getName() + "</option>");
+                        out.println("<option value=\"" + ro.getId() + "\" class=\"fladt\" hidden=\"true\">" + ro.getName() + "</option>");
                     }
 
                     for (RoofType r : slopedroofs)
@@ -71,20 +71,22 @@
             <br>
             <br>
 
-            <select name="shed">
+            <select name="shed" onchange="show(this.value)">
                 <option disabled selected>Vælg skur</option>
-                <option>Med skur</option>
-                <option>Uden skur</option>
+                <option value="Med skur">Med skur</option>
+                <option value="Uden skur">Uden skur</option>
             </select>
 
             <br>
             <br>
-            <p>OBS! Skuret skal have min. 15 cm udhæng på alle sider <br>
-                og skal derfor være mindst 30 cm smallere og kortere end carporten</p>
-            Bredde af skur: <br>
-            <input type="number" pattern="[0-2000]*" name="shedDepth" value="210" min="210" max="720"><br>
-            Dybde afskur: <br>
-            <input type="number" pattern="[0-2000]*" name="shedWidth" value="210" min="210" max="770"><br><br>
+            <div id="skur" hidden="true">
+                <p>OBS! Skuret skal have min. 15 cm udhæng på alle sider <br>
+                    og skal derfor være mindst 30 cm smallere og kortere end carporten</p>
+                Bredde af skur:<br>
+                <input type="number" pattern="[0-2000]*" name="shedDepth" value="210" min="210" max="720"><br>
+                Dybde afskur: <br>
+                <input type="number" pattern="[0-2000]*" name="shedWidth" value="210" min="210" max="770"><br><br>
+            </div>
 
             <br><br>
             <button name="command" value="calculate">Beregn carport</button>
@@ -127,6 +129,17 @@
                     });
 
                     document.getElementById("hældning").disabled = false;
+                }
+
+                function show(value)
+                {
+                    if (value === "Med skur")
+                    {
+                        document.getElementById("skur").removeAttribute("hidden");
+                    }
+                    else{
+                        document.getElementById("skur").setAttribute("hidden", "true");
+                    }
                 }
 
             </script>
