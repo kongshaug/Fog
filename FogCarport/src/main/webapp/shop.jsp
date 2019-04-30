@@ -46,7 +46,7 @@
 
                     for (RoofType ro : flatroofs)
                     {
-                        out.println("<option value=\"" + ro.getId() + "\" class=\"fladt\" hidden=\"true\">" + ro.getName() + "</option>");
+                        out.println("<option value=\"" + ro.getId() + "\" class=\"fladt\" disabled=\"disabled\">" + ro.getName() + "</option>");
                     }
 
                     for (RoofType r : slopedroofs)
@@ -95,18 +95,21 @@
 
                 function disable()
                 {
-                    var flatoptions = document.querySelectorAll(".fladt");
+                    var flatoptions = [...document.getElementsByClassName("fladt")];
 
                     flatoptions.forEach(function (x)
                     {
-                        x.hidden = false;
+                        x.removeAttribute("disabled");
+                        //x.hidden = false;
                     });
 
-                    var slopeoptions = document.querySelectorAll(".rejsning");
+                    var slopeoptions = [...document.getElementsByClassName("rejsning")];
 
                     slopeoptions.forEach(function (x)
                     {
-                        x.hidden = true;
+                        
+                        x.setAttribute("disabled","disabled");
+                        //x.hidden = true;
                     });
 
                     document.getElementById("hældning").disabled = true;
@@ -115,17 +118,20 @@
 
                 function enable()
                 {
-                    var flatoptions = document.querySelectorAll(".fladt");
+                    var flatoptions = [...document.getElementsByClassName("fladt")];
 
                     flatoptions.forEach(function (x)
                     {
-                        x.hidden = true;
+                        alert("hej");
+                        x.setAttribute("disabled","disabled");
+                        //x.hidden = true;
                     });
-                    var slopeoptions = document.querySelectorAll(".rejsning");
+                    var slopeoptions = [...document.getElementsByClassName("rejsning")];
 
                     slopeoptions.forEach(function (x)
                     {
-                        x.hidden = false;
+                        x.removeAttribute("disabled");
+                        //x.hidden = false;
                     });
 
                     document.getElementById("hældning").disabled = false;
@@ -136,8 +142,8 @@
                     if (value === "Med skur")
                     {
                         document.getElementById("skur").removeAttribute("hidden");
-                    }
-                    else{
+                    } else 
+                    {
                         document.getElementById("skur").setAttribute("hidden", "true");
                     }
                 }
