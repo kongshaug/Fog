@@ -180,7 +180,7 @@ public class CalculateRoof
         parts.add(ScrewsForTaglægter);
 
         //calculations for toplægte, tegl and beklædning 
-        calcToplægte(depth, parts, taglægte, ToplægteHolderen);
+        calcToplægte(depth, parts, numberOfSpær, taglægte, ToplægteHolderen);
         
         if(carport.getRoof().getType().getName().contains("Betontagsten"))
         {
@@ -276,9 +276,9 @@ public class CalculateRoof
         parts.add(beslagscrews);
     }
 
-    private void calcToplægte(int depth, ArrayList<Part> parts, Material taglægte, Material ToplægteHolderen)
+    private void calcToplægte(int depth, ArrayList<Part> parts, int numberOfSpær, Material taglægte, Material ToplægteHolderen)
     {
-        Part ToplægteHolder = new Part(ToplægteHolderen, 0, 1, "Monteres på toppen af spærerne (til toplægte)");
+        Part ToplægteHolder = new Part(ToplægteHolderen, 0, numberOfSpær, "Monteres på toppen af spærerne (til toplægte)");
         parts.add(ToplægteHolder);
 
         //toplægte for the middle
