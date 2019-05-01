@@ -14,25 +14,25 @@ import java.util.Map;
  */
 public class CommandController
 {
+
     private static CommandController instance = null;
     private final Map<String, Command> commands = new HashMap();
 
     private CommandController()
     {
-      //Command shop = new ShopCommand("shop.jsp");
-      commands.put("shop", new ShopCommand("shop.jsp"));
-      commands.put("calculate", new PartlistCommand("partlist.jsp"));
-//      commands.put("shoppingcart", new ShoppingcartCommand("shoppingcart.jsp"));
-//      commands.put("placeorder", new PlaceOrderCommand("placeorder.jsp"));
-//      commands.put("back", shop);
-//      commands.put("logout", new LogoutCommand("index.jsp"));
-//      commands.put("customer", new CustomerCommand("customer.jsp"));
-//      commands.put("employee", new EmployeeCommand("employee.jsp"));
+        Command shop = new ShopCommand("shop.jsp");
+        commands.put("shop", new ShopCommand("shop.jsp"));
+        commands.put("calculate", new PartlistCommand("partlist.jsp"));
+        commands.put("login", new LoginCommand("/Fog?command=shop", "employee.jsp"));
+        commands.put("newuser", new NewUserCommand("newuser.jsp"));
+        commands.put("adduser", new AddUserCommand("index.jsp", "newuser.jsp"));
+        commands.put("back", shop);
+        commands.put("placeorder", new PlaceOrderCommand("placeorder.jsp"));
+        commands.put("regretorder", new RegretOrderCommand("shop.jsp"));
 //      commands.put("customerorder", new CustomerOrderCommand("customerorder.jsp"));
 //      commands.put("employeeorder", new EmployeeOrderCommand("employeeorder.jsp"));
 //      commands.put("shipped", new ShippedCommand("employeeorder.jsp"));
 //      
-      
     }
 
     public static synchronized Command from(String path)
@@ -47,5 +47,5 @@ public class CommandController
         }
         return instance.commands.get(path);
     }
-    
+
 }

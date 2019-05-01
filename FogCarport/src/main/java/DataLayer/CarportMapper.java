@@ -5,10 +5,11 @@
  */
 package DataLayer;
 
-import FunctionLayer.Carport;
-import FunctionLayer.Material;
-import FunctionLayer.Roof;
-import FunctionLayer.RoofType;
+import FunctionLayer.HelpingClasses.Carport;
+import FunctionLayer.HelpingClasses.Material;
+import FunctionLayer.HelpingClasses.Roof;
+import FunctionLayer.HelpingClasses.RoofType;
+import FunctionLayer.HelpingClasses.Shed;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -141,7 +142,6 @@ public class CarportMapper
                 unit = rs.getString("unit");
                 material_class = rs.getString("material_class");
                 price = rs.getDouble("price");
-                
 
                 material = new Material(id, name, unit, material_class, price);
             }
@@ -155,23 +155,32 @@ public class CarportMapper
         }
     }
 
-    public void orderCarport(Carport carport) throws DataException
+    public void orderCarportWithShed(Carport carport) throws DataException
     {
         try
         {
             dbc.open();
+
             String query = "INSERT INTO Fog.carport"
-                    + "(`depth`,`width`)"
-                    + "VALUES (?,?);";
+                    + "(`depth`,`width`, `roof_id`, `shed_id`)"
+                    + "VALUES (?,?,?,?);";
+
+            addRoof(carport.getRoof());
+            addShed(carport.getShed());
 
             int id = 0;
             int depth = carport.getDepth();
             int width = carport.getWidth();
 
+            int roof_id = carport.getRoof().getId();
+            int shed_id = carport.getShed().getId();
+
             PreparedStatement statement = dbc.preparedStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             statement.setInt(1, depth);
             statement.setInt(2, width);
+            statement.setInt(3, roof_id);
+            statement.setInt(4, shed_id);
             statement.executeUpdate();
 
             ResultSet rs = statement.getGeneratedKeys();
@@ -180,7 +189,46 @@ public class CarportMapper
                 id = rs.getInt(1);
                 carport.setId(id);
             }
+
+            dbc.close();
+
+        } catch (SQLException ex)
+        {
+            throw new DataException(ex.getMessage());
+        }
+    }
+
+    public void orderCarportWithoutShed(Carport carport) throws DataException
+    {
+        try
+        {
+            dbc.open();
+
+            String query = "INSERT INTO Fog.carport"
+                    + "(`depth`,`width`, `roof_id`)"
+                    + "VALUES (?,?,?);";
+
             addRoof(carport.getRoof());
+
+            int id = 0;
+            int depth = carport.getDepth();
+            int width = carport.getWidth();
+
+            int roof_id = carport.getRoof().getId();
+
+            PreparedStatement statement = dbc.preparedStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+            statement.setInt(1, depth);
+            statement.setInt(2, width);
+            statement.setInt(3, roof_id);
+            statement.executeUpdate();
+
+            ResultSet rs = statement.getGeneratedKeys();
+            if (rs.next())
+            {
+                id = rs.getInt(1);
+                carport.setId(id);
+            }
 
             dbc.close();
 
@@ -256,7 +304,7 @@ public class CarportMapper
 
                 if (m2 == null)
                 {
-                    rooftype = new RoofType(id, name,roof_class, m1);
+                    rooftype = new RoofType(id, name, roof_class, m1);
                 } else
                 {
                     rooftype = new RoofType(id, name, roof_class, m1, m2);
@@ -265,6 +313,38 @@ public class CarportMapper
 
             //dbc.close();
             return rooftype;
+
+        } catch (SQLException ex)
+        {
+            throw new DataException(ex.getMessage());
+        }
+    }
+
+    private void addShed(Shed shed) throws DataException
+    {
+        try
+        {
+            dbc.open();
+            String query = "INSERT INTO Fog.shed"
+                    + "(`width`,`depth`)"
+                    + "VALUES (?,?);";
+
+            int id = 0;
+            int width = shed.getWidth();
+            int depth = shed.getDepth();
+
+            PreparedStatement statement = dbc.preparedStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+            statement.setInt(1, width);
+            statement.setInt(2, depth);
+            statement.executeUpdate();
+
+            ResultSet rs = statement.getGeneratedKeys();
+            if (rs.next())
+            {
+                id = rs.getInt(1);
+                shed.setId(id);
+            }
 
         } catch (SQLException ex)
         {

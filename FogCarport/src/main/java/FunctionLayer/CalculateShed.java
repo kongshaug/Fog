@@ -5,6 +5,9 @@
  */
 package FunctionLayer;
 
+import FunctionLayer.HelpingClasses.Carport;
+import FunctionLayer.HelpingClasses.Material;
+import FunctionLayer.HelpingClasses.Part;
 import static java.lang.Math.sqrt;
 import java.util.ArrayList;
 

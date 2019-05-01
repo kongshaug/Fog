@@ -6,11 +6,11 @@
 package PresentaionLayer;
 
 import DataLayer.DataException;
-import FunctionLayer.Carport;
+import FunctionLayer.HelpingClasses.Carport;
 import FunctionLayer.FunctionManager;
-import FunctionLayer.Roof;
-import FunctionLayer.RoofType;
-import FunctionLayer.Shed;
+import FunctionLayer.HelpingClasses.Roof;
+import FunctionLayer.HelpingClasses.RoofType;
+import FunctionLayer.HelpingClasses.Shed;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;

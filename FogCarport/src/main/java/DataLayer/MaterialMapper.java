@@ -5,8 +5,8 @@
  */
 package DataLayer;
 
-import FunctionLayer.Material;
-import FunctionLayer.RoofType;
+import FunctionLayer.HelpingClasses.Material;
+import FunctionLayer.HelpingClasses.RoofType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

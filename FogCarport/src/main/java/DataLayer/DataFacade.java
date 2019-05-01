@@ -5,11 +5,11 @@
  */
 package DataLayer;
 
-import FunctionLayer.Carport;
-import FunctionLayer.Material;
-import FunctionLayer.RoofType;
-import FunctionLayer.User;
-import java.sql.SQLException;
+import FunctionLayer.HelpingClasses.Carport;
+import FunctionLayer.HelpingClasses.Material;
+import FunctionLayer.HelpingClasses.Order;
+import FunctionLayer.HelpingClasses.RoofType;
+import FunctionLayer.HelpingClasses.User;
 import java.util.List;
 
 /**
@@ -25,6 +25,7 @@ public class DataFacade
     private MaterialMapper mm = new MaterialMapper(dbc);
     private CarportMapper cm = new CarportMapper(dbc);
     private UserMapper um = new UserMapper(dbc);
+    private OrderMapper om = new OrderMapper(dbc);
 
     private DataFacade() throws DataException
     {
@@ -60,13 +61,15 @@ public class DataFacade
         return cm.getCarport(carport_id);
     }
 
-    public String orderCarport(Carport carport) throws DataException
+    public void orderCarport(Carport carport) throws DataException
     {
-        String res = "";
-        cm.orderCarport(carport);
-
-        res = "Tak for din ordre, nummer: " + carport.getId();
-        return res;
+        if (carport.getShed() == null)
+        {
+            cm.orderCarportWithoutShed(carport);
+        } else
+        {
+            cm.orderCarportWithShed(carport);
+        }
     }
 
     public List<RoofType> getRoofs() throws DataException
@@ -84,9 +87,24 @@ public class DataFacade
         return um.getUsers();
     }
 
-    public void newCustomer(User newUser) throws DataException
+    public void newUser(User newUser) throws DataException
     {
-        um.addCustomer(newUser);
+        um.addUser(newUser);
+    }
+
+    public User login(String email, String password) throws DataException
+    {
+        return um.login(email, password);
+    }
+
+    public void placeOrder(Order order) throws DataException
+    {
+        om.placeOrder(order);
+    }
+
+    public String orderShipped(int order_id) throws DataException
+    {
+        return om.orderShipped(order_id);
     }
 
 }

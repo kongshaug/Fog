@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FunctionLayer;
+package FunctionLayer.HelpingClasses;
 
 import java.util.ArrayList;
 
@@ -41,6 +41,11 @@ public class Shed
     public int getDepth()
     {
         return depth;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
     }
 
     public int getWidth()

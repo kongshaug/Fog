@@ -6,7 +6,7 @@
 package PresentaionLayer;
 
 import FunctionLayer.FunctionManager;
-import FunctionLayer.RoofType;
+import FunctionLayer.HelpingClasses.RoofType;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

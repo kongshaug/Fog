@@ -4,21 +4,24 @@
     Author     : benja
 --%>
 
+<%@page import="FunctionLayer.HelpingClasses.User"%>
+<%@page import="FunctionLayer.HelpingClasses.RoofType"%>
 <%@page import="java.util.List"%>
-<%@page import="FunctionLayer.RoofType"%>
 <%@page import="javafx.scene.control.RadioButton"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Shop</title>
+        <title>Fog</title>
     </head>
     <body>
         <br>
         <%
-
+            User user = (User) session.getAttribute("user");
             String errormessage = (String) session.getAttribute("errormessage");
+            
+            out.println(user);
 
             if (errormessage != null)
             {
@@ -27,6 +30,7 @@
         <%
                 session.removeAttribute("errormessage");
             }
+            
         %>
 
         <form action="Fog" method="POST">

@@ -5,6 +5,11 @@
  */
 package FunctionLayer;
 
+import FunctionLayer.HelpingClasses.Carport;
+import FunctionLayer.HelpingClasses.Material;
+import FunctionLayer.HelpingClasses.Order;
+import FunctionLayer.HelpingClasses.RoofType;
+import FunctionLayer.HelpingClasses.User;
 import DataLayer.DataException;
 import DataLayer.DataFacade;
 import java.util.ArrayList;
@@ -40,6 +45,105 @@ public class FunctionManager
             instance = new FunctionManager();
         }
         return instance;
+    }
+
+    public User login(String email, String password) throws DataException
+    {
+        return db.login(email, password);
+    }
+
+    public String newUser(User user) throws DataException
+    {
+        String res = "";
+        List<User> users = db.getUsers();
+
+        for (User u : users)
+        {
+            if (u.getEmail().equals(user.getEmail()))
+            {
+                res = "Email er allerede i brug";
+            }
+        }
+
+        if (!user.getEmail().contains("@") && !user.getEmail().contains("."))
+        {
+            res = "Venligst indtast en gyldig email";
+        }
+        if (user.getName().isEmpty() || user.getName() == null || isCaracter(user.getName()) == false)
+        {
+            res = "Venligst indtast dit navn (må kun indeholde bogstaver)";
+        }
+        if (user.getPassword().isEmpty() || user.getPassword() == null || user.getPassword().length() < 4)
+        {
+            res = "Venligst indtast en adgangskode med en minimumslængde på 4";
+        }
+        if (user.getAddress().isEmpty() || user.getAddress() == null)
+        {
+            res = "Venligst indtast din adresse";
+        }
+        if (user.getZipcode().isEmpty() || user.getZipcode() == null || user.getZipcode().length() != 4 || isNumber(user.getZipcode()) == false)
+        {
+            res = "Venligst indtast et gyldigt postnummer på 4 cifre";
+        }
+
+        if (user.getPhone().isEmpty() || user.getPhone() == null || user.getPhone().length() != 8 || isNumber(user.getPhone()) == false)
+        {
+            res = "Venligst indtast et gyldigt 8-cifret telefonnummer";
+        }
+
+        if (res.isEmpty())
+        {
+            db.newUser(user);
+            res = "Din bruger er nu oprettet";
+        }
+
+        return res;
+    }
+
+    private boolean isNumber(String str)
+    {
+        for (char c : str.toCharArray())
+        {
+            if (!Character.isDigit(c))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean isCaracter(String str)
+    {
+        for (char c : str.toCharArray())
+        {
+            if (Character.isDigit(c))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public String placeOrder(Order order) throws DataException
+    {
+        String res = "";
+
+        if (order != null)
+        {
+            db.orderCarport(order.getCarport());
+            db.placeOrder(order);
+            res = "Tak for din forespørgsel. Vi vil behandle den hurtigst muligt";
+        } else
+        {
+            res = "Din forespørgsel kunne ikke blive sendt";
+        }
+        return res;
+    }
+
+    public void isShipped(Order order) throws DataException
+    {
+        String shipped = db.orderShipped(order.getOrder_id());
+        order.setShipped(shipped);
     }
 
     public void calcCarport(Carport carport) throws DataException

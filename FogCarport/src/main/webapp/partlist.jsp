@@ -4,15 +4,15 @@
     Author     : aamandajuhl
 --%>
 
+<%@page import="FunctionLayer.HelpingClasses.Carport"%>
+<%@page import="FunctionLayer.HelpingClasses.Part"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="FunctionLayer.Part"%>
-<%@page import="FunctionLayer.Carport"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Partlist</title>
+        <title>Fog</title>
     </head>
     <%
         Carport carport = (Carport) session.getAttribute("carport");
@@ -209,6 +209,9 @@
                 %>
             </table>
             <h1><%=carport.getTotal_price()%></h1>
+            
+            <button name="command" value="placeorder">Send forespørgsel</button>
+            <button name="command" value="regretorder">Annuller forespørgsel</button>
 
         </form>
     </body>

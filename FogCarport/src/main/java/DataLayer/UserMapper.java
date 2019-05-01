@@ -5,8 +5,8 @@
  */
 package DataLayer;
 
-import FunctionLayer.User;
-import java.sql.DataTruncation;
+import FunctionLayer.Enum.Role;
+import FunctionLayer.HelpingClasses.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,6 +26,49 @@ public class UserMapper
     public UserMapper(DBConnector dbc)
     {
         this.dbc = dbc;
+
+    }
+
+    public User login(String email, String password) throws DataException
+    {
+        try
+        {
+            dbc.open();
+            String query
+                    = "SELECT * "
+                    + "FROM user "
+                    + "WHERE email = ? AND password = ?;";
+
+            PreparedStatement statement = dbc.preparedStatement(query, Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, email);
+            statement.setString(2, password);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next())
+            {
+                int id = rs.getInt("user_id");
+                String name = rs.getString("user_name");
+                String address = rs.getString("address");
+                String zipcode = rs.getString("zipcode");
+                String phonenumber = rs.getString("phone_number");
+                String role = rs.getString("role");
+
+                Role r = Role.valueOf(role.toUpperCase());
+
+                User user = new User(id, email, password, name, address, zipcode, phonenumber, r);
+
+                dbc.close();
+                return user;
+            } else
+            {
+                dbc.close();
+                return null;
+            }
+
+        } catch (SQLException ex)
+        {
+            throw new DataException(ex.getMessage());
+        }
     }
 
     public User getUser(int user_id) throws DataException
@@ -50,11 +93,13 @@ public class UserMapper
                 String password = rs.getString("password");
                 String name = rs.getString("user_name");
                 String address = rs.getString("address");
-                int zipcode = rs.getInt("zipcode");
-                int phonenumber = rs.getInt("phone_number");
+                String zipcode = rs.getString("zipcode");
+                String phonenumber = rs.getString("phone_number");
                 String role = rs.getString("role");
 
-                user = new User(id, email, password, name, address, zipcode, phonenumber, role);
+                Role r = Role.valueOf(role.toUpperCase());
+
+                user = new User(id, email, password, name, address, zipcode, phonenumber, r);
             }
 
             dbc.close();
@@ -89,11 +134,13 @@ public class UserMapper
                 String password = rs.getString("password");
                 String name = rs.getString("user_name");
                 String address = rs.getString("address");
-                int zipcode = rs.getInt("zipcode");
-                int phonenumber = rs.getInt("phone_number");
+                String zipcode = rs.getString("zipcode");
+                String phonenumber = rs.getString("phone_number");
                 String role = rs.getString("role");
 
-                User u = new User(id, email, password, name, address, zipcode, phonenumber, role);
+                Role r = Role.valueOf(role.toUpperCase());
+
+                User u = new User(id, email, password, name, address, zipcode, phonenumber, r);
                 users.add(u);
 
             }
@@ -107,7 +154,7 @@ public class UserMapper
         }
     }
 
-    public void addCustomer(User newUser) throws DataException
+    public void addUser(User newUser) throws DataException
     {
         try
         {
@@ -121,9 +168,9 @@ public class UserMapper
             String password = newUser.getPassword();
             String user_name = newUser.getName();
             String address = newUser.getAddress();
-            int zipcode = newUser.getZipcode();
-            int phonenumber = newUser.getPhone();
-            String role = newUser.getRole();
+            String zipcode = newUser.getZipcode();
+            String phonenumber = newUser.getPhone();
+            String role = newUser.getRole().toString();
 
             PreparedStatement statement = dbc.preparedStatement(query, Statement.RETURN_GENERATED_KEYS);
 
@@ -131,8 +178,8 @@ public class UserMapper
             statement.setString(2, password);
             statement.setString(3, user_name);
             statement.setString(4, address);
-            statement.setInt(5, zipcode);
-            statement.setInt(6, phonenumber);
+            statement.setString(5, zipcode);
+            statement.setString(6, phonenumber);
             statement.setString(7, role);
             statement.executeUpdate();
 
@@ -150,23 +197,6 @@ public class UserMapper
             throw new DataException(e.getMessage());
         }
 
-    }
-
-    public void addEmployee(User newUser) throws DataException
-    {
-        try
-        {
-            dbc.open();
-
-            String query = "INSERT INTO Fog.`user`"
-                    + "(`email`, `password`, `user_name`, `address`, `zipcode`, `phone_number`, `role`)"
-                    + "VALUES (?,?,?,?,?,?,?);";
-
-            dbc.close();
-        } catch (SQLException e)
-        {
-            throw new DataException(e.getMessage());
-        }
     }
 
 }

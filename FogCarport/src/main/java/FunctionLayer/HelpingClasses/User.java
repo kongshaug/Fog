@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FunctionLayer;
+package FunctionLayer.HelpingClasses;
+
+import FunctionLayer.Enum.Role;
 
 /**
  *
@@ -17,11 +19,11 @@ public class User
     private String password;
     private String name;
     private String address;
-    private int zipcode;
-    private int phone;
-    private String role;
+    private String zipcode;
+    private String phone;
+    private Role role;
 
-    public User(int id, String email, String password, String name, String address, int zipcode, int phone, String role)
+    public User(int id, String email, String password, String name, String address, String zipcode, String phone, Role role)
     {
         this.id = id;
         this.email = email;
@@ -33,7 +35,7 @@ public class User
         this.role = role;
     }
 
-    public User(String email, String password, String name, String address, int zipcode, int phone, String role)
+    public User(String email, String password, String name, String address, String zipcode, String phone, Role role)
     {
         this.email = email;
         this.password = password;
@@ -44,9 +46,15 @@ public class User
         this.role = role;
     }
 
-    public int getZipcode()
+    public String getZipcode()
     {
         return zipcode;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "User{" + "id=" + id + ", email=" + email + ", password=" + password + ", name=" + name + ", address=" + address + ", zipcode=" + zipcode + ", phone=" + phone + ", role=" + role + '}';
     }
 
     public void setId(int id)
@@ -79,12 +87,12 @@ public class User
         return address;
     }
 
-    public int getPhone()
+    public String getPhone()
     {
         return phone;
     }
 
-    public String getRole()
+    public Role getRole()
     {
         return role;
     }
