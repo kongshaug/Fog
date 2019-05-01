@@ -38,8 +38,8 @@
             <label> <input type="radio" name="roof" id="sloped" value="sloped"onclick="enable()" checked="checked"><span>Tag med rejsning</span></label>
 
             <br><br>
-            <select name="type">
-                <option disabled selected>Vælg tagtype</option>            
+            <select name="type" id="type">
+                <option disabled selected value="0">Vælg tagtype</option>            
                 <%
                     List<RoofType> slopedroofs = (List<RoofType>) session.getAttribute("slopedroofs");
                     List<RoofType> flatroofs = (List<RoofType>) session.getAttribute("flatroofs");
@@ -59,7 +59,7 @@
 
             <br><br>
             <select name="slope" id="hældning">
-                <option disabled selected>Vælg hældning</option>
+                <option disabled selected value="0">Vælg hældning</option>
                 <%                    for (int i = 15;
                             i <= 45; i = i + 5)
                     {
@@ -112,6 +112,8 @@
                     });
 
                     document.getElementById("hældning").disabled = true;
+                    document.getElementById("type").value = 0;
+                    document.getElementById("hældning").value = 0;
 
                 }
 
@@ -133,6 +135,8 @@
                     });
 
                     document.getElementById("hældning").disabled = false;
+                    document.getElementById("type").value = 0;
+                    document.getElementById("hældning").value = 0;
                 }
 
                 function show(value)
