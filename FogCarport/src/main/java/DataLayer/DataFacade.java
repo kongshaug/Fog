@@ -84,7 +84,7 @@ public class DataFacade
         return um.getUsers();
     }
 
-    public void newCustomer(User newUser) throws SQLException
+    public void newCustomer(User newUser) throws DataException
     {
         um.addCustomer(newUser);
     }

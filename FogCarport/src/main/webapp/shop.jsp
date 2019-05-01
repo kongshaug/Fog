@@ -46,7 +46,7 @@
 
                     for (RoofType ro : flatroofs)
                     {
-                        out.println("<option value=\"" + ro.getId() + "\" class=\"fladt\" disabled=\"disabled\">" + ro.getName() + "</option>");
+                        out.println("<option value=\"" + ro.getId() + "\" class=\"fladt\" disabled=\"disabled\" hidden=\"hidden\">" + ro.getName() + "</option>");
                     }
 
                     for (RoofType r : slopedroofs)
@@ -100,16 +100,15 @@
                     flatoptions.forEach(function (x)
                     {
                         x.removeAttribute("disabled");
-                        //x.hidden = false;
+                        x.removeAttribute("hidden");
                     });
-
                     var slopeoptions = [...document.getElementsByClassName("rejsning")];
 
                     slopeoptions.forEach(function (x)
                     {
                         
                         x.setAttribute("disabled","disabled");
-                        //x.hidden = true;
+                        x.setAttribute("hidden","hidden");
                     });
 
                     document.getElementById("hældning").disabled = true;
@@ -122,16 +121,15 @@
 
                     flatoptions.forEach(function (x)
                     {
-                        alert("hej");
                         x.setAttribute("disabled","disabled");
-                        //x.hidden = true;
+                        x.setAttribute("hidden","hidden");
                     });
                     var slopeoptions = [...document.getElementsByClassName("rejsning")];
 
                     slopeoptions.forEach(function (x)
                     {
                         x.removeAttribute("disabled");
-                        //x.hidden = false;
+                        x.removeAttribute("hidden");
                     });
 
                     document.getElementById("hældning").disabled = false;
