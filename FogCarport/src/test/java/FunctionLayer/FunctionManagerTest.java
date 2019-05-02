@@ -6,6 +6,7 @@
 
 package FunctionLayer;
 
+import FunctionLayer.Enum.Role;
 import FunctionLayer.HelpingClasses.Carport;
 import FunctionLayer.HelpingClasses.Order;
 import FunctionLayer.HelpingClasses.RoofType;
@@ -54,11 +55,10 @@ public class FunctionManagerTest {
     @Test
     public void testGetInstance() throws Exception {
         System.out.println("getInstance");
-        FunctionManager expResult = null;
+        FunctionManager expResult = FunctionManager.getInstance();
         FunctionManager result = FunctionManager.getInstance();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -67,14 +67,14 @@ public class FunctionManagerTest {
     @Test
     public void testLogin() throws Exception {
         System.out.println("login");
-        String email = "";
-        String password = "";
+        String email = "test@hotmail.com";
+        String password = "1234";
         FunctionManager instance = new FunctionManager();
         User expResult = null;
         User result = instance.login(email, password);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(password, result.getPassword());
+        assertEquals(email, result.getEmail());
+       
     }
 
     /**
@@ -83,11 +83,30 @@ public class FunctionManagerTest {
     @Test
     public void testNewUser() throws Exception {
         System.out.println("newUser");
-        User user = null;
+        
+        
+        String email = "newUser@hotmail.com";
+        String password = "1234";
+        
         FunctionManager instance = new FunctionManager();
-        String expResult = "";
+        
+        
+        
+        User user = user( email,password, "testname", "teststreeet", "2200", "11111111", Role.CUSTOMER);
+  
+        
+        String expResult = "Din bruger er nu oprettet";
+        
         String result = instance.newUser(user);
+        
+        
+        
         assertEquals(expResult, result);
+        
+        
+        
+        
+        
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -252,17 +271,6 @@ public class FunctionManagerTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of calcRoof method, of class FunctionManager.
-     */
-    @Test
-    public void testCalcRoof() throws Exception {
-        System.out.println("calcRoof");
-        Carport carport = null;
-        FunctionManager instance = new FunctionManager();
-        instance.calcRoof(carport);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+
     
 }
