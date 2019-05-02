@@ -12,8 +12,8 @@
 <%@include file = "customerheader.jsp" %>
 
 <center class="index" id="index"> 
-    <br><br><br>
     <div id="shop">
+        <img src="images/logo.png" width="30%"><br>
         <%            String errormessage = (String) request.getAttribute("errormessage");
             if (errormessage != null)
             {
@@ -22,6 +22,7 @@
         <%
             }
         %>
+        <br>
         <form action="Fog" method="POST">
             Bredde:&nbsp;&nbsp;<input type="number" pattern="[0-2000]*" name="depth" value="240" min="240" max="750">
             &nbsp;&nbsp;

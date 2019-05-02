@@ -272,16 +272,10 @@ public class FunctionManagerTest {
     @Test
     public void testGetRoofType() throws Exception {
         System.out.println("getRoofType");
-        
-        Material roof_materialOne = new Material(39, "B & C rygsten rød", "stk", "tag", 15.00);
-        Material roof_materialTwo = new Material(36, "B & C dobbelt -s rød", "stk", "tag", 15.00);
-        RoofType type = new RoofType(2,"Betontagsten - rød", "slope", roof_materialOne, roof_materialTwo);
-        
-        String roofkind = "slope";
+
         int typeId = 2;
         FunctionManager instance = new FunctionManager();
-        String expResult = null;
-        RoofType result = instance.getRoofType(roofkind, typeId);
+        RoofType result = instance.getRoofTypeById(typeId);
         assertEquals("Betontagsten - rød", result.getName());
         
     }

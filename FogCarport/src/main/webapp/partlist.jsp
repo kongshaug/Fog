@@ -8,33 +8,71 @@
 <%@page import="FunctionLayer.HelpingClasses.Part"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Fog</title>
-    </head>
-    <%
-        Carport carport = (Carport) session.getAttribute("carport");
-    %>
-    <body>
-        <form action="Fog" method="POST">
-            <br><br>
-            <table>
-                <caption>Træ</caption>
-                <tr>
-                    <th><b>Materiale</b></th>
-                    <th><b>Længde</b></th>
-                    <th><b>Antal</b></th>
-                    <th><b>Enhed</b></th>
-                    <th><b>Beskrivelse</b></th>
-                    <th><b>Pris</b></th>
-                </tr>
-                <%
-                    ArrayList<Part> parts = carport.getParts();
-                    ArrayList<Part> roof_parts = carport.getRoof().getParts();
+<%@include file = "customerheader.jsp" %>
+<%        Carport carport = (Carport) session.getAttribute("carport");
+%>
+<center id="partlist" class="partlist">
+<div>
+    <form action="Fog" method="POST">
+        <h1>Stykliste</h1>
+        <table class="partlist" id="partlist">
+            <caption><h1>Træ</h1></caption>
+            <tr>
+                <th><b>Materiale</b></th>
+                <th><b>Længde</b></th>
+                <th><b>Antal</b></th>
+                <th><b>Enhed</b></th>
+                <th><b>Beskrivelse</b></th>
+                <th><b>Pris</b></th>
+            </tr>
+            <%
+                ArrayList<Part> parts = carport.getParts();
+                ArrayList<Part> roof_parts = carport.getRoof().getParts();
 
-                    for (Part p : parts)
+                for (Part p : parts)
+                {
+                    if (p.getMaterial_class().equals("træ"))
+                    {
+                        out.println("<tr>");
+                        out.println("<td>" + p.getName() + "</td>");
+                        if (p.getLength() != 0)
+                        {
+                            out.println("<td>" + p.getLength() + "</td>");
+                        } else
+                        {
+                            out.println("<td> </td>");
+                        }
+                        out.println("<td>" + p.getQuantity() + "</td>");
+                        out.println("<td>" + p.getUnit() + "</td>");
+                        out.println("<td>" + p.getDescription() + "</td>");
+                        out.println("<td>" + p.getTotal_price() + " kr. </td>");
+                    }
+                }
+
+                for (Part p : roof_parts)
+                {
+                    if (p.getMaterial_class().equals("træ"))
+                    {
+                        out.println("<tr>");
+                        out.println("<td>" + p.getName() + "</td>");
+                        if (p.getLength() != 0)
+                        {
+                            out.println("<td>" + p.getLength() + "</td>");
+                        } else
+                        {
+                            out.println("<td> </td>");
+                        }
+                        out.println("<td>" + p.getQuantity() + "</td>");
+                        out.println("<td>" + p.getUnit() + "</td>");
+                        out.println("<td>" + p.getDescription() + "</td>");
+                        out.println("<td>" + p.getTotal_price() + " kr. </td>");
+                    }
+                }
+                if (carport.getShed() != null)
+                {
+
+                    ArrayList<Part> shed_parts = carport.getShed().getParts();
+                    for (Part p : shed_parts)
                     {
                         if (p.getMaterial_class().equals("træ"))
                         {
@@ -50,101 +88,100 @@
                             out.println("<td>" + p.getQuantity() + "</td>");
                             out.println("<td>" + p.getUnit() + "</td>");
                             out.println("<td>" + p.getDescription() + "</td>");
-                            out.println("<td>" + p.getTotal_price() + "</td>");
+                            out.println("<td>" + p.getTotal_price() + " kr. </td>");
                         }
                     }
+                }
 
-                    for (Part p : roof_parts)
+            %>
+        </table>
+        <br><br>
+        <table class="partlist" id="partlist">
+            <caption><h1>Tag</h1></caption>
+            <tr>
+                <th><b>Materiale</b></th>
+                <th><b>Længde</b></th>
+                <th><b>Antal</b></th>
+                <th><b>Enhed</b></th>
+                <th><b>Beskrivelse</b></th>
+                <th><b>Pris</b></th>
+            </tr>
+            <%                    for (Part p : roof_parts)
+                {
+                    if (p.getMaterial_class().equals("tag"))
                     {
-                        if (p.getMaterial_class().equals("træ"))
+                        out.println("<tr>");
+                        out.println("<td>" + p.getName() + "</td>");
+                        if (p.getLength() != 0)
                         {
-                            out.println("<tr>");
-                            out.println("<td>" + p.getName() + "</td>");
-                            if (p.getLength() != 0)
-                            {
-                                out.println("<td>" + p.getLength() + "</td>");
-                            } else
-                            {
-                                out.println("<td> </td>");
-                            }
-                            out.println("<td>" + p.getQuantity() + "</td>");
-                            out.println("<td>" + p.getUnit() + "</td>");
-                            out.println("<td>" + p.getDescription() + "</td>");
-                            out.println("<td>" + p.getTotal_price() + "</td>");
+                            out.println("<td>" + p.getLength() + "</td>");
+                        } else
+                        {
+                            out.println("<td> </td>");
                         }
+                        out.println("<td>" + p.getQuantity() + "</td>");
+                        out.println("<td>" + p.getUnit() + "</td>");
+                        out.println("<td>" + p.getDescription() + "</td>");
+                        out.println("<td>" + p.getTotal_price() + " kr. </td>");
                     }
-                    if (carport.getShed() != null)
+                }
+            %>
+        </table>
+        <br><br>
+        <table class="partlist" id="partlist">
+            <caption><h1>Beslag og skruer</h1></caption>
+            <tr>
+                <th><b>Materiale</b></th>
+                <th><b>Længde</b></th>
+                <th><b>Antal</b></th>
+                <th><b>Enhed</b></th>
+                <th><b>Beskrivelse</b></th>
+                <th><b>Pris</b></th>
+            </tr>
+            <%
+                for (Part p : parts)
+                {
+                    if (p.getMaterial_class().equals("beslag og skruer"))
                     {
+                        out.println("<tr>");
+                        out.println("<td>" + p.getName() + "</td>");
+                        if (p.getLength() != 0)
+                        {
+                            out.println("<td>" + p.getLength() + "</td>");
+                        } else
+                        {
+                            out.println("<td> </td>");
+                        }
+                        out.println("<td>" + p.getQuantity() + "</td>");
+                        out.println("<td>" + p.getUnit() + "</td>");
+                        out.println("<td>" + p.getDescription() + "</td>");
+                        out.println("<td>" + p.getTotal_price() + " kr. </td>");
+                    }
+                }
 
-                        ArrayList<Part> shed_parts = carport.getShed().getParts();
-                        for (Part p : shed_parts)
-                        {
-                            if (p.getMaterial_class().equals("træ"))
-                            {
-                                out.println("<tr>");
-                                out.println("<td>" + p.getName() + "</td>");
-                                if (p.getLength() != 0)
-                                {
-                                    out.println("<td>" + p.getLength() + "</td>");
-                                } else
-                                {
-                                    out.println("<td> </td>");
-                                }
-                                out.println("<td>" + p.getQuantity() + "</td>");
-                                out.println("<td>" + p.getUnit() + "</td>");
-                                out.println("<td>" + p.getDescription() + "</td>");
-                                out.println("<td>" + p.getTotal_price() + "</td>");
-                            }
-                        }
-                    }
-
-                %>
-            </table>
-            <br><br>
-            <table>
-                <caption>Tag</caption>
-                <tr>
-                    <th><b>Materiale</b></th>
-                    <th><b>Længde</b></th>
-                    <th><b>Antal</b></th>
-                    <th><b>Enhed</b></th>
-                    <th><b>Beskrivelse</b></th>
-                    <th><b>Pris</b></th>
-                </tr>
-                <%                    for (Part p : roof_parts)
+                for (Part p : roof_parts)
+                {
+                    if (p.getMaterial_class().equals("beslag og skruer"))
                     {
-                        if (p.getMaterial_class().equals("tag"))
+                        out.println("<tr>");
+                        out.println("<td>" + p.getName() + "</td>");
+                        if (p.getLength() != 0)
                         {
-                            out.println("<tr>");
-                            out.println("<td>" + p.getName() + "</td>");
-                            if (p.getLength() != 0)
-                            {
-                                out.println("<td>" + p.getLength() + "</td>");
-                            } else
-                            {
-                                out.println("<td> </td>");
-                            }
-                            out.println("<td>" + p.getQuantity() + "</td>");
-                            out.println("<td>" + p.getUnit() + "</td>");
-                            out.println("<td>" + p.getDescription() + "</td>");
-                            out.println("<td>" + p.getTotal_price() + "</td>");
+                            out.println("<td>" + p.getLength() + "</td>");
+                        } else
+                        {
+                            out.println("<td> </td>");
                         }
+                        out.println("<td>" + p.getQuantity() + "</td>");
+                        out.println("<td>" + p.getUnit() + "</td>");
+                        out.println("<td>" + p.getDescription() + "</td>");
+                        out.println("<td>" + p.getTotal_price() + " kr. </td>");
                     }
-                %>
-            </table>
-            <br><br>
-            <table>
-                <caption>Beslag og skruer</caption>
-                <tr>
-                    <th><b>Materiale</b></th>
-                    <th><b>Længde</b></th>
-                    <th><b>Antal</b></th>
-                    <th><b>Enhed</b></th>
-                    <th><b>Beskrivelse</b></th>
-                    <th><b>Pris</b></th>
-                </tr>
-                <%
-                    for (Part p : parts)
+                }
+                if (carport.getShed() != null)
+                {
+                    ArrayList<Part> shed_parts = carport.getShed().getParts();
+                    for (Part p : shed_parts)
                     {
                         if (p.getMaterial_class().equals("beslag og skruer"))
                         {
@@ -160,59 +197,19 @@
                             out.println("<td>" + p.getQuantity() + "</td>");
                             out.println("<td>" + p.getUnit() + "</td>");
                             out.println("<td>" + p.getDescription() + "</td>");
-                            out.println("<td>" + p.getTotal_price() + "</td>");
+                            out.println("<td>" + p.getTotal_price() + " kr. </td>");
                         }
                     }
+                }
+            %>
+        </table>
+        <h1>Carportens købspris: <%=carport.getTotal_price()%> kr. </h1>
 
-                    for (Part p : roof_parts)
-                    {
-                        if (p.getMaterial_class().equals("beslag og skruer"))
-                        {
-                            out.println("<tr>");
-                            out.println("<td>" + p.getName() + "</td>");
-                            if (p.getLength() != 0)
-                            {
-                                out.println("<td>" + p.getLength() + "</td>");
-                            } else
-                            {
-                                out.println("<td> </td>");
-                            }
-                            out.println("<td>" + p.getQuantity() + "</td>");
-                            out.println("<td>" + p.getUnit() + "</td>");
-                            out.println("<td>" + p.getDescription() + "</td>");
-                            out.println("<td>" + p.getTotal_price() + "</td>");
-                        }
-                    }
-                    if (carport.getShed() != null)
-                    {
-                        ArrayList<Part> shed_parts = carport.getShed().getParts();
-                        for (Part p : shed_parts)
-                        {
-                            if (p.getMaterial_class().equals("beslag og skruer"))
-                            {
-                                out.println("<tr>");
-                                out.println("<td>" + p.getName() + "</td>");
-                                if (p.getLength() != 0)
-                                {
-                                    out.println("<td>" + p.getLength() + "</td>");
-                                } else
-                                {
-                                    out.println("<td> </td>");
-                                }
-                                out.println("<td>" + p.getQuantity() + "</td>");
-                                out.println("<td>" + p.getUnit() + "</td>");
-                                out.println("<td>" + p.getDescription() + "</td>");
-                                out.println("<td>" + p.getTotal_price() + "</td>");
-                            }
-                        }
-                    }
-                %>
-            </table>
-            <h1><%=carport.getTotal_price()%></h1>
-            
-            <button name="command" value="placeorder">Send forespørgsel</button>
-            <button name="command" value="regretorder">Annuller forespørgsel</button>
-
-        </form>
-    </body>
+        <button name="command" value="placeorder">Send forespørgsel</button>
+        &nbsp;&nbsp;
+        <button name="command" value="regretorder">Annuller forespørgsel</button>
+</div>
+</center>
+</form>
+</body>
 </html>

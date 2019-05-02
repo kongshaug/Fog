@@ -6,21 +6,20 @@
 
 <%@page import="FunctionLayer.HelpingClasses.Order"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Fog</title>
-    </head>
-    <body>
-        <form action="Fog" method="POST">
-        <%
-            String message = (String) request.getAttribute("message");
-            Order order = (Order) session.getAttribute("order");
-            out.println(message);
-            out.println(order.getOrder_date());
-        %>
-        <button name="command" value="back">Gå til shop</button>
-        </form>
-    </body>
+<%@include file = "customerheader.jsp" %>
+<form action="Fog" method="POST">
+    <center id="index" class="index">
+        <div>
+            <img src="images/logo.png" width="30%"><br>
+            <%            
+                String message = (String) request.getAttribute("message");
+                out.println(message);
+
+            %>
+            <br><br>
+            <button name="command" value="back">Gå til shop</button>
+            </form>
+        </div>
+    </center>
+</body>
 </html>

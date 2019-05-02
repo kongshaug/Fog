@@ -28,7 +28,7 @@
                 font-family: Avenir Next Condensed;  
                 z-index: 9999;
             }
-            
+
             .menu li p {
                 float: right;
                 display: block;
