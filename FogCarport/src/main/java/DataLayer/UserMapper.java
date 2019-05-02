@@ -199,4 +199,28 @@ public class UserMapper
 
     }
 
+    public void removeUser(User user) throws DataException
+    {
+        try
+        {
+            dbc.open();
+
+            String query = "DELETE FROM Fog.`user`"
+                    + "WHERE user_id = ?;";
+
+            int user_id = user.getId();
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+            statement.setInt(1, user_id);
+            statement.executeUpdate();
+
+            dbc.close();
+
+        } catch (SQLException e)
+        {
+            throw new DataException(e.getMessage());
+        }
+
+    }
+
 }
