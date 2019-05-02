@@ -69,9 +69,14 @@ public class FunctionManagerTest {
         System.out.println("login");
         String email = "test@hotmail.com";
         String password = "1234";
+        
         FunctionManager instance = new FunctionManager();
-        User expResult = null;
+        
+        
+ 
+       
         User result = instance.login(email, password);
+        
         assertEquals(password, result.getPassword());
         assertEquals(email, result.getEmail());
        
@@ -92,23 +97,18 @@ public class FunctionManagerTest {
         
         
         
-        //User user = user( email,password, "testname", "teststreeet", "2200", "11111111", Role.CUSTOMER);
+        User user = new User( email,password, "testname", "teststreeet", "2200", "11111111", Role.CUSTOMER);
   
         
         String expResult = "Din bruger er nu oprettet";
         
-        //String result = instance.newUser(user);
+        String result = instance.newUser(user);
         
+        instance.removeUser(user);
         
+        assertEquals(expResult, result);
         
-        //assertEquals(expResult, result);
-        
-        
-        
-        
-        
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -116,28 +116,47 @@ public class FunctionManagerTest {
      */
     @Test
     public void testPlaceOrder() throws Exception {
+        
         System.out.println("placeOrder");
-        Order order = null;
+        
+        String email = "newUser@hotmail.com";
+        String password = "1234";
+        
         FunctionManager instance = new FunctionManager();
-        String expResult = "";
+
+        User user = new User( email,password, "testname", "teststreeet", "2200", "11111111", Role.CUSTOMER);
+          Material roof_materialOne = new Material(39, "B & C rygsten rød", "stk", "tag", 15.00);
+        Material roof_materialTwo = new Material(36, "B & C dobbelt -s rød", "stk", "tag", 15.00);
+        RoofType type = new RoofType(2,"Betontagsten - rød", "slope", roof_materialOne, roof_materialTwo);
+        
+        Roof SlopeRoof = new Roof(15, type);
+        
+        Shed shed = new Shed(200, 200);
+        
+        Carport carport = new Carport(650, 650, SlopeRoof, shed);
+        
+        Order order = new Order(user, carport);
+        
+     
+        String expResult = "Tak for din forespørgsel. Vi vil behandle den hurtigst muligt";
+        
         String result = instance.placeOrder(order);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
      * Test of isShipped method, of class FunctionManager.
      */
-    @Test
-    public void testIsShipped() throws Exception {
-        System.out.println("isShipped");
-        Order order = null;
-        FunctionManager instance = new FunctionManager();
-        instance.isShipped(order);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+//    @Test
+//    public void testIsShipped() throws Exception {
+//        System.out.println("isShipped");
+//        Order order = null;
+//        FunctionManager instance = new FunctionManager();
+//        instance.isShipped(order);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 
     /**
      * Test of calcCarport method, of class FunctionManager.
