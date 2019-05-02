@@ -142,6 +142,20 @@ public class FunctionManager
         return res;
     }
 
+    public String removeUser(User user) throws DataException
+    {
+        String res = "";
+        if (user != null)
+        {
+            db.removeUser(user);
+            res = "Brugeren er nu slettet";
+        } else
+        {
+            res = "Brugeren kunne ikke slettes";
+        }
+        return res;
+    }
+
     public void isShipped(Order order) throws DataException
     {
         String shipped = db.orderShipped(order.getOrder_id());
@@ -153,7 +167,7 @@ public class FunctionManager
         if (carport.getWidth() <= 750 && carport.getDepth() <= 800)
         {
             Map<Integer, Material> map = getMaterials();
-            
+
             Material pole = map.get(2);
             Material rem = map.get(3);
             Material bolts = map.get(26);
@@ -168,18 +182,18 @@ public class FunctionManager
     {
         Map<Integer, Material> map = getMaterials();
 
-            Material spær = map.get(3);
-            Material universalV = map.get(19);
-            Material universalH = map.get(18);
-            Material beslagSkruer = map.get(32);
-            Material lægte = map.get(7);
-            Material tagskruer = map.get(30);
-            Material understern = map.get(8);
-            Material overstern = map.get(9);
-            Material vandbræt = map.get(5);
-            Material skruer = map.get(23);
-            Material plastmo = map.get(12);
-            Material plastmotætning = map.get(42);
+        Material spær = map.get(3);
+        Material universalV = map.get(19);
+        Material universalH = map.get(18);
+        Material beslagSkruer = map.get(32);
+        Material lægte = map.get(7);
+        Material tagskruer = map.get(30);
+        Material understern = map.get(8);
+        Material overstern = map.get(9);
+        Material vandbræt = map.get(5);
+        Material skruer = map.get(23);
+        Material plastmo = map.get(12);
+        Material plastmotætning = map.get(42);
 
         cr.calculateFlatRoof(carport, spær, universalV, universalH, beslagSkruer, lægte, tagskruer, understern, overstern, vandbræt, skruer);
         cr.calculatePlatsmo(carport, plastmo, plastmotætning);
@@ -188,7 +202,7 @@ public class FunctionManager
     private void calcSlopeRoof(Carport carport) throws DataException
     {
         Map<Integer, Material> map = getMaterials();
-        
+
         Material spær = map.get(3);
         Material taglægter = map.get(7);
         Material spærbeslag = map.get(43);
@@ -215,9 +229,9 @@ public class FunctionManager
     {
         if (carport.getShed().getWidth() <= carport.getWidth() - 30 && carport.getShed().getDepth() <= carport.getDepth() - 30)
         {
-            
+
             Map<Integer, Material> map = getMaterials();
-             
+
             Material stolpe = map.get(2);
             Material bræt = map.get(4);
             Material vinkelbeslag = map.get(22);
@@ -231,7 +245,7 @@ public class FunctionManager
             Material planker = map.get(5);
 
             if (carport.getRoof().getSlope() == 0)
-                
+
             {
                 cs.calcShedFlatRoof(carport, stolpe, bræt, vinkelbeslag, skruer, beklædning, skrue1, skrue2, lægte, stalddørsgrebene, hængselet, planker);
 
@@ -255,16 +269,16 @@ public class FunctionManager
         }
         return result;
     }
-    
+
     private Map<Integer, Material> getMaterials() throws DataException
     {
-        
+
         Map<Integer, Material> map = new HashMap<>();
-        
+
         List<Material> materials = db.getMaterials();
         for (Material material : materials)
         {
-         map.put(material.getId(), material);
+            map.put(material.getId(), material);
         }
         return map;
     }

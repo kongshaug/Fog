@@ -180,8 +180,8 @@ public class DataFacadeTest
     @Test
     public void testGetUsers() throws Exception
     {
-        System.out.println("getUsers");
-        DataFacade instance = null;
+       
+        DataFacade instance = new DataFacade();
         List<User> expResult = null;
         List<User> result = instance.getUsers();
         assertEquals(expResult, result);
