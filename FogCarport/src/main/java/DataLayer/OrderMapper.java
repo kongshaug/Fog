@@ -86,7 +86,6 @@ public class OrderMapper
             while (rs.next())
             {
                 order_date = rs.getString("order_date");
-
             }
 
             return order_date;

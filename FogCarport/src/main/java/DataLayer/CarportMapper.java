@@ -79,8 +79,8 @@ public class CarportMapper
             Roof roof = null;
 
             dbc.open();
-            String query = "SELECT * FROM Fog.roof"
-                    + "WHERE (roof_id = ?);";
+            String query = "SELECT * FROM Fog.`roof`"
+                    + "WHERE (`roof_id` = ?);";
 
             PreparedStatement statement = dbc.preparedStatement(query);
             statement.setInt(1, roof_id);
@@ -113,8 +113,8 @@ public class CarportMapper
             Shed shed = null;
 
             dbc.open();
-            String query = "SELECT * FROM Fog.shed"
-                    + "WHERE (shed_id = ?);";
+            String query = "SELECT * FROM Fog.`shed`"
+                    + "WHERE (`shed_id` = ?);";
 
             PreparedStatement statement = dbc.preparedStatement(query);
             statement.setInt(1, shed_id);

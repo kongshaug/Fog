@@ -5,10 +5,15 @@
  */
 package DataLayer;
 
+import FunctionLayer.Enum.Paid;
 import FunctionLayer.Enum.Role;
+import FunctionLayer.Enum.Status;
 import FunctionLayer.HelpingClasses.Carport;
 import FunctionLayer.HelpingClasses.Material;
+import FunctionLayer.HelpingClasses.Order;
+import FunctionLayer.HelpingClasses.Roof;
 import FunctionLayer.HelpingClasses.RoofType;
+import FunctionLayer.HelpingClasses.Shed;
 import FunctionLayer.HelpingClasses.User;
 import java.util.List;
 import org.junit.After;
@@ -100,12 +105,12 @@ public class DataFacadeTest
     @Test
     public void testLogin() throws DataException
     {
-        String email = "test@hotmail.com";
+        String email = "malie@hotmail.com";
         String password = "1234";
         User login = df.login(email, password);
 
-        assertEquals("test@hotmail.com", login.getEmail());
-        assertEquals("1234", login.getPassword());
+        assertEquals(email, login.getEmail());
+        assertEquals(password, login.getPassword());
     }
 
     /**
@@ -279,35 +284,53 @@ public class DataFacadeTest
         assertEquals(1, c.getShed().getId());
         assertEquals(1, c.getRoof().getId());
     }
-//
-//    /**
-//     * Test of orderCarport method, of class DataFacade.
-//     */
-//    @Test
-//    public void testOrderCarport() throws Exception
-//    {
-//        System.out.println("orderCarport");
-//        Carport carport = null;
-//        DataFacade instance = null;
-//        instance.orderCarport(carport);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//
-//    /**
-//     * Test of placeOrder method, of class DataFacade.
-//     */
-//    @Test
-//    public void testPlaceOrder() throws Exception
-//    {
-//        System.out.println("placeOrder");
-//        Order order = null;
-//        DataFacade instance = null;
-//        instance.placeOrder(order);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+
+    /**
+     * Test of orderCarport method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testOrderCarport() throws DataException
+    {
+        List<RoofType> rooftype = df.getRoofs();
+
+        //test orderCarport with roof and without shed
+        Roof roof = new Roof(15, rooftype.get(1));
+        Carport carport = new Carport(300, 400, roof);
+        df.orderCarport(carport);
+
+        assertEquals(300, carport.getWidth());
+        assertEquals(400, carport.getDepth());
+        assertEquals(15, carport.getRoof().getSlope());
+        assertEquals("Betontagsten - rød", carport.getRoof().getType().getName());
+
+        //test orderCarport with roof and shed
+        Shed shed = new Shed(470, 470);
+        Carport carport1 = new Carport(500, 500, roof, shed);
+        df.orderCarport(carport1);
+
+        assertEquals(500, carport1.getWidth());
+        assertEquals(470, carport1.getShed().getDepth());
+
+    }
+
+    /**
+     * Test of placeOrder method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testPlaceOrder() throws DataException
+    {
+        User user = df.getUser(3);
+        Carport carport = df.getCarport(23);
+        String shipped = null;
+        double sales_price = df.getCarport(23).getTotal_price();
+        
+        Order o = new Order(35, user, carport, "2019-05-02 17:44:17", Status.MODTAGET, shipped, Paid.IKKE_BETALT, sales_price);
+        df.placeOrder(o);
+    }
 //
 //    /**
 //     * Test of orderShipped method, of class DataFacade.
