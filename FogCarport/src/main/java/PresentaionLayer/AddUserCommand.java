@@ -45,7 +45,7 @@ public class AddUserCommand implements Command
         User user = new User(email, password, name, address, zipcode, phone, Role.CUSTOMER);
         String message = manager.newUser(user);
 
-        session.setAttribute("message", message);
+        request.setAttribute("message", message);
 
         if (message.equals("Din bruger er nu oprettet"))
         {

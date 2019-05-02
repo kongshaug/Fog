@@ -50,7 +50,7 @@ public class LoginCommand implements Command
                 return EmployeeTarget;
             }
         }
-        session.setAttribute("message", "Forkert email eller adgangskode!");
+        request.setAttribute("message", "Forkert email eller adgangskode!");
 
         return "index.jsp";
 

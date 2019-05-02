@@ -13,7 +13,7 @@
     </head>
     <body>
         <%
-            String message = (String) session.getAttribute("message");
+            String message = (String) request.getAttribute("message");
         %>
         <form action="Fog" method="POST">
             <input type="text" name="email" placeholder="email" value="" minlength="6" required> <br><br>
@@ -27,7 +27,6 @@
             if (message != null)
             {
                 out.println(message);
-                session.removeAttribute("message");
             }
         %>
     </body>
