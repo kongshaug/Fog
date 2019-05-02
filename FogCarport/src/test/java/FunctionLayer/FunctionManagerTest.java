@@ -189,7 +189,7 @@ public class FunctionManagerTest {
         
         Shed shed = new Shed(1, 200, 200);
         
-        Carport carport = new Carport(800, 800, SlopeRoof, shed);
+        Carport carport = new Carport(650, 650, SlopeRoof, shed);
         
         FunctionManager instance = new FunctionManager();
         

@@ -5,15 +5,17 @@
  */
 package FunctionLayer;
 
+import DataLayer.DataException;
+import DataLayer.DataFacade;
 import FunctionLayer.HelpingClasses.Carport;
 import FunctionLayer.HelpingClasses.Material;
 import FunctionLayer.HelpingClasses.Order;
 import FunctionLayer.HelpingClasses.RoofType;
 import FunctionLayer.HelpingClasses.User;
-import DataLayer.DataException;
-import DataLayer.DataFacade;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -150,10 +152,12 @@ public class FunctionManager
     {
         if (carport.getWidth() <= 750 && carport.getDepth() <= 800)
         {
-            Material pole = getMaterial(2);
-            Material rem = getMaterial(3);
-            Material bolts = getMaterial(26);
-            Material discs = getMaterial(27);
+            Map<Integer, Material> map = getMaterials();
+            
+            Material pole = map.get(2);
+            Material rem = map.get(3);
+            Material bolts = map.get(26);
+            Material discs = map.get(27);
 
             c.calculatepoles(carport, pole, bolts, discs);
             c.calculateRem(carport, rem);
@@ -162,18 +166,20 @@ public class FunctionManager
 
     private void calcFlatroof(Carport carport) throws DataException
     {
-        Material spær = getMaterial(3);
-        Material universalV = getMaterial(19);
-        Material universalH = getMaterial(18);
-        Material beslagSkruer = getMaterial(32);
-        Material lægte = getMaterial(7);
-        Material tagskruer = getMaterial(30);
-        Material understern = getMaterial(8);
-        Material overstern = getMaterial(9);
-        Material vandbræt = getMaterial(5);
-        Material skruer = getMaterial(23);
-        Material plastmo = getMaterial(12);
-        Material plastmotætning = getMaterial(42);
+        Map<Integer, Material> map = getMaterials();
+
+            Material spær = map.get(3);
+            Material universalV = map.get(19);
+            Material universalH = map.get(18);
+            Material beslagSkruer = map.get(32);
+            Material lægte = map.get(7);
+            Material tagskruer = map.get(30);
+            Material understern = map.get(8);
+            Material overstern = map.get(9);
+            Material vandbræt = map.get(5);
+            Material skruer = map.get(23);
+            Material plastmo = map.get(12);
+            Material plastmotætning = map.get(42);
 
         cr.calculateFlatRoof(carport, spær, universalV, universalH, beslagSkruer, lægte, tagskruer, understern, overstern, vandbræt, skruer);
         cr.calculatePlatsmo(carport, plastmo, plastmotætning);
@@ -181,23 +187,25 @@ public class FunctionManager
 
     private void calcSlopeRoof(Carport carport) throws DataException
     {
-        Material spær = getMaterial(3);
-        Material taglægter = getMaterial(7);
-        Material spærbeslag = getMaterial(43);
-        Material beslagSkruerSpær = getMaterial(24);
-        Material skruer = getMaterial(25);
-        Material universalV = getMaterial(19);
-        Material universalH = getMaterial(18);
-        Material toplægteholder = getMaterial(15);
+        Map<Integer, Material> map = getMaterials();
+        
+        Material spær = map.get(3);
+        Material taglægter = map.get(7);
+        Material spærbeslag = map.get(43);
+        Material beslagSkruerSpær = map.get(24);
+        Material skruer = map.get(25);
+        Material universalV = map.get(19);
+        Material universalH = map.get(18);
+        Material toplægteholder = map.get(15);
         Material tegl = carport.getRoof().getType().getM2();
         Material rygsten = carport.getRoof().getType().getM1();
-        Material rygstensbeslag = getMaterial(16);
-        Material beklædning = getMaterial(5);
-        Material vandbræt = getMaterial(5);
-        Material trykimpbræt = getMaterial(1);
-        Material skruerTotal = getMaterial(23);
-        Material skrue1 = getMaterial(28);
-        Material skrue2 = getMaterial(29);
+        Material rygstensbeslag = map.get(16);
+        Material beklædning = map.get(5);
+        Material vandbræt = map.get(5);
+        Material trykimpbræt = map.get(1);
+        Material skruerTotal = map.get(23);
+        Material skrue1 = map.get(28);
+        Material skrue2 = map.get(29);
 
         cr.calculateSlopeRoof(carport, spær, taglægter, spærbeslag, beslagSkruerSpær, skruer, universalV, universalH, toplægteholder, tegl, rygsten, rygstensbeslag, beklædning, vandbræt, trykimpbræt, skruerTotal, skrue1, skrue2);
 
@@ -207,19 +215,23 @@ public class FunctionManager
     {
         if (carport.getShed().getWidth() <= carport.getWidth() - 30 && carport.getShed().getDepth() <= carport.getDepth() - 30)
         {
-            Material stolpe = getMaterial(2);
-            Material bræt = getMaterial(4);
-            Material vinkelbeslag = getMaterial(22);
-            Material skruer = getMaterial(32);
-            Material beklædning = getMaterial(5);
-            Material skrue1 = getMaterial(33);
-            Material skrue2 = getMaterial(34);
-            Material lægte = getMaterial(10);
-            Material stalddørsgrebene = getMaterial(20);
-            Material hængselet = getMaterial(21);
-            Material planker = getMaterial(5);
+            
+            Map<Integer, Material> map = getMaterials();
+             
+            Material stolpe = map.get(2);
+            Material bræt = map.get(4);
+            Material vinkelbeslag = map.get(22);
+            Material skruer = map.get(32);
+            Material beklædning = map.get(5);
+            Material skrue1 = map.get(33);
+            Material skrue2 = map.get(34);
+            Material lægte = map.get(10);
+            Material stalddørsgrebene = map.get(20);
+            Material hængselet = map.get(21);
+            Material planker = map.get(5);
 
             if (carport.getRoof().getSlope() == 0)
+                
             {
                 cs.calcShedFlatRoof(carport, stolpe, bræt, vinkelbeslag, skruer, beklædning, skrue1, skrue2, lægte, stalddørsgrebene, hængselet, planker);
 
@@ -242,6 +254,19 @@ public class FunctionManager
             }
         }
         return result;
+    }
+    
+    private Map<Integer, Material> getMaterials() throws DataException
+    {
+        
+        Map<Integer, Material> map = new HashMap<>();
+        
+        List<Material> materials = db.getMaterials();
+        for (Material material : materials)
+        {
+         map.put(material.getId(), material);
+        }
+        return map;
     }
 
     public List<RoofType> getSlopedRoofs() throws DataException
