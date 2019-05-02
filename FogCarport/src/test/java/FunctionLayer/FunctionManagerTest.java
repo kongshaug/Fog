@@ -118,16 +118,13 @@ public class FunctionManagerTest {
     public void testPlaceOrder() throws Exception {
         
         System.out.println("placeOrder");
-        
-        String email = "newUser@hotmail.com";
-        String password = "1234";
-        
+    
         FunctionManager instance = new FunctionManager();
 
-        User user = new User( email,password, "testname", "teststreeet", "2200", "11111111", Role.CUSTOMER);
+        User user = new User(60, "testtiltest@em.dk","1234", "benja", "teststreeet", "2200", "11111111", Role.CUSTOMER);
           Material roof_materialOne = new Material(39, "B & C rygsten rød", "stk", "tag", 15.00);
         Material roof_materialTwo = new Material(36, "B & C dobbelt -s rød", "stk", "tag", 15.00);
-        RoofType type = new RoofType(2,"Betontagsten - rød", "slope", roof_materialOne, roof_materialTwo);
+        RoofType type = new RoofType(2, "Betontagsten - rød", "slope", roof_materialOne, roof_materialTwo);
         
         Roof SlopeRoof = new Roof(15, type);
         
@@ -283,11 +280,10 @@ public class FunctionManagerTest {
         String roofkind = "slope";
         int typeId = 2;
         FunctionManager instance = new FunctionManager();
-        RoofType expResult = null;
+        String expResult = null;
         RoofType result = instance.getRoofType(roofkind, typeId);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals("Betontagsten - rød", result.getName());
+        
     }
 
 
