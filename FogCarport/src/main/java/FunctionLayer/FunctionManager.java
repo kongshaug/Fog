@@ -255,7 +255,7 @@ public class FunctionManager
             }
         }
     }
-
+// I don't think this is in use anymore, can be removed.
     private Material getMaterial(int id) throws DataException
     {
         Material result = null;
@@ -319,6 +319,7 @@ public class FunctionManager
 
     public RoofType getRoofType(String roofkind, int typeId) throws DataException
     {
+        
         RoofType type = null;
 
         if (roofkind.equals("flat"))
@@ -346,6 +347,15 @@ public class FunctionManager
         return type;
     }
 
+     public RoofType getRoofTypeById(int typeId) throws DataException
+    {
+        RoofType type = null;
+        
+        return db.getRoof(typeId);
+   
+         
+    }
+    
     public void calcRoof(Carport carport) throws DataException
     {
         if (carport.getRoof().getType().getRoof_class().equals("flat"))

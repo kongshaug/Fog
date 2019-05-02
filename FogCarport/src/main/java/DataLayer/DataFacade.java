@@ -77,6 +77,11 @@ public class DataFacade
         return mm.getRoofs();
     }
     
+     public RoofType getRoof(int id) throws DataException
+    {
+        return mm.getRoof(id);
+    }
+    
     public User getUser(int user_id) throws DataException
     {
         return um.getUser(user_id);

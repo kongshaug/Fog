@@ -233,5 +233,54 @@ public class MaterialMapper
             throw new DataException(ex.getMessage());
         }
     }
+    
+      public RoofType getRoof(int theId) throws DataException
+    {
+        try
+        {
+            RoofType rooftypes = null;
+
+            dbc.open();
+            String query = "SELECT * FROM Fog.`roof_type` where roof_type_id ="+theId+";";
+
+            int id = 0;
+            String name = "";
+            String roof_class = "";
+            int m1_id = 0;
+            int m2_id = 0;
+            Material m1 = null;
+            Material m2 = null;
+
+            PreparedStatement statment = dbc.preparedStatement(query);
+            ResultSet rs = statment.executeQuery();
+
+            while (rs.next())
+            {
+                id = rs.getInt("roof_type_id");
+                name = rs.getString("roof_type_name");
+                roof_class = rs.getString("roof_type_class");
+                m1_id = rs.getInt("roof_material1");
+                m2_id = rs.getInt("roof_material2");
+                m1 = retrieveMaterial(m1_id);
+                m2 = retrieveMaterial(m2_id);
+
+                if (m2 == null)
+                {
+                   rooftypes = new RoofType(id, name, roof_class, m1);
+                } else
+                {
+                   rooftypes = new RoofType(id, name, roof_class, m1, m2);
+                }
+
+            }
+
+            dbc.close();
+            return rooftypes;
+
+        } catch (SQLException ex)
+        {
+            throw new DataException(ex.getMessage());
+        }
+    }
 
 }
