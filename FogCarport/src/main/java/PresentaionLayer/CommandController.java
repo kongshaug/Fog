@@ -29,6 +29,7 @@ public class CommandController
         commands.put("back", shop);
         commands.put("placeorder", new PlaceOrderCommand("placeorder.jsp"));
         commands.put("regretorder", new RegretOrderCommand("shop.jsp"));
+        commands.put("logout", new LogoutCommand("index.jsp"));
 //      commands.put("customerorder", new CustomerOrderCommand("customerorder.jsp"));
 //      commands.put("employeeorder", new EmployeeOrderCommand("employeeorder.jsp"));
 //      commands.put("shipped", new ShippedCommand("employeeorder.jsp"));

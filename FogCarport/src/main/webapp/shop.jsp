@@ -9,33 +9,24 @@
 <%@page import="java.util.List"%>
 <%@page import="javafx.scene.control.RadioButton"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Fog</title>
-    </head>
-    <body>
-        <br>
-        <%
-            User user = (User) session.getAttribute("user");
-            String errormessage = (String) request.getAttribute("errormessage");
-            
-            out.println(user);
+<%@include file = "customerheader.jsp" %>
 
+<center class="index" id="index"> 
+    <br><br><br>
+    <div id="shop">
+        <%            String errormessage = (String) request.getAttribute("errormessage");
             if (errormessage != null)
             {
         %>
-        <p><%=errormessage%></p>
+        <p><%=errormessage%></p><br>
         <%
-            }        
+            }
         %>
-
         <form action="Fog" method="POST">
-            Bredde: <br>
-            <input type="number" pattern="[0-2000]*" name="depth" value="240" min="240" max="750"><br>
-            Dybde: <br>
-            <input type="number" pattern="[0-2000]*" name="width" value="240" min="240" max="800"><br><br>
+            Bredde:&nbsp;&nbsp;<input type="number" pattern="[0-2000]*" name="depth" value="240" min="240" max="750">
+            &nbsp;&nbsp;
+            Dybde:&nbsp;&nbsp;<input type="number" pattern="[0-2000]*" name="width" value="240" min="240" max="800">
+            <br><br>
             <label> <input type="radio" name="roof" id="flat" value="flat" onclick="disable()"><span>Fladt tag</span></label>
             <label> <input type="radio" name="roof" id="sloped" value="sloped"onclick="enable()" checked="checked"><span>Tag med rejsning</span></label>
 
@@ -70,89 +61,88 @@
                 %>
             </select>
 
-            <br>
-            <br>
+            <br><br>
 
             <select name="shed" onchange="show(this.value)">
                 <option disabled selected>Vælg skur</option>
                 <option value="Med skur">Med skur</option>
                 <option value="Uden skur">Uden skur</option>
-            </select>
+            </select>       
+    </div>
+    <br>
+    <div id="skur" hidden="true">
+        OBS! Skuret skal have min. 15 cm udhæng på alle sider <br>
+        og skal derfor være mindst 30 cm smallere og kortere end carporten 
+        <br><br>
+        Bredde af skur:&nbsp;&nbsp;<input type="number" pattern="[0-2000]*" name="shedDepth" value="210" min="210" max="720">
+        &nbsp;&nbsp;
+        Dybde afskur:&nbsp;&nbsp;<input type="number" pattern="[0-2000]*" name="shedWidth" value="210" min="210" max="770">
+    </div>
+    <br>
+    <div><button name="command" value="calculate">Beregn carport</button></div>
 
-            <br>
-            <br>
-            <div id="skur" hidden="true">
-                <p>OBS! Skuret skal have min. 15 cm udhæng på alle sider <br>
-                    og skal derfor være mindst 30 cm smallere og kortere end carporten</p>
-                Bredde af skur:<br>
-                <input type="number" pattern="[0-2000]*" name="shedDepth" value="210" min="210" max="720"><br>
-                Dybde afskur: <br>
-                <input type="number" pattern="[0-2000]*" name="shedWidth" value="210" min="210" max="770"><br><br>
-            </div>
+    <br><br>
+    <script>
 
-            <br><br>
-            <button name="command" value="calculate">Beregn carport</button>
+        function disable()
+        {
+            var flatoptions = [...document.getElementsByClassName("fladt")];
 
-            <script>
+            flatoptions.forEach(function (x)
+            {
+                x.removeAttribute("disabled");
+                x.removeAttribute("hidden");
+            });
+            var slopeoptions = [...document.getElementsByClassName("rejsning")];
 
-                function disable()
-                {
-                    var flatoptions = [...document.getElementsByClassName("fladt")];
+            slopeoptions.forEach(function (x)
+            {
 
-                    flatoptions.forEach(function (x)
-                    {
-                        x.removeAttribute("disabled");
-                        x.removeAttribute("hidden");
-                    });
-                    var slopeoptions = [...document.getElementsByClassName("rejsning")];
+                x.setAttribute("disabled", "disabled");
+                x.setAttribute("hidden", "hidden");
+            });
 
-                    slopeoptions.forEach(function (x)
-                    {
-                        
-                        x.setAttribute("disabled","disabled");
-                        x.setAttribute("hidden","hidden");
-                    });
+            document.getElementById("hældning").disabled = true;
+            document.getElementById("type").value = 0;
+            document.getElementById("hældning").value = 0;
 
-                    document.getElementById("hældning").disabled = true;
-                    document.getElementById("type").value = 0;
-                    document.getElementById("hældning").value = 0;
+        }
 
-                }
+        function enable()
+        {
+            var flatoptions = [...document.getElementsByClassName("fladt")];
 
-                function enable()
-                {
-                    var flatoptions = [...document.getElementsByClassName("fladt")];
+            flatoptions.forEach(function (x)
+            {
+                x.setAttribute("disabled", "disabled");
+                x.setAttribute("hidden", "hidden");
+            });
+            var slopeoptions = [...document.getElementsByClassName("rejsning")];
 
-                    flatoptions.forEach(function (x)
-                    {
-                        x.setAttribute("disabled","disabled");
-                        x.setAttribute("hidden","hidden");
-                    });
-                    var slopeoptions = [...document.getElementsByClassName("rejsning")];
+            slopeoptions.forEach(function (x)
+            {
+                x.removeAttribute("disabled");
+                x.removeAttribute("hidden");
+            });
 
-                    slopeoptions.forEach(function (x)
-                    {
-                        x.removeAttribute("disabled");
-                        x.removeAttribute("hidden");
-                    });
+            document.getElementById("hældning").disabled = false;
+            document.getElementById("type").value = 0;
+            document.getElementById("hældning").value = 0;
+        }
 
-                    document.getElementById("hældning").disabled = false;
-                    document.getElementById("type").value = 0;
-                    document.getElementById("hældning").value = 0;
-                }
+        function show(value)
+        {
+            if (value === "Med skur")
+            {
+                document.getElementById("skur").removeAttribute("hidden");
+            } else
+            {
+                document.getElementById("skur").setAttribute("hidden", "true");
+            }
+        }
 
-                function show(value)
-                {
-                    if (value === "Med skur")
-                    {
-                        document.getElementById("skur").removeAttribute("hidden");
-                    } else 
-                    {
-                        document.getElementById("skur").setAttribute("hidden", "true");
-                    }
-                }
-
-            </script>
-        </form> 
-    </body>
+    </script>
+</center>
+</form> 
+</body>
 </html>
