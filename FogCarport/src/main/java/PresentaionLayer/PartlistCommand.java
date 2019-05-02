@@ -75,7 +75,7 @@ public class PartlistCommand implements Command
         {
             Carport carport = null;
             Roof roof = null;
-            RoofType type = manager.getRoofType(rooftype, Integer.parseInt(typeId));
+            RoofType type = manager.getRoofTypeById(Integer.parseInt(typeId));
             
             if (rooftype.equals("flat"))
             {

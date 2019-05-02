@@ -317,35 +317,7 @@ public class FunctionManager
         return flatRoofs;
     }
 
-    public RoofType getRoofType(String roofkind, int typeId) throws DataException
-    {
-        
-        RoofType type = null;
-
-        if (roofkind.equals("flat"))
-        {
-            List<RoofType> rooftypes = getFlatRoofs();
-            for (RoofType rooftype : rooftypes)
-            {
-                if (rooftype.getId() == typeId)
-                {
-                    type = rooftype;
-                }
-            }
-        } else
-        {
-            List<RoofType> rooftypes = getSlopedRoofs();
-            for (RoofType rooftype : rooftypes)
-            {
-                if (rooftype.getId() == typeId)
-                {
-                    type = rooftype;
-                }
-            }
-        }
-
-        return type;
-    }
+ 
 
      public RoofType getRoofTypeById(int typeId) throws DataException
     {
