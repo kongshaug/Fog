@@ -37,14 +37,7 @@ public class CarportMapper
 
             dbc.open();
             String query = "SELECT * FROM Fog.`carport`"
-                    + "INNER JOIN Fog.carport_has_roof"
                     + "WHERE (`carport_id` = ?);";
-
-            int id = 0;
-            int depth = 0;
-            int width = 0;
-            int roof_id = 0;
-            Roof roof = null;
 
             PreparedStatement statement = dbc.preparedStatement(query);
             statement.setInt(1, carport_id);
@@ -52,19 +45,22 @@ public class CarportMapper
 
             if (rs.next())
             {
-                id = rs.getInt("carport_id");
-                depth = rs.getInt("depth");
-                width = rs.getInt("width");
-                roof_id = rs.getInt("roof_id");
-                roof = getRoof(roof_id);
+                int id = rs.getInt("carport_id");
+                int depth = rs.getInt("depth");
+                int width = rs.getInt("width");
+                int roof_id = rs.getInt("roof_id");
+                int shed_id = rs.getInt("shed_id");
+                Roof roof = getRoof(roof_id);
+                Shed shed = getShed(shed_id);
 
-//                if (shed == 0)
-//                {
-                carport = new Carport(id, width, depth, roof);
-//                } else
-//                {
-//                    carport = new Carport(id, width, depth, null, null);
-//                }
+                if (shed != null)
+                {
+                    carport = new Carport(id, width, depth, roof, shed);
+                } else
+                {
+                    carport = new Carport(id, width, depth, roof);
+
+                }
             }
 
             dbc.close();
@@ -86,27 +82,55 @@ public class CarportMapper
             String query = "SELECT * FROM Fog.roof"
                     + "WHERE (roof_id = ?);";
 
-            int id = 0;
-            int roof_slope = 0;
-            int roof_type_id = 0;
-            RoofType roof_type = null;
-
             PreparedStatement statement = dbc.preparedStatement(query);
             statement.setInt(1, roof_id);
             ResultSet rs = statement.executeQuery();
 
             if (rs.next())
             {
-                id = rs.getInt("roof_id");
-                roof_slope = rs.getInt("roof_slope");
-                roof_type_id = rs.getInt("roof_type");
-                roof_type = getRoofType(roof_type_id);
+                int id = rs.getInt("roof_id");
+                int roof_slope = rs.getInt("roof_slope");
+                int roof_type_id = rs.getInt("roof_type");
+                RoofType roof_type = getRoofType(roof_type_id);
 
                 roof = new Roof(id, roof_slope, roof_type);
 
             }
 
             return roof;
+
+        } catch (SQLException ex)
+        {
+            throw new DataException(ex.getMessage());
+        }
+
+    }
+
+    private Shed getShed(int shed_id) throws DataException
+    {
+        try
+        {
+            Shed shed = null;
+
+            dbc.open();
+            String query = "SELECT * FROM Fog.shed"
+                    + "WHERE (shed_id = ?);";
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+            statement.setInt(1, shed_id);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next())
+            {
+                int id = rs.getInt("shed_id");
+                int width = rs.getInt("width");
+                int depth = rs.getInt("depth");
+
+                shed = new Shed(id, width, depth);
+
+            }
+
+            return shed;
 
         } catch (SQLException ex)
         {
@@ -125,28 +149,21 @@ public class CarportMapper
             String query = "SELECT * FROM Fog.`materials`"
                     + "WHERE (`material_id` = ?);";
 
-            int id = 0;
-            String name = "";
-            String unit = "";
-            String material_class = "";
-            double price = 0;
-
             PreparedStatement statement = dbc.preparedStatement(query);
             statement.setInt(1, material_id);
             ResultSet rs = statement.executeQuery();
 
             if (rs.next())
             {
-                id = rs.getInt("material_id");
-                name = rs.getString("material_name");
-                unit = rs.getString("unit");
-                material_class = rs.getString("material_class");
-                price = rs.getDouble("price");
+                int id = rs.getInt("material_id");
+                String name = rs.getString("material_name");
+                String unit = rs.getString("unit");
+                String material_class = rs.getString("material_class");
+                double price = rs.getDouble("price");
 
                 material = new Material(id, name, unit, material_class, price);
             }
 
-            //dbc.close();
             return material;
 
         } catch (SQLException ex)
@@ -168,7 +185,6 @@ public class CarportMapper
             addRoof(carport.getRoof());
             addShed(carport.getShed());
 
-            int id = 0;
             int depth = carport.getDepth();
             int width = carport.getWidth();
 
@@ -186,7 +202,7 @@ public class CarportMapper
             ResultSet rs = statement.getGeneratedKeys();
             if (rs.next())
             {
-                id = rs.getInt(1);
+                int id = rs.getInt(1);
                 carport.setId(id);
             }
 
@@ -280,27 +296,19 @@ public class CarportMapper
             String query = "SELECT * FROM Fog.`roof_type`"
                     + "WHERE (`roof_type_id` = ?);";
 
-            int id = 0;
-            String name = "";
-            String roof_class = "";
-            int m1_id = 0;
-            int m2_id = 0;
-            Material m1 = null;
-            Material m2 = null;
-
             PreparedStatement statement = dbc.preparedStatement(query);
             statement.setInt(1, roof_type_id);
             ResultSet rs = statement.executeQuery();
 
             if (rs.next())
             {
-                id = rs.getInt("roof_type_id");
-                name = rs.getString("roof_type_name");
-                roof_class = rs.getString("roof_type_class");
-                m1_id = rs.getInt("roof_material1");
-                m2_id = rs.getInt("roof_material2");
-                m1 = getMaterial(m1_id);
-                m2 = getMaterial(m2_id);
+                int id = rs.getInt("roof_type_id");
+                String name = rs.getString("roof_type_name");
+                String roof_class = rs.getString("roof_type_class");
+                int m1_id = rs.getInt("roof_material1");
+                int m2_id = rs.getInt("roof_material2");
+                Material m1 = getMaterial(m1_id);
+                Material m2 = getMaterial(m2_id);
 
                 if (m2 == null)
                 {
