@@ -1,0 +1,81 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 02-05-2019, 11:31:33
+    Author     : sofieamalielandt
+*/
+
+.index div {
+    border-style: none;
+    border-radius: 10px;
+    padding: 40px;
+    box-sizing: border-box;
+    width: 400px;
+    background-color: rgba(7, 72, 133, 1.0);
+    text-align: center; 
+    color: whitesmoke;
+    font-family: Avenir Next Condensed;
+}
+
+#index input, select{
+    position: relative;  
+    display: inline-block;
+    align-items: center;
+    background-color: transparent;
+    border: solid;
+    border-color: whitesmoke;
+    text-decoration: none;
+    font-size: 16px;
+    text-align: center;
+    padding: 5px 5px 5px 5px;
+    border-radius: 10px; 
+    border-width: thin;
+    color: whitesmoke;
+    font-family: Avenir Next Condensed;
+}
+
+#index button {
+    position: static; width: auto; 
+    display: inline-block;
+    align-items: center;
+    background-color: transparent;
+    color: whitesmoke;
+    border: solid;
+    border-color: whitesmoke;
+    border-width: thin;
+    font-size: 16px;
+    text-align: center;
+    padding: 5px 9px;
+    border-radius: 10px;
+    font-family: Avenir Next Condensed;
+}
+
+#index input:hover, select:hover {
+    background-color: whitesmoke;
+    color: rgba(7, 72, 133, 1.0);
+    border-radius: 10px;
+}
+
+#index ::-webkit-input-placeholder {
+    color: whitesmoke;
+    opacity: 0.8;
+
+}
+
+#index button:hover {
+    background-color: whitesmoke;
+    color: rgba(7, 72, 133, 1.0);
+}
+
+html{
+    background-image: url("../images/fog.png");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 500px;
+    font-family: Avenir Next Condensed;
+
+}
