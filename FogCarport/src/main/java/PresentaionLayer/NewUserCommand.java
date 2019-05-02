@@ -7,11 +7,8 @@ package PresentaionLayer;
 
 import DataLayer.DataException;
 import FunctionLayer.FunctionManager;
-import FunctionLayer.Enum.Role;
-import FunctionLayer.HelpingClasses.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *

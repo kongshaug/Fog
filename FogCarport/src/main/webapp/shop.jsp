@@ -19,7 +19,7 @@
         <br>
         <%
             User user = (User) session.getAttribute("user");
-            String errormessage = (String) session.getAttribute("errormessage");
+            String errormessage = (String) request.getAttribute("errormessage");
             
             out.println(user);
 
@@ -28,9 +28,7 @@
         %>
         <p><%=errormessage%></p>
         <%
-                session.removeAttribute("errormessage");
-            }
-            
+            }        
         %>
 
         <form action="Fog" method="POST">

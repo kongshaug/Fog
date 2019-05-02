@@ -15,12 +15,10 @@
     <body>
         <form action="Fog" method="POST">
         <%
-            String message = (String) session.getAttribute("message");
+            String message = (String) request.getAttribute("message");
             Order order = (Order) session.getAttribute("order");
             out.println(message);
-             out.println(order.getOrder_date());
-            
-            session.removeAttribute("message");
+            out.println(order.getOrder_date());
         %>
         <button name="command" value="back">Gå til shop</button>
         </form>

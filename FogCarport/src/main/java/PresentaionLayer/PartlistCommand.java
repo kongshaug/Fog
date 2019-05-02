@@ -46,17 +46,17 @@ public class PartlistCommand implements Command
 
         if (typeId == null)
         {
-            session.setAttribute("errormessage", "Vælg venligst tagtype!");
+            request.setAttribute("errormessage", "Vælg venligst tagtype!");
             return "shop.jsp";
         }
         if (rooftype.equals("sloped") && slope == null)
         {
-            session.setAttribute("errormessage", "Vælg venligst hældning!");
+            request.setAttribute("errormessage", "Vælg venligst hældning!");
             return "shop.jsp";
         }
         if (shedOrNot == null)
         {
-            session.setAttribute("errormessage", "Vælg venligst om der ønskes skur eller ej!");
+            request.setAttribute("errormessage", "Vælg venligst om der ønskes skur eller ej!");
             return "shop.jsp";
         }
 
@@ -64,7 +64,7 @@ public class PartlistCommand implements Command
         {
             if (shedDepth > depth - 30 || shedWidth > width - 30)
             {
-                session.setAttribute("errormessage", "Skuret skal være mindst 30 cm smallere og kortere end carporten. "
+                request.setAttribute("errormessage", "Skuret skal være mindst 30 cm smallere og kortere end carporten. "
                         + "Målene for dit skur er lige nu  " + (shedDepth - (depth - 30)) + " for dybe og " + (shedWidth - (width - 30)) + " for bred. Prøv igen.");
 
                 return "shop.jsp";
