@@ -25,7 +25,6 @@ public class DataFacade
     private MaterialMapper mm = new MaterialMapper(dbc);
     private CarportMapper cm = new CarportMapper(dbc);
     private UserMapper um = new UserMapper(dbc);
-    private OrderMapper om = new OrderMapper(dbc);
 
     public DataFacade() throws DataException
     {
@@ -54,11 +53,6 @@ public class DataFacade
     public List<Material> getMaterials() throws DataException
     {
         return mm.getMaterials();
-    }
-
-    public Carport getCarport(int carport_id) throws DataException
-    {
-        return cm.getCarport(carport_id);
     }
 
     public void orderCarport(Carport carport) throws DataException
@@ -104,12 +98,12 @@ public class DataFacade
 
     public void placeOrder(Order order) throws DataException
     {
-        om.placeOrder(order);
+        cm.placeOrder(order);
     }
 
     public String orderShipped(int order_id) throws DataException
     {
-        return om.orderShipped(order_id);
+        return cm.orderShipped(order_id);
     }
 
     public void removeUser(User user) throws DataException
@@ -119,17 +113,17 @@ public class DataFacade
 
     public Order getOrder(int order_id) throws DataException
     {
-        return om.getOrder(order_id);
+        return cm.getOrder(order_id);
     }
     
     public List<Order> getOrders() throws DataException
     {
-        return om.getOrders();
+        return cm.getOrders();
     }
     
     public List<Order> getOrdersByEmail(String email) throws DataException
     {
-        return om.getOrdersByEmail(email);
+        return cm.getOrdersByEmail(email);
     }
 
 }
