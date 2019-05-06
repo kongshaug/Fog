@@ -29,29 +29,29 @@ import static org.junit.Assert.*;
  */
 public class DataFacadeTest
 {
-
+    
     DataFacade df;
-
+    
     public DataFacadeTest()
     {
     }
-
+    
     @BeforeClass
     public static void setUpClass()
     {
     }
-
+    
     @AfterClass
     public static void tearDownClass()
     {
     }
-
+    
     @Before
     public void setUp() throws DataException
     {
         df = DataFacade.getInstance();
     }
-
+    
     @After
     public void tearDown()
     {
@@ -85,15 +85,15 @@ public class DataFacadeTest
         String zipcode = "1234";
         String phone = "88888888";
         Role r = Role.CUSTOMER;
-
+        
         User newUser = new User(email, password, name, address, zipcode, phone, r);
         df.newUser(newUser);
         df.getUser(newUser.getId());
-
+        
         assertEquals(newUser.getName(), name);
         assertEquals(newUser.getAddress(), address);
         assertEquals(newUser.getRole(), r);
-
+        
         df.removeUser(newUser);
     }
 
@@ -108,7 +108,7 @@ public class DataFacadeTest
         String email = "malie@hotmail.dk";
         String password = "1234";
         User login = df.login(email, password);
-
+        
         assertEquals(email, login.getEmail());
         assertEquals(password, login.getPassword());
     }
@@ -122,7 +122,7 @@ public class DataFacadeTest
     public void testGetUser() throws DataException
     {
         User user = df.getUser(1);
-
+        
         assertNotNull(user);
         assertEquals("Amalie", user.getName());
         assertEquals("malie@hotmail.dk", user.getEmail());
@@ -139,7 +139,7 @@ public class DataFacadeTest
     public void testNegativeGetUser() throws DataException
     {
         User user = df.getUser(3);
-
+        
         assertNotNull(user);
         assertNotEquals("benjamin", user.getName());
         assertNotEquals(Role.ADMIN, user.getRole());
@@ -169,7 +169,7 @@ public class DataFacadeTest
         assertEquals("træ", m.getMaterial_class());
         assertEquals(15.00, m.getPrice(), 0.01);
         assertEquals(7, m.getId());
-
+        
         Material m2 = df.getMaterial("1x20 mm hulbånd 10 mtr");
         assertEquals("beslag og skruer", m2.getMaterial_class());
         assertEquals("rulle", m2.getUnit());
@@ -189,7 +189,7 @@ public class DataFacadeTest
         assertEquals("tag", m.getMaterial_class());
         assertEquals("stk", m.getUnit());
         assertEquals(70.00, m.getPrice(), 0.01);
-
+        
         Material m2 = df.getMaterial(22);
         assertEquals("Vinkelbeslag", m2.getName());
         assertEquals("beslag og skruer", m2.getMaterial_class());
@@ -210,7 +210,7 @@ public class DataFacadeTest
         assertEquals("rulle", materials.get(30).getUnit());
         assertEquals("træ", materials.get(0).getMaterial_class());
         assertEquals(50.00, materials.get(9).getPrice(), 0.01);
-
+        
         int expResult = 45;
         int result = df.getMaterials().size();
         assertEquals(expResult, result);
@@ -227,7 +227,7 @@ public class DataFacadeTest
         List<Material> materials = df.getMaterials();
         assertNotEquals("skur", materials.get(5).getMaterial_class());
         assertNotEquals("meter", materials.get(23).getUnit());
-
+        
         int expResult = 42;
         int result = df.getMaterials().size();
         assertNotEquals(expResult, result);
@@ -245,7 +245,7 @@ public class DataFacadeTest
         assertEquals("Plasttrapezplader", rooftype.get(0).getName());
         assertEquals("slope", rooftype.get(2).getRoof_class());
         assertEquals(14, rooftype.get(4).getM1().getId());
-
+        
         int expResult = 6;
         int result = df.getRoofs().size();
         assertEquals(expResult, result);
@@ -262,7 +262,7 @@ public class DataFacadeTest
         List<RoofType> rooftype = df.getRoofs();
         assertNotEquals("Betontagsten - blå", rooftype.get(1).getName());
         assertNotEquals("flat", rooftype.get(2).getRoof_class());
-
+        
         int expResult = 2;
         int result = df.getRoofs().size();
         assertNotEquals(expResult, result);
@@ -277,7 +277,7 @@ public class DataFacadeTest
     public void testGetCarport() throws DataException
     {
         Carport c = df.getCarport(1);
-
+        
         assertNotNull(c);
         assertEquals(650, c.getDepth());
         assertEquals(650, c.getWidth());
@@ -299,7 +299,7 @@ public class DataFacadeTest
         Roof roof = new Roof(15, rooftype.get(1));
         Carport carport = new Carport(300, 400, roof);
         df.orderCarport(carport);
-
+        
         assertEquals(300, carport.getWidth());
         assertEquals(400, carport.getDepth());
         assertEquals(15, carport.getRoof().getSlope());
@@ -309,11 +309,58 @@ public class DataFacadeTest
         Shed shed = new Shed(470, 470);
         Carport carport1 = new Carport(500, 500, roof, shed);
         df.orderCarport(carport1);
-
+        
         assertEquals(500, carport1.getWidth());
         assertEquals(470, carport1.getShed().getDepth());
-
+        
     }
+
+    /**
+     * Test of orderCarport method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testGetOrder() throws DataException
+    {
+        Order o = df.getOrder(31);
+        
+        assertEquals(1, o.getUser().getId());
+        assertEquals(Status.MODTAGET, o.getStatus());
+        assertEquals(5614.0, o.getSales_price(), 0.01);
+    }
+
+    /**
+     * Test of orderCarport method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testGetAllOrders() throws DataException
+    {
+        List<Order> orders = df.getOrders();
+        
+        assertEquals(29, orders.get(5).getCarport().getId());
+        assertEquals(Status.MODTAGET, orders.get(10).getStatus());
+        assertEquals(Paid.IKKE_BETALT, orders.get(20).getPaid());
+        
+        int expected = 35;
+        int result = df.getOrders().size();
+        
+        assertEquals(expected, result);
+    }
+
+    /**
+     * Test of orderCarport method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testGetAllOrdersByEmail_String() throws DataException
+    {
+        
+    }
+
 //
 //    /**
 //     * Test of orderShipped method, of class DataFacade.
