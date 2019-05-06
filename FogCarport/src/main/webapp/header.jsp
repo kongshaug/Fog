@@ -4,6 +4,7 @@
     Author     : sofieamalielandt
 --%>
 
+<%@page import="FunctionLayer.Enum.Role"%>
 <%@page import="FunctionLayer.HelpingClasses.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -53,7 +54,7 @@
                 font-size: 18px;
                 height: 80px;
             }
-            
+
             .menu li #img {
                 float: left;
                 display: inline-block;
@@ -64,16 +65,58 @@
                 display: -webkit-flex;
                 -webkit-align-items: center; 
             }
+
+            .menu li #user {
+                float: left;
+                display: inline-block;
+                text-align: center;
+                padding: 5px 5px;
+                text-decoration: none; 
+                position: static; width: 80px; 
+                display: -webkit-flex;
+                -webkit-align-items: center; 
+            }
+
+            .menu li #home {
+                float: left;
+                display: inline-block;
+                text-align: center;
+                padding: 5px 5px;
+                text-decoration: none; 
+                position: static; width: 80px; 
+                display: -webkit-flex;
+                -webkit-align-items: center; 
+            }
             .menu li #img img {
                 text-align: center;
                 padding: 10px 10px 5px 10px;
+                width: 60px;
+                height: 60px;
+                text-decoration: none;  
+                display: -webkit-flex;
+                -webkit-align-items: center; 
+            }
+
+            .menu li #user img {
+                text-align: center;
+                padding: 10px 10px 0px 10px;
+                width: 40px;
+                height: 40px;
+                text-decoration: none;  
+                display: -webkit-flex;
+                -webkit-align-items: center; 
+            }
+
+            .menu li #home img {
+                text-align: center;
+                padding: 10px 10px 10px 10px;
                 width: 50px;
                 height: 50px;
                 text-decoration: none;  
                 display: -webkit-flex;
                 -webkit-align-items: center; 
             }
-            
+
             .menu li button img:hover, .dropdown:hover {
                 opacity: 0.6;
             }
@@ -89,7 +132,7 @@
                 top: 11%;
             }
 
-            #index input, select{
+            #index select{
                 position: relative;  
                 display: inline-block;
                 align-items: center;
@@ -106,6 +149,8 @@
                 font-family: Avenir Next Condensed;
             }
 
+         
+
         </style>
     </head>
     <body>
@@ -117,19 +162,26 @@
                 <ul>
                     <li><button id="img" name="command" value="shop"><img src="images/logo.png"></button></li>
 
-                    
                     <%
                         if (user != null)
                         {
                             out.println("<li><button name=\"command\" value=\"logout\">Log ud</button></li>");
                             out.println("<li><p>" + user.getEmail() + "&nbsp;&nbsp</p></li>");
-                        }
-                        else
+
+                            if (user.getRole() == Role.CUSTOMER)
+                            {
+                                out.println(" <li><button id=\"user\" name=\"command\" value=\"shop\"><img src=\"images/user.png\"></button></li>");
+                            } else
+                            {
+                                out.println(" <li><button id=\"home\" name=\"command\" value=\"employee\"><img src=\"images/home.png\"></button></li>");
+
+                            }
+                        } else
                         {
                             out.println("<li><button id=\"log\" name=\"command\" value=\"logout\">Log ind</button></li>");
                         }
+
                     %>
-                    
                 </ul>
             </center>
         </form>

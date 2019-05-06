@@ -7,8 +7,11 @@ package PresentaionLayer;
 
 import DataLayer.DataException;
 import FunctionLayer.FunctionManager;
+import FunctionLayer.HelpingClasses.Order;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -16,8 +19,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class EmployeeCommand implements Command
 {
+
     private String target;
-    
+
     public EmployeeCommand(String target)
     {
         this.target = target;
@@ -26,7 +30,22 @@ public class EmployeeCommand implements Command
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        HttpSession session = request.getSession();
+        String search = request.getParameter("search");
+
+        if (search == null)
+        {
+            List<Order> orders = manager.getOrders();
+            session.setAttribute("orders", orders);
+
+        } else
+        {
+            List<Order> orders = manager.getOrdersByEmail(search);
+            session.setAttribute("orders", orders);
+
+        }
+
+        return target;
     }
-    
+
 }

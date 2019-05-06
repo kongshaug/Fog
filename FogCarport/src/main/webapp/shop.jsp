@@ -9,7 +9,7 @@
 <%@page import="java.util.List"%>
 <%@page import="javafx.scene.control.RadioButton"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file = "customerheader.jsp" %>
+<%@include file = "header.jsp" %>
 
 <center class="index" id="index"> 
     <div id="shop">

@@ -6,7 +6,7 @@
 
 <%@page import="FunctionLayer.HelpingClasses.Order"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file = "customerheader.jsp" %>
+<%@include file = "header.jsp" %>
 <form action="Fog" method="POST">
     <center id="index" class="index">
         <div>

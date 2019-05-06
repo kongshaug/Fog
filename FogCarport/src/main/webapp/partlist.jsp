@@ -8,7 +8,7 @@
 <%@page import="FunctionLayer.HelpingClasses.Part"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file = "customerheader.jsp" %>
+<%@include file = "header.jsp" %>
 <%        Carport carport = (Carport) session.getAttribute("carport");
 %>
 <center id="partlist" class="partlist">

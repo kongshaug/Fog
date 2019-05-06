@@ -131,4 +131,11 @@ public class Order
         this.sales_price = sales_price;
     }
 
+    @Override
+    public String toString()
+    {
+        return "Ordrer: " + order_id + ", ordrer dato: " + order_date + ", status: " + status + ", betalt: " + paid;
+    }
+    
+
 }
