@@ -149,7 +149,71 @@
                 font-family: Avenir Next Condensed;
             }
 
-         
+            .order button {
+                background-color: rgba(7, 72, 133, 1.0);
+                border:  none;
+                color: whitesmoke;
+                padding: 10px 24px; /* Some padding */
+                width: 100%; /* Set a width if needed */
+                display: block; /* Make the buttons appear below each other */
+                font-family: Avenir Next Condensed;
+                font-size: 16px;
+                align-items: center;
+                margin: 0;
+                border-radius: 10px;
+            }
+
+            .order button:not(:last-child) {
+                border-bottom: none; /* Prevent double borders */
+            }
+
+            /* Add a background color on hover */
+            .order button:hover {
+                background-color: whitesmoke;
+                color: rgba(7, 72, 133, 1.0);
+            }
+
+            .order div {
+                border-style: none;
+                border-radius: 10px;
+                padding: 40px 0px 40px 0px;
+                width: 55%;
+                background-color: rgba(7, 72, 133, 1.0);
+                text-align: center; 
+                color: whitesmoke;
+                font-family: Avenir Next Condensed;
+            }
+
+            .order input {
+                position: relative;  
+                display: inline-block;
+                align-items: center;
+                background-color: transparent;
+                border: solid;
+                border-color: whitesmoke;
+                text-decoration: none;
+                font-size: 16px;
+                text-align: center;
+                padding: 5px 5px 5px 5px;
+                border-radius: 10px; 
+                border-width: thin;
+                color: whitesmoke;
+                font-family: Avenir Next Condensed;
+                width: 50%;
+            }
+
+            .order input:hover {
+                background-color: whitesmoke;
+                color: rgba(7, 72, 133, 1.0);
+                border-radius: 10px;
+            }
+
+            .order ::-webkit-input-placeholder {
+                color: whitesmoke;
+                opacity: 0.8;
+
+            }
+
 
         </style>
     </head>
@@ -171,12 +235,12 @@
                             if (user.getRole() == Role.CUSTOMER)
                             {
                                 out.println(" <li><button id=\"user\" name=\"command\" value=\"customer\"><img src=\"images/user.png\"></button></li>");
-                            } else if(user.getRole() == Role.ADMIN)
+                            } else if (user.getRole() == Role.ADMIN)
                             {
                                 out.println(" <li><button id=\"home\" name=\"command\" value=\"employee\"><img src=\"images/home.png\"></button></li>");
                                 out.println(" <li><button id=\"home\" name=\"command\" value=\"employee\"><img src=\"images/tools.png\"></button></li>");
                                 out.println(" <li><button id=\"home\" name=\"command\" value=\"employee\"><img src=\"images/adduser.png\"></button></li>");
-                            }else if(user.getRole() == Role.EMPLOYEE)
+                            } else if (user.getRole() == Role.EMPLOYEE)
                             {
                                 out.println(" <li><button id=\"home\" name=\"command\" value=\"employee\"><img src=\"images/home.png\"></button></li>");
                                 out.println(" <li><button id=\"home\" name=\"command\" value=\"employee\"><img src=\"images/tools.png\"></button></li>");
