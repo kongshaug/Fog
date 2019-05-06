@@ -46,37 +46,35 @@
                 text-align: center;
                 background-color: rgba(7, 72, 133, 1.0);
                 text-decoration: none;
-                padding: 20px 20px;
-                position: static; width: 150px; 
+                position: static; width: 120px; 
                 color: whitesmoke;
                 border: none;
                 font-family: Avenir Next Condensed;
                 font-size: 18px;
                 height: 80px;
             }
-            .menu li a {
+            
+            .menu li #img {
                 float: left;
-                display: block;
-                color: whitesmoke;
+                display: inline-block;
                 text-align: center;
-                padding: 0px 16px;
-                text-decoration: none;  
-                height: 80px;
+                padding: 5px 0px;
+                text-decoration: none; 
+                position: static; width: 80px; 
                 display: -webkit-flex;
                 -webkit-align-items: center; 
             }
-            .menu li a img {
-                display: block;
+            .menu li #img img {
                 text-align: center;
-                padding: 0px 10px;
+                padding: 10px 10px 5px 10px;
                 width: 50px;
                 height: 50px;
                 text-decoration: none;  
                 display: -webkit-flex;
                 -webkit-align-items: center; 
             }
-
-            .menu li a:hover, li a img:hover, .dropdown:hover {
+            
+            .menu li button img:hover, .dropdown:hover {
                 opacity: 0.6;
             }
 
@@ -117,7 +115,7 @@
         <form action="Fog" method="post">
             <center class="menu">
                 <ul>
-                    <li> <a href="shop.jsp"><img src="images/logo.png"></a></li>
+                    <li><button id="img" name="command" value="shop"><img src="images/logo.png"></button></li>
 
                     
                     <%
@@ -128,7 +126,7 @@
                         }
                         else
                         {
-                            out.println("<li><button name=\"command\" value=\"logout\">Log ind</button></li>");
+                            out.println("<li><button id=\"log\" name=\"command\" value=\"logout\">Log ind</button></li>");
                         }
                     %>
                     

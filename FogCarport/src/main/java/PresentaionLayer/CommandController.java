@@ -23,7 +23,7 @@ public class CommandController
         Command shop = new ShopCommand("shop.jsp");
         commands.put("shop", new ShopCommand("shop.jsp"));
         commands.put("calculate", new PartlistCommand("partlist.jsp"));
-        commands.put("login", new LoginCommand("/Fog?command=shop", "employee.jsp"));
+        commands.put("login", new LoginCommand("/Fog?command=shop", "/Fog?command=employee"));
         commands.put("newuser", new NewUserCommand("newuser.jsp"));
         commands.put("adduser", new AddUserCommand("index.jsp", "newuser.jsp", "nouser.jsp"));
         commands.put("back", shop);
@@ -31,7 +31,7 @@ public class CommandController
         commands.put("regretorder", new RegretOrderCommand("shop.jsp"));
         commands.put("logout", new LogoutCommand("index.jsp"));
         commands.put("noUser", new noUserCommand("partlist.jsp"));
-//      commands.put("customerorder", new CustomerOrderCommand("customerorder.jsp"));
+        commands.put("employee", new EmployeeCommand("employee.jsp"));
 //      commands.put("employeeorder", new EmployeeOrderCommand("employeeorder.jsp"));
 //      commands.put("shipped", new ShippedCommand("employeeorder.jsp"));
 //      
