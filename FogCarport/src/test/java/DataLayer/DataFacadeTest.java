@@ -105,7 +105,7 @@ public class DataFacadeTest
     @Test
     public void testLogin() throws DataException
     {
-        String email = "malie@hotmail.dk";
+        String email = "customer@hotmail.dk";
         String password = "1234";
         User login = df.login(email, password);
         
@@ -123,11 +123,10 @@ public class DataFacadeTest
     {
         User user = df.getUser(1);
         
-        assertNotNull(user);
-        assertEquals("Amalie", user.getName());
-        assertEquals("malie@hotmail.dk", user.getEmail());
-        assertEquals("2700", user.getZipcode());
-        assertEquals(Role.EMPLOYEE, user.getRole());
+        assertEquals("cus", user.getName());
+        assertEquals("customer@hotmail.dk", user.getEmail());
+        assertEquals("2770", user.getZipcode());
+        assertEquals(Role.CUSTOMER, user.getRole());
     }
 
     /**
@@ -138,9 +137,8 @@ public class DataFacadeTest
     @Test
     public void testNegativeGetUser() throws DataException
     {
-        User user = df.getUser(3);
+        User user = df.getUser(1);
         
-        assertNotNull(user);
         assertNotEquals("benjamin", user.getName());
         assertNotEquals(Role.ADMIN, user.getRole());
     }
@@ -154,6 +152,11 @@ public class DataFacadeTest
     public void testGetUsers() throws DataException
     {
         List<User> users = df.getUsers();
+        
+        int expected = 5;
+        int result = df.getUsers().size();
+        
+        assertNotEquals(expected, result);
         assertNotNull(users);
     }
 
@@ -323,7 +326,6 @@ public class DataFacadeTest
     {
         List<Order> orders = df.getOrders();
         
-        //assertEquals(29, orders.get(5).getCarport().getId());
         assertEquals(Status.MODTAGET, orders.get(10).getStatus());
         assertEquals(Paid.IKKE_BETALT, orders.get(20).getPaid());
         
@@ -331,6 +333,26 @@ public class DataFacadeTest
         int result = df.getOrders().size();
         
         assertEquals(expected, result);
+    }
+
+    /**
+     * Test of orderCarport method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testNegativeGetAllOrders() throws DataException
+    {
+        List<Order> orders = df.getOrders();
+        
+        assertNotEquals(5000, orders.get(3).getSales_price());
+        assertNotEquals(Status.AFBESTILT, orders.get(10).getStatus());
+        assertNotEquals(Paid.BETALT, orders.get(20).getPaid());
+        
+        int expected = 25;
+        int result = df.getOrders().size();
+        
+        assertNotEquals(expected, result);
     }
 
     /**
