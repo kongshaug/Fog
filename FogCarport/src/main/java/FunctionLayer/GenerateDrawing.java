@@ -72,7 +72,7 @@ public class GenerateDrawing {
             return drawing;
     }
     
-       public String drawSlopeRoofFromTop(Carport carport)
+       public String drawRoofFromTop(Carport carport)
     {
             int hight = carport.getDepth();
             int width = carport.getWidth();
@@ -91,8 +91,7 @@ public class GenerateDrawing {
                     numberOfSpær = part.getQuantity();
                    //try to add: to safe time inside loop break;
                 }
-            }
-            
+            }  
         
             double count = 100;
             double count2 = 100;
@@ -122,6 +121,8 @@ public class GenerateDrawing {
 "        style=\"stroke:#000000; fill: #ff0000\"/>";
                
             }
+            
+            //first and last lægte
             
                    drawing += "<rect x =\""+(count2)+"\" y =\"100\" height=\""+(hight)+"\" width=\"5\"" +
 "        style=\"stroke:#000000; fill: #ff0000\"/>";
