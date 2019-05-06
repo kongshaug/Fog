@@ -29,7 +29,7 @@ import java.util.List;
 public class CarportMapper
 {
 
-    private DBConnector dbc;
+    private DBConnector dbc = new DBConnector();
 
     public CarportMapper(DBConnector dbc) throws DataException
     {
@@ -570,7 +570,7 @@ public class CarportMapper
 
             String query = "SELECT * FROM Fog.`order`"
                     + "WHERE `user_id` = (SELECT `user_id` FROM Fog.`user`"
-                    + "WHERE `email` = ?);";
+                    + "WHERE `email` = '?');";
 
             PreparedStatement statement = dbc.preparedStatement(query);
             statement.setString(1, email);
@@ -611,7 +611,6 @@ public class CarportMapper
         try
         {
             User user = null;
-
             String query = "SELECT * FROM Fog.`user`"
                     + "WHERE (`user_id` = ?);";
 

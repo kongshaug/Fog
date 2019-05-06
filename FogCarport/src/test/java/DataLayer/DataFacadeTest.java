@@ -121,12 +121,13 @@ public class DataFacadeTest
     @Test
     public void testGetUser() throws DataException
     {
-        User user = df.getUser(1);
+        User user = df.getUser(175);
         
-        assertEquals("cus", user.getName());
-        assertEquals("customer@hotmail.dk", user.getEmail());
-        assertEquals("2770", user.getZipcode());
-        assertEquals(Role.CUSTOMER, user.getRole());
+        assertNotNull(user);
+        assertEquals("emp", user.getName());
+        assertEquals("employee@hotmail.dk", user.getEmail());
+        assertEquals("2780", user.getZipcode());
+        assertEquals(Role.EMPLOYEE, user.getRole());
     }
 
     /**
@@ -137,8 +138,9 @@ public class DataFacadeTest
     @Test
     public void testNegativeGetUser() throws DataException
     {
-        User user = df.getUser(1);
+        User user = df.getUser(176);
         
+        assertNotNull(user);
         assertNotEquals("benjamin", user.getName());
         assertNotEquals(Role.ADMIN, user.getRole());
     }
@@ -363,7 +365,17 @@ public class DataFacadeTest
     @Test
     public void testGetAllOrdersByEmail_String() throws DataException
     {
+        String email = "employee@hotmail.dk";
         
+        List<Order> orders = df.getOrdersByEmail(email);
+        
+        assertEquals(Status.MODTAGET, orders.get(0).getStatus());
+        assertEquals(175, orders.get(0).getUser().getId());
+        
+        int expected = 1;
+        int result = df.getOrdersByEmail(email).size();
+        
+        assertEquals(expected, result);
     }
 
 //
