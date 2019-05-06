@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
  */
 public class ShopCommand implements Command
 {
+
     private String target;
 
     public ShopCommand(String target)
@@ -29,11 +30,15 @@ public class ShopCommand implements Command
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataLayer.DataException
     {
         HttpSession session = request.getSession();
-        List<RoofType> slopedRoofs = manager.getSlopedRoofs();
-        List<RoofType> flatRoofs = manager.getFlatRoofs();
+        
+        if (session.getAttribute("slopedroofs") == null || session.getAttribute("flatroofs") == null)
+        {
+            List<RoofType> slopedRoofs = manager.getSlopedRoofs();
+            List<RoofType> flatRoofs = manager.getFlatRoofs();
 
-        session.setAttribute("slopedroofs", slopedRoofs);
-        session.setAttribute("flatroofs", flatRoofs);
+            session.setAttribute("slopedroofs", slopedRoofs);
+            session.setAttribute("flatroofs", flatRoofs);
+        }
 
         return target;
     }

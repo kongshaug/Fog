@@ -119,13 +119,19 @@
                 <ul>
                     <li> <a href="shop.jsp"><img src="images/logo.png"></a></li>
 
-                    <li><button name="command" value="logout">Log ud</button></li>
-                    <li><p>
-                            <%
-                                out.println(user.getEmail() + "&nbsp;&nbsp");
-                            %>
-                        </p>
-                    </li>
+                    
+                    <%
+                        if (user != null)
+                        {
+                            out.println("<li><button name=\"command\" value=\"logout\">Log ud</button></li>");
+                            out.println("<li><p>" + user.getEmail() + "&nbsp;&nbsp</p></li>");
+                        }
+                        else
+                        {
+                            out.println("<li><button name=\"command\" value=\"logout\">Log ind</button></li>");
+                        }
+                    %>
+                    
                 </ul>
             </center>
         </form>

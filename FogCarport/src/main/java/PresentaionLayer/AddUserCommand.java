@@ -22,11 +22,13 @@ public class AddUserCommand implements Command
 
     private String target;
     private String error;
+    private String noUser;
 
-    public AddUserCommand(String target, String error)
+    public AddUserCommand(String target, String error, String noUser)
     {
         this.target = target;
         this.error = error;
+        this.noUser = noUser;
 
     }
 
@@ -49,7 +51,13 @@ public class AddUserCommand implements Command
 
         if (message.equals("Din bruger er nu oprettet"))
         {
-            return target;
+            if (session.getAttribute("carport") != null)
+            {
+                return noUser;
+            } else
+            {
+                return target;
+            }
         } else
         {
             return error;

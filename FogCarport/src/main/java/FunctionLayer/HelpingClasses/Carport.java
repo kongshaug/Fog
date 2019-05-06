@@ -95,7 +95,7 @@ public class Carport
         return parts;
     }
 
-    public void setParts(ArrayList parts)
+    public void setParts(ArrayList<Part> parts)
     {
         this.parts = parts;
     }
@@ -124,6 +124,7 @@ public class Carport
     public double getTotal_price()
     {
         total_price = calcTotalPrice();
+        total_price = Math.round(total_price*100.0)/100.0;
         return total_price;
     }
 
