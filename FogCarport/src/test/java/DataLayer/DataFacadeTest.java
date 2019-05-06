@@ -97,21 +97,21 @@ public class DataFacadeTest
         df.removeUser(newUser);
     }
 
-//    /**
-//     * Test of login method, of class DataFacade.
-//     *
-//     * @throws DataLayer.DataException
-//     */
-//    @Test
-//    public void testLogin() throws DataException
-//    {
-//        String email = "malie@hotmail.com";
-//        String password = "1234";
-//        User login = df.login(email, password);
-//
-//        assertEquals(email, login.getEmail());
-//        assertEquals(password, login.getPassword());
-//    }
+    /**
+     * Test of login method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testLogin() throws DataException
+    {
+        String email = "malie@hotmail.dk";
+        String password = "1234";
+        User login = df.login(email, password);
+
+        assertEquals(email, login.getEmail());
+        assertEquals(password, login.getPassword());
+    }
 
     /**
      * Test of getUser method, of class DataFacade.
@@ -314,23 +314,6 @@ public class DataFacadeTest
         assertEquals(470, carport1.getShed().getDepth());
 
     }
-//
-//    /**
-//     * Test of placeOrder method, of class DataFacade.
-//     *
-//     * @throws DataLayer.DataException
-//     */
-//    @Test
-//    public void testPlaceOrder() throws DataException
-//    {
-//        User user = df.getUser(3);
-//        Carport carport = df.getCarport(23);
-//        String shipped = null;
-//        double sales_price = df.getCarport(23).getTotal_price();
-//        
-//        Order o = new Order(35, user, carport, "2019-05-02 17:44:17", Status.MODTAGET, shipped, Paid.IKKE_BETALT, sales_price);
-//        df.placeOrder(o);
-//    }
 //
 //    /**
 //     * Test of orderShipped method, of class DataFacade.
