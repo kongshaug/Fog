@@ -52,6 +52,7 @@ public class PlaceOrderCommand implements Command
         if (message.equals("Tak for din forespørgsel. Vi vil behandle den hurtigst muligt"))
         {
             session.removeAttribute("carport");
+            session.removeAttribute("orders");
         }
 
         return target;

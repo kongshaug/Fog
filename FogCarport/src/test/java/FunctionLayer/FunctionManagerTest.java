@@ -70,20 +70,20 @@ public class FunctionManagerTest
 
     }
 
-    /**
-     * Test of login method, of class FunctionManager.
-     * @throws DataLayer.DataException
-     */
-    @Test
-    public void testLogin() throws DataException
-    {
-        String email = "benja_kongs@hotmail.com";
-        String password = "tun89tcv";
-        User result = fm.login(email, password);
-
-        assertEquals(password, result.getPassword());
-        assertEquals(email, result.getEmail());
-    }
+//    /**
+//     * Test of login method, of class FunctionManager.
+//     * @throws DataLayer.DataException
+//     */
+//    @Test
+//    public void testLogin() throws DataException
+//    {
+//        String email = "benja_kongs@hotmail.com";
+//        String password = "tun89tcv";
+//        User result = fm.login(email, password);
+//
+//        assertEquals(password, result.getPassword());
+//        assertEquals(email, result.getEmail());
+//    }
 
     /**
      * Test of newUser method, of class FunctionManager.
@@ -105,28 +105,28 @@ public class FunctionManagerTest
 
     }
 
-    /**
-     * Test of placeOrder method, of class FunctionManager.
-     * @throws DataLayer.DataException
-     */
-    @Test
-    public void testPlaceOrder() throws DataException
-    {
-        User user = new User(60, "testtiltest@em.dk", "1234", "benja", "teststreeet", "2200", "11111111", Role.CUSTOMER);
-        Material roof_materialOne = new Material(39, "B & C rygsten rød", "stk", "tag", 15.00);
-        Material roof_materialTwo = new Material(36, "B & C dobbelt -s rød", "stk", "tag", 15.00);
-        RoofType type = new RoofType(2, "Betontagsten - rød", "slope", roof_materialOne, roof_materialTwo);
-
-        Roof SlopeRoof = new Roof(15, type);
-        Shed shed = new Shed(200, 200);
-        Carport carport = new Carport(650, 650, SlopeRoof, shed);
-        Order order = new Order(user, carport);
-
-        String expResult = "Tak for din forespørgsel. Vi vil behandle den hurtigst muligt";
-
-        String result = fm.placeOrder(order);
-        assertEquals(expResult, result);
-    }
+//    /**
+//     * Test of placeOrder method, of class FunctionManager.
+//     * @throws DataLayer.DataException
+//     */
+//    @Test
+//    public void testPlaceOrder() throws DataException
+//    {
+//        User user = new User(60, "testtiltest@em.dk", "1234", "benja", "teststreeet", "2200", "11111111", Role.CUSTOMER);
+//        Material roof_materialOne = new Material(39, "B & C rygsten rød", "stk", "tag", 15.00);
+//        Material roof_materialTwo = new Material(36, "B & C dobbelt -s rød", "stk", "tag", 15.00);
+//        RoofType type = new RoofType(2, "Betontagsten - rød", "slope", roof_materialOne, roof_materialTwo);
+//
+//        Roof SlopeRoof = new Roof(15, type);
+//        Shed shed = new Shed(200, 200);
+//        Carport carport = new Carport(650, 650, SlopeRoof, shed);
+//        Order order = new Order(user, carport);
+//
+//        String expResult = "Tak for din forespørgsel. Vi vil behandle den hurtigst muligt";
+//
+//        String result = fm.placeOrder(order);
+//        assertEquals(expResult, result);
+//    }
 
     /**
      * Test of isShipped method, of class FunctionManager.

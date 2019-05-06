@@ -568,9 +568,7 @@ public class CarportMapper
 
             dbc.open();
 
-            String query = "SELECT * FROM Fog.`order`"
-                    + "WHERE `user_id` = (SELECT `user_id` FROM Fog.`user`"
-                    + "WHERE `email` = '?');";
+            String query = "SELECT * FROM Fog.`order` JOIN `user` ON (`order`.user_id = `user`.user_id) WHERE email = ?;";
 
             PreparedStatement statement = dbc.preparedStatement(query);
             statement.setString(1, email);
