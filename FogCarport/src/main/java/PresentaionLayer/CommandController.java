@@ -32,7 +32,7 @@ public class CommandController
         commands.put("logout", new LogoutCommand("index.jsp"));
         commands.put("noUser", new noUserCommand("partlist.jsp"));
         commands.put("employee", new EmployeeCommand("employee.jsp"));
-//      commands.put("employeeorder", new EmployeeOrderCommand("employeeorder.jsp"));
+        commands.put("customer", new CustomerCommand("customer.jsp"));
 //      commands.put("shipped", new ShippedCommand("employeeorder.jsp"));
 //      
     }

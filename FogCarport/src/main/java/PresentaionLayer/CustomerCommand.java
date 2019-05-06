@@ -7,6 +7,9 @@ package PresentaionLayer;
 
 import DataLayer.DataException;
 import FunctionLayer.FunctionManager;
+import FunctionLayer.HelpingClasses.Order;
+import FunctionLayer.HelpingClasses.User;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,12 +18,12 @@ import javax.servlet.http.HttpSession;
  *
  * @author sofieamalielandt
  */
-public class LogoutCommand implements Command
+public class CustomerCommand implements Command
 {
 
     private String target;
 
-    public LogoutCommand(String target)
+    public CustomerCommand(String target)
     {
         this.target = target;
     }
@@ -29,11 +32,14 @@ public class LogoutCommand implements Command
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
         HttpSession session = request.getSession();
-        session.removeAttribute("user");
-        session.removeAttribute("order");
-        session.removeAttribute("carport");
-        session.removeAttribute("orders");
-        
+        User user = (User) session.getAttribute("user");
+
+        if (session.getAttribute("orders") == null)
+        {
+            List<Order> orders = manager.getOrdersByEmail(user.getEmail());
+            session.setAttribute("orders", orders);
+        }
+
         return target;
     }
 
