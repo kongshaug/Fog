@@ -255,20 +255,6 @@ public class FunctionManager
             }
         }
     }
-// I don't think this is in use anymore, can be removed.
-    private Material getMaterial(int id) throws DataException
-    {
-        Material result = null;
-        List<Material> materials = db.getMaterials();
-        for (Material material : materials)
-        {
-            if (material.getId() == id)
-            {
-                result = material;
-            }
-        }
-        return result;
-    }
 
     private Map<Integer, Material> getMaterials() throws DataException
     {
@@ -317,17 +303,14 @@ public class FunctionManager
         return flatRoofs;
     }
 
- 
-
-     public RoofType getRoofTypeById(int typeId) throws DataException
+    public RoofType getRoofTypeById(int typeId) throws DataException
     {
         RoofType type = null;
-        
+
         return db.getRoof(typeId);
-   
-         
+
     }
-    
+
     public void calcRoof(Carport carport) throws DataException
     {
         if (carport.getRoof().getType().getRoof_class().equals("flat"))
@@ -337,6 +320,21 @@ public class FunctionManager
         {
             calcSlopeRoof(carport);
         }
+    }
+
+    public Order getOrder(int order_id) throws DataException
+    {
+        return db.getOrder(order_id);
+    }
+
+    public List<Order> getOrders() throws DataException
+    {
+        return db.getOrders();
+    }
+
+    public List<Order> getOrdersByEmail(String email) throws DataException
+    {
+        return db.getOrdersByEmail(email);
     }
 
 }

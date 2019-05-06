@@ -22,10 +22,12 @@ public class PlaceOrderCommand implements Command
 {
 
     private String target;
+    private String noUser;
 
-    public PlaceOrderCommand(String target)
+    public PlaceOrderCommand(String target, String noUser)
     {
         this.target = target;
+        this.noUser =  noUser;
     }
 
     @Override
@@ -35,6 +37,12 @@ public class PlaceOrderCommand implements Command
 
         User user = (User) session.getAttribute("user");
         Carport carport = (Carport) session.getAttribute("carport");
+        
+        if(user == null)
+        {
+            return noUser;
+        }
+        
         Order order = new Order(user, carport);
         session.setAttribute("order", order);
 

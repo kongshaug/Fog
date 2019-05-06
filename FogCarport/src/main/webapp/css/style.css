@@ -43,8 +43,8 @@ and open the template in the editor.
     position: static; width: auto; 
     display: inline-block;
     align-items: center;
-    background-color: transparent;
-    color: whitesmoke;
+    background-color: whitesmoke;
+    color: rgba(7, 72, 133, 1.0);
     border: solid;
     border-color: whitesmoke;
     border-width: thin;

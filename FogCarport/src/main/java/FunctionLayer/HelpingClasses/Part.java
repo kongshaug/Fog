@@ -82,16 +82,20 @@ public class Part
 
     private double calcTotalPrice()
     {
+        double price;
+        
         if (length == 0)
         {
-            return (material.getPrice() * quantity);
+            price = (material.getPrice() * quantity);
         } else
         {
             double length_meter = length;
             double Qua = quantity;
-
-            return ((Qua * length_meter) / 100.0) * material.getPrice();
+            price = ((Qua * length_meter) / 100.0) * material.getPrice();
         }
+        
+        price = Math.round(price * 100.0)/100.0;
+        return price;
     }
 
 }

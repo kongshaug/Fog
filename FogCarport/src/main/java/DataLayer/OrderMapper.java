@@ -5,11 +5,18 @@
  */
 package DataLayer;
 
+import FunctionLayer.Enum.Paid;
+import FunctionLayer.Enum.Role;
+import FunctionLayer.Enum.Status;
+import FunctionLayer.HelpingClasses.Carport;
 import FunctionLayer.HelpingClasses.Order;
+import FunctionLayer.HelpingClasses.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -19,10 +26,14 @@ public class OrderMapper
 {
 
     private DBConnector dbc;
+    private UserMapper um = null;
+    private CarportMapper cm = null;
 
-    public OrderMapper(DBConnector dbc)
+    public OrderMapper(DBConnector dbc) throws DataException
     {
         this.dbc = dbc;
+        um = new UserMapper(dbc);
+        cm = new CarportMapper(dbc);
     }
 
     public void placeOrder(Order order) throws DataException
@@ -134,4 +145,134 @@ public class OrderMapper
         }
     }
 
+    public Order getOrder(int order_id) throws DataException
+    {
+        try
+        {
+            Order order = null;
+
+            String query = "SELECT * FROM Fog.order"
+                    + "WHERE `order_id` = ?;";
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+            statement.setInt(1, order_id);
+
+            ResultSet rs = statement.executeQuery();
+            if (rs.next())
+            {
+                int id = rs.getInt("order_id");
+                int user_id = rs.getInt("user_id");
+                User user = um.getUser(user_id);
+                int carport_id = rs.getInt("carport_id");
+                Carport carport = cm.getCarport(carport_id);
+                String order_date = rs.getString("order_date");
+                String order_status = rs.getString("order_status");
+                String shipped = rs.getString("shipped");
+                String paid = rs.getString("paid");
+                double sales_price = rs.getDouble("sales_price");
+
+                Status s = Status.valueOf(order_status.toUpperCase());
+                Paid p = Paid.valueOf(paid.toUpperCase());
+
+                order = new Order(id, user, carport, order_date, s, shipped, p, sales_price);
+            }
+
+            dbc.close();
+
+            return order;
+
+        } catch (SQLException e)
+        {
+            throw new DataException(e.getMessage());
+        }
+    }
+
+    public List<Order> getOrders() throws DataException
+    {
+        try
+        {
+            List<Order> orders = new ArrayList<>();
+
+            dbc.open();
+
+            String query = "SELECT * FROM Fog.order;";
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next())
+            {
+                int id = rs.getInt("order_id");
+                int user_id = rs.getInt("user_id");
+                User user = um.getUser(user_id);
+                int carport_id = rs.getInt("carport_id");
+                Carport carport = cm.getCarport(carport_id);
+                String order_date = rs.getString("order_date");
+                String order_status = rs.getString("order_status");
+                String shipped = rs.getString("shipped");
+                String paid = rs.getString("paid");
+                double sales_price = rs.getDouble("sales_price");
+
+                Status s = Status.valueOf(order_status.toUpperCase());
+                Paid p = Paid.valueOf(paid.toUpperCase());
+
+                Order o = new Order(id, user, carport, order_date, s, shipped, p, sales_price);
+                orders.add(o);
+            }
+
+            dbc.close();
+            return orders;
+
+        } catch (SQLException e)
+        {
+            throw new DataException(e.getMessage());
+        }
+
+    }
+
+    public List<Order> getOrdersByEmail(String email) throws DataException
+    {
+        try
+        {
+            List<Order> orders = new ArrayList<>();
+
+            dbc.open();
+
+            String query = "SELECT * FROM Fog.order"
+                    + "WHERE user_id = (SELECT user_id FROM Fog.user"
+                    + "WHERE email = ?);";
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+            statement.setString(1, email);
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next())
+            {
+                int id = rs.getInt("order_id");
+                int user_id = rs.getInt("user_id");
+                User user = um.getUser(user_id);
+                int carport_id = rs.getInt("carport_id");
+                Carport carport = cm.getCarport(carport_id);
+                String order_date = rs.getString("order_date");
+                String order_status = rs.getString("order_status");
+                String shipped = rs.getString("shipped");
+                String paid = rs.getString("paid");
+                double sales_price = rs.getDouble("sales_price");
+
+                Status s = Status.valueOf(order_status.toUpperCase());
+                Paid p = Paid.valueOf(paid.toUpperCase());
+
+                Order o = new Order(id, user, carport, order_date, s, shipped, p, sales_price);
+                orders.add(o);
+            }
+
+            dbc.close();
+            return orders;
+
+        } catch (SQLException e)
+        {
+            throw new DataException(e.getMessage());
+        }
+
+    }
 }

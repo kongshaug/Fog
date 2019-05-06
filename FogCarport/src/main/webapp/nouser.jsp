@@ -1,7 +1,7 @@
 <%-- 
-    Document   : index
-    Created on : 01-05-2019, 10:15:36
-    Author     : aamandajuhl
+    Document   : nouser
+    Created on : 06-05-2019, 10:12:51
+    Author     : sofieamalielandt
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,10 +18,6 @@
         <br><br><br>
         <div>
             <img src="images/logo.png" width="30%"><br>
-            <form action="Fog" method="POST">
-                <button name="command" value="shop">Gå til shoppen</button>
-            </form>
-            <br>
             <%
                 String message = (String) request.getAttribute("message");
 
@@ -36,13 +32,13 @@
                 <input type="text" name="email" placeholder="Indtast e-mail" value="" minlength="6" required> <br><br>
                 Adgangskode<br>
                 <input type="password" name="password" placeholder="Indtast adgangskode" value="" minlength="4" required> <br><br>
-                <button name="command" value="login">Log ind</button>
+                <button name="command" value="noUser">Log ind</button>
             </form>
             <form action="Fog" method="POST">
                 <br><br><button name="command" value="newuser">Opret ny bruger</button>
             </form>
-
-
+            
+            
 
         </div>
     </center>
