@@ -322,4 +322,19 @@ public class FunctionManager
         }
     }
 
+    public Order getOrder(int order_id) throws DataException
+    {
+        return db.getOrder(order_id);
+    }
+
+    public List<Order> getOrders() throws DataException
+    {
+        return db.getOrders();
+    }
+
+    public List<Order> getOrdersByEmail(String email) throws DataException
+    {
+        return db.getOrdersByEmail(email);
+    }
+
 }

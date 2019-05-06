@@ -216,7 +216,7 @@ public class OrderMapper
                 Status s = Status.valueOf(order_status.toUpperCase());
                 Paid p = Paid.valueOf(paid.toUpperCase());
 
-                Order o = new Order(user_id, user, carport, order_date, s, shipped, p, sales_price);
+                Order o = new Order(id, user, carport, order_date, s, shipped, p, sales_price);
                 orders.add(o);
             }
 
@@ -228,34 +228,51 @@ public class OrderMapper
             throw new DataException(e.getMessage());
         }
 
-//    }
-//
-//    public List<Order> getOrdersByEmail(String email) throws DataException
-//    {
-//        try
-//        {
-//            List<Order> orders = new ArrayList<>();
-//
-//            dbc.open();
-//
-//            String query = "SELECT * FROM Fog.order"
-//                    + "INNER JOIN `user`"
-//                    + "ON `order`.user_id = `user`.user_id"
-//                    + "WHERE email = ?;";
-//
-//            PreparedStatement statement = dbc.preparedStatement(query);
-//            ResultSet rs = statement.executeQuery();
-//            
-//            
-//            
-//            
-//        } catch (SQLException e)
-//        {
-//            throw new DataException(e.getMessage());
-//        }
-//        
-//        
-//
-//    }
+    }
+
+    public List<Order> getOrdersByEmail(String email) throws DataException
+    {
+        try
+        {
+            List<Order> orders = new ArrayList<>();
+
+            dbc.open();
+
+            String query = "SELECT * FROM Fog.order"
+                    + "WHERE user_id = (SELECT user_id FROM Fog.user"
+                    + "WHERE email = ?);";
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+            statement.setString(1, email);
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next())
+            {
+                int id = rs.getInt("order_id");
+                int user_id = rs.getInt("user_id");
+                User user = um.getUser(user_id);
+                int carport_id = rs.getInt("carport_id");
+                Carport carport = cm.getCarport(carport_id);
+                String order_date = rs.getString("order_date");
+                String order_status = rs.getString("order_status");
+                String shipped = rs.getString("shipped");
+                String paid = rs.getString("paid");
+                double sales_price = rs.getDouble("sales_price");
+
+                Status s = Status.valueOf(order_status.toUpperCase());
+                Paid p = Paid.valueOf(paid.toUpperCase());
+
+                Order o = new Order(id, user, carport, order_date, s, shipped, p, sales_price);
+                orders.add(o);
+            }
+
+            dbc.close();
+            return orders;
+
+        } catch (SQLException e)
+        {
+            throw new DataException(e.getMessage());
+        }
+
     }
 }
