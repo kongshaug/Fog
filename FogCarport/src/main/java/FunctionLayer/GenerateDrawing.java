@@ -83,7 +83,7 @@ public class GenerateDrawing {
             {
                 if (7 == part.getId())
                 {
-                    numberOfSpær = part.getQuantity();
+                    numberOflægter = part.getQuantity();
                    //try to add: to safe time inside loop break;
                 }
                 else if (3 == part.getId())
@@ -144,11 +144,104 @@ public class GenerateDrawing {
             
             drawing += "<text x=\""+(width/2)+"\" y=\""+(hight + 140)+"\" fill=\"blue\">your carport is "+width+" cm wide</text>";
             
-             drawing += "<text  x=\""+(width + 110)+"\" y=\""+(hight /2 +100)+"\" fill=\"blue\"  >YYYyour carport is "+hight+" cm long</text>";
+             drawing += "<text  x=\""+(width + 110)+"\" y=\""+(hight /2 +100)+"\" fill=\"blue\"  >your carport is "+hight+" cm long</text>";
+             
+             if(carport.getShed() != null)
+                 
+             {
+             
+                 drawing += drawShed(carport);
+             
+             }
+             
+             drawing += drawflatFront(carport);
             
             drawing += "</svg>";
             
             return drawing;
+            
+            
+    }
+        public String drawShed(Carport carport)
+    {
+         int carportHight = carport.getDepth();
+            int carportWidth = carport.getWidth();
+            int shedHight = carport.getShed().getDepth();
+            int shedWidth = carport.getShed().getWidth();
+            int numberOfStolper = 6;
+            
+         
+             
+        String drawing = "";
+        
+        drawing += "<SVG viewBox=\"0 "+(400-carportWidth-shedWidth)+" "+(carportWidth-shedWidth+(shedWidth + 500))+" "+(shedHight+500)+"\" width= \"100%\" hight= \"50%\">";
+       drawing += "<rect x=\"0\" y =\"0\" height=\""+shedHight+"\" width=\""+shedWidth+"\"" +
+"        style=\"stroke:#000000; fill: #ffffff\"/>\n" ;
+        
+       drawing += "<rect x=\"0\" y =\"0\" height=\"10\" width=\"10\"" +
+"        style=\"stroke:#000000; fill: #ffffff\"/>\n" ;
+       
+       drawing += "<rect x=\"0\" y =\""+(shedHight-10)+"\" height=\"10\" width=\"10\"" +
+"        style=\"stroke:#000000; fill: #ffffff\"/>\n" ;
+       
+       drawing += "<rect x=\""+(shedWidth-10)+"\" y =\"0\" height=\"10\" width=\"10\"" +
+"        style=\"stroke:#000000; fill: #ffffff\"/>\n" ;
+       
+       drawing += "<rect x=\""+(shedWidth-10)+"\" y =\""+(shedHight-10)+"\" height=\"10\" width=\"10\"" +
+"        style=\"stroke:#000000; fill: #ffffff\"/>\n" ;
+       
+       drawing += "<rect x=\""+(shedWidth-10)+"\" y =\"30\" height=\"10\" width=\"10\"" +
+"        style=\"stroke:#000000; fill: #ffffff\"/>\n" ;
+       
+       drawing += "<rect x=\""+(shedWidth-10)+"\" y =\"85\" height=\"10\" width=\"10\"" +
+"        style=\"stroke:#000000; fill: #ffffff\"/>\n" ;
+       
+       drawing += "<rect x=\""+(shedWidth-5)+"\" y =\"40\" height=\"45\" width=\"5\"" +
+"        style=\"stroke:#000000; fill: #ffffff\"/>\n" ;
+       
+        drawing += "</svg>";
+        
+    return drawing;
     }
     
+          public String drawflatFront(Carport carport)
+    {
+        
+        // this method could be change to flat roof side by adding beams from side
+        
+         int hight = carport.getDepth();
+            int width = carport.getWidth();
+        
+            
+         
+             
+        String drawing = "";
+        
+       drawing += "<SVG viewBox=\"0 0 "+(width + 500)+" "+(hight+500)+"\" width= \"100%\" hight= \"50%\">";
+                    
+       drawing += "<rect x=\"0\" y =\"10\" height=\"200\" width=\"10\"" +
+            "style=\"stroke:#000000; fill: #ffffff\"/>\n" ;
+       drawing += "<rect x=\""+(width-10)+"\" y =\"10\" height=\"200\" width=\"10\"" +
+            "style=\"stroke:#000000; fill: #ffffff\"/>\n" ;
+       
+       //the line for the flat roof put inside if statment and check for sloap to check if the roof is sloped if it is change to that option
+        drawing += "<rect x=\"0\" y =\"0\" height=\"10\" width=\""+width+"\"" +
+            "style=\"stroke:#000000; fill: #ffffff\"/>\n" ;
+        
+        if (carport.getShed() != null)
+        {
+        int shedWidth = carport.getShed().getWidth();
+        
+        drawing += "<rect x=\"10\" y =\"10\" height=\"200\" width=\""+shedWidth+"\"" +
+            "style=\"stroke:#000000; fill: #ffffff\"/>\n" ;
+
+        }
+        
+
+       
+        drawing += "</svg>";
+        
+    return drawing;
+    }
+        
 }

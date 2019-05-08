@@ -30,6 +30,7 @@ public class FunctionManager
     private CalculateRoof cr;
     private CalculatePackages cp;
     private CalculateShed cs;
+    private GenerateDrawing GD;
     
 
     public FunctionManager() throws DataException
@@ -39,7 +40,7 @@ public class FunctionManager
         cr = new CalculateRoof(cp);
         cs = new CalculateShed(cp);
         c = new Calculate();
-        
+        GD = new GenerateDrawing();
     }
 
     public static FunctionManager getInstance() throws DataException
@@ -341,7 +342,7 @@ public class FunctionManager
 
     public String drawingOfRoof(Carport carport)
     {
-       GenerateDrawing GD = new GenerateDrawing();
+       
     return GD.drawRoofFromTop(carport);
         
     }

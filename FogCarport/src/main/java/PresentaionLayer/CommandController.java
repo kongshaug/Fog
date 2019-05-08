@@ -33,6 +33,7 @@ public class CommandController
         commands.put("noUser", new noUserCommand("partlist.jsp"));
         commands.put("employee", new EmployeeCommand("employee.jsp"));
         commands.put("customer", new CustomerCommand("customer.jsp"));
+        commands.put("drawing", new DrawingCommand("drawing.jsp"));
 //      commands.put("shipped", new ShippedCommand("employeeorder.jsp"));
 //      
     }

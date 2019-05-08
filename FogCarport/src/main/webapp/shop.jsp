@@ -80,7 +80,7 @@
         Dybde afskur:&nbsp;&nbsp;<input type="number" pattern="[0-2000]*" name="shedWidth" value="210" min="210" max="770">
     </div>
     <br>
-    <div><button name="command" value="calculate">Beregn carport</button></div>
+    <div><button name="command" value="drawing">Beregn carport</button></div>
 
     <br><br>
     <script>
