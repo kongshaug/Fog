@@ -72,7 +72,7 @@ public class Order
 
     public String getShipped()
     {
-        if(shipped == null)
+        if (shipped == null)
         {
             return "Ordren er endnu ikke afsendt";
         } else
@@ -89,6 +89,16 @@ public class Order
     public double getSales_price()
     {
         return sales_price;
+    }
+
+    public double getProfit()
+    {
+        double profit = ((sales_price - carport.getTotal_price()) / carport.getTotal_price()) * 100;
+        
+        profit = Math.round(profit * 100.0)/100.0;
+        
+        return profit;
+    
     }
 
     public void setOrder_id(int order_id)
@@ -136,6 +146,5 @@ public class Order
     {
         return "Ordrer: " + order_id + ", ordrer dato: " + order_date + ", status: " + status + ", betalt: " + paid;
     }
-    
 
 }

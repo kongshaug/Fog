@@ -31,7 +31,6 @@ public class FunctionManager
     private CalculatePackages cp;
     private CalculateShed cs;
     private GenerateDrawing GD;
-    
 
     public FunctionManager() throws DataException
     {
@@ -342,9 +341,12 @@ public class FunctionManager
 
     public String drawingOfRoof(Carport carport)
     {
-       
-    return GD.drawRoofFromTop(carport);
-        
+        return GD.drawRoofFromTop(carport);
     }
     
+    public void updateSalesPrice(int order_id, double salesprice) throws DataException
+    {
+        db.updateSalesPrice(order_id, salesprice);
+    }
+
 }

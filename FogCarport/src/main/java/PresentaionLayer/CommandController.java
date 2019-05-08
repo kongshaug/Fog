@@ -22,7 +22,7 @@ public class CommandController
     {
         Command shop = new ShopCommand("shop.jsp");
         commands.put("shop", new ShopCommand("shop.jsp"));
-        commands.put("calculate", new PartlistCommand("partlist.jsp"));
+        commands.put("calculate", new PartlistCommand("partlist.jsp")); //skal laves om
         commands.put("login", new LoginCommand("/Fog?command=shop", "/Fog?command=employee"));
         commands.put("newuser", new NewUserCommand("newuser.jsp"));
         commands.put("adduser", new AddUserCommand("index.jsp", "newuser.jsp", "nouser.jsp"));
@@ -30,12 +30,13 @@ public class CommandController
         commands.put("placeorder", new PlaceOrderCommand("placeorder.jsp", "nouser.jsp"));
         commands.put("regretorder", new RegretOrderCommand("shop.jsp"));
         commands.put("logout", new LogoutCommand("index.jsp"));
-        commands.put("noUser", new noUserCommand("partlist.jsp"));
+        commands.put("noUser", new noUserCommand("partlist.jsp")); // skal laves om
         commands.put("employee", new EmployeeCommand("employee.jsp"));
         commands.put("customer", new CustomerCommand("customer.jsp"));
-        commands.put("drawing", new DrawingCommand("drawing.jsp"));
-//      commands.put("shipped", new ShippedCommand("employeeorder.jsp"));
-//      
+        commands.put("drawing", new DrawingCommand("drawing.jsp")); // skal laves om 
+        commands.put("employeeorder", new EmployeeOrderCommand("employeeorder.jsp"));
+        commands.put("profit", new ProfitCommand("employeeorder.jsp"));
+        commands.put("viewpartlist", new ViewPartlistCommand("partlist.jsp"));
     }
 
     public static synchronized Command from(String path)

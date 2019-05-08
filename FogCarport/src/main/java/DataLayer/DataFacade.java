@@ -125,5 +125,10 @@ public class DataFacade
     {
         return cm.getOrdersByEmail(email);
     }
+    
+    public void updateSalesPrice(int order_id, double salesprice) throws DataException
+    {
+        cm.updateSalesPrice(order_id, salesprice);
+    }
 
 }

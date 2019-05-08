@@ -4,12 +4,14 @@
     Author     : aamandajuhl
 --%>
 
+<%@page import="FunctionLayer.HelpingClasses.Order"%>
 <%@page import="FunctionLayer.HelpingClasses.Carport"%>
 <%@page import="FunctionLayer.HelpingClasses.Part"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file = "header.jsp" %>
-<%        Carport carport = (Carport) session.getAttribute("carport");
+<%        Order order = (Order) session.getAttribute("order");
+          Carport carport = order.getCarport();
 %>
 <center id="partlist" class="partlist">
 <div>
@@ -203,11 +205,10 @@
                 }
             %>
         </table>
-        <h1>Carportens købspris: <%=carport.getTotal_price()%> kr. </h1>
+        <br>
+        <button name="command" value="employeeorder">Gå tilbage</button>
+        <input type="hidden" id="order_id" name="selected" value="<%=order.getOrder_id()%>">
 
-        <button name="command" value="placeorder">Send forespørgsel</button>
-        &nbsp;&nbsp;
-        <button name="command" value="regretorder">Annuller forespørgsel</button>
 </div>
 </center>
 </form>

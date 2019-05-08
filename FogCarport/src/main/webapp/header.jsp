@@ -238,12 +238,12 @@
                             } else if (user.getRole() == Role.ADMIN)
                             {
                                 out.println(" <li><button id=\"home\" name=\"command\" value=\"employee\"><img src=\"images/home.png\"></button></li>");
-                                out.println(" <li><button id=\"home\" name=\"command\" value=\"employee\"><img src=\"images/tools.png\"></button></li>");
-                                out.println(" <li><button id=\"home\" name=\"command\" value=\"employee\"><img src=\"images/adduser.png\"></button></li>");
+                                out.println(" <li><button id=\"user\" name=\"command\" value=\"employee\"><img src=\"images/tools.png\"></button></li>");
+                                out.println(" <li><button id=\"user\" name=\"command\" value=\"employee\"><img src=\"images/adduser.png\"></button></li>");
                             } else if (user.getRole() == Role.EMPLOYEE)
                             {
                                 out.println(" <li><button id=\"home\" name=\"command\" value=\"employee\"><img src=\"images/home.png\"></button></li>");
-                                out.println(" <li><button id=\"home\" name=\"command\" value=\"employee\"><img src=\"images/tools.png\"></button></li>");
+                                out.println(" <li><button id=\"user\" name=\"command\" value=\"employee\"><img src=\"images/tools.png\"></button></li>");
                             }
                         } else
                         {
