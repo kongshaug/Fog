@@ -8,7 +8,6 @@ package PresentaionLayer;
 import DataLayer.DataException;
 import FunctionLayer.FunctionManager;
 import FunctionLayer.HelpingClasses.Order;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,12 +16,11 @@ import javax.servlet.http.HttpSession;
  *
  * @author sofieamalielandt
  */
-public class EmployeeCommand implements Command
+public class ProfitCommand implements Command
 {
-
     private String target;
-
-    public EmployeeCommand(String target)
+    
+    public ProfitCommand(String target)
     {
         this.target = target;
     }
@@ -31,21 +29,20 @@ public class EmployeeCommand implements Command
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
         HttpSession session = request.getSession();
-        String search = request.getParameter("search");
-
-        if (search == null || search.isEmpty())
+        Order order = (Order) session.getAttribute("order");
+        double salesprice = Double.parseDouble(request.getParameter("salesprice"));
+        
+        if(salesprice >= (order.getCarport().getTotal_price() * 1.10))
         {
-            List<Order> orders = manager.getOrders();
-            session.setAttribute("orders", orders);
-
-        } else
-        {
-            List<Order> orders = manager.getOrdersByEmail(search);
-            session.setAttribute("orders", orders);
-
+            order.setSales_price(salesprice);
         }
-
+        else{
+            String errormessage = "Der skal minimum være en profit på 10%";
+            request.setAttribute("pricemessage", errormessage);
+        }
+        
+        
         return target;
     }
-
+    
 }

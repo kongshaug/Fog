@@ -14,7 +14,8 @@
 <center class="index" id="index"> 
     <div id="shop">
         <img src="images/logo.png" width="30%"><br>
-        <%            String errormessage = (String) request.getAttribute("errormessage");
+        <%            
+            String errormessage = (String) request.getAttribute("errormessage");
             if (errormessage != null)
             {
         %>

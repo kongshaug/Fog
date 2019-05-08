@@ -16,14 +16,22 @@
             <input type="text" name="search" placeholder="Søg e-mail" value=""> 
             <br><br><button name="command" value="employee">Søg</button><br><br>
 
-            <%                
+            <%               
                 List<Order> orders = (List<Order>) session.getAttribute("orders");
                 for (Order o : orders)
-                { 
-                    out.println("<button name=\"command\" value=\"employeeorder\"" + o.getOrder_id() + "\">" + o + "</button>");
+                {
+                    out.println("<button name=\"command\" value=\"employeeorder\" onclick=\"setId("+ o.getOrder_id() + ")\">" + o + "</button>");
                 }
             %>
+            <input type="hidden" id="order_id" name="selected" value="">
         </div>
+
+        <script>
+            function setId(Id) {
+                document.getElementById('order_id').value = Id;
+            }
+        </script>
+
     </center>
 </form>
 </html>
