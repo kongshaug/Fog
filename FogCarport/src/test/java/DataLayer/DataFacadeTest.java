@@ -121,7 +121,7 @@ public class DataFacadeTest
     @Test
     public void testGetUser() throws DataException
     {
-        User user = df.getUser(175);
+        User user = df.getUser(221);
         
         assertNotNull(user);
         assertEquals("emp", user.getName());
@@ -138,7 +138,7 @@ public class DataFacadeTest
     @Test
     public void testNegativeGetUser() throws DataException
     {
-        User user = df.getUser(176);
+        User user = df.getUser(222);
         
         assertNotNull(user);
         assertNotEquals("benjamin", user.getName());
@@ -301,82 +301,48 @@ public class DataFacadeTest
         assertEquals(500, carport1.getWidth());
         assertEquals(470, carport1.getShed().getDepth());
         
+        //test placeOrder
+        User user = df.getUser(222);
+        Order order = new Order(user, carport);
+        
+        df.placeOrder(order);
+        Order o = df.getOrder(order.getOrder_id());
+        
+        assertEquals(Status.MODTAGET, o.getStatus());
+        assertEquals(0, o.getSales_price(), 0.01);
+        assertEquals(Paid.IKKE_BETALT, o.getPaid());
+        assertEquals(222, o.getUser().getId());  
     }
 
-//    /**
-//     * Test of orderCarport method, of class DataFacade.
-//     *
-//     * @throws DataLayer.DataException
-//     */
-//    @Test
-//    public void testGetOrder() throws DataException
-//    {
-//        Order o = df.getOrder(31);
-//        
-//        assertEquals(1, o.getUser().getId());
-//        assertEquals(Status.MODTAGET, o.getStatus());
-//        assertEquals(5614.0, o.getSales_price(), 0.01);
-//    }
-//
-//    /**
-//     * Test of orderCarport method, of class DataFacade.
-//     *
-//     * @throws DataLayer.DataException
-//     */
-//    @Test
-//    public void testGetAllOrders() throws DataException
-//    {
-//        List<Order> orders = df.getOrders();
-//        
-//        assertEquals(Status.MODTAGET, orders.get(10).getStatus());
-//        assertEquals(Paid.IKKE_BETALT, orders.get(20).getPaid());
-//        
-//        int expected = 36;
-//        int result = df.getOrders().size();
-//        
-//        assertEquals(expected, result);
-//    }
-//
-//    /**
-//     * Test of orderCarport method, of class DataFacade.
-//     *
-//     * @throws DataLayer.DataException
-//     */
-//    @Test
-//    public void testNegativeGetAllOrders() throws DataException
-//    {
-//        List<Order> orders = df.getOrders();
-//        
-//        assertNotEquals(5000, orders.get(3).getSales_price());
-//        assertNotEquals(Status.AFBESTILT, orders.get(10).getStatus());
-//        assertNotEquals(Paid.BETALT, orders.get(20).getPaid());
-//        
-//        int expected = 25;
-//        int result = df.getOrders().size();
-//        
-//        assertNotEquals(expected, result);
-//    }
-//
-//    /**
-//     * Test of orderCarport method, of class DataFacade.
-//     *
-//     * @throws DataLayer.DataException
-//     */
-//    @Test
-//    public void testGetAllOrdersByEmail_String() throws DataException
-//    {
-//        String email = "employee@hotmail.dk";
-//        
-//        List<Order> orders = df.getOrdersByEmail(email);
-//        
-//        assertEquals(Status.MODTAGET, orders.get(0).getStatus());
-//        assertEquals(175, orders.get(0).getUser().getId());
-//        
-//        int expected = 1;
-//        int result = df.getOrdersByEmail(email).size();
-//        
-//        assertEquals(expected, result);
-//    }
+    /**
+     * Test of getAllOrders method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testGetAllOrders() throws DataException
+    {
+        List<Order> orders = df.getOrders();
+        
+        assertEquals(Status.MODTAGET, orders.get(0).getStatus());
+        assertEquals(Paid.IKKE_BETALT, orders.get(0).getPaid());
+        
+        assertNotNull(df.getOrders().size());
+
+    }
+
+    /**
+     * Test of getAllOrdersByEmail method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testGetAllOrdersByEmail_String() throws DataException
+    {
+        String email = "employee@hotmail.dk";
+        assertNotNull(df.getOrdersByEmail(email).size());
+
+    }
 
 //
 //    /**
