@@ -8,13 +8,11 @@ package FunctionLayer;
 import DataLayer.DataException;
 import FunctionLayer.Enum.Role;
 import FunctionLayer.HelpingClasses.Carport;
-import FunctionLayer.HelpingClasses.Order;
 import FunctionLayer.HelpingClasses.RoofType;
 import FunctionLayer.HelpingClasses.User;
 import FunctionLayer.HelpingClasses.Material;
 import FunctionLayer.HelpingClasses.Roof;
 import FunctionLayer.HelpingClasses.Shed;
-import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -70,21 +68,6 @@ public class FunctionManagerTest
 
     }
 
-//    /**
-//     * Test of login method, of class FunctionManager.
-//     * @throws DataLayer.DataException
-//     */
-//    @Test
-//    public void testLogin() throws DataException
-//    {
-//        String email = "benja_kongs@hotmail.com";
-//        String password = "tun89tcv";
-//        User result = fm.login(email, password);
-//
-//        assertEquals(password, result.getPassword());
-//        assertEquals(email, result.getEmail());
-//    }
-
     /**
      * Test of newUser method, of class FunctionManager.
      * @throws DataLayer.DataException
@@ -104,29 +87,23 @@ public class FunctionManagerTest
         fm.removeUser(user);
 
     }
+    
+     /**
+     * Test of newUser method, of class FunctionManager.
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testNegativeNewUser() throws DataException
+    {
+        String email = "customer@hotmail.dk";
+        String password = "1234";
 
-//    /**
-//     * Test of placeOrder method, of class FunctionManager.
-//     * @throws DataLayer.DataException
-//     */
-//    @Test
-//    public void testPlaceOrder() throws DataException
-//    {
-//        User user = new User(60, "testtiltest@em.dk", "1234", "benja", "teststreeet", "2200", "11111111", Role.CUSTOMER);
-//        Material roof_materialOne = new Material(39, "B & C rygsten rød", "stk", "tag", 15.00);
-//        Material roof_materialTwo = new Material(36, "B & C dobbelt -s rød", "stk", "tag", 15.00);
-//        RoofType type = new RoofType(2, "Betontagsten - rød", "slope", roof_materialOne, roof_materialTwo);
-//
-//        Roof SlopeRoof = new Roof(15, type);
-//        Shed shed = new Shed(200, 200);
-//        Carport carport = new Carport(650, 650, SlopeRoof, shed);
-//        Order order = new Order(user, carport);
-//
-//        String expResult = "Tak for din forespørgsel. Vi vil behandle den hurtigst muligt";
-//
-//        String result = fm.placeOrder(order);
-//        assertEquals(expResult, result);
-//    }
+        User user = new User(email, password, "testname", "teststreeet", "2200", "11111111", Role.CUSTOMER);
+
+        String expResult = "Email er allerede i brug";
+        String result = fm.newUser(user);
+        assertEquals(expResult, result);
+    }
 
     /**
      * Test of isShipped method, of class FunctionManager.
@@ -194,8 +171,6 @@ public class FunctionManagerTest
     @Test
     public void testCalcShed() throws DataException
     {
-        System.out.println("calcShed");
-
         Material roof_materialOne = new Material(39, "B & C rygsten rød", "stk", "tag", 15.00);
         Material roof_materialTwo = new Material(36, "B & C dobbelt -s rød", "stk", "tag", 15.00);
         RoofType type = new RoofType(2, "Betontagsten - rød", "slope", roof_materialOne, roof_materialTwo);
