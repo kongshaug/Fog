@@ -14,6 +14,8 @@
 %>
 
 <%=roofDrawing%>
+
+<%-- 
 <center id="partlist" class="partlist">
 <div>
     <form action="Fog" method="POST">
@@ -206,6 +208,8 @@
                 }
             %>
         </table>
+
+--%>
         <h1>Carportens købspris: <%=carport.getTotal_price()%> kr. </h1>
 
         <button name="command" value="placeorder">Send forespørgsel</button>

@@ -70,14 +70,24 @@ public class GenerateDrawing {
         int width = carport.getWidth();
         int numberOfSpær = 0;
         int numberOflægter = 0;
+        boolean isSlope = carport.getRoof().getSlope() != 0;
 
         for (Part part : carport.getRoof().getParts()) {
-            if (7 == part.getId()) {
+            if (!isSlope && 7 == part.getId()) {
                 numberOflægter = part.getQuantity();
-                //try to add: to safe time inside loop break;
-            } else if (3 == part.getId()) {
-                numberOfSpær = part.getQuantity();
-                //try to add: to safe time inside loop break;
+               
+                //this is for flat roof, what is used for not flat roof?
+            } else if (!isSlope && 3 == part.getId()) {
+                numberOfSpær = part.getQuantity(); 
+            }
+         
+            else if (isSlope && 3 == part.getId() && part.getDescription().equals("Midterstykker til spær")) {
+                numberOflægter = part.getQuantity();
+              
+            }
+             else if (isSlope && 7 == part.getId()) {
+                numberOfSpær += part.getQuantity();
+              
             }
         }
 
@@ -95,14 +105,14 @@ public class GenerateDrawing {
                 + "        style=\"stroke:#000000; fill: #fff000\"/>";
 
             //first and last spær
-        drawing += "<rect x =\"100\" y =\"" + 100 + "\" height=\"" + (15) + "\" width=\"" + (width) + "\""
+        drawing += "<rect x =\"100\" y =\"" + 100 + "\" height=\"" + (5) + "\" width=\"" + (width) + "\""
                 + "        style=\"stroke:#000000; fill: #f00000\"/>";
 
-        drawing += "<rect x =\"100\" y =\"" + (hight + 100 - 15) + "\" height=\"" + (15) + "\" width=\"" + (width) + "\""
+        drawing += "<rect x =\"100\" y =\"" + (hight + 100 - 15) + "\" height=\"" + (5) + "\" width=\"" + (width) + "\""
                 + "        style=\"stroke:#000000; fill: #f00000\"/>";
         for (int i = 1; i <= numberOfSpær - 2; i++) {
             count += ((hight) / (numberOfSpær - 1));
-            drawing += "<rect x =\"100\" y =\"" + (count) + "\" height=\"" + (15) + "\" width=\"" + (width) + "\""
+            drawing += "<rect x =\"100\" y =\"" + (count) + "\" height=\"" + (5) + "\" width=\"" + (width) + "\""
                     + "        style=\"stroke:#000000; fill: #ff0000\"/>";
 
         }
@@ -190,8 +200,10 @@ public class GenerateDrawing {
         int width = carport.getWidth();
 
         String drawing = "";
+        
+        
 
-        drawing += "<SVG viewBox=\"0 0 " + (width + 500) + " " + (hight + 500) + "\" width= \"100%\" hight= \"50%\">";
+        drawing += "<SVG viewBox=\"-100 -800 " + (width + 500) + " " + (hight + 500) + "\" width= \"100%\" hight= \"50%\">";
 
         drawing += "<rect x=\"0\" y =\"10\" height=\"200\" width=\"10\""
                 + "style=\"stroke:#000000; fill: #ffffff\"/>\n";
@@ -224,42 +236,93 @@ public class GenerateDrawing {
         for (Part part : carport.getParts()) {
             if (part.getId() == 2) {
                 numberOfPoles = part.getQuantity() / 2;
+                if(part.getQuantity() % 2 != 0)
+                {
+                numberOfPoles++;
+                break;
+                }
             }
 
         }
 
         String drawing = "";
 
-        drawing += "<SVG viewBox=\"0 -400 " + (width + 500) + " " + (hight + 500) + "\" width= \"100%\" hight= \"50%\">";
+        drawing += "<SVG viewBox=\"0 -1100 " + (width + 500) + " " + (hight + 500) + "\" width= \"100%\" hight= \"50%\">";
+        
+
 
         drawing += "<rect x=\"0\" y =\"10\" height=\"200\" width=\"10\""
                 + "style=\"stroke:#000000; fill: #ffffff\"/>\n";
-        drawing += "<rect x=\"" + (width - 10) + "\" y =\"10\" height=\"200\" width=\"10\""
+        
+      
+        
+        drawing += "<rect x=\"" + (hight - 10) + "\" y =\"10\" height=\"200\" width=\"10\""
                 + "style=\"stroke:#000000; fill: #ffffff\"/>\n";
         
         
         if (carport.getShed() != null) {
-            int shedWidth = carport.getShed().getWidth();
+            int shedDeapth = carport.getShed().getDepth();
+            
 
-            drawing += "<rect x=\"10\" y =\"10\" height=\"200\" width=\"" + shedWidth + "\""
+            drawing += "<rect x=\"10\" y =\"10\" height=\"200\" width=\"" + shedDeapth + "\""
                     + "style=\"stroke:#000000; fill: #ffffff\"/>\n";
+              
+            drawing += "<rect x=\""+(10+(shedDeapth/2))+"\" y =\"40\" height=\"170\" width=\"80\""
+                + "style=\"stroke:#000000; fill: #ffffff\"/>\n";
+            
+             drawing +=  "<circle cx=\""+(80+(shedDeapth/2))+"\" cy=\"120\" r=\"5\"/>";
 
         }
-
-        for (int i = 2; i< numberOfPoles - 2 ; i++) {
-            drawing += "<rect x=\"" + (hight / i) + "\" y =\"10\" height=\"200\" width=\"10\""
+        int count = 0;
+        for (int i = 1; i<= numberOfPoles -2 ; i++) {
+           count += (hight / (numberOfPoles-1));
+            drawing += "<rect x=\"" + (count) + "\" y =\"10\" height=\"200\" width=\"10\""
                     + "style=\"stroke:#000000; fill: #ffffff\"/>\n";
 
         }
 
         //the line for the flat roof put inside if statment and check for sloap to check if the roof is sloped if it is change to that option
-        drawing += "<rect x=\"0\" y =\"0\" height=\"10\" width=\"" + width + "\""
+        drawing += "<rect x=\"0\" y =\"0\" height=\"10\" width=\"" + hight + "\""
                 + "style=\"stroke:#000000; fill: #ffffff\"/>\n";
 
+        
+         if (carport.getRoof().getSlope() != 0)
+            
+        {
+        drawing += drawSlopeRoofSide(carport);
 
-        drawing += "</svg>";
-
-        return drawing;
+        
+    
     }
+         drawing += "</svg>";
+         return drawing;
+    }
+    
+     public String drawSlopeRoofSide(Carport carport) {
+
+        int hight = carport.getDepth();
+        int width = carport.getWidth();
+        int roofHight = 0;
+                
+                      for (Part part : carport.getRoof().getParts()) {
+            if (3 == part.getId() && part.getDescription().equals("Midterstykker til spær")) {
+                roofHight = part.getLength();
+            }
+                      }
+       
+       String drawing = "";
+        
+      drawing += "<SVG viewBox=\"0 0 " + (roofHight) + " " + (width) + "\" width= \"100%\" hight= \"50%\">";
+
+        drawing += "<rect x=\""+(0)+"\" y =\"0\" height=\""+(roofHight)+"\" width=\""+hight+"\""
+                + "style=\"stroke:#000000; fill: #ffffff\"/>\n";
+        
+        
+        
+       
+         drawing += "</svg>";
+       
+       return drawing; 
+     }
 
 }
