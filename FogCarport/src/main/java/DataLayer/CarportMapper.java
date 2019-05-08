@@ -640,4 +640,27 @@ public class CarportMapper
         }
 
     }
+
+    public void updateSalesPrice(int order_id, double salesprice) throws DataException
+    {
+        try
+        {
+            dbc.open();
+
+            String query = "UPDATE Fog.order"
+                    + "SET sales_price = ?"
+                    + "WHERE order_id = ?;";
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+            statement.setDouble(1, salesprice);
+            statement.setInt(2, order_id);
+
+            statement.executeUpdate();
+
+        } catch (SQLException e)
+        {
+            throw new DataException(e.getMessage());
+        }
+
+    }
 }
