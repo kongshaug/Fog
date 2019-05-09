@@ -241,8 +241,9 @@ public class UserMapper
 
     }
 
-    public void updateUser(User user) throws SQLException
+    public void updateUser(User user) throws DataException
     {
+        try{
         dbc.open();
 
         String query = "UPDATE `Fog`.`user`"
@@ -268,6 +269,10 @@ public class UserMapper
         statement.executeUpdate();
 
         dbc.close();
+        } catch(SQLException e)
+        {
+            throw new DataException(e.getMessage());
+        }
     }
 
     public void removeUser(User user) throws DataException

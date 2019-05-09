@@ -166,33 +166,8 @@ public class DataFacade
         return um.getEmployeeByEmail(email);
     }
 
-    public String updateUser(User user, String email, String name, String address, String zipcode, String phone) throws DataException, SQLException
+    public void updateUser(User user) throws DataException
     {
-        boolean notInUse = true;
-        
-        List<User> users = um.getUsers();
-        
-        for (User u : users)
-        {
-            if (u.getEmail().equals(email))
-            {
-                if (u.getId() != user.getId())
-                {
-                    notInUse = false;
-                }
-            }
-        }
-        
-        if(notInUse)
-        {
-            user.setEmail(email);
-            user.setName(name);
-            
-            um.updateUser(user);
-            
-        }
-        
-        
-        return "";
+        um.updateUser(user);
     }
 }
