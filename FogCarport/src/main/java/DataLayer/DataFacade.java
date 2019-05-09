@@ -10,7 +10,9 @@ import FunctionLayer.Enum.Status;
 import FunctionLayer.HelpingClasses.Carport;
 import FunctionLayer.HelpingClasses.Material;
 import FunctionLayer.HelpingClasses.Order;
+import FunctionLayer.HelpingClasses.Roof;
 import FunctionLayer.HelpingClasses.RoofType;
+import FunctionLayer.HelpingClasses.Shed;
 import FunctionLayer.HelpingClasses.User;
 import java.util.List;
 
@@ -137,9 +139,24 @@ public class DataFacade
     {
         cm.updateStatusAndPaid(order_id, status, paid);
     }
-    
+
     public void removeOrder(Order order) throws DataException
     {
         cm.removeOrder(order);
+    }
+
+    public void removeCarport(Carport carport) throws DataException
+    {
+        cm.removeCarport(carport);
+    }
+
+    public void removeShed(Shed shed) throws DataException
+    {
+        cm.removeShed(shed);
+    }
+
+    public void removeRoof(Roof roof) throws DataException
+    {
+        cm.removeRoof(roof);
     }
 }

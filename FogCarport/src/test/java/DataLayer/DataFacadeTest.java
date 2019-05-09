@@ -294,8 +294,9 @@ public class DataFacadeTest
         assertEquals("Betontagsten - rød", carport.getRoof().getType().getName());
 
         //test orderCarport with roof and shed
+        Roof roof1 = new Roof(0, rooftype.get(0));
         Shed shed = new Shed(470, 470);
-        Carport carport1 = new Carport(500, 500, roof, shed);
+        Carport carport1 = new Carport(500, 500, roof1, shed);
         df.orderCarport(carport1);
         
         assertEquals(500, carport1.getWidth());
@@ -303,30 +304,54 @@ public class DataFacadeTest
         
         //test placeOrder
         User user = df.getUser(2);
+        User user1 = df.getUser(3);
         Order order = new Order(user, carport);
+        Order order1 = new Order(user1, carport1);
         
         df.placeOrder(order);
-        
-        //test removeOrder
+        df.placeOrder(order1);
+       
+        //test removeOrder, test removeCarport
         df.removeOrder(order);
+        df.removeOrder(order1);
+        df.removeCarport(carport);
+        df.removeCarport(carport1);
+        df.removeRoof(roof);
+        df.removeRoof(roof1);
+        df.removeShed(shed);
     }
-//
-//    /**
-//     * Test of getAllOrders method, of class DataFacade.
-//     *
-//     * @throws DataLayer.DataException
-//     */
-//    @Test
-//    public void testGetAllOrders() throws DataException
-//    {
-//        List<Order> orders = df.getOrders();
-//        
-//        assertEquals(Status.MODTAGET, orders.get(0).getStatus());
-//        assertEquals(Paid.BETALT, orders.get(0).getPaid());
-//        
-//        assertNotNull(df.getOrders().size());
-//
-//    }
+    
+    /**
+     * Test of getOrder method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testGetOrder() throws DataException
+    {
+        Order o = df.getOrder(1);
+        assertEquals(2, o.getUser().getId());
+        assertEquals(Status.MODTAGET, o.getStatus());
+        assertEquals(24501.0, o.getSales_price(), 0.01);
+        
+    }
+
+    /**
+     * Test of getAllOrders method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testGetAllOrders() throws DataException
+    {
+        List<Order> orders = df.getOrders();
+        
+        assertEquals(Status.MODTAGET, orders.get(0).getStatus());
+        assertEquals(Paid.IKKE_BETALT, orders.get(0).getPaid());
+        
+        assertNotNull(df.getOrders().size());
+
+    }
 
     /**
      * Test of getAllOrdersByEmail method, of class DataFacade.

@@ -289,6 +289,72 @@ public class CarportMapper
             throw new DataException(ex.getMessage());
         }
     }
+    
+    public void removeRoof(Roof roof) throws DataException
+    {
+        try
+        {
+            dbc.open();
+            String query = "DELETE FROM Fog.`roof`"
+                    + "WHERE `roof_id` = ?;";
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+
+            int roof_id = roof.getId();
+            statement.setInt(1, roof_id);
+            statement.executeUpdate();
+            
+            dbc.close();
+
+        } catch (SQLException ex)
+        {
+            throw new DataException(ex.getMessage());
+        }
+    }
+    
+     public void removeShed(Shed shed) throws DataException
+    {
+        try
+        {
+            dbc.open();
+            String query = "DELETE FROM Fog.`shed`"
+                    + "WHERE `shed_id` = ?;";
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+
+            int shed_id = shed.getId();
+            statement.setInt(1, shed_id);
+            statement.executeUpdate();
+            
+            dbc.close();
+
+        } catch (SQLException ex)
+        {
+            throw new DataException(ex.getMessage());
+        }
+    }
+     
+      public void removeCarport(Carport carport) throws DataException
+    {
+        try
+        {
+            dbc.open();
+            String query = "DELETE FROM Fog.`carport`"
+                    + "WHERE `carport_id` = ?;";
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+
+            int carport_id = carport.getId();
+            statement.setInt(1, carport_id);
+            statement.executeUpdate();
+            
+            dbc.close();
+
+        } catch (SQLException ex)
+        {
+            throw new DataException(ex.getMessage());
+        }
+    }
 
     private RoofType getRoofType(int roof_type_id) throws DataException
     {
