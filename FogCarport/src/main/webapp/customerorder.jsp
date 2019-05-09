@@ -15,7 +15,7 @@
         <div id="shop">
             <%                Order order = (Order) session.getAttribute("order");
                 out.println("Ordrer: " + order.getOrder_id() + ", Bestilt: " + order.getOrder_date() + "<br>");
-
+                out.println("Afsendt: " + order.getShipped() + "<br>");
             %>
             <br>
             <select name="status" disabled="disabled">

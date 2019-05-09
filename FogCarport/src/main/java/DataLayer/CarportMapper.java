@@ -444,7 +444,7 @@ public class CarportMapper
             String query = "UPDATE Fog.`order`"
                     + "SET shipped = CURRENT_TIMESTAMP WHERE (order_id = ?);";
 
-            String query2 = "SELECT shipped FROM order"
+            String query2 = "SELECT `shipped` FROM Fog.`order`"
                     + " WHERE (`order_id` = ?);";
 
             String shipped = "";

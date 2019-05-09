@@ -20,6 +20,12 @@
                 out.println("Kundenummer: " + order.getUser().getId() + " - Navn: " + order.getUser().getName() + "<br>");
                 out.println("E-mail: " + order.getUser().getEmail() + " - Telefon: " + order.getUser().getPhone() + "<br>");
                 out.println("Adresse: " + order.getUser().getAddress() + ", " + order.getUser().getZipcode() + "<br>");
+                out.println("Afsendt: " + order.getShipped() + "<br>");
+                
+                if (order.getShipped().equals("Ordren er endnu ikke afsendt"))
+                {
+                    out.println("<br><button name=\"command\" value=\"shipped\">Afsend ordren</button><br>");
+                }
             %>
             <br>
             <select name="status">
@@ -215,7 +221,7 @@
             } else
             {
                 out.println("Bredde af skur:&nbsp;&nbsp;<input type=\"number\" pattern=\"[0-2000]*\" name=\"shedDepth\" id=\"shedDepth\" value=\"210\"min=\"210\" max=\"720\" disabled=\"disabled\">&nbsp;&nbsp;");
-                out.println("Dybde afskur:&nbsp;&nbsp;<input type=\"number\" pattern=\"[0-2000]*\" name=\"shedWidth\" id=\"shedWidth\" value=\"210\" min=\"210\" max=\"770\" disabled=\"disabled\">");
+                out.println("Dybde af skur:&nbsp;&nbsp;<input type=\"number\" pattern=\"[0-2000]*\" name=\"shedWidth\" id=\"shedWidth\" value=\"210\" min=\"210\" max=\"770\" disabled=\"disabled\">");
             }
 
         %>

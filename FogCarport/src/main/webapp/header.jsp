@@ -149,6 +149,12 @@
                 font-family: Avenir Next Condensed;
             }
 
+            #index select:hover {
+                background-color: whitesmoke;
+                color: rgba(7, 72, 133, 1.0);
+                border-radius: 10px;
+            }
+
             .order button {
                 background-color: rgba(7, 72, 133, 1.0);
                 border:  none;

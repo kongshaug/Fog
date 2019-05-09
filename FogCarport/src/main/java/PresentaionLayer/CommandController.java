@@ -36,6 +36,7 @@ public class CommandController
         commands.put("drawing", new DrawingCommand("drawing.jsp")); // skal laves om 
         commands.put("employeeorder", new EmployeeOrderCommand("employeeorder.jsp"));
         commands.put("customerorder", new CustomerOrderCommand("customerorder.jsp"));
+        commands.put("shipped", new ShippedCommand("employeeorder.jsp"));
         commands.put("profit", new ProfitCommand("employeeorder.jsp"));
         commands.put("update", new UpdateCommand("employeeorder.jsp"));
         commands.put("viewpartlist", new ViewPartlistCommand("partlist.jsp"));
