@@ -679,9 +679,9 @@ public class CarportMapper
             String order_status = status.toString();
             String order_paid = paid.toString();
 
-            statement.setInt(1, order_id);
-            statement.setString(2, order_status);
-            statement.setString(3, order_paid);
+            statement.setString(1, order_status);
+            statement.setString(2, order_paid);
+            statement.setInt(3, order_id);
             statement.executeUpdate();
 
         } catch (SQLException e)
