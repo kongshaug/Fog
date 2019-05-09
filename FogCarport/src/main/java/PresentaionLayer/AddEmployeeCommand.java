@@ -36,7 +36,14 @@ public class AddEmployeeCommand implements Command
         String zipcode = request.getParameter("zipcode");
         String phone = request.getParameter("phone");
         String choosen_role = request.getParameter("role");
-        Role role = Role.valueOf(choosen_role);
+        Role role;
+        if (choosen_role.equals("Administrator"))
+        {
+            role = Role.ADMIN;
+        } else
+        {
+            role = Role.EMPLOYEE;
+        }
 
         User user = new User(email, "1234", name, address, zipcode, phone, role);
         String message = manager.newUser(user);
