@@ -37,8 +37,8 @@
             <br><br>
             <select name="role">
                 <%                    
-                    out.println("<option> " + Role.EMPLOYEE + "</option>");
-                    out.println("<option> " + Role.ADMIN + "</option>");
+                    out.println("<option>Medarbejder</option>");
+                    out.println("<option>Administrator</option>");
 
                 %>
             </select>
