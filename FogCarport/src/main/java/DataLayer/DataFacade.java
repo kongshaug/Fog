@@ -5,10 +5,14 @@
  */
 package DataLayer;
 
+import FunctionLayer.Enum.Paid;
+import FunctionLayer.Enum.Status;
 import FunctionLayer.HelpingClasses.Carport;
 import FunctionLayer.HelpingClasses.Material;
 import FunctionLayer.HelpingClasses.Order;
+import FunctionLayer.HelpingClasses.Roof;
 import FunctionLayer.HelpingClasses.RoofType;
+import FunctionLayer.HelpingClasses.Shed;
 import FunctionLayer.HelpingClasses.User;
 import java.util.List;
 
@@ -115,20 +119,44 @@ public class DataFacade
     {
         return cm.getOrder(order_id);
     }
-    
+
     public List<Order> getOrders() throws DataException
     {
         return cm.getOrders();
     }
-    
+
     public List<Order> getOrdersByEmail(String email) throws DataException
     {
         return cm.getOrdersByEmail(email);
     }
-    
+
     public void updateSalesPrice(int order_id, double salesprice) throws DataException
     {
         cm.updateSalesPrice(order_id, salesprice);
     }
 
+    public void updateStatusAndPaid(int order_id, Status status, Paid paid) throws DataException
+    {
+        cm.updateStatusAndPaid(order_id, status, paid);
+    }
+
+    public void removeOrder(Order order) throws DataException
+    {
+        cm.removeOrder(order);
+    }
+
+    public void removeCarport(Carport carport) throws DataException
+    {
+        cm.removeCarport(carport);
+    }
+
+    public void removeShed(Shed shed) throws DataException
+    {
+        cm.removeShed(shed);
+    }
+
+    public void removeRoof(Roof roof) throws DataException
+    {
+        cm.removeRoof(roof);
+    }
 }

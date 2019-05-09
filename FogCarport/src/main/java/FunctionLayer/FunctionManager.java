@@ -7,6 +7,8 @@ package FunctionLayer;
 
 import DataLayer.DataException;
 import DataLayer.DataFacade;
+import FunctionLayer.Enum.Paid;
+import FunctionLayer.Enum.Status;
 import FunctionLayer.HelpingClasses.Carport;
 import FunctionLayer.HelpingClasses.Material;
 import FunctionLayer.HelpingClasses.Order;
@@ -343,10 +345,14 @@ public class FunctionManager
     {
         return GD.drawRoofFromTop(carport);
     }
-    
+
     public void updateSalesPrice(int order_id, double salesprice) throws DataException
     {
         db.updateSalesPrice(order_id, salesprice);
     }
 
+    public void updateStatusAndPaid(int order_id, Status status, Paid paid) throws DataException
+    {
+        db.updateStatusAndPaid(order_id, status, paid);
+    }
 }

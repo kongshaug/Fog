@@ -210,11 +210,10 @@
         </table>
 
 --%>
-        <h1>Carportens købspris: <%=carport.getTotal_price()%> kr. </h1>
-
-        <button name="command" value="placeorder">Send forespørgsel</button>
-        &nbsp;&nbsp;
-        <button name="command" value="regretorder">Annuller forespørgsel</button>
+<h1>Carportens købspris: <%=carport.getTotal_price()%> kr. </h1>
+    <button name="command" value="placeorder">Send forespørgsel</button>
+    &nbsp;&nbsp;
+    <button name="command" value="regretorder">Annuller forespørgsel</button>
 </div>
 </center>
 </form>

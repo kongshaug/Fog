@@ -4,6 +4,7 @@
     Author     : sofieamalielandt
 --%>
 
+<%@page import="FunctionLayer.Enum.Paid"%>
 <%@page import="FunctionLayer.Enum.Status"%>
 <%@page import="java.util.List"%>
 <%@page import="FunctionLayer.HelpingClasses.RoofType"%>
@@ -19,12 +20,17 @@
                 out.println("Kundenummer: " + order.getUser().getId() + " - Navn: " + order.getUser().getName() + "<br>");
                 out.println("E-mail: " + order.getUser().getEmail() + " - Telefon: " + order.getUser().getPhone() + "<br>");
                 out.println("Adresse: " + order.getUser().getAddress() + ", " + order.getUser().getZipcode() + "<br>");
-
+                out.println("Afsendt: " + order.getShipped() + "<br>");
+                
+                if (order.getShipped().equals("Ordren er endnu ikke afsendt"))
+                {
+                    out.println("<br><button name=\"command\" value=\"shipped\">Afsend ordren</button><br>");
+                }
             %>
             <br>
-
             <select name="status">
-                <%                    for (Status s : Status.values())
+                <%
+                    for (Status s : Status.values())
                     {
                         if (s.equals(order.getStatus()))
                         {
@@ -37,13 +43,31 @@
                     }
                 %>
             </select>
+            &nbsp;&nbsp;
+            <select name="paid">
+                <%
+                    for (Paid p : Paid.values())
+                    {
+                        if (p.equals(order.getPaid()))
+                        {
+                            out.println("<option selected> " + p + "</option>");
+                        } else
+                        {
 
+                            out.println("<option> " + p + "</option>");
+                        }
+                    }
+                %>
+            </select> 
+            <br><br><button name="command" value="update">Opdater</button>
         </div>
     </form>
     <br>
+
     <form action="Fog" method="POST">
         <div>
-            <%                String pricemessage = (String) request.getAttribute("pricemessage");
+            <%
+                String pricemessage = (String) request.getAttribute("pricemessage");
                 if (pricemessage != null)
                 {
             %>
@@ -56,10 +80,21 @@
             <br>
             Profit:&nbsp;&nbsp;<%=order.getProfit()%>%
             <br><br>
-            <button  name="command" value="profit">Beregn prisen</button>
+            <button  name="command" value="profit" onclick="setUpdate(0)">Beregn profit</button>
+            &nbsp;&nbsp;
+            <button  name="command" value="profit" onclick="setUpdate(1)">Fastlæg prisen</button>
+
+            <input type="hidden" id="update" name="update" value="0">
+            <script>
+                function setUpdate(update) {
+                    document.getElementById('update').value = update;
+                    alert(document.getElementById("update").value);
+                }
+            </script>
         </div>
     </form>
     <br>
+
     <form action="Fog" method="POST">
         <div id="shop">
             <%
@@ -71,9 +106,9 @@
             <%            }
             %>
             <br>
-            Bredde:&nbsp;&nbsp;<input type="number" pattern="[0-2000]*" name="width" value="<%=order.getCarport().getWidth()%>" min="240" max="750" disabled="disabled">
+            Bredde:&nbsp;&nbsp;<input type="number" pattern="[0-2000]*" name="width" id="width" value="<%=order.getCarport().getWidth()%>" min="240" max="750" disabled="disabled">
             &nbsp;&nbsp;
-            Dybde:&nbsp;&nbsp;<input type="number" pattern="[0-2000]*" name="depth" value="<%=order.getCarport().getDepth()%>" min="240" max="800" disabled="disabled">
+            Dybde:&nbsp;&nbsp;<input type="number" pattern="[0-2000]*" name="depth" id="depth" value="<%=order.getCarport().getDepth()%>" min="240" max="800" disabled="disabled">
             <br><br>
             <% if (order.getCarport().getRoof().getSlope() == 0)
                 {
@@ -90,16 +125,22 @@
             %>
             <br><br>
             <select name="type" id="type" disabled="disabled">
-                <option selected value="<%=order.getCarport().getRoof().getType().getId()%>"><%=order.getCarport().getRoof().getType().getName()%></option>           
-                <%
-                    List<RoofType> slopedroofs = (List<RoofType>) session.getAttribute("slopedroofs");
+                <%                      List<RoofType> slopedroofs = (List<RoofType>) session.getAttribute("slopedroofs");
                     List<RoofType> flatroofs = (List<RoofType>) session.getAttribute("flatroofs");
 
                     if (order.getCarport().getRoof().getSlope() == 0)
                     {
                         for (RoofType ro : flatroofs)
                         {
-                            out.println("<option value=\"" + ro.getId() + "\" class=\"fladt\">" + ro.getName() + "</option>");
+                            if (order.getCarport().getRoof().getType().getId() == ro.getId())
+                            {
+                                out.println("<option selected value=\"" + ro.getId() + "\" class=\"fladt\">" + ro.getName() + "</option>");
+
+                            } else
+                            {
+
+                                out.println("<option value=\"" + ro.getId() + "\" class=\"fladt\">" + ro.getName() + "</option>");
+                            }
                         }
 
                         for (RoofType r : slopedroofs)
@@ -115,7 +156,13 @@
 
                         for (RoofType r : slopedroofs)
                         {
-                            out.println("<option value=\"" + r.getId() + "\" class=\"rejsning\">" + r.getName() + "</option>");
+                            if (order.getCarport().getRoof().getType().getId() == r.getId())
+                            {
+                                out.println("<option selected value=\"" + r.getId() + "\" class=\"rejsning\">" + r.getName() + "</option>");
+                            } else
+                            {
+                                out.println("<option value=\"" + r.getId() + "\" class=\"rejsning\">" + r.getName() + "</option>");
+                            }
                         }
                     }
 
@@ -136,7 +183,7 @@
                 %>
             </select>
             <br><br>
-            <select name="shed" onchange="show(this.value)" disabled="disabled">
+            <select name="shed" id="shed" onchange="show(this.value)" disabled="disabled">
                 <%
                     if (order.getCarport().getShed() == null)
                     {
@@ -151,6 +198,7 @@
                 %>
             </select>       
         </div>
+
         <br>
         <%        if (order.getCarport().getShed() == null)
             {
@@ -168,17 +216,19 @@
         <%
             if (order.getCarport().getShed() != null)
             {
-                out.println("Bredde af skur:&nbsp;&nbsp;<input type=\"number\" pattern=\"[0-2000]*\" name=\"shedDepth\" value=\"" + order.getCarport().getShed().getDepth() + "\"min=\"210\" max=\"720\" disabled=\"disabled\">&nbsp;&nbsp;");
-                out.println("Dybde afskur:&nbsp;&nbsp;<input type=\"number\" pattern=\"[0-2000]*\" name=\"shedWidth\" value=\"" + order.getCarport().getShed().getWidth() + "\" min=\"210\" max=\"770\" disabled=\"disabled\">");
+                out.println("Bredde af skur:&nbsp;&nbsp;<input type=\"number\" pattern=\"[0-2000]*\" name=\"shedDepth\" id=\"shedDepth\" value=\"" + order.getCarport().getShed().getDepth() + "\"min=\"210\" max=\"720\" disabled=\"disabled\">&nbsp;&nbsp;");
+                out.println("Dybde afskur:&nbsp;&nbsp;<input type=\"number\" pattern=\"[0-2000]*\" name=\"shedWidth\" id=\"shedWidth\" value=\"" + order.getCarport().getShed().getWidth() + "\" min=\"210\" max=\"770\" disabled=\"disabled\">");
             } else
             {
-                out.println("Bredde af skur:&nbsp;&nbsp;<input type=\"number\" pattern=\"[0-2000]*\" name=\"shedDepth\" value=\"210\"min=\"210\" max=\"720\" disabled=\"disabled\">&nbsp;&nbsp;");
-                out.println("Dybde afskur:&nbsp;&nbsp;<input type=\"number\" pattern=\"[0-2000]*\" name=\"shedWidth\" value=\"210\" min=\"210\" max=\"770\" disabled=\"disabled\">");
+                out.println("Bredde af skur:&nbsp;&nbsp;<input type=\"number\" pattern=\"[0-2000]*\" name=\"shedDepth\" id=\"shedDepth\" value=\"210\"min=\"210\" max=\"720\" disabled=\"disabled\">&nbsp;&nbsp;");
+                out.println("Dybde af skur:&nbsp;&nbsp;<input type=\"number\" pattern=\"[0-2000]*\" name=\"shedWidth\" id=\"shedWidth\" value=\"210\" min=\"210\" max=\"770\" disabled=\"disabled\">");
             }
 
         %>
         </div>
+
         <br>
+
         <div>
             <button name="command" value="viewpartlist">Se stykliste</button>
         </div>
@@ -242,6 +292,7 @@
                 document.getElementById("skur").setAttribute("hidden", "true");
             }
         }
+
 
     </script>
 </center>

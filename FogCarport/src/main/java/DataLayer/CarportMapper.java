@@ -289,6 +289,72 @@ public class CarportMapper
             throw new DataException(ex.getMessage());
         }
     }
+    
+    public void removeRoof(Roof roof) throws DataException
+    {
+        try
+        {
+            dbc.open();
+            String query = "DELETE FROM Fog.`roof`"
+                    + "WHERE `roof_id` = ?;";
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+
+            int roof_id = roof.getId();
+            statement.setInt(1, roof_id);
+            statement.executeUpdate();
+            
+            dbc.close();
+
+        } catch (SQLException ex)
+        {
+            throw new DataException(ex.getMessage());
+        }
+    }
+    
+     public void removeShed(Shed shed) throws DataException
+    {
+        try
+        {
+            dbc.open();
+            String query = "DELETE FROM Fog.`shed`"
+                    + "WHERE `shed_id` = ?;";
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+
+            int shed_id = shed.getId();
+            statement.setInt(1, shed_id);
+            statement.executeUpdate();
+            
+            dbc.close();
+
+        } catch (SQLException ex)
+        {
+            throw new DataException(ex.getMessage());
+        }
+    }
+     
+      public void removeCarport(Carport carport) throws DataException
+    {
+        try
+        {
+            dbc.open();
+            String query = "DELETE FROM Fog.`carport`"
+                    + "WHERE `carport_id` = ?;";
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+
+            int carport_id = carport.getId();
+            statement.setInt(1, carport_id);
+            statement.executeUpdate();
+            
+            dbc.close();
+
+        } catch (SQLException ex)
+        {
+            throw new DataException(ex.getMessage());
+        }
+    }
 
     private RoofType getRoofType(int roof_type_id) throws DataException
     {
@@ -444,7 +510,7 @@ public class CarportMapper
             String query = "UPDATE Fog.`order`"
                     + "SET shipped = CURRENT_TIMESTAMP WHERE (order_id = ?);";
 
-            String query2 = "SELECT shipped FROM order"
+            String query2 = "SELECT `shipped` FROM Fog.`order`"
                     + " WHERE (`order_id` = ?);";
 
             String shipped = "";
@@ -647,15 +713,67 @@ public class CarportMapper
         {
             dbc.open();
 
-            String query = "UPDATE Fog.order"
-                    + "SET sales_price = ?"
-                    + "WHERE order_id = ?;";
+            String query = "UPDATE Fog.`order`"
+                    + "SET `sales_price` = ?"
+                    + "WHERE `order_id` = ?;";
 
             PreparedStatement statement = dbc.preparedStatement(query);
             statement.setDouble(1, salesprice);
             statement.setInt(2, order_id);
 
             statement.executeUpdate();
+
+        } catch (SQLException e)
+        {
+            throw new DataException(e.getMessage());
+        }
+
+    }
+
+    public void updateStatusAndPaid(int order_id, Status status, Paid paid) throws DataException
+    {
+        try
+        {
+            dbc.open();
+
+            String query = "UPDATE Fog.`order`"
+                    + "SET `order_status` = ?, `paid` = ?"
+                    + "WHERE `order_id` = ?;";
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+
+            String order_status = status.toString();
+            String order_paid = paid.toString();
+
+            statement.setString(1, order_status);
+            statement.setString(2, order_paid);
+            statement.setInt(3, order_id);
+            statement.executeUpdate();
+            
+            dbc.close();
+
+        } catch (SQLException e)
+        {
+            throw new DataException(e.getMessage());
+        }
+    }
+    
+    public void removeOrder(Order order) throws DataException
+    {
+        try
+        {
+            dbc.open();
+
+            String query = "DELETE FROM Fog.`order`"
+                    + "WHERE order_id = ?;";
+
+            int order_id = order.getOrder_id();
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+            statement.setInt(1, order_id);
+            statement.executeUpdate();
+
+            dbc.close();
 
         } catch (SQLException e)
         {

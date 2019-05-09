@@ -6,6 +6,8 @@
 package PresentaionLayer;
 
 import DataLayer.DataException;
+import FunctionLayer.Enum.Paid;
+import FunctionLayer.Enum.Status;
 import FunctionLayer.FunctionManager;
 import FunctionLayer.HelpingClasses.Order;
 import javax.servlet.http.HttpServletRequest;
@@ -14,14 +16,14 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author sofieamalielandt
+ * @author aamandajuhl
  */
-public class ProfitCommand implements Command
+public class UpdateCommand implements Command
 {
 
     private String target;
 
-    public ProfitCommand(String target)
+    public UpdateCommand(String target)
     {
         this.target = target;
     }
@@ -29,25 +31,22 @@ public class ProfitCommand implements Command
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
+
         HttpSession session = request.getSession();
         Order order = (Order) session.getAttribute("order");
-        double salesprice = Double.parseDouble(request.getParameter("salesprice"));
-        int update = Integer.parseInt(request.getParameter("update"));
+        String change_paid = request.getParameter("paid");
+        String change_status = request.getParameter("status");
+        
+        Paid paid = Paid.valueOf(change_paid);
+        Status status = Status.valueOf(change_status);
+        
+        order.setPaid(paid);
+        order.setStatus(status);
+        manager.updateStatusAndPaid(order.getOrder_id(), status, paid);
 
-        if (salesprice >= (order.getCarport().getTotal_price() * 1.10))
-        {
-            order.setSales_price(salesprice);
-            if (update == 1)
-            {
-                manager.updateSalesPrice(order.getOrder_id(), order.getSales_price());
-            }
-        } else
-        {
-            String errormessage = "Der skal minimum være en profit på 10%";
-            request.setAttribute("pricemessage", errormessage);
-        }
 
         return target;
+
     }
 
 }

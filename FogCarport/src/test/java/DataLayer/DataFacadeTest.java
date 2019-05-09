@@ -121,10 +121,10 @@ public class DataFacadeTest
     @Test
     public void testGetUser() throws DataException
     {
-        User user = df.getUser(221);
+        User user = df.getUser(1);
         
         assertNotNull(user);
-        assertEquals("emp", user.getName());
+        assertEquals("Bent", user.getName());
         assertEquals("employee@hotmail.dk", user.getEmail());
         assertEquals("2780", user.getZipcode());
         assertEquals(Role.EMPLOYEE, user.getRole());
@@ -138,7 +138,7 @@ public class DataFacadeTest
     @Test
     public void testNegativeGetUser() throws DataException
     {
-        User user = df.getUser(222);
+        User user = df.getUser(2);
         
         assertNotNull(user);
         assertNotEquals("benjamin", user.getName());
@@ -155,7 +155,7 @@ public class DataFacadeTest
     {
         List<User> users = df.getUsers();
         
-        int expected = 5;
+        int expected = 4;
         int result = df.getUsers().size();
         
         assertNotEquals(expected, result);
@@ -294,24 +294,46 @@ public class DataFacadeTest
         assertEquals("Betontagsten - rød", carport.getRoof().getType().getName());
 
         //test orderCarport with roof and shed
+        Roof roof1 = new Roof(0, rooftype.get(0));
         Shed shed = new Shed(470, 470);
-        Carport carport1 = new Carport(500, 500, roof, shed);
+        Carport carport1 = new Carport(500, 500, roof1, shed);
         df.orderCarport(carport1);
         
         assertEquals(500, carport1.getWidth());
         assertEquals(470, carport1.getShed().getDepth());
         
         //test placeOrder
-        User user = df.getUser(222);
+        User user = df.getUser(2);
+        User user1 = df.getUser(3);
         Order order = new Order(user, carport);
+        Order order1 = new Order(user1, carport1);
         
         df.placeOrder(order);
-        Order o = df.getOrder(order.getOrder_id());
-        
+        df.placeOrder(order1);
+       
+        //test removeOrder, test removeCarport
+        df.removeOrder(order);
+        df.removeOrder(order1);
+        df.removeCarport(carport);
+        df.removeCarport(carport1);
+        df.removeRoof(roof);
+        df.removeRoof(roof1);
+        df.removeShed(shed);
+    }
+    
+    /**
+     * Test of getOrder method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testGetOrder() throws DataException
+    {
+        Order o = df.getOrder(1);
+        assertEquals(2, o.getUser().getId());
         assertEquals(Status.MODTAGET, o.getStatus());
-        assertEquals(0, o.getSales_price(), 0.01);
-        assertEquals(Paid.IKKE_BETALT, o.getPaid());
-        assertEquals(222, o.getUser().getId());  
+        assertEquals(24501.0, o.getSales_price(), 0.01);
+        
     }
 
     /**

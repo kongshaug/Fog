@@ -7,18 +7,20 @@ package PresentaionLayer;
 
 import DataLayer.DataException;
 import FunctionLayer.FunctionManager;
+import FunctionLayer.HelpingClasses.Order;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author sofieamalielandt
  */
-public class ViewPartlistCommand implements Command
+public class ShippedCommand implements Command
 {
     private String target;
     
-    public ViewPartlistCommand(String target)
+    public ShippedCommand(String target)
     {
         this.target = target;
     }
@@ -26,8 +28,14 @@ public class ViewPartlistCommand implements Command
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
-        
-        return target;
+         HttpSession session = request.getSession();
+         
+         Order order = (Order) session.getAttribute("order");
+         manager.isShipped(order);
+         
+         return target;
+    
     }
+
     
 }
