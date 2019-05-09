@@ -7,6 +7,8 @@ package FunctionLayer;
 
 import DataLayer.DataException;
 import DataLayer.DataFacade;
+import FunctionLayer.Enum.Paid;
+import FunctionLayer.Enum.Status;
 import FunctionLayer.HelpingClasses.Carport;
 import FunctionLayer.HelpingClasses.Material;
 import FunctionLayer.HelpingClasses.Order;
@@ -349,14 +351,8 @@ public class FunctionManager
         db.updateSalesPrice(order_id, salesprice);
     }
 
-    public void updateStatus(int order_id, String status) throws DataException
+    public void updateStatusAndPaid(int order_id, Status status, Paid paid) throws DataException
     {
-        db.updateStatus(order_id, status);
+        db.updateStatusAndPaid(order_id, status, paid);
     }
-
-    public void updatePaid(int order_id, String paid) throws DataException
-    {
-        db.updatePaid(order_id, paid);
-    }
-
 }

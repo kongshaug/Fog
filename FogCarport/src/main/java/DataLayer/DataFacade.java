@@ -5,6 +5,8 @@
  */
 package DataLayer;
 
+import FunctionLayer.Enum.Paid;
+import FunctionLayer.Enum.Status;
 import FunctionLayer.HelpingClasses.Carport;
 import FunctionLayer.HelpingClasses.Material;
 import FunctionLayer.HelpingClasses.Order;
@@ -115,30 +117,24 @@ public class DataFacade
     {
         return cm.getOrder(order_id);
     }
-    
+
     public List<Order> getOrders() throws DataException
     {
         return cm.getOrders();
     }
-    
+
     public List<Order> getOrdersByEmail(String email) throws DataException
     {
         return cm.getOrdersByEmail(email);
     }
-    
+
     public void updateSalesPrice(int order_id, double salesprice) throws DataException
     {
         cm.updateSalesPrice(order_id, salesprice);
     }
-    
-    public void updateStatus(int order_id, String status) throws DataException
-    {
-        cm.updateStatus(order_id, status);
-    }
-    
-    public void updatePaid(int order_id, String paid) throws DataException
-    {
-        cm.updatePaid(order_id, paid);
-    }
 
+    public void updateStatusAndPaid(int order_id, Status status, Paid paid) throws DataException
+    {
+        cm.updateStatusAndPaid(order_id, status, paid);
+    }
 }

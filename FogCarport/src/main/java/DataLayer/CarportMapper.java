@@ -664,42 +664,24 @@ public class CarportMapper
 
     }
 
-    public void updateStatus(int order_id, String status) throws DataException
+    public void updateStatusAndPaid(int order_id, Status status, Paid paid) throws DataException
     {
         try
         {
             dbc.open();
 
             String query = "UPDATE Fog.`order`"
-                    + "SET `order_status` = ?"
+                    + "SET `order_status` = ? AND `paid` = ?"
                     + "WHERE `order_id` = ?;";
 
             PreparedStatement statement = dbc.preparedStatement(query);
-            statement.setString(1, status);
-            statement.setInt(2, order_id);
 
-            statement.executeUpdate();
+            String order_status = status.toString();
+            String order_paid = paid.toString();
 
-        } catch (SQLException e)
-        {
-            throw new DataException(e.getMessage());
-        }
-    }
-
-    public void updatePaid(int order_id, String paid) throws DataException
-    {
-        try
-        {
-            dbc.open();
-
-            String query = "UPDATE Fog.`order`"
-                    + "SET `paid` = ?"
-                    + "WHERE `order_id` = ?;";
-
-            PreparedStatement statement = dbc.preparedStatement(query);
-            statement.setString(1, paid);
-            statement.setInt(2, order_id);
-
+            statement.setInt(1, order_id);
+            statement.setString(2, order_status);
+            statement.setString(3, order_paid);
             statement.executeUpdate();
 
         } catch (SQLException e)
