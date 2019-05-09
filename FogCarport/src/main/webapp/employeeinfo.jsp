@@ -33,7 +33,10 @@
 
             <button id="save" name="command" value="employeeupdate" style="display:none;">Gem</button>
         </form>
-        <button id="update" onclick="update()">Opdater</button> 
+            <button id="update" onclick="update()">Opdater</button> <br><br>
+        <form action="Fog" method="POST">
+        <button id="delete" name="command" value="deleteemployee">Slet medarbejder</button>
+        </form>
     </div>
 </center>
 <script>

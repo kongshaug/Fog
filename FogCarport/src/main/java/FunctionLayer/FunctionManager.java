@@ -154,10 +154,10 @@ public class FunctionManager
         if (user != null)
         {
             db.removeUser(user);
-            res = "Brugeren er nu slettet";
+            res = "Medarbejderen er nu slettet";
         } else
         {
-            res = "Brugeren kunne ikke slettes";
+            res = "Medarbejderen kunne ikke slettes";
         }
         return res;
     }
@@ -424,4 +424,6 @@ public class FunctionManager
     {
         return db.getUser(user_id);
     }
+    
+    
 }

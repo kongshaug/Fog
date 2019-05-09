@@ -50,6 +50,7 @@ public class CommandController
         commands.put("employeelist", new EmployeeListCommand("employeelist.jsp"));
         commands.put("employeeinfo", new EmployeeInfoCommand("employeeinfo.jsp"));
         commands.put("employeeupdate", new EmployeeUpdateCommand("employeeinfo.jsp"));
+        commands.put("deleteemployee", new DeleteEmployeeCommand("employeelist.jsp"));
         
     }
 
