@@ -6,6 +6,8 @@
 package PresentaionLayer;
 
 import DataLayer.DataException;
+import FunctionLayer.Enum.Paid;
+import FunctionLayer.Enum.Status;
 import FunctionLayer.FunctionManager;
 import FunctionLayer.HelpingClasses.Order;
 import javax.servlet.http.HttpServletRequest;
@@ -32,11 +34,15 @@ public class UpdateCommand implements Command
 
         HttpSession session = request.getSession();
         Order order = (Order) session.getAttribute("order");
-        String paid = request.getParameter("paid");
-        String status = request.getParameter("status");
-
-        manager.updatePaid(order.getOrder_id(), paid);
-        manager.updateStatus(order.getOrder_id(), status);
+        String change_paid = request.getParameter("paid");
+        String change_status = request.getParameter("status");
+        
+        Paid paid = Paid.valueOf(change_paid);
+        Status status = Status.valueOf(change_status);
+        
+        order.setPaid(paid);
+        order.setStatus(status);
+        manager.updateStatusAndPaid(order.getOrder_id(), status, paid);
 
 
         return target;

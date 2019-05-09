@@ -224,7 +224,7 @@
         <form action="Fog" method="post">
             <center class="menu">
                 <ul>
-                    <li><button id="img" name="command" value="shop"><img src="images/logo.png"></button></li>
+                    <li><button id="img" name="command" value="shop" title="Gå til shoppen"><img src="images/logo.png"></button></li>
 
                     <%
                         if (user != null)
@@ -234,16 +234,16 @@
 
                             if (user.getRole() == Role.CUSTOMER)
                             {
-                                out.println(" <li><button id=\"user\" name=\"command\" value=\"customer\"><img src=\"images/user.png\"></button></li>");
+                                out.println(" <li><button id=\"user\" name=\"command\" value=\"customer\" title=\"Ordrer historik\"><img src=\"images/user.png\"></button></li>");
                             } else if (user.getRole() == Role.ADMIN)
                             {
-                                out.println(" <li><button id=\"home\" name=\"command\" value=\"employee\"><img src=\"images/home.png\"></button></li>");
-                                out.println(" <li><button id=\"user\" name=\"command\" value=\"employee\"><img src=\"images/tools.png\"></button></li>");
-                                out.println(" <li><button id=\"user\" name=\"command\" value=\"employee\"><img src=\"images/adduser.png\"></button></li>");
+                                out.println(" <li><button id=\"home\" name=\"command\" value=\"employee\" title=\"Ordrer i systemet\"><img src=\"images/home.png\"></button></li>");
+                                out.println(" <li><button id=\"user\" name=\"command\" value=\"employee\" title=\"Opdater materialer\"><img src=\"images/tools.png\"></button></li>");
+                                out.println(" <li><button id=\"user\" name=\"command\" value=\"employee\" title=\"Opret ny medarbejder\"><img src=\"images/adduser.png\"></button></li>");
                             } else if (user.getRole() == Role.EMPLOYEE)
                             {
-                                out.println(" <li><button id=\"home\" name=\"command\" value=\"employee\"><img src=\"images/home.png\"></button></li>");
-                                out.println(" <li><button id=\"user\" name=\"command\" value=\"employee\"><img src=\"images/tools.png\"></button></li>");
+                                out.println(" <li><button id=\"home\" name=\"command\" value=\"employee\" title=\"Ordrer i systemet\"><img src=\"images/home.png\"></button></li>");
+                                out.println(" <li><button id=\"user\" name=\"command\" value=\"employee\" title=\"Opdater materialer\"><img src=\"images/tools.png\"></button></li>");
                             }
                         } else
                         {

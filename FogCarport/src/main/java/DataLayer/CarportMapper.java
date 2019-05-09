@@ -671,7 +671,7 @@ public class CarportMapper
             dbc.open();
 
             String query = "UPDATE Fog.`order`"
-                    + "SET `order_status` = ? AND `paid` = ?"
+                    + "SET `order_status` = ?, `paid` = ?"
                     + "WHERE `order_id` = ?;";
 
             PreparedStatement statement = dbc.preparedStatement(query);
@@ -683,6 +683,8 @@ public class CarportMapper
             statement.setString(2, order_paid);
             statement.setInt(3, order_id);
             statement.executeUpdate();
+            
+            dbc.close();
 
         } catch (SQLException e)
         {
