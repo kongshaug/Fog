@@ -154,6 +154,48 @@ public class UserMapper
         }
     }
 
+    public User getEmployeeByEmail(String email) throws DataException
+    {
+        try
+        {
+            User user = null;
+
+            dbc.open();
+
+            String query = "SELECT * FROM Fog.`user`"
+                    + "WHERE `email` = ?;";
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+            statement.setString(1, email);
+
+            ResultSet rs = statement.executeQuery();
+            if (rs.next())
+            {
+                int user_id = rs.getInt("user_id");
+                String user_email = rs.getString("email");
+                String password = rs.getString("password");
+                String name = rs.getString("user_name");
+                String address = rs.getString("address");
+                String zipcode = rs.getString("zipcode");
+                String phonenumber = rs.getString("phone_number");
+                String role = rs.getString("role");
+
+                Role r = Role.valueOf(role.toUpperCase());
+
+                user = new User(user_id, user_email, password, name, address, zipcode, phonenumber, r);
+            }
+  
+            dbc.close();
+            
+            return user;
+
+        } catch (SQLException e)
+        {
+            throw new DataException(e.getMessage());
+        }
+
+    }
+
     public void addUser(User newUser) throws DataException
     {
         try

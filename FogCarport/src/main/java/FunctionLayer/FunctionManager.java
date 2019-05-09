@@ -355,4 +355,9 @@ public class FunctionManager
     {
         db.updateStatusAndPaid(order_id, status, paid);
     }
+    
+    public User getEmployeeByEmail(String email) throws DataException
+    {
+        return db.getEmployeeByEmail(email);
+    }
 }
