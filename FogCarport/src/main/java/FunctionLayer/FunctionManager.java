@@ -343,10 +343,20 @@ public class FunctionManager
     {
         return GD.drawRoofFromTop(carport);
     }
-    
+
     public void updateSalesPrice(int order_id, double salesprice) throws DataException
     {
         db.updateSalesPrice(order_id, salesprice);
+    }
+
+    public void updateStatus(int order_id, String status) throws DataException
+    {
+        db.updateStatus(order_id, status);
+    }
+
+    public void updatePaid(int order_id, String paid) throws DataException
+    {
+        db.updatePaid(order_id, paid);
     }
 
 }

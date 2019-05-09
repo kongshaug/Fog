@@ -130,5 +130,15 @@ public class DataFacade
     {
         cm.updateSalesPrice(order_id, salesprice);
     }
+    
+    public void updateStatus(int order_id, String status) throws DataException
+    {
+        cm.updateStatus(order_id, status);
+    }
+    
+    public void updatePaid(int order_id, String paid) throws DataException
+    {
+        cm.updatePaid(order_id, paid);
+    }
 
 }

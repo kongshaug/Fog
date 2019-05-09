@@ -14,13 +14,14 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author sofieamalielandt
+ * @author aamandajuhl
  */
-public class ProfitCommand implements Command
+public class UpdateCommand implements Command
 {
+
     private String target;
-    
-    public ProfitCommand(String target)
+
+    public UpdateCommand(String target)
     {
         this.target = target;
     }
@@ -28,22 +29,18 @@ public class ProfitCommand implements Command
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
+
         HttpSession session = request.getSession();
         Order order = (Order) session.getAttribute("order");
-        double salesprice = Double.parseDouble(request.getParameter("salesprice"));
-        
-        if(salesprice >= (order.getCarport().getTotal_price() * 1.10))
-        {
-            order.setSales_price(salesprice);
-            manager.updateSalesPrice(order.getOrder_id(), order.getSales_price());
-        }
-        else{
-            String errormessage = "Der skal minimum være en profit på 10%";
-            request.setAttribute("pricemessage", errormessage);
-        }
-        
-        
+        String paid = request.getParameter("paid");
+        String status = request.getParameter("status");
+
+        manager.updatePaid(order.getOrder_id(), paid);
+        manager.updateStatus(order.getOrder_id(), status);
+
+
         return target;
+
     }
-    
+
 }

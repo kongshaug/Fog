@@ -4,6 +4,7 @@
     Author     : sofieamalielandt
 --%>
 
+<%@page import="FunctionLayer.Enum.Paid"%>
 <%@page import="FunctionLayer.Enum.Status"%>
 <%@page import="java.util.List"%>
 <%@page import="FunctionLayer.HelpingClasses.RoofType"%>
@@ -24,7 +25,8 @@
             <br>
 
             <select name="status">
-                <%                    for (Status s : Status.values())
+                <%                    
+                    for (Status s : Status.values())
                     {
                         if (s.equals(order.getStatus()))
                         {
@@ -38,12 +40,29 @@
                 %>
             </select>
 
+            <select name="paid">
+                <%
+                    for (Paid p : Paid.values())
+                    {
+                        if (p.equals(order.getPaid()))
+                        {
+                            out.println("<option selected> " + p + "</option>");
+                        } else
+                        {
+
+                            out.println("<option> " + p + "</option>");
+                        }
+                    }
+                %>
+            </select> 
+            <button name="command" value="update">Opdater</button>
         </div>
     </form>
     <br>
     <form action="Fog" method="POST">
         <div>
-            <%                String pricemessage = (String) request.getAttribute("pricemessage");
+            <%
+                String pricemessage = (String) request.getAttribute("pricemessage");
                 if (pricemessage != null)
                 {
             %>

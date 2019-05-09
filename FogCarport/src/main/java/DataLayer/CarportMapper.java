@@ -647,9 +647,9 @@ public class CarportMapper
         {
             dbc.open();
 
-            String query = "UPDATE Fog.order"
-                    + "SET sales_price = ?"
-                    + "WHERE order_id = ?;";
+            String query = "UPDATE Fog.`order`"
+                    + "SET `sales_price` = ?"
+                    + "WHERE `order_id` = ?;";
 
             PreparedStatement statement = dbc.preparedStatement(query);
             statement.setDouble(1, salesprice);
@@ -662,5 +662,49 @@ public class CarportMapper
             throw new DataException(e.getMessage());
         }
 
+    }
+
+    public void updateStatus(int order_id, String status) throws DataException
+    {
+        try
+        {
+            dbc.open();
+
+            String query = "UPDATE Fog.`order`"
+                    + "SET `order_status` = ?"
+                    + "WHERE `order_id` = ?;";
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+            statement.setString(1, status);
+            statement.setInt(2, order_id);
+
+            statement.executeUpdate();
+
+        } catch (SQLException e)
+        {
+            throw new DataException(e.getMessage());
+        }
+    }
+
+    public void updatePaid(int order_id, String paid) throws DataException
+    {
+        try
+        {
+            dbc.open();
+
+            String query = "UPDATE Fog.`order`"
+                    + "SET `paid` = ?"
+                    + "WHERE `order_id` = ?;";
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+            statement.setString(1, paid);
+            statement.setInt(2, order_id);
+
+            statement.executeUpdate();
+
+        } catch (SQLException e)
+        {
+            throw new DataException(e.getMessage());
+        }
     }
 }
