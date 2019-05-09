@@ -19,7 +19,7 @@
                 List<User> users = (List<User>) session.getAttribute("users");
                 for (User u : users)
                 {
-                    out.println("<button name=\"command\" value=\"employeelist\" onclick=\"setId(" + u.getId() + ")\">" + u + "</button>");
+                    out.println("<button name=\"command\" value=\"employeeupdate\" onclick=\"setId(" + u.getId() + ")\">" + u + "</button>");
                 }
             %>
             <input type="hidden" id="user_id" name="selected" value="">

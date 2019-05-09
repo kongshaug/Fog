@@ -9,6 +9,7 @@ import DataLayer.DataException;
 import FunctionLayer.FunctionManager;
 import FunctionLayer.HelpingClasses.Order;
 import FunctionLayer.HelpingClasses.User;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,14 +36,15 @@ public class EmployeeListCommand implements Command
 
         if (search == null || search.isEmpty())
         {
-            List<User> users = manager.getUsers();
+            List<User> users = manager.getEmployeesAndAdmins();
             session.setAttribute("users", users);
 
         } else
         {
-            List<User> users = (List<User>) manager.getEmployeeByEmail(search);
+            List<User> users = new ArrayList<>();
+            User employee = (User) manager.getEmployeeByEmail(search);
+            users.add(employee);
             session.setAttribute("users", users);
-
         }
         return target;
     }

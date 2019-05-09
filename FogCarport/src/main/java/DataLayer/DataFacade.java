@@ -165,6 +165,11 @@ public class DataFacade
     {
         return um.getEmployeeByEmail(email);
     }
+    
+    public List<User> getEmployeesAndAdmins() throws DataException
+    {
+        return um.getEmployeesAndAdmins();
+    }
 
     public void updateUser(User user) throws DataException
     {

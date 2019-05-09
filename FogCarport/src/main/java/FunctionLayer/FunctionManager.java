@@ -162,11 +162,11 @@ public class FunctionManager
         return res;
     }
 
-    public List<User> getUsers() throws DataException
+    public List<User> getEmployeesAndAdmins() throws DataException
     {
-        return db.getUsers();
+        return db.getEmployeesAndAdmins();
     }
-
+    
     public void isShipped(Order order) throws DataException
     {
         String shipped = db.orderShipped(order.getOrder_id());
