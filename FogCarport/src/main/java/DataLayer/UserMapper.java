@@ -199,6 +199,35 @@ public class UserMapper
 
     }
 
+    public void updateUser(User user) throws SQLException
+    {
+        dbc.open();
+
+        String query = "UPDATE `Fog`.`user`"
+                + "SET `email` = ?,`password` = ?,`user_name` = ?,`address` = ?,`zipcode` = ?,`phone_number` = ? WHERE (`user_id` = '?');";
+
+        String email = user.getEmail();
+        String password = user.getPassword();
+        String user_name = user.getName();
+        String address = user.getAddress();
+        String zipcode = user.getZipcode();
+        String phonenumber = user.getPhone();
+        int user_id = user.getId();
+
+        PreparedStatement statement = dbc.preparedStatement(query);
+
+        statement.setString(1, email);
+        statement.setString(2, password);
+        statement.setString(3, user_name);
+        statement.setString(4, address);
+        statement.setString(5, zipcode);
+        statement.setString(6, phonenumber);
+        statement.setInt(7, user_id);
+        statement.executeUpdate();
+
+        dbc.close();
+    }
+
     public void removeUser(User user) throws DataException
     {
         try

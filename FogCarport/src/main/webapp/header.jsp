@@ -245,6 +245,7 @@
                             {
                                 out.println(" <li><button id=\"home\" name=\"command\" value=\"employee\" title=\"Ordrer i systemet\"><img src=\"images/home.png\"></button></li>");
                                 out.println(" <li><button id=\"user\" name=\"command\" value=\"employee\" title=\"Opdater materialer\"><img src=\"images/tools.png\"></button></li>");
+                                out.println(" <li><button id=\"user\" name=\"command\" value=\"employee\" title=\"Rediger medarbejder\"><img src=\"images/edituser.png\"></button></li>");
                                 out.println(" <li><button id=\"user\" name=\"command\" value=\"employee\" title=\"Opret ny medarbejder\"><img src=\"images/adduser.png\"></button></li>");
                             } else if (user.getRole() == Role.EMPLOYEE)
                             {
