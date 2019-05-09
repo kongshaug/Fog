@@ -88,7 +88,6 @@
             <script>
                 function setUpdate(update) {
                     document.getElementById('update').value = update;
-                    alert(document.getElementById("update").value);
                 }
             </script>
         </div>
@@ -231,6 +230,8 @@
 
         <div>
             <button name="command" value="viewpartlist">Se stykliste</button>
+            &nbsp;&nbsp;
+            <button name="command" value="viewdrawing">Se tegning</button>
         </div>
     </form>
 
