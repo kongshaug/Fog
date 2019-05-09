@@ -295,7 +295,7 @@ public class UserMapper
             dbc.open();
 
             String query = "UPDATE `Fog`.`user`"
-                    + "SET `email` = ?,`password` = ?,`user_name` = ?,`address` = ?,`zipcode` = ?,`phone_number` = ? WHERE (`user_id` = '?');";
+                    + "SET `email` = ?,`password` = ?,`user_name` = ?,`address` = ?,`zipcode` = ?,`phone_number` = ? WHERE `user_id` = ?;";
 
             String email = user.getEmail();
             String password = user.getPassword();
