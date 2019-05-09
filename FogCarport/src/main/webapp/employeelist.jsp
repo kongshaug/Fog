@@ -13,7 +13,7 @@
         <div>
             <h1>Alle medarbejdere</h1>
             <input type="text" name="search" placeholder="Søg e-mail" value=""> 
-            <br><br><button name="command" value="employee">Søg</button><br><br>
+            <br><br><button name="command" value="employeelist">Søg</button><br><br>
 
             <%                
                 List<User> users = (List<User>) session.getAttribute("users");

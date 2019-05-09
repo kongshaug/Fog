@@ -47,6 +47,7 @@ public class CommandController
         
         commands.put("newemployee", new NewEmployeeCommand("addemployee.jsp"));
         commands.put("addemployee", new AddEmployeeCommand("addemployee.jsp"));
+        commands.put("employeelist", new EmployeeListCommand("employeelist.jsp"));
     }
 
     public static synchronized Command from(String path)

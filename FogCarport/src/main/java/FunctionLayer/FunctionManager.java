@@ -8,6 +8,7 @@ package FunctionLayer;
 import DataLayer.DataException;
 import DataLayer.DataFacade;
 import FunctionLayer.Enum.Paid;
+import FunctionLayer.Enum.Role;
 import FunctionLayer.Enum.Status;
 import FunctionLayer.HelpingClasses.Carport;
 import FunctionLayer.HelpingClasses.Material;
@@ -159,6 +160,11 @@ public class FunctionManager
             res = "Brugeren kunne ikke slettes";
         }
         return res;
+    }
+
+    public List<User> getUsers() throws DataException
+    {
+        return db.getUsers();
     }
 
     public void isShipped(Order order) throws DataException
