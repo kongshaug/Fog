@@ -312,6 +312,9 @@ public class DataFacadeTest
         assertEquals(0, o.getSales_price(), 0.01);
         assertEquals(Paid.IKKE_BETALT, o.getPaid());
         assertEquals(222, o.getUser().getId());  
+        
+        //test removeOrder
+        df.removeOrder(order);
     }
 
     /**

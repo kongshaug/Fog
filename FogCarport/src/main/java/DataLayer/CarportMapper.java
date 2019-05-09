@@ -691,4 +691,28 @@ public class CarportMapper
             throw new DataException(e.getMessage());
         }
     }
+    
+    public void removeOrder(Order order) throws DataException
+    {
+        try
+        {
+            dbc.open();
+
+            String query = "DELETE FROM Fog.`order`"
+                    + "WHERE order_id = ?;";
+
+            int order_id = order.getOrder_id();
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+            statement.setInt(1, order_id);
+            statement.executeUpdate();
+
+            dbc.close();
+
+        } catch (SQLException e)
+        {
+            throw new DataException(e.getMessage());
+        }
+
+    }
 }

@@ -137,4 +137,9 @@ public class DataFacade
     {
         cm.updateStatusAndPaid(order_id, status, paid);
     }
+    
+    public void removeOrder(Order order) throws DataException
+    {
+        cm.removeOrder(order);
+    }
 }
