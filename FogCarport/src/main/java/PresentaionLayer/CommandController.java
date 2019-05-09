@@ -48,6 +48,8 @@ public class CommandController
         commands.put("newemployee", new NewEmployeeCommand("addemployee.jsp", "employee.jsp"));
         commands.put("addemployee", new AddEmployeeCommand("addemployee.jsp"));
         commands.put("employeelist", new EmployeeListCommand("employeelist.jsp"));
+        commands.put("employeeinfo", new EmployeeInfoCommand("employeeinfo.jsp"));
+        
     }
 
     public static synchronized Command from(String path)

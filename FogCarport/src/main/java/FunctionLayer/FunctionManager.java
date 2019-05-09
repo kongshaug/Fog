@@ -166,7 +166,7 @@ public class FunctionManager
     {
         return db.getEmployeesAndAdmins();
     }
-    
+
     public void isShipped(Order order) throws DataException
     {
         String shipped = db.orderShipped(order.getOrder_id());
@@ -418,5 +418,10 @@ public class FunctionManager
 
         return res;
 
+    }
+
+    public User getUser(int user_id) throws DataException
+    {
+        return db.getUser(user_id);
     }
 }
