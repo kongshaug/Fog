@@ -6,8 +6,8 @@
 package PresentaionLayer;
 
 import DataLayer.DataException;
+import FunctionLayer.Enum.Role;
 import FunctionLayer.FunctionManager;
-import FunctionLayer.HelpingClasses.Order;
 import FunctionLayer.HelpingClasses.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,10 +21,12 @@ public class EmployeeInfoCommand implements Command
 {
 
     private String target;
+    private String denied;
 
-    public EmployeeInfoCommand(String target)
+    public EmployeeInfoCommand(String target, String denied)
     {
         this.target = target;
+        this.denied = denied;
     }
 
     @Override
@@ -32,11 +34,21 @@ public class EmployeeInfoCommand implements Command
     {
         HttpSession session = request.getSession();
         int user_id = Integer.parseInt(request.getParameter("selected"));
-        User employee = manager.getUser(user_id);
-        
-        session.setAttribute("employee", employee);
+        User user = (User) session.getAttribute("user");
 
-        return target;
+        if (user.getRole().equals(Role.ADMIN))
+        {
+            User employee = manager.getUser(user_id);
+
+            session.setAttribute("employee", employee);
+
+            return target;
+            
+        } else
+        {
+            request.setAttribute("message", "Adgang nægtet");
+            return denied;
+        }
     }
 
 }

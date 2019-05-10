@@ -17,7 +17,7 @@
             <%    String message = (String) request.getAttribute("message");
                 if (message != null)
                 {
-                    out.println(message + "<br>");
+                    out.println(message + "<br><br>");
                 }
            
                 List<User> users = (List<User>) session.getAttribute("users");
