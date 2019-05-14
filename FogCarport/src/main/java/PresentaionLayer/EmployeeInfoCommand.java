@@ -15,33 +15,40 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author sofieamalielandt
+ * @author aamandajuhl
  */
-public class ViewPartlistCommand implements Command
+public class EmployeeInfoCommand implements Command
 {
-    private String emptarget;
-    private String custarget;
-    
-    public ViewPartlistCommand(String emptarget, String custarget)
+
+    private String target;
+    private String denied;
+
+    public EmployeeInfoCommand(String target, String denied)
     {
-        this.emptarget = emptarget;
-        this.custarget = custarget;
+        this.target = target;
+        this.denied = denied;
     }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
         HttpSession session = request.getSession();
+        int user_id = Integer.parseInt(request.getParameter("selected"));
         User user = (User) session.getAttribute("user");
-        
-        if (user.getRole().equals(Role.ADMIN) || user.getRole().equals(Role.EMPLOYEE))
+
+        if (user.getRole().equals(Role.ADMIN))
         {
-            return emptarget;
-        }
-        else{
+            User employee = manager.getUser(user_id);
+
+            session.setAttribute("employee", employee);
+
+            return target;
             
-            return custarget;
+        } else
+        {
+            request.setAttribute("message", "Adgang nægtet");
+            return denied;
         }
     }
-    
+
 }

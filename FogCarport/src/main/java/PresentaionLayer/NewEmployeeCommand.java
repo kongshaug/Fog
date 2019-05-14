@@ -17,15 +17,16 @@ import javax.servlet.http.HttpSession;
  *
  * @author sofieamalielandt
  */
-public class ViewPartlistCommand implements Command
+public class NewEmployeeCommand implements Command
 {
-    private String emptarget;
-    private String custarget;
-    
-    public ViewPartlistCommand(String emptarget, String custarget)
+
+    private String target;
+    private String denied;
+
+    public NewEmployeeCommand(String target, String denied)
     {
-        this.emptarget = emptarget;
-        this.custarget = custarget;
+        this.target = target;
+        this.denied = denied;
     }
 
     @Override
@@ -33,15 +34,15 @@ public class ViewPartlistCommand implements Command
     {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        
-        if (user.getRole().equals(Role.ADMIN) || user.getRole().equals(Role.EMPLOYEE))
+
+        if (user.getRole().equals(Role.ADMIN))
         {
-            return emptarget;
+            return target;
         }
         else{
-            
-            return custarget;
+            request.setAttribute("message", "Adgang nægtet");
+            return denied;
         }
     }
-    
+
 }

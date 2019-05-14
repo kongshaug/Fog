@@ -1,13 +1,14 @@
 <%-- 
-    Document   : partlist
-    Created on : 23-04-2019, 15:24:04
-    Author     : aamandajuhl
+    Document   : customerpartlist
+    Created on : 09-05-2019, 14:00:50
+    Author     : sofieamalielandt
 --%>
 
-<%@page import="FunctionLayer.HelpingClasses.Order"%>
 <%@page import="FunctionLayer.HelpingClasses.Carport"%>
+<%@page import="FunctionLayer.HelpingClasses.Order"%>
 <%@page import="FunctionLayer.HelpingClasses.Part"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="FunctionLayer.Enum.Role"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file = "header.jsp" %>
 <%    Order order = (Order) session.getAttribute("order");
@@ -25,7 +26,6 @@
                     <th><b>Antal</b></th>
                     <th><b>Enhed</b></th>
                     <th><b>Beskrivelse</b></th>
-                    <th><b>Pris</b></th>
                 </tr>
                 <%
                     ArrayList<Part> parts = carport.getParts();
@@ -47,7 +47,6 @@
                             out.println("<td>" + p.getQuantity() + "</td>");
                             out.println("<td>" + p.getUnit() + "</td>");
                             out.println("<td>" + p.getDescription() + "</td>");
-                            out.println("<td>" + p.getTotal_price() + " kr. </td>");
                         }
                     }
 
@@ -67,7 +66,6 @@
                             out.println("<td>" + p.getQuantity() + "</td>");
                             out.println("<td>" + p.getUnit() + "</td>");
                             out.println("<td>" + p.getDescription() + "</td>");
-                            out.println("<td>" + p.getTotal_price() + " kr. </td>");
                         }
                     }
                     if (carport.getShed() != null)
@@ -90,7 +88,6 @@
                                 out.println("<td>" + p.getQuantity() + "</td>");
                                 out.println("<td>" + p.getUnit() + "</td>");
                                 out.println("<td>" + p.getDescription() + "</td>");
-                                out.println("<td>" + p.getTotal_price() + " kr. </td>");
                             }
                         }
                     }
@@ -106,7 +103,6 @@
                     <th><b>Antal</b></th>
                     <th><b>Enhed</b></th>
                     <th><b>Beskrivelse</b></th>
-                    <th><b>Pris</b></th>
                 </tr>
                 <%                    for (Part p : roof_parts)
                     {
@@ -124,7 +120,6 @@
                             out.println("<td>" + p.getQuantity() + "</td>");
                             out.println("<td>" + p.getUnit() + "</td>");
                             out.println("<td>" + p.getDescription() + "</td>");
-                            out.println("<td>" + p.getTotal_price() + " kr. </td>");
                         }
                     }
                 %>
@@ -138,7 +133,6 @@
                     <th><b>Antal</b></th>
                     <th><b>Enhed</b></th>
                     <th><b>Beskrivelse</b></th>
-                    <th><b>Pris</b></th>
                 </tr>
                 <%
                     for (Part p : parts)
@@ -157,7 +151,6 @@
                             out.println("<td>" + p.getQuantity() + "</td>");
                             out.println("<td>" + p.getUnit() + "</td>");
                             out.println("<td>" + p.getDescription() + "</td>");
-                            out.println("<td>" + p.getTotal_price() + " kr. </td>");
                         }
                     }
 
@@ -177,7 +170,6 @@
                             out.println("<td>" + p.getQuantity() + "</td>");
                             out.println("<td>" + p.getUnit() + "</td>");
                             out.println("<td>" + p.getDescription() + "</td>");
-                            out.println("<td>" + p.getTotal_price() + " kr. </td>");
                         }
                     }
                     if (carport.getShed() != null)
@@ -199,14 +191,13 @@
                                 out.println("<td>" + p.getQuantity() + "</td>");
                                 out.println("<td>" + p.getUnit() + "</td>");
                                 out.println("<td>" + p.getDescription() + "</td>");
-                                out.println("<td>" + p.getTotal_price() + " kr. </td>");
                             }
                         }
                     }
                 %>
             </table>
             <br><br>
-            <button name="command" value="employeeorder">Gå tilbage</button>
+            <button name="command" value="customerorder">Gå tilbage</button>
             <input type="hidden" id="order_id" name="selected" value="<%=order.getOrder_id()%>">
             </div>
             </center>

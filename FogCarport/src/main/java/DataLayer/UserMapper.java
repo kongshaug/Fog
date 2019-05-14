@@ -154,6 +154,95 @@ public class UserMapper
         }
     }
 
+    public List<User> getEmployeesAndAdmins() throws DataException
+    {
+        try
+        {
+            List<User> users = new ArrayList<>();
+
+            dbc.open();
+
+            String query = "SELECT * FROM Fog.`user`"
+                    + "WHERE `role` = ? OR `role` = ?;";
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+            String employee_role = Role.EMPLOYEE.toString();
+            String admin_role = Role.ADMIN.toString();
+
+            statement.setString(1, employee_role);
+            statement.setString(2, admin_role);
+
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next())
+            {
+                int id = rs.getInt("user_id");
+                String email = rs.getString("email");
+                String password = rs.getString("password");
+                String name = rs.getString("user_name");
+                String address = rs.getString("address");
+                String zipcode = rs.getString("zipcode");
+                String phonenumber = rs.getString("phone_number");
+                String role = rs.getString("role");
+
+                Role r = Role.valueOf(role);
+
+                User u = new User(id, email, password, name, address, zipcode, phonenumber, r);
+                users.add(u);
+            }
+
+            dbc.close();
+
+            return users;
+
+        } catch (SQLException e)
+        {
+            throw new DataException(e.getMessage());
+        }
+    }
+
+    public User getEmployeeByEmail(String email) throws DataException
+    {
+        try
+        {
+            User user = null;
+
+            dbc.open();
+
+            String query = "SELECT * FROM Fog.`user`"
+                    + "WHERE `email` = ?;";
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+            statement.setString(1, email);
+
+            ResultSet rs = statement.executeQuery();
+            if (rs.next())
+            {
+                int user_id = rs.getInt("user_id");
+                String user_email = rs.getString("email");
+                String password = rs.getString("password");
+                String name = rs.getString("user_name");
+                String address = rs.getString("address");
+                String zipcode = rs.getString("zipcode");
+                String phonenumber = rs.getString("phone_number");
+                String role = rs.getString("role");
+
+                Role r = Role.valueOf(role.toUpperCase());
+
+                user = new User(user_id, user_email, password, name, address, zipcode, phonenumber, r);
+            }
+
+            dbc.close();
+
+            return user;
+
+        } catch (SQLException e)
+        {
+            throw new DataException(e.getMessage());
+        }
+
+    }
+
     public void addUser(User newUser) throws DataException
     {
         try
@@ -199,33 +288,39 @@ public class UserMapper
 
     }
 
-    public void updateUser(User user) throws SQLException
+    public void updateUser(User user) throws DataException
     {
-        dbc.open();
+        try
+        {
+            dbc.open();
 
-        String query = "UPDATE `Fog`.`user`"
-                + "SET `email` = ?,`password` = ?,`user_name` = ?,`address` = ?,`zipcode` = ?,`phone_number` = ? WHERE (`user_id` = '?');";
+            String query = "UPDATE `Fog`.`user`"
+                    + "SET `email` = ?,`password` = ?,`user_name` = ?,`address` = ?,`zipcode` = ?,`phone_number` = ? WHERE `user_id` = ?;";
 
-        String email = user.getEmail();
-        String password = user.getPassword();
-        String user_name = user.getName();
-        String address = user.getAddress();
-        String zipcode = user.getZipcode();
-        String phonenumber = user.getPhone();
-        int user_id = user.getId();
+            String email = user.getEmail();
+            String password = user.getPassword();
+            String user_name = user.getName();
+            String address = user.getAddress();
+            String zipcode = user.getZipcode();
+            String phonenumber = user.getPhone();
+            int user_id = user.getId();
 
-        PreparedStatement statement = dbc.preparedStatement(query);
+            PreparedStatement statement = dbc.preparedStatement(query);
 
-        statement.setString(1, email);
-        statement.setString(2, password);
-        statement.setString(3, user_name);
-        statement.setString(4, address);
-        statement.setString(5, zipcode);
-        statement.setString(6, phonenumber);
-        statement.setInt(7, user_id);
-        statement.executeUpdate();
+            statement.setString(1, email);
+            statement.setString(2, password);
+            statement.setString(3, user_name);
+            statement.setString(4, address);
+            statement.setString(5, zipcode);
+            statement.setString(6, phonenumber);
+            statement.setInt(7, user_id);
+            statement.executeUpdate();
 
-        dbc.close();
+            dbc.close();
+        } catch (SQLException e)
+        {
+            throw new DataException(e.getMessage());
+        }
     }
 
     public void removeUser(User user) throws DataException

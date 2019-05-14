@@ -100,13 +100,16 @@
         %>
         </div>
         <br>
+        <div>
         <%
             if(order.getPaid().equals(Paid.BETALT))
             {
-                out.println("<div><button name=\"command\" value=\"viewpartlist\">Se stykliste</button></div>");
+                out.println("<button name=\"command\" value=\"viewpartlist\">Se stykliste</button>&nbsp;&nbsp;");
             }
         
         %>
+            <button name="command" value="viewdrawing">Se tegning</button>
+        </div>
     </form>
 </body>
 </html>

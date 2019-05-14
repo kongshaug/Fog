@@ -6,9 +6,9 @@
 package PresentaionLayer;
 
 import DataLayer.DataException;
-import FunctionLayer.Enum.Role;
 import FunctionLayer.FunctionManager;
 import FunctionLayer.HelpingClasses.User;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,31 +17,33 @@ import javax.servlet.http.HttpSession;
  *
  * @author sofieamalielandt
  */
-public class ViewPartlistCommand implements Command
+public class DeleteEmployeeCommand implements Command
 {
-    private String emptarget;
-    private String custarget;
-    
-    public ViewPartlistCommand(String emptarget, String custarget)
+
+    private String target;
+
+    public DeleteEmployeeCommand(String target)
     {
-        this.emptarget = emptarget;
-        this.custarget = custarget;
+        this.target = target;
     }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User employee = (User) session.getAttribute("employee");
+
+        session.removeAttribute("employee");
+        session.removeAttribute("users");
         
-        if (user.getRole().equals(Role.ADMIN) || user.getRole().equals(Role.EMPLOYEE))
-        {
-            return emptarget;
-        }
-        else{
-            
-            return custarget;
-        }
+        String message = manager.removeUser(employee);
+
+        request.setAttribute("message", message);
+        List<User> users = manager.getEmployeesAndAdmins();
+        session.setAttribute("users", users);
+
+        return target;
+
     }
-    
+
 }

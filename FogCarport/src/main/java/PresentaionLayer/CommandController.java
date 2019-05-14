@@ -21,25 +21,37 @@ public class CommandController
     private CommandController()
     {
         Command shop = new ShopCommand("shop.jsp");
+        commands.put("back", shop);
         commands.put("shop", new ShopCommand("shop.jsp"));
-        commands.put("calculate", new PartlistCommand("partlist.jsp")); //skal laves om
+        commands.put("logout", new LogoutCommand("index.jsp"));
         commands.put("login", new LoginCommand("/Fog?command=shop", "/Fog?command=employee"));
+        
         commands.put("newuser", new NewUserCommand("newuser.jsp"));
         commands.put("adduser", new AddUserCommand("index.jsp", "newuser.jsp", "nouser.jsp"));
-        commands.put("back", shop);
+        
         commands.put("placeorder", new PlaceOrderCommand("placeorder.jsp", "nouser.jsp"));
         commands.put("regretorder", new RegretOrderCommand("shop.jsp"));
-        commands.put("logout", new LogoutCommand("index.jsp"));
-        commands.put("noUser", new noUserCommand("partlist.jsp")); // skal laves om
-        commands.put("employee", new EmployeeCommand("employee.jsp"));
+        commands.put("noUser", new noUserCommand("drawing.jsp"));
+        
+        commands.put("drawing", new DrawingCommand("drawing.jsp")); 
         commands.put("customer", new CustomerCommand("customer.jsp"));
-        commands.put("drawing", new DrawingCommand("drawing.jsp")); // skal laves om 
-        commands.put("employeeorder", new EmployeeOrderCommand("employeeorder.jsp"));
+        commands.put("employee", new EmployeeCommand("employee.jsp"));
+        
         commands.put("customerorder", new CustomerOrderCommand("customerorder.jsp"));
+        commands.put("employeeorder", new EmployeeOrderCommand("employeeorder.jsp", "employee.jsp"));
         commands.put("shipped", new ShippedCommand("employeeorder.jsp"));
         commands.put("profit", new ProfitCommand("employeeorder.jsp"));
         commands.put("update", new UpdateCommand("employeeorder.jsp"));
-        commands.put("viewpartlist", new ViewPartlistCommand("partlist.jsp"));
+        commands.put("viewpartlist", new ViewPartlistCommand("partlist.jsp", "customerpartlist.jsp"));
+        commands.put("viewdrawing", new ViewDrawingCommand("viewdrawing.jsp"));
+        
+        commands.put("newemployee", new NewEmployeeCommand("addemployee.jsp", "employee.jsp"));
+        commands.put("addemployee", new AddEmployeeCommand("addemployee.jsp"));
+        commands.put("employeelist", new EmployeeListCommand("employeelist.jsp"));
+        commands.put("employeeinfo", new EmployeeInfoCommand("employeeinfo.jsp", "employeelist.jsp"));
+        commands.put("employeeupdate", new EmployeeUpdateCommand("employeeinfo.jsp"));
+        commands.put("deleteemployee", new DeleteEmployeeCommand("employeelist.jsp"));
+        
     }
 
     public static synchronized Command from(String path)

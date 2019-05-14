@@ -76,6 +76,16 @@
                 display: -webkit-flex;
                 -webkit-align-items: center; 
             }
+            .menu li #usericon {
+                float: left;
+                display: inline-block;
+                text-align: center;
+                padding: 5px 5px;
+                text-decoration: none; 
+                position: static; width: 70px; 
+                display: -webkit-flex;
+                -webkit-align-items: center; 
+            }
 
             .menu li #home {
                 float: left;
@@ -100,6 +110,16 @@
             .menu li #user img {
                 text-align: center;
                 padding: 10px 10px 0px 10px;
+                width: 40px;
+                height: 40px;
+                text-decoration: none;  
+                display: -webkit-flex;
+                -webkit-align-items: center; 
+            }
+            
+            .menu li #usericon img {
+                text-align: center;
+                padding: 10px 10px 7px 10px;
                 width: 40px;
                 height: 40px;
                 text-decoration: none;  
@@ -240,15 +260,18 @@
 
                             if (user.getRole() == Role.CUSTOMER)
                             {
-                                out.println(" <li><button id=\"user\" name=\"command\" value=\"customer\" title=\"Ordrer historik\"><img src=\"images/user.png\"></button></li>");
+                                out.println(" <li><button id=\"usericon\" name=\"command\" value=\"customer\" title=\"Profil\"><img src=\"images/user.png\"></button></li>");
+                                out.println(" <li><button id=\"home\" name=\"command\" value=\"customer\" title=\"Ordrer historik\"><img src=\"images/orders.png\"></button></li>");
                             } else if (user.getRole() == Role.ADMIN)
                             {
+                                out.println(" <li><button id=\"usericon\" name=\"command\" value=\"employee\" title=\"Profil\"><img src=\"images/user.png\"></button></li>");
                                 out.println(" <li><button id=\"home\" name=\"command\" value=\"employee\" title=\"Ordrer i systemet\"><img src=\"images/home.png\"></button></li>");
                                 out.println(" <li><button id=\"user\" name=\"command\" value=\"employee\" title=\"Opdater materialer\"><img src=\"images/tools.png\"></button></li>");
-                                out.println(" <li><button id=\"user\" name=\"command\" value=\"employee\" title=\"Rediger medarbejder\"><img src=\"images/edituser.png\"></button></li>");
-                                out.println(" <li><button id=\"user\" name=\"command\" value=\"employee\" title=\"Opret ny medarbejder\"><img src=\"images/adduser.png\"></button></li>");
+                                out.println(" <li><button id=\"user\" name=\"command\" value=\"employeelist\" title=\"Rediger medarbejder\"><img src=\"images/edituser.png\"></button></li>");
+                                out.println(" <li><button id=\"user\" name=\"command\" value=\"newemployee\" title=\"Opret ny medarbejder\"><img src=\"images/adduser.png\"></button></li>");
                             } else if (user.getRole() == Role.EMPLOYEE)
                             {
+                                out.println(" <li><button id=\"usericon\" name=\"command\" value=\"employee\" title=\"Profil\"><img src=\"images/user.png\"></button></li>");
                                 out.println(" <li><button id=\"home\" name=\"command\" value=\"employee\" title=\"Ordrer i systemet\"><img src=\"images/home.png\"></button></li>");
                                 out.println(" <li><button id=\"user\" name=\"command\" value=\"employee\" title=\"Opdater materialer\"><img src=\"images/tools.png\"></button></li>");
                             }

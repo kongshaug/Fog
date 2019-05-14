@@ -15,33 +15,35 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author sofieamalielandt
+ * @author aamandajuhl
  */
-public class ViewPartlistCommand implements Command
+public class EmployeeUpdateCommand implements Command
 {
-    private String emptarget;
-    private String custarget;
-    
-    public ViewPartlistCommand(String emptarget, String custarget)
+
+    private String target;
+
+    public EmployeeUpdateCommand(String target)
     {
-        this.emptarget = emptarget;
-        this.custarget = custarget;
+        this.target = target;
     }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        
-        if (user.getRole().equals(Role.ADMIN) || user.getRole().equals(Role.EMPLOYEE))
-        {
-            return emptarget;
-        }
-        else{
-            
-            return custarget;
-        }
+        User employee = (User) session.getAttribute("employee");
+
+        String email = request.getParameter("email");
+        String name = request.getParameter("name");
+        String address = request.getParameter("address");
+        String zipcode = request.getParameter("zipcode");
+        String phone = request.getParameter("phone");
+
+        String message = manager.updateUser(employee, email, name, address, zipcode, phone);
+
+        request.setAttribute("message", message);
+
+        return target;
+
     }
-    
 }

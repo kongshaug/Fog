@@ -54,12 +54,42 @@ public class User
     @Override
     public String toString()
     {
-        return "User{" + "id=" + id + ", email=" + email + ", password=" + password + ", name=" + name + ", address=" + address + ", zipcode=" + zipcode + ", phone=" + phone + ", role=" + role + '}';
+        return "Bruger: " + email + ", navn: " + name + ", mobilnr: " + phone;
     }
 
     public void setId(int id)
     {
         this.id = id;
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
+
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public void setAddress(String address)
+    {
+        this.address = address;
+    }
+
+    public void setZipcode(String zipcode)
+    {
+        this.zipcode = zipcode;
+    }
+
+    public void setPhone(String phone)
+    {
+        this.phone = phone;
     }
 
     public int getId()

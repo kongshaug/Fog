@@ -14,6 +14,7 @@ import FunctionLayer.HelpingClasses.Roof;
 import FunctionLayer.HelpingClasses.RoofType;
 import FunctionLayer.HelpingClasses.Shed;
 import FunctionLayer.HelpingClasses.User;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -158,5 +159,20 @@ public class DataFacade
     public void removeRoof(Roof roof) throws DataException
     {
         cm.removeRoof(roof);
+    }
+
+    public User getEmployeeByEmail(String email) throws DataException
+    {
+        return um.getEmployeeByEmail(email);
+    }
+    
+    public List<User> getEmployeesAndAdmins() throws DataException
+    {
+        return um.getEmployeesAndAdmins();
+    }
+
+    public void updateUser(User user) throws DataException
+    {
+        um.updateUser(user);
     }
 }

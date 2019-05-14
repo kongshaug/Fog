@@ -6,9 +6,8 @@
 package PresentaionLayer;
 
 import DataLayer.DataException;
-import FunctionLayer.Enum.Role;
 import FunctionLayer.FunctionManager;
-import FunctionLayer.HelpingClasses.User;
+import FunctionLayer.HelpingClasses.Order;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,31 +16,28 @@ import javax.servlet.http.HttpSession;
  *
  * @author sofieamalielandt
  */
-public class ViewPartlistCommand implements Command
+public class ViewDrawingCommand implements Command
 {
-    private String emptarget;
-    private String custarget;
-    
-    public ViewPartlistCommand(String emptarget, String custarget)
+
+    private String target;
+
+    public ViewDrawingCommand(String target)
     {
-        this.emptarget = emptarget;
-        this.custarget = custarget;
+        this.target = target;
     }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        Order order = (Order) session.getAttribute("order");
         
-        if (user.getRole().equals(Role.ADMIN) || user.getRole().equals(Role.EMPLOYEE))
-        {
-            return emptarget;
-        }
-        else{
-            
-            return custarget;
-        }
+        String roofDrawing = manager.drawingOfRoof(order.getCarport());
+
+        session.setAttribute("carport", order.getCarport());
+        session.setAttribute("roofDrawing", roofDrawing);
+        
+        return target;
     }
-    
+
 }

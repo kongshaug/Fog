@@ -8,12 +8,14 @@ package FunctionLayer;
 import DataLayer.DataException;
 import DataLayer.DataFacade;
 import FunctionLayer.Enum.Paid;
+import FunctionLayer.Enum.Role;
 import FunctionLayer.Enum.Status;
 import FunctionLayer.HelpingClasses.Carport;
 import FunctionLayer.HelpingClasses.Material;
 import FunctionLayer.HelpingClasses.Order;
 import FunctionLayer.HelpingClasses.RoofType;
 import FunctionLayer.HelpingClasses.User;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -152,12 +154,17 @@ public class FunctionManager
         if (user != null)
         {
             db.removeUser(user);
-            res = "Brugeren er nu slettet";
+            res = "Medarbejderen er nu slettet";
         } else
         {
-            res = "Brugeren kunne ikke slettes";
+            res = "Medarbejderen kunne ikke slettes";
         }
         return res;
+    }
+
+    public List<User> getEmployeesAndAdmins() throws DataException
+    {
+        return db.getEmployeesAndAdmins();
     }
 
     public void isShipped(Order order) throws DataException
@@ -355,4 +362,68 @@ public class FunctionManager
     {
         db.updateStatusAndPaid(order_id, status, paid);
     }
+
+    public User getEmployeeByEmail(String email) throws DataException
+    {
+        return db.getEmployeeByEmail(email);
+    }
+
+    public String updateUser(User user, String email, String name, String address, String zipcode, String phone) throws DataException
+    {
+        String res = "";
+        List<User> users = db.getUsers();
+
+        for (User u : users)
+        {
+            if (u.getEmail().equals(email) && u.getId() != user.getId())
+            {
+                res = "Email eksisterer allerede";
+            }
+            if (!user.getEmail().contains("@") && !user.getEmail().contains("."))
+            {
+                res = "Venligst indtast en gyldig email";
+            }
+            if (user.getName().isEmpty() || user.getName() == null || isCaracter(user.getName()) == false)
+            {
+                res = "Venligst indtast dit navn (må kun indeholde bogstaver)";
+            }
+            if (user.getPassword().isEmpty() || user.getPassword() == null || user.getPassword().length() < 4)
+            {
+                res = "Venligst indtast en adgangskode med en minimumslængde på 4";
+            }
+            if (user.getAddress().isEmpty() || user.getAddress() == null)
+            {
+                res = "Venligst indtast din adresse";
+            }
+            if (user.getZipcode().isEmpty() || user.getZipcode() == null || user.getZipcode().length() != 4 || isNumber(user.getZipcode()) == false)
+            {
+                res = "Venligst indtast et gyldigt postnummer på 4 cifre";
+            }
+            if (user.getPhone().isEmpty() || user.getPhone() == null || user.getPhone().length() != 8 || isNumber(user.getPhone()) == false)
+            {
+                res = "Venligst indtast et gyldigt 8-cifret telefonnummer";
+            }
+        }
+
+        if (res.isEmpty())
+        {
+            user.setEmail(email);
+            user.setName(name);
+            user.setAddress(address);
+            user.setZipcode(zipcode);
+            user.setPhone(phone);
+            db.updateUser(user);
+            res = "Medarbejderens information er opdateret";
+        }
+
+        return res;
+
+    }
+
+    public User getUser(int user_id) throws DataException
+    {
+        return db.getUser(user_id);
+    }
+    
+    
 }
