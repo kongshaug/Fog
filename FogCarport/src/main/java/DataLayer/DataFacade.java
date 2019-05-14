@@ -175,4 +175,9 @@ public class DataFacade
     {
         um.updateUser(user);
     }
+    
+    public void updatePassword(int user_id, String password) throws DataException
+    {
+        um.updatePassword(user_id, password);
+    }
 }

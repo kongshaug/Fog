@@ -12,7 +12,7 @@
     Order order = (Order) session.getAttribute("order");
     String roofDrawing = (String) session.getAttribute("roofDrawing");
 %>
-<center id="index" class="index">
+<center id="partlist" class="partlist">
     <form action="Fog" method="POST">
         <div>
             <%
@@ -29,7 +29,9 @@
         </div>
         <br><br>
     </form>
+        <div>
     <%=roofDrawing%>
+        </div>
 </center>
 </body>
 </html>

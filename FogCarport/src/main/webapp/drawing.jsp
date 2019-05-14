@@ -12,7 +12,7 @@
 <%        Carport carport = (Carport) session.getAttribute("carport");
     String roofDrawing = (String) session.getAttribute("roofDrawing");
 %>
-<center id="index" class="index">
+<center id="partlist" class="partlist">
     <form action="Fog" method="POST">
         <div>
             <button name="command" value="placeorder">Send forespørgsel</button>
@@ -21,7 +21,10 @@
         </div>
         <br><br>
     </form>
+    
+    <div>
     <%=roofDrawing%>
+    </div>
     
 </center>
 </body>

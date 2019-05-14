@@ -31,9 +31,9 @@
             <input type="text" id="phone" name="phone" value="<%=user.getPhone()%>" minlength="8" maxlength="8" required disabled="disabled"> <br><br>
 
             Adgangskode &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ny adgangskode
-            <input type="password" id="oldpassword" name="oldpassword" value="<%=user.getPassword()%>" onclick="password()" minlength="4" required disabled="disabled"> 
+            <input type="password" id="oldpassword" name="oldpassword" value="<%=user.getPassword()%>" minlength="4" required disabled="disabled"> 
             &nbsp;&nbsp;
-            <input type="password" id="newpassword" name="newpassword" value="<%=user.getPassword()%>" minlength="4" required disabled="disabled"> <br><br>
+            <input type="password" id="newpassword" name="newpassword" value="<%=user.getPassword()%>" onclick="password()" minlength="4" required disabled="disabled"> <br><br>
 
 
             <button id="save" name="command" value="customerupdate" style="display:none;">Gem</button>

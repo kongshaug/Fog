@@ -490,6 +490,30 @@ public class FunctionManager
         return res;
 
     }
+    
+    public String updatePassword(User user, String oldpassword, String newpassword) throws DataException
+    {
+        String res = "";
+
+        if (!user.getPassword().equals(oldpassword))
+        {
+            res = "Venligst indtast din nuværende adgangskode, for at ændre adgangskoden";
+        }
+        if (newpassword.isEmpty() || newpassword == null || newpassword.length() < 4)
+        {
+            res = "Venligst indtast en adgangskode med en minimumslængde på 4";
+        }
+
+        if (res.isEmpty())
+        {
+            user.setPassword(newpassword);
+            db.updatePassword(user.getId(), newpassword);
+            res = "Din adgangskode er ændret";
+        }
+
+        return res;
+
+    }
 
     public User getUser(int user_id) throws DataException
     {
