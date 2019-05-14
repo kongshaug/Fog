@@ -260,7 +260,7 @@
 
                             if (user.getRole() == Role.CUSTOMER)
                             {
-                                out.println(" <li><button id=\"usericon\" name=\"command\" value=\"customer\" title=\"Profil\"><img src=\"images/user.png\"></button></li>");
+                                out.println(" <li><button id=\"usericon\" name=\"command\" value=\"customerinfo\" title=\"Profil\"><img src=\"images/user.png\"></button></li>");
                                 out.println(" <li><button id=\"home\" name=\"command\" value=\"customer\" title=\"Ordrer historik\"><img src=\"images/orders.png\"></button></li>");
                             } else if (user.getRole() == Role.ADMIN)
                             {

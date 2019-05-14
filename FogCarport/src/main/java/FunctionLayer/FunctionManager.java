@@ -15,7 +15,6 @@ import FunctionLayer.HelpingClasses.Material;
 import FunctionLayer.HelpingClasses.Order;
 import FunctionLayer.HelpingClasses.RoofType;
 import FunctionLayer.HelpingClasses.User;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -154,10 +153,23 @@ public class FunctionManager
         if (user != null)
         {
             db.removeUser(user);
-            res = "Medarbejderen er nu slettet";
+
+            if (user.getRole().equals(Role.CUSTOMER))
+            {
+                res = "Din bruger er nu slettet";
+            } else
+            {
+                res = "Medarbejderen er nu slettet";
+            }
         } else
         {
-            res = "Medarbejderen kunne ikke slettes";
+            if (user.getRole().equals(Role.CUSTOMER))
+            {
+                res = "Din bruger kunne ikke slettes";
+            } else
+            {
+                res = "Medarbejderen kunne ikke slettes";
+            }
         }
         return res;
     }
@@ -368,7 +380,7 @@ public class FunctionManager
         return db.getEmployeeByEmail(email);
     }
 
-    public String updateUser(User user, String email, String name, String address, String zipcode, String phone) throws DataException
+    public String updateEmployee(User user, String email, String name, String address, String zipcode, String phone) throws DataException
     {
         String res = "";
         List<User> users = db.getUsers();
@@ -377,32 +389,31 @@ public class FunctionManager
         {
             if (u.getEmail().equals(email) && u.getId() != user.getId())
             {
-                res = "Email eksisterer allerede";
+                res = "Email er allerede i brug";
             }
-            if (!user.getEmail().contains("@") && !user.getEmail().contains("."))
-            {
-                res = "Venligst indtast en gyldig email";
-            }
-            if (user.getName().isEmpty() || user.getName() == null || isCaracter(user.getName()) == false)
-            {
-                res = "Venligst indtast dit navn (må kun indeholde bogstaver)";
-            }
-            if (user.getPassword().isEmpty() || user.getPassword() == null || user.getPassword().length() < 4)
-            {
-                res = "Venligst indtast en adgangskode med en minimumslængde på 4";
-            }
-            if (user.getAddress().isEmpty() || user.getAddress() == null)
-            {
-                res = "Venligst indtast din adresse";
-            }
-            if (user.getZipcode().isEmpty() || user.getZipcode() == null || user.getZipcode().length() != 4 || isNumber(user.getZipcode()) == false)
-            {
-                res = "Venligst indtast et gyldigt postnummer på 4 cifre";
-            }
-            if (user.getPhone().isEmpty() || user.getPhone() == null || user.getPhone().length() != 8 || isNumber(user.getPhone()) == false)
-            {
-                res = "Venligst indtast et gyldigt 8-cifret telefonnummer";
-            }
+        }
+
+        if (!email.contains("@") && !email.contains("."))
+        {
+            res = "Venligst indtast en gyldig email";
+        }
+
+        if (name.isEmpty() || name == null || isCaracter(name) == false)
+        {
+            res = "Venligst indtast dit navn (må kun indeholde bogstaver)";
+        }
+
+        if (address.isEmpty() || address == null)
+        {
+            res = "Venligst indtast din adresse";
+        }
+        if (zipcode.isEmpty() || zipcode == null || zipcode.length() != 4 || isNumber(zipcode) == false)
+        {
+            res = "Venligst indtast et gyldigt postnummer på 4 cifre";
+        }
+        if (phone.isEmpty() || phone == null || phone.length() != 8 || isNumber(phone) == false)
+        {
+            res = "Venligst indtast et gyldigt 8-cifret telefonnummer";
         }
 
         if (res.isEmpty())
@@ -420,10 +431,69 @@ public class FunctionManager
 
     }
 
+    public String updateCustomer(User user, String email, String name, String oldpassword, String newpassword, String address, String zipcode, String phone) throws DataException
+    {
+        String res = "";
+        List<User> users = db.getUsers();
+
+        for (User u : users)
+        {
+            if (u.getEmail().equals(email) && u.getId() != user.getId())
+            {
+                res = "Email er allerede i brug";
+            }
+        }
+        if (!email.contains("@") && !email.contains("."))
+        {
+            res = "Venligst indtast en gyldig email";
+        }
+
+        if (!user.getPassword().equals(oldpassword))
+        {
+            res = "Venligst indtast din nuværende adgangskode, for at ændre adgangskoden";
+        }
+        if (newpassword.isEmpty() || newpassword == null || newpassword.length() < 4)
+        {
+            res = "Venligst indtast en adgangskode med en minimumslængde på 4";
+        }
+
+        if (name.isEmpty() || name == null || isCaracter(name) == false)
+        {
+            res = "Venligst indtast dit navn (må kun indeholde bogstaver)";
+        }
+
+        if (address.isEmpty() || address == null)
+        {
+            res = "Venligst indtast din adresse";
+        }
+        if (zipcode.isEmpty() || zipcode == null || zipcode.length() != 4 || isNumber(zipcode) == false)
+        {
+            res = "Venligst indtast et gyldigt postnummer på 4 cifre";
+        }
+        if (phone.isEmpty() || phone == null || phone.length() != 8 || isNumber(phone) == false)
+        {
+            res = "Venligst indtast et gyldigt 8-cifret telefonnummer";
+        }
+
+        if (res.isEmpty())
+        {
+            user.setEmail(email);
+            user.setName(name);
+            user.setPassword(newpassword);
+            user.setAddress(address);
+            user.setZipcode(zipcode);
+            user.setPhone(phone);
+            db.updateUser(user);
+            res = "Dine information er opdateret";
+        }
+
+        return res;
+
+    }
+
     public User getUser(int user_id) throws DataException
     {
         return db.getUser(user_id);
     }
-    
-    
+
 }

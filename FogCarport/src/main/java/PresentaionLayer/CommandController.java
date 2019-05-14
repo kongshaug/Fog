@@ -52,6 +52,9 @@ public class CommandController
         commands.put("employeeupdate", new EmployeeUpdateCommand("employeeinfo.jsp"));
         commands.put("deleteemployee", new DeleteEmployeeCommand("employeelist.jsp"));
         
+        commands.put("customerinfo", new CustomerInfoCommand("customerinfo.jsp"));
+        commands.put("customerupdate", new CustomerUpdateCommand("customerinfo.jsp"));
+        commands.put("deletecustomer", new DeleteCustomerCommand("index.jsp"));
     }
 
     public static synchronized Command from(String path)

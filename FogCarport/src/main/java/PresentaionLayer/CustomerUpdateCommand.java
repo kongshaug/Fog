@@ -6,7 +6,6 @@
 package PresentaionLayer;
 
 import DataLayer.DataException;
-import FunctionLayer.Enum.Role;
 import FunctionLayer.FunctionManager;
 import FunctionLayer.HelpingClasses.User;
 import javax.servlet.http.HttpServletRequest;
@@ -15,14 +14,14 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author aamandajuhl
+ * @author sofieamalielandt
  */
-public class EmployeeUpdateCommand implements Command
+public class CustomerUpdateCommand implements Command
 {
 
     private String target;
 
-    public EmployeeUpdateCommand(String target)
+    public CustomerUpdateCommand(String target)
     {
         this.target = target;
     }
@@ -31,19 +30,20 @@ public class EmployeeUpdateCommand implements Command
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
         HttpSession session = request.getSession();
-        User employee = (User) session.getAttribute("employee");
+        User user = (User) session.getAttribute("user");
 
         String email = request.getParameter("email");
         String name = request.getParameter("name");
         String address = request.getParameter("address");
         String zipcode = request.getParameter("zipcode");
         String phone = request.getParameter("phone");
-
-        String message = manager.updateEmployee(employee, email, name, address, zipcode, phone);
+        String oldpassword = request.getParameter("oldpassword");
+        String newpassword = request.getParameter("newpassword");
+        
+        String message = manager.updateCustomer(user, email, name, oldpassword, newpassword, address, zipcode, phone);
 
         request.setAttribute("message", message);
-
         return target;
-
     }
+
 }
