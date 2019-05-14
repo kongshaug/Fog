@@ -48,7 +48,9 @@ public class CommandController
         commands.put("newemployee", new NewEmployeeCommand("addemployee.jsp", "employee.jsp"));
         commands.put("addemployee", new AddEmployeeCommand("addemployee.jsp"));
         commands.put("employeelist", new EmployeeListCommand("employeelist.jsp"));
-        commands.put("employeeinfo", new EmployeeInfoCommand("employeeinfo.jsp"));
+        commands.put("employeeinfo", new EmployeeInfoCommand("employeeinfo.jsp", "employeelist.jsp"));
+        commands.put("employeeupdate", new EmployeeUpdateCommand("employeeinfo.jsp"));
+        commands.put("deleteemployee", new DeleteEmployeeCommand("employeelist.jsp"));
         
     }
 

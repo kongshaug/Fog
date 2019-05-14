@@ -21,6 +21,13 @@
 
         %>
         <form action="Fog" method="POST">
+            <select name="role">
+                <%                    
+                    out.println("<option>Medarbejder</option>");
+                    out.println("<option>Administrator</option>");
+
+                %>
+            </select><br><br>
             Navn<br>
             <input type="text" name="name" placeholder="Indtast navn" value="" minlength="2" required> <br><br>
             E-mail<br>
@@ -34,14 +41,7 @@
             Adgangskode<br>
             <input type="password" name="password" value="1234" minlength="4" required disabled="disabled">
             <br>(Altid 1234 for nye medarbejdere)
-            <br><br>
-            <select name="role">
-                <%                    
-                    out.println("<option>Medarbejder</option>");
-                    out.println("<option>Administrator</option>");
-
-                %>
-            </select>
+           
             <br><br><button name="command" value="addemployee">Opret medarbejder</button> <br><br>
 
 

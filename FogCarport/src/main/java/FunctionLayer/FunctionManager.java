@@ -154,10 +154,10 @@ public class FunctionManager
         if (user != null)
         {
             db.removeUser(user);
-            res = "Brugeren er nu slettet";
+            res = "Medarbejderen er nu slettet";
         } else
         {
-            res = "Brugeren kunne ikke slettes";
+            res = "Medarbejderen kunne ikke slettes";
         }
         return res;
     }
@@ -368,14 +368,14 @@ public class FunctionManager
         return db.getEmployeeByEmail(email);
     }
 
-    public String updateUser(User user, String email, String name, String address, String zipcode, String phone) throws DataException, SQLException
+    public String updateUser(User user, String email, String name, String address, String zipcode, String phone) throws DataException
     {
         String res = "";
         List<User> users = db.getUsers();
 
         for (User u : users)
         {
-            if (u.getEmail().equals(email))
+            if (u.getEmail().equals(email) && u.getId() != user.getId())
             {
                 res = "Email eksisterer allerede";
             }
@@ -413,7 +413,7 @@ public class FunctionManager
             user.setZipcode(zipcode);
             user.setPhone(phone);
             db.updateUser(user);
-            return "Medarbejderens information er opdateret";
+            res = "Medarbejderens information er opdateret";
         }
 
         return res;
@@ -424,4 +424,6 @@ public class FunctionManager
     {
         return db.getUser(user_id);
     }
+    
+    
 }

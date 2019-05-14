@@ -6,9 +6,12 @@
 package PresentaionLayer;
 
 import DataLayer.DataException;
+import FunctionLayer.Enum.Role;
 import FunctionLayer.FunctionManager;
+import FunctionLayer.HelpingClasses.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -27,9 +30,20 @@ public class EmployeeUpdateCommand implements Command
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
-        
-        
-        return target;
-    }
+        HttpSession session = request.getSession();
+        User employee = (User) session.getAttribute("employee");
 
+        String email = request.getParameter("email");
+        String name = request.getParameter("name");
+        String address = request.getParameter("address");
+        String zipcode = request.getParameter("zipcode");
+        String phone = request.getParameter("phone");
+
+        String message = manager.updateUser(employee, email, name, address, zipcode, phone);
+
+        request.setAttribute("message", message);
+
+        return target;
+
+    }
 }
