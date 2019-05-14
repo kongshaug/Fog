@@ -722,6 +722,8 @@ public class CarportMapper
             statement.setInt(2, order_id);
 
             statement.executeUpdate();
+            
+            dbc.close();
 
         } catch (SQLException e)
         {

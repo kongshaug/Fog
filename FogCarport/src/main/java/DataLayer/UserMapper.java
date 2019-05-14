@@ -322,6 +322,29 @@ public class UserMapper
             throw new DataException(e.getMessage());
         }
     }
+    
+    public void updatePassword(int user_id, String password) throws DataException
+    {
+        try{
+            
+            dbc.open();
+            
+            String query = "UPDATE Fog.`user`"
+                    + "SET `password` = ? WHERE `user_id` = ?;";
+            
+            PreparedStatement statement = dbc.preparedStatement(query);
+            
+            statement.setString(1, password);
+            statement.setInt(2, user_id);
+            statement.executeUpdate();
+            
+            dbc.close();
+            
+        } catch(SQLException e)
+        {
+            throw new DataException(e.getMessage());
+        }
+    }
 
     public void removeUser(User user) throws DataException
     {
