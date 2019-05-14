@@ -15,55 +15,55 @@ import java.util.ArrayList;
  */
 public class GenerateDrawing {
 
-    public String drawFlatRoofFromTop(Carport carport) {
-        int hight = carport.getDepth();
-        int width = carport.getWidth();
-        int numberOflægter = 0;
-
-        for (Part part : carport.getRoof().getParts()) {
-            if ("45x195 spærtræ ubh.".equals(part.getName())) {
-                numberOflægter = part.getQuantity();
-                //try to add: to safe time inside loop break;
-            }
-        }
-
-        double count = 100;
-
-        String drawing = "<SVG viewBox=\"0 0 " + (width + 500) + " " + (hight + 500) + "\" width= \"100%\" hight= \"50%\">"
-                + "<rect x=\"100\" y =\"100\" height=\"" + hight + "\" width=\"" + width + "\""
-                + "        style=\"stroke:#000000; fill: #ffffff\"/>\n";
-
-        drawing += "<rect x =\"100\" y =\"100\" height=\"" + (hight) + "\" width=\"" + 30 + "\""
-                + "        style=\"stroke:#000000; fill: #fff000\"/>";
-
-        drawing += "<rect x =\"" + (width + 70) + "\" y =\"100\" height=\"" + (hight) + "\" width=\"" + 30 + "\""
-                + "        style=\"stroke:#000000; fill: #fff000\"/>";
-
-        //first and last spær
-        drawing += "<rect x =\"100\" y =\"" + 100 + "\" height=\"" + (15) + "\" width=\"" + (width) + "\""
-                + "        style=\"stroke:#000000; fill: #f00000\"/>";
-
-        drawing += "<rect x =\"100\" y =\"" + (hight + 100 - 15) + "\" height=\"" + (15) + "\" width=\"" + (width) + "\""
-                + "        style=\"stroke:#000000; fill: #f00000\"/>";
-        for (int i = 1; i <= numberOflægter - 2; i++) {
-            count += ((hight) / (numberOflægter - 1));
-            drawing += "<rect x =\"100\" y =\"" + (count) + "\" height=\"" + (15) + "\" width=\"" + (width) + "\""
-                    + "        style=\"stroke:#000000; fill: #ff0000\"/>";
-
-        }
-
-        drawing += "<line x1=\"80\" y1=\"100\" x2=\"80\" y2=\"" + (hight + 100) + "\" style=\"stroke:#000000;\" stroke-width=\"5\" />";
-
-        drawing += "<line x1=\"100\" y1=\"" + (hight + 120) + "\" x2=\"" + (width + 100) + "\" y2=\"" + (hight + 120) + "\" style=\"stroke:#000000;\" stroke-width=\"5\" />";
-
-        drawing += "<text x=\"" + (width / 2) + "\" y=\"" + (hight + 140) + "\" fill=\"blue\">brede " + width + " cm</text>";
-
-        drawing += "<text  x=\"" + (width + 110) + "\" y=\"" + (hight / 2 + 100) + "\" fill=\"blue\"  >længde " + hight + " cm</text>";
-
-        drawing += "</svg>";
-
-        return drawing;
-    }
+//    public String drawFlatRoofFromTop(Carport carport) {
+//        int hight = carport.getDepth();
+//        int width = carport.getWidth();
+//        int numberOflægter = 0;
+//
+//        for (Part part : carport.getRoof().getParts()) {
+//            if ("45x195 spærtræ ubh.".equals(part.getName())) {
+//                numberOflægter = part.getQuantity();
+//                //try to add: to safe time inside loop break;
+//            }
+//        }
+//
+//        double count = 100;
+//
+//        String drawing = "<SVG viewBox=\"0 0 " + (width + 500) + " " + (hight + 500) + "\" width= \"100%\" hight= \"50%\">"
+//                + "<rect x=\"100\" y =\"100\" height=\"" + hight + "\" width=\"" + width + "\""
+//                + "        style=\"stroke:#000000; fill: #ffffff\"/>\n";
+//
+//        drawing += "<rect x =\"100\" y =\"100\" height=\"" + (hight) + "\" width=\"" + 30 + "\""
+//                + "        style=\"stroke:#000000; fill: #fff000\"/>";
+//
+//        drawing += "<rect x =\"" + (width + 70) + "\" y =\"100\" height=\"" + (hight) + "\" width=\"" + 30 + "\""
+//                + "        style=\"stroke:#000000; fill: #fff000\"/>";
+//
+//        //first and last spær
+//        drawing += "<rect x =\"100\" y =\"" + 100 + "\" height=\"" + (15) + "\" width=\"" + (width) + "\""
+//                + "        style=\"stroke:#000000; fill: #f00000\"/>";
+//
+//        drawing += "<rect x =\"100\" y =\"" + (hight + 100 - 15) + "\" height=\"" + (15) + "\" width=\"" + (width) + "\""
+//                + "        style=\"stroke:#000000; fill: #f00000\"/>";
+//        for (int i = 1; i <= numberOflægter - 2; i++) {
+//            count += ((hight) / (numberOflægter - 1));
+//            drawing += "<rect x =\"100\" y =\"" + (count) + "\" height=\"" + (15) + "\" width=\"" + (width) + "\""
+//                    + "        style=\"stroke:#000000; fill: #ff0000\"/>";
+//
+//        }
+//
+//        drawing += "<line x1=\"80\" y1=\"100\" x2=\"80\" y2=\"" + (hight + 100) + "\" style=\"stroke:#000000;\" stroke-width=\"5\" />";
+//
+//        drawing += "<line x1=\"100\" y1=\"" + (hight + 120) + "\" x2=\"" + (width + 100) + "\" y2=\"" + (hight + 120) + "\" style=\"stroke:#000000;\" stroke-width=\"5\" />";
+//
+//        drawing += "<text x=\"" + (width / 2) + "\" y=\"" + (hight + 140) + "\" fill=\"white\">brede " + width + " cm</text>";
+//
+//        drawing += "<text  x=\"" + (width + 110) + "\" y=\"" + (hight / 2 + 100) + "\" fill=\"white\"  >længde " + hight + " cm</text>";
+//
+//        drawing += "</svg>";
+//
+//        return drawing;
+//    }
 ///start metoden
 
     public String drawRoofFromTop(Carport carport) {
@@ -97,48 +97,48 @@ public class GenerateDrawing {
                 + "        style=\"stroke:#000000; fill: #ffffff\"/>\n";
 
         drawing += "<rect x =\"0\" y =\"0\" height=\"" + (hight) + "\" width=\"" + 30 + "\""
-                + "        style=\"stroke:#000000; fill: #fff000\"/>";
+                + "        style=\"stroke:#000000; fill: #000000\"/>";
 
         drawing += "<rect x =\"" + (width - 30) + "\" y =\"0\" height=\"" + (hight) + "\" width=\"" + 30 + "\""
-                + "        style=\"stroke:#000000; fill: #fff000\"/>";
+                + "        style=\"stroke:#000000; fill: #000000\"/>";
 
         //first and last spær
         drawing += "<rect x =\"0\" y =\"" + 0 + "\" height=\"" + (5) + "\" width=\"" + (width) + "\""
-                + "        style=\"stroke:#000000; fill: #f00000\"/>";
+                + "        style=\"stroke:#000000; fill: #A9A9A9\"/>";
 
         drawing += "<rect x =\"0\" y =\"" + (hight - 5) + "\" height=\"" + (5) + "\" width=\"" + (width) + "\""
-                + "        style=\"stroke:#000000; fill: #f00000\"/>";
+                + "        style=\"stroke:#000000; fill: #A9A9A9\"/>";
         for (int i = 1; i <= numberOfSpær - 2; i++) {
             count += ((hight) / (numberOfSpær - 1));
             drawing += "<rect x =\"0\" y =\"" + (count) + "\" height=\"" + (5) + "\" width=\"" + (width) + "\""
-                    + "        style=\"stroke:#000000; fill: #ff0000\"/>";
+                    + "        style=\"stroke:#000000; fill: #A9A9A9\"/>";
 
         }
 
         //first and last lægte
         drawing += "<rect x =\"" + (count2) + "\" y =\"0\" height=\"" + (hight) + "\" width=\"5\""
-                + "        style=\"stroke:#000000; fill: #ff0000\"/>";
+                + "        style=\"stroke:#000000; fill: #C0C0C0\"/>";
 
         drawing += "<rect x =\"" + (width) + "\" y =\"0\" height=\"" + (hight) + "\" width=\"5\""
-                + "        style=\"stroke:#000000; fill: #ff0000\"/>";
+                + "        style=\"stroke:#000000; fill: #C0C0C0\"/>";
         for (int i = 1; i <= numberOflægter - 2; i++) {
 
             count2 += ((width) / (numberOflægter - 1));
 
             drawing += "<rect x =\"" + (count2) + "\" y =\"0\" height=\"" + (hight) + "\" width=\"5\""
-                    + "        style=\"stroke:#000000; fill: #ff0000\"/>";
+                    + "        style=\"stroke:#000000; fill: #C0C0C0\"/>";
         }
 
-        drawing += "<text x=\"" + (width / 2 - 150) + "\" y=\"" + (hight + 30) + "\" fill=\"yellow\">din carport set fra toppen har bredden " + width + " cm</text>";
+        drawing += "<text x=\"" + (width / 2 - 150) + "\" y=\"" + (hight + 30) + "\" fill=\"white\">din carport set fra toppen har bredden " + width + " cm</text>";
 
-        drawing += "<text  x=\"" + (width + 10) + "\" y=\"" + (hight / 2 + 15) + "\" fill=\"yellow\"  >dybde " + hight + "</text>";
+        drawing += "<text  x=\"" + (width + 10) + "\" y=\"" + (hight / 2 + 15) + "\" fill=\"white\"  >dybde " + hight + "</text>";
 
         if (carport.getShed() != null) {
             drawing += drawShed(carport);
         }
         drawing += "</svg>";
 
-        drawing += drawflatFront(carport);
+        drawing += drawFront(carport);
         drawing += drawflatSide(carport);
 
         return drawing;
@@ -181,7 +181,7 @@ public class GenerateDrawing {
         return drawing;
     }
 
-    public String drawflatFront(Carport carport) {
+    public String drawFront(Carport carport) {
 
         // this method could be change to flat roof side by adding beams from side
         int hight = carport.getDepth();
@@ -224,7 +224,7 @@ public class GenerateDrawing {
 
         }
 
-        drawing += "<text x=\"" + (width / 2 - 100) + "\" y=\"" + (roofHight+230) + "\" fill=\"yellow\">din carport set fra fronten har bredden " + width + " cm</text>";
+        drawing += "<text x=\"" + (width / 2 - 100) + "\" y=\"" + (roofHight+230) + "\" fill=\"white\">din carport set fra fronten har bredden " + width + " cm</text>";
 
         drawing += "</svg>";
 
@@ -277,7 +277,7 @@ public class GenerateDrawing {
                     + "style=\"stroke:#000000; fill: #ffffff\"/>\n";
 
             drawing += "<rect x=\"" + (10 + (shedDeapth / 2)) + "\" y =\""+(roofHight+40)+"\" height=\"170\" width=\"80\""
-                    + "style=\"stroke:#000000; fill: #ffffff\"/>\n";
+                    + "style=\"stroke:#000000; fill: #C0C0C0\"/>\n";
 
             drawing += "<circle cx=\"" + (80 + (shedDeapth / 2)) + "\" cy=\""+(roofHight+120)+"\" r=\"5\"/>";
 
