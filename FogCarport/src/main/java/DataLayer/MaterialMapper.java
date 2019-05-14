@@ -10,6 +10,7 @@ import FunctionLayer.HelpingClasses.RoofType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -157,6 +158,98 @@ public class MaterialMapper
         } catch (SQLException ex)
         {
             throw new DataException(ex.getMessage());
+        }
+    }
+
+    public void addMaterial(Material newMaterial) throws DataException
+    {
+        try
+        {
+            dbc.open();
+            
+            String query = "INSERT INTO Fog.`materials`"
+                    + "(`material_name`, `unit`, `material_class`, `price`) VALUES (?,?,?,?);";
+            
+            int material_id;
+            String material_name = newMaterial.getName();
+            String unit = newMaterial.getUnit();
+            String material_class = newMaterial.getMaterial_class();
+            Double price = newMaterial.getPrice();
+            
+            PreparedStatement statement = dbc.preparedStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+            statement.setString(1, material_name);
+            statement.setString(2, unit);
+            statement.setString(3, material_class);
+            statement.setDouble(4, price);
+            
+            ResultSet rs = statement.getGeneratedKeys();
+            if (rs.next())
+            {
+                material_id = rs.getInt(1);
+                newMaterial.setId(material_id);
+            }
+
+            dbc.close();
+        } catch (SQLException e)
+        {
+            throw new DataException(e.getMessage());
+        }
+
+    }
+    
+    public void deleteMaterial(Material material) throws DataException
+    {
+        try{
+            dbc.open();
+            
+            String query = "DELETE FROM Fog.`materials`"
+                    + "WHERE `material_id` = ?;";
+            
+            int material_id = material.getId();
+            
+             PreparedStatement statement = dbc.preparedStatement(query);
+            statement.setInt(1, material_id);
+            statement.executeUpdate();
+            
+            dbc.close();
+            
+        } catch(SQLException e)
+        {
+            throw new DataException(e.getMessage());
+        }
+    }
+    
+    public void updateMaterial(Material material) throws DataException
+    {
+        try{
+            
+            dbc.open();
+            
+            String query = "UPDATE Fog.`materials`"
+                    + "SET `material_name` = ?, `unit` = ?, `material_class` = ?, `price` = ? "
+                    + "WHERE `material_id` = ?;";
+            
+            String material_name = material.getName();
+            String unit = material.getUnit();
+            String material_class = material.getMaterial_class();
+            Double price = material.getPrice();
+            int material_id = material.getId();
+            
+            PreparedStatement statement = dbc.preparedStatement(query);
+            
+            statement.setString(1, material_name);
+            statement.setString(2, unit);
+            statement.setString(3, material_class);
+            statement.setDouble(4, price);
+            statement.setInt(5, material_id);
+            statement.executeUpdate();
+            
+            dbc.close();
+            
+        } catch(SQLException e)
+        {
+            throw new DataException(e.getMessage());
         }
     }
 

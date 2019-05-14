@@ -47,6 +47,21 @@ public class Material
         return id;
     }
 
+    public void setId(int id)
+    {
+        this.id = id;
+    }
+
+    public void setUnit(String unit)
+    {
+        this.unit = unit;
+    }
+
+    public void setMaterial_class(String material_class)
+    {
+        this.material_class = material_class;
+    }
+
     public String getName()
     {
         return name;
