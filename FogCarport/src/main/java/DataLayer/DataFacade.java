@@ -180,4 +180,19 @@ public class DataFacade
     {
         um.updatePassword(user_id, password);
     }
+    
+    public void updateMaterial(Material material) throws DataException
+    {
+        mm.updateMaterial(material);
+    }
+    
+    public void addMaterial(Material newMaterial) throws DataException
+    {
+        mm.addMaterial(newMaterial);
+    }
+    
+    public void deleteMaterial(Material material) throws DataException
+    {
+        mm.deleteMaterial(material);
+    }
 }

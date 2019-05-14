@@ -163,13 +163,7 @@ public class FunctionManager
             }
         } else
         {
-            if (user.getRole().equals(Role.CUSTOMER))
-            {
-                res = "Din bruger kunne ikke slettes";
-            } else
-            {
-                res = "Medarbejderen kunne ikke slettes";
-            }
+            res = "Brugeren kunne ikke slettes";
         }
         return res;
     }
@@ -398,20 +392,20 @@ public class FunctionManager
             res = "Venligst indtast en gyldig email";
         }
 
-        if (name.isEmpty() || name == null || isCaracter(name) == false)
+        if (name == null || name.isEmpty() || isCaracter(name) == false)
         {
             res = "Venligst indtast dit navn (må kun indeholde bogstaver)";
         }
 
-        if (address.isEmpty() || address == null)
+        if (address == null || address.isEmpty())
         {
             res = "Venligst indtast din adresse";
         }
-        if (zipcode.isEmpty() || zipcode == null || zipcode.length() != 4 || isNumber(zipcode) == false)
+        if (zipcode == null || zipcode.isEmpty() || zipcode.length() != 4 || isNumber(zipcode) == false)
         {
             res = "Venligst indtast et gyldigt postnummer på 4 cifre";
         }
-        if (phone.isEmpty() || phone == null || phone.length() != 8 || isNumber(phone) == false)
+        if (phone == null || phone.isEmpty() || phone.length() != 8 || isNumber(phone) == false)
         {
             res = "Venligst indtast et gyldigt 8-cifret telefonnummer";
         }
@@ -452,25 +446,25 @@ public class FunctionManager
         {
             res = "Venligst indtast din nuværende adgangskode, for at ændre adgangskoden";
         }
-        if (newpassword.isEmpty() || newpassword == null || newpassword.length() < 4)
+        if (newpassword == null || newpassword.isEmpty() || newpassword.length() < 4)
         {
             res = "Venligst indtast en adgangskode med en minimumslængde på 4";
         }
 
-        if (name.isEmpty() || name == null || isCaracter(name) == false)
+        if (name == null || name.isEmpty() || isCaracter(name) == false)
         {
             res = "Venligst indtast dit navn (må kun indeholde bogstaver)";
         }
 
-        if (address.isEmpty() || address == null)
+        if (address == null || address.isEmpty())
         {
             res = "Venligst indtast din adresse";
         }
-        if (zipcode.isEmpty() || zipcode == null || zipcode.length() != 4 || isNumber(zipcode) == false)
+        if (zipcode == null || zipcode.isEmpty() || zipcode.length() != 4 || isNumber(zipcode) == false)
         {
             res = "Venligst indtast et gyldigt postnummer på 4 cifre";
         }
-        if (phone.isEmpty() || phone == null || phone.length() != 8 || isNumber(phone) == false)
+        if (phone == null || phone.isEmpty() || phone.length() != 8 || isNumber(phone) == false)
         {
             res = "Venligst indtast et gyldigt 8-cifret telefonnummer";
         }
@@ -490,7 +484,7 @@ public class FunctionManager
         return res;
 
     }
-    
+
     public String updatePassword(User user, String oldpassword, String newpassword) throws DataException
     {
         String res = "";
@@ -499,7 +493,7 @@ public class FunctionManager
         {
             res = "Venligst indtast din nuværende adgangskode, for at ændre adgangskoden";
         }
-        if (newpassword.isEmpty() || newpassword == null || newpassword.length() < 4)
+        if (newpassword == null || newpassword.isEmpty() || newpassword.length() < 4)
         {
             res = "Venligst indtast en adgangskode med en minimumslængde på 4";
         }
@@ -518,6 +512,63 @@ public class FunctionManager
     public User getUser(int user_id) throws DataException
     {
         return db.getUser(user_id);
+    }
+
+    public String updateMaterial(Material material, String material_name, String unit, String material_class, double price) throws DataException
+    {
+        String res = "";
+
+        if (material_name == null || material_name.isEmpty())
+        {
+            res = "Udfyld venligst materialets nye navn";
+        }
+        if (unit == null || unit.isEmpty() || isCaracter(unit) == false)
+        {
+            res = "Udfyld venligst en passende enhed for materialet";
+        }
+        if(material_class == null || material_class.isEmpty() || isCaracter(material_class) == false)
+        {
+            res = "Angiv venligst en passende kategori for materialet";
+        }
+        
+        if (price == 0 || isDouble(price) == false)
+        {
+            res = "Angiv venligst en ny pris for materialet";
+        }
+
+        if (res.isEmpty())
+        {
+            material.setName(material_name);
+            material.setUnit(unit);
+            material.setMaterial_class(material_class);
+            material.setPrice(price);
+            db.updateMaterial(material);
+
+            res = "Materialet er opdateret";
+        }
+
+        return res;
+
+    }
+
+    private boolean isDouble(Double d)
+    {
+        String str = Double.toString(d);
+        return isNumber(str);
+    }
+
+//    public String deleteMaterial(Material material)
+//    {
+//        String res = "";
+//        if (material != null)
+//        {
+//            
+//        }
+//    }
+//    
+    public List<Material> getAllMaterials() throws DataException
+    {
+        return db.getMaterials();
     }
 
 }
