@@ -553,7 +553,7 @@ public class FunctionManager
 
     private boolean isDouble(Double d)
     {
-        String str = Double.toString(d);
+        String str = String.valueOf(d);
         return isNumber(str);
     }
 
