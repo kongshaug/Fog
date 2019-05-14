@@ -526,11 +526,11 @@ public class FunctionManager
         {
             res = "Udfyld venligst en passende enhed for materialet";
         }
-        if(material_class == null || material_class.isEmpty() || isCaracter(material_class) == false)
+        if (material_class == null || material_class.isEmpty() || isCaracter(material_class) == false)
         {
             res = "Angiv venligst en passende kategori for materialet";
         }
-        
+
         if (price == 0 || isDouble(price) == false)
         {
             res = "Angiv venligst en ny pris for materialet";
@@ -557,15 +557,52 @@ public class FunctionManager
         return isNumber(str);
     }
 
-//    public String deleteMaterial(Material material)
-//    {
-//        String res = "";
-//        if (material != null)
-//        {
-//            
-//        }
-//    }
-//    
+    public String deleteMaterial(Material material) throws DataException
+    {
+        String res = "";
+        if (material != null)
+        {
+            db.deleteMaterial(material);
+            res = "Materialet er slettet";
+        } else
+        {
+            res = "Materialet kunne ikke slettes";
+        }
+        return res;
+    }
+    
+    public String addMaterial(Material newMaterial) throws DataException
+    {
+        String res = "";
+        
+        if (newMaterial.getName() == null || newMaterial.getName() .isEmpty())
+        {
+            res = "Udfyld venligst materialets navn";
+        }
+        if (newMaterial.getUnit() == null || newMaterial.getUnit().isEmpty() || isCaracter(newMaterial.getUnit()) == false)
+        {
+            res = "Udfyld venligst en passende enhed for materialet";
+        }
+        if (newMaterial.getMaterial_class() == null || newMaterial.getMaterial_class().isEmpty() || isCaracter(newMaterial.getMaterial_class()) == false)
+        {
+            res = "Angiv venligst en passende kategori for materialet";
+        }
+
+        if (newMaterial.getPrice() == 0 || isDouble(newMaterial.getPrice()) == false)
+        {
+            res = "Angiv venligst en pris for materialet";
+        }
+
+        if (res.isEmpty())
+        {
+            db.addMaterial(newMaterial);
+            res = "Materialet er tilføjet til listen";
+        }
+
+        return res;
+        
+    }
+
     public List<Material> getAllMaterials() throws DataException
     {
         return db.getMaterials();
