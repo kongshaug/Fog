@@ -58,6 +58,10 @@ public class CommandController
 
         commands.put("employeeprofile", new EmployeeProfileCommand("employeeprofile.jsp"));
         commands.put("employeeupdatepassword", new PasswordCommand("employeeprofile.jsp"));
+        
+        commands.put("materials", new MaterialsCommand("materials.jsp", "employee.jsp"));
+        commands.put("material", new MaterialCommand("material.jsp"));
+        commands.put("materialupdate", new UpdateMaterialCommand("material.jsp"));
 
     }
 

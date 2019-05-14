@@ -116,7 +116,7 @@
                 display: -webkit-flex;
                 -webkit-align-items: center; 
             }
-            
+
             .menu li #usericon img {
                 text-align: center;
                 padding: 10px 10px 7px 10px;
@@ -266,14 +266,16 @@
                             {
                                 out.println(" <li><button id=\"usericon\" name=\"command\" value=\"employeeprofile\" title=\"Profil\"><img src=\"images/user.png\"></button></li>");
                                 out.println(" <li><button id=\"home\" name=\"command\" value=\"employee\" title=\"Ordrer i systemet\"><img src=\"images/home.png\"></button></li>");
-                                out.println(" <li><button id=\"user\" name=\"command\" value=\"employee\" title=\"Opdater materialer\"><img src=\"images/tools.png\"></button></li>");
+                                out.println(" <li><button id=\"user\" name=\"command\" value=\"materials\" onclick=\"enterpassword()\" title=\"Opdater materialer\"><img src=\"images/tools.png\"></button></li>");
                                 out.println(" <li><button id=\"user\" name=\"command\" value=\"employeelist\" title=\"Rediger medarbejder\"><img src=\"images/edituser.png\"></button></li>");
                                 out.println(" <li><button id=\"user\" name=\"command\" value=\"newemployee\" title=\"Opret ny medarbejder\"><img src=\"images/adduser.png\"></button></li>");
+                                out.println("<input type=\"hidden\" id=\"password\" name=\"password\" value=\"\">");
                             } else if (user.getRole() == Role.EMPLOYEE)
                             {
                                 out.println(" <li><button id=\"usericon\" name=\"command\" value=\"employeeprofile\" title=\"Profil\"><img src=\"images/user.png\"></button></li>");
                                 out.println(" <li><button id=\"home\" name=\"command\" value=\"employee\" title=\"Ordrer i systemet\"><img src=\"images/home.png\"></button></li>");
-                                out.println(" <li><button id=\"user\" name=\"command\" value=\"employee\" title=\"Opdater materialer\"><img src=\"images/tools.png\"></button></li>");
+                                out.println(" <li><button id=\"user\" name=\"command\" value=\"materials\" onclick=\"enterpassword()\" title=\"Opdater materialer\"><img src=\"images/tools.png\"></button></li>");
+                                out.println("<input type=\"hidden\" id=\"password\" name=\"password\" value=\"\">");
                             }
                         } else
                         {
@@ -285,3 +287,11 @@
             </center>
         </form>
         <br><br><br><br><br>
+
+        <script>
+            function enterpassword() {
+                var enter_password = prompt("Indtast venligst din adgangskode", "");
+                document.getElementById('password').value = enter_password;
+            }
+
+        </script>

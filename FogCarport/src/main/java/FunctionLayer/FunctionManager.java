@@ -607,5 +607,9 @@ public class FunctionManager
     {
         return db.getMaterials();
     }
-
+    
+    public Material getMaterial(int material_id) throws DataException
+    {
+        return db.getMaterial(material_id);
+    }
 }
