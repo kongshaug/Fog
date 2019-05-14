@@ -517,6 +517,14 @@ public class FunctionManager
     public String updateMaterial(Material material, String material_name, String unit, String material_class, double price) throws DataException
     {
         String res = "";
+        
+        for (Material m : getAllMaterials())
+        {
+            if (material_name.equals(m.getName()) && material.getId() != m.getId())
+        {
+            res = "Materiale med samme navn eksisterer allerede";
+        }
+        }
 
         if (material_name == null || material_name.isEmpty())
         {
@@ -531,7 +539,7 @@ public class FunctionManager
             res = "Angiv venligst en passende kategori for materialet";
         }
 
-        if (price == 0 || isDouble(price) == false)
+        if (price == 0)
         {
             res = "Angiv venligst en ny pris for materialet";
         }
@@ -549,12 +557,6 @@ public class FunctionManager
 
         return res;
 
-    }
-
-    private boolean isDouble(Double d)
-    {
-        String str = String.valueOf(d);
-        return isNumber(str);
     }
 
     public String deleteMaterial(Material material) throws DataException
@@ -575,6 +577,14 @@ public class FunctionManager
     {
         String res = "";
         
+        for (Material m : getAllMaterials())
+        {
+            if (newMaterial.getName().equals(m.getName()))
+        {
+            res = "Materiale med samme navn eksisterer allerede";
+        }
+        }
+        
         if (newMaterial.getName() == null || newMaterial.getName() .isEmpty())
         {
             res = "Udfyld venligst materialets navn";
@@ -588,7 +598,7 @@ public class FunctionManager
             res = "Angiv venligst en passende kategori for materialet";
         }
 
-        if (newMaterial.getPrice() == 0 || isDouble(newMaterial.getPrice()) == false)
+        if (newMaterial.getPrice() == 0)
         {
             res = "Angiv venligst en pris for materialet";
         }

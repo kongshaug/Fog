@@ -35,7 +35,7 @@
             <button name="command" value="material">Opdater materiale</button>
             <button name="command" value="deletematerial">Slet materiale</button>
             <br><br>
-            <button name="command" value="addmaterial">Tilføj materiale</button>
+            <button name="command" value="materialadd">Tilføj et materiale</button>
         </form>
         
     </div>

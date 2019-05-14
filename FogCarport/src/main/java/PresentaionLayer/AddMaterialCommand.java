@@ -8,6 +8,7 @@ package PresentaionLayer;
 import DataLayer.DataException;
 import FunctionLayer.FunctionManager;
 import FunctionLayer.HelpingClasses.Material;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,31 +17,46 @@ import javax.servlet.http.HttpSession;
  *
  * @author sofieamalielandt
  */
-public class UpdateMaterialCommand implements Command
+public class AddMaterialCommand implements Command
 {
+
     private String target;
-    
-    public UpdateMaterialCommand(String target)
+    private String error;
+
+    public AddMaterialCommand(String target, String error)
     {
         this.target = target;
+        this.error = error;
     }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
+
         HttpSession session = request.getSession();
-        Material material = (Material) session.getAttribute("material");
 
         String name = request.getParameter("name");
         String unit = request.getParameter("unit");
         String material_class = request.getParameter("material_class");
         double price = Double.parseDouble(request.getParameter("price"));
-        
-        String message = manager.updateMaterial(material, name, unit, material_class, price);
-        
+
+        Material material = new Material(name, unit, material_class, price);
+
+        String message = manager.addMaterial(material);
         request.setAttribute("message", message);
+
+        if (message.equals("Materialet er tilføjet til listen"))
+        {
+            List<Material> materials = manager.getAllMaterials();
+            session.setAttribute("materials", materials);
+            return target;
+        }
+        else
+        {
+            return error;
+        }
+
         
-        return target; 
     }
-    
+
 }

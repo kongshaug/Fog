@@ -6,11 +6,8 @@
 package PresentaionLayer;
 
 import DataLayer.DataException;
-import FunctionLayer.Enum.Role;
 import FunctionLayer.FunctionManager;
 import FunctionLayer.HelpingClasses.Material;
-import FunctionLayer.HelpingClasses.User;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,11 +17,12 @@ import javax.servlet.http.HttpSession;
  *
  * @author sofieamalielandt
  */
-public class MaterialCommand implements Command
+public class DeleteMaterialCommand implements Command
 {
+
     private String target;
-    
-    public MaterialCommand(String target)
+
+    public DeleteMaterialCommand(String target)
     {
         this.target = target;
     }
@@ -33,10 +31,6 @@ public class MaterialCommand implements Command
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        
-        if (user.getRole().equals(Role.ADMIN) || user.getRole().equals(Role.EMPLOYEE))
-        {
 
         String material_str = request.getParameter("material");
         
@@ -47,25 +41,17 @@ public class MaterialCommand implements Command
         }
         
         int material_id = Integer.parseInt(material_str);
-        
         Material material = manager.getMaterial(material_id);
-        List<String> material_classes = new ArrayList<>();
-        material_classes.add("træ");
-        material_classes.add("tag");
-        material_classes.add("beslag og skruer");
-        
-        session.setAttribute("material", material);
-        session.setAttribute("material_classes", material_classes);
-        
-        return target;
-        
-        }
-        else
+
+        String message = manager.deleteMaterial(material);
+        request.setAttribute("message", message);
+
+        if (message.equals("Materialet er slettet"))
         {
-            request.setAttribute("errormessage", "Adgang nægtet");
-            return "shop.jsp";
+            List<Material> materials = manager.getAllMaterials();
+            session.setAttribute("materials", materials);
         }
-        
+        return target;
     }
-    
+
 }

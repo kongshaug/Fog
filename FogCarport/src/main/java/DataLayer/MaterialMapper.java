@@ -182,6 +182,7 @@ public class MaterialMapper
             statement.setString(2, unit);
             statement.setString(3, material_class);
             statement.setDouble(4, price);
+             statement.executeUpdate();
             
             ResultSet rs = statement.getGeneratedKeys();
             if (rs.next())

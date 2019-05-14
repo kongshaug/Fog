@@ -27,6 +27,14 @@ public class Material
         this.price = price;
     }
 
+    public Material(String name, String unit, String material_class, double price)
+    {
+        this.name = name;
+        this.unit = unit;
+        this.material_class = material_class;
+        this.price = price;
+    }
+
     public double getPrice()
     {
         return price;
