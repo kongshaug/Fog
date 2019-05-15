@@ -43,10 +43,25 @@ public class Roof
     {
         this.parts = parts;
     }
+    
+    public void resetParts()
+    {
+        this.parts = new ArrayList<>();
+    }
 
     public int getId()
     {
         return id;
+    }
+
+    public void setSlope(int slope)
+    {
+        this.slope = slope;
+    }
+
+    public void setType(RoofType type)
+    {
+        this.type = type;
     }
 
     public int getSlope()
@@ -63,5 +78,7 @@ public class Roof
     {
         return parts;
     }
+    
+    
 
 }
