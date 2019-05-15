@@ -160,6 +160,11 @@ public class DataFacade
     {
         cm.removeRoof(roof);
     }
+    
+    public void deleteShedId(Carport carport) throws DataException
+    {
+        cm.removeShedId(carport);
+    }
 
     public User getEmployeeByEmail(String email) throws DataException
     {

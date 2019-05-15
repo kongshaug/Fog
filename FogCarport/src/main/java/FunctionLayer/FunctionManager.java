@@ -651,6 +651,7 @@ public class FunctionManager
             {
                 if (shed_width == 0 && shed_depth == 0)
                 {
+                    db.deleteShedId(carport);
                     db.removeShed(carport.getShed());
                     carport.setShed(null);
                     res = "Carporten er opdateret og skuret er fjernet";

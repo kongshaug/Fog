@@ -334,6 +334,27 @@ public class CarportMapper
         }
     }
 
+    public void removeShedId(Carport carport) throws DataException
+    {
+        try
+        {
+            dbc.open();
+
+            String query = "UPDATE Fog.`carport`"
+                    + "SET `shed_id` = null WHERE `carport_id` = ?;";
+            
+            PreparedStatement statement = dbc.preparedStatement(query);
+            statement.setInt(1, carport.getId());
+            statement.executeUpdate();
+
+            dbc.close();
+
+        } catch (SQLException ex)
+        {
+            throw new DataException(ex.getMessage());
+        }
+    }
+
     public void removeCarport(Carport carport) throws DataException
     {
         try
