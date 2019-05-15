@@ -16,12 +16,12 @@
     <form action="Fog" method="POST">
         <div id="shop">
             <%            Order order = (Order) session.getAttribute("order");
-                out.println("Ordrer: " + order.getOrder_id() + ", Bestilt: " + order.getOrder_date() + "<br><br>");
+                out.println("Ordrer: " + order.getOrder_id() + "Carport: " + order.getCarport().getId() + ", Bestilt: " + order.getOrder_date() + "<br><br>");
                 out.println("Kundenummer: " + order.getUser().getId() + " - Navn: " + order.getUser().getName() + "<br>");
                 out.println("E-mail: " + order.getUser().getEmail() + " - Telefon: " + order.getUser().getPhone() + "<br>");
-                out.println("Adresse: " + order.getUser().getAddress() + ", " + order.getUser().getZipcode() + "<br>");
+                out.println("Adresse: " + order.getUser().getAddress() + ", " + order.getUser().getZipcode() + "<br><br>");
                 out.println("Afsendt: " + order.getShipped() + "<br>");
-                
+
                 if (order.getShipped().equals("Ordren er endnu ikke afsendt"))
                 {
                     out.println("<br><button name=\"command\" value=\"shipped\">Afsend ordren</button><br>");
@@ -124,7 +124,8 @@
             %>
             <br><br>
             <select name="type" id="type" disabled="disabled">
-                <%                      List<RoofType> slopedroofs = (List<RoofType>) session.getAttribute("slopedroofs");
+                <option disabled value="0">Vælg tagtype</option> 
+                <%                    List<RoofType> slopedroofs = (List<RoofType>) session.getAttribute("slopedroofs");
                     List<RoofType> flatroofs = (List<RoofType>) session.getAttribute("flatroofs");
 
                     if (order.getCarport().getRoof().getSlope() == 0)
@@ -215,28 +216,48 @@
         <%
             if (order.getCarport().getShed() != null)
             {
-                out.println("Bredde af skur:&nbsp;&nbsp;<input type=\"number\" pattern=\"[0-2000]*\" name=\"shedDepth\" id=\"shedDepth\" value=\"" + order.getCarport().getShed().getDepth() + "\"min=\"210\" max=\"720\" disabled=\"disabled\">&nbsp;&nbsp;");
-                out.println("Dybde afskur:&nbsp;&nbsp;<input type=\"number\" pattern=\"[0-2000]*\" name=\"shedWidth\" id=\"shedWidth\" value=\"" + order.getCarport().getShed().getWidth() + "\" min=\"210\" max=\"770\" disabled=\"disabled\">");
+                out.println("Bredde af skur:&nbsp;&nbsp;<input type=\"number\" pattern=\"[0-2000]*\" name=\"shedWidth\" id=\"shedWidth\" value=\"" + order.getCarport().getShed().getWidth() + "\" min=\"210\" max=\"770\" disabled=\"disabled\">");
+                out.println("Dybde af skur:&nbsp;&nbsp;<input type=\"number\" pattern=\"[0-2000]*\" name=\"shedDepth\" id=\"shedDepth\" value=\"" + order.getCarport().getShed().getDepth() + "\"min=\"210\" max=\"720\" disabled=\"disabled\">&nbsp;&nbsp;");
+
             } else
             {
-                out.println("Bredde af skur:&nbsp;&nbsp;<input type=\"number\" pattern=\"[0-2000]*\" name=\"shedDepth\" id=\"shedDepth\" value=\"210\"min=\"210\" max=\"720\" disabled=\"disabled\">&nbsp;&nbsp;");
-                out.println("Dybde af skur:&nbsp;&nbsp;<input type=\"number\" pattern=\"[0-2000]*\" name=\"shedWidth\" id=\"shedWidth\" value=\"210\" min=\"210\" max=\"770\" disabled=\"disabled\">");
+                out.println("Bredde af skur:&nbsp;&nbsp;<input type=\"number\" pattern=\"[0-2000]*\" name=\"shedWidth\" id=\"shedWidth\" value=\"0\" min=\"210\" max=\"770\" disabled=\"disabled\">");
+                out.println("Dybde af skur:&nbsp;&nbsp;<input type=\"number\" pattern=\"[0-2000]*\" name=\"shedDepth\" id=\"shedDepth\" value=\"0\"min=\"210\" max=\"720\" disabled=\"disabled\">&nbsp;&nbsp;");
+
             }
 
         %>
         </div>
-
         <br>
 
         <div>
+            <button id="save" name="command" value="updatecarport" style="display:none;">Gem ændringer</button>
+            &nbsp;&nbsp;
             <button name="command" value="viewpartlist">Se stykliste</button>
             &nbsp;&nbsp;
             <button name="command" value="viewdrawing">Se tegning</button>
         </div>
     </form>
+    <br>
+    <div id="button"><button id="rediger" onclick="update()">Rediger carport</button> </div>
 
     <script>
 
+        function update() {
+            document.getElementById("width").removeAttribute("disabled");
+            document.getElementById("depth").removeAttribute("disabled");
+            document.getElementById("flat").removeAttribute("disabled");
+            document.getElementById("sloped").removeAttribute("disabled");
+            document.getElementById("type").removeAttribute("disabled");
+            document.getElementById("hældning").removeAttribute("disabled");
+            document.getElementById("shed").removeAttribute("disabled");
+            document.getElementById("shedDepth").removeAttribute("disabled");
+            document.getElementById("shedWidth").removeAttribute("disabled");
+            document.getElementById("save").style.display = "inline-block";
+            document.getElementById("rediger").style.display = "none";
+            document.getElementById("button").setAttribute("hidden", "true");
+
+        }
         function disable()
         {
             var flatoptions = [...document.getElementsByClassName("fladt")];

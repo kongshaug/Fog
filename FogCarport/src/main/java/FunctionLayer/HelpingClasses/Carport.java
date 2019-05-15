@@ -43,6 +43,7 @@ public class Carport
 
     public Carport(int id, int width, int depth, Roof roof, Shed shed)
     {
+        this.id = id;
         this.width = width;
         this.depth = depth;
         this.roof = roof;
@@ -53,6 +54,7 @@ public class Carport
 
     public Carport(int id, int width, int depth, Roof roof)
     {
+        this.id = id;
         this.width = width;
         this.depth = depth;
         this.roof = roof;

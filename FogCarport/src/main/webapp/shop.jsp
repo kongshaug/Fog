@@ -78,7 +78,7 @@
         <br><br>
         Bredde af skur:&nbsp;&nbsp;<input type="number" pattern="[0-2000]*" name="shedWidth" value="210" min="210" max="720">
         &nbsp;&nbsp;
-        Dybde afskur:&nbsp;&nbsp;<input type="number" pattern="[0-2000]*" name="shedDepth" value="210" min="210" max="770">
+        Dybde af skur:&nbsp;&nbsp;<input type="number" pattern="[0-2000]*" name="shedDepth" value="210" min="210" max="770">
     </div>
     <br>
     <div><button name="command" value="drawing">Beregn carport</button></div>
