@@ -20,11 +20,29 @@ public class CalculateRoof
 
     private CalculatePackages cp;
 
+    /**
+     *
+     * @param cp
+     */
     public CalculateRoof(CalculatePackages cp)
     {
         this.cp = cp;
     }
 
+    /**
+     * calculates all the materials needed to make a flat roof and puts it in the list of materials in the carport object
+     * @param carport
+     * @param spær
+     * @param beslagV
+     * @param beslagH
+     * @param BeslagSkruer
+     * @param lægte
+     * @param RoofScrews
+     * @param understern
+     * @param overstern
+     * @param vandbræt
+     * @param skruer
+     */
     public void calculateFlatRoof(Carport carport, Material spær, Material beslagV, Material beslagH, Material BeslagSkruer,
             Material lægte, Material RoofScrews, Material understern, Material overstern, Material vandbræt, Material skruer)
     {
@@ -119,6 +137,12 @@ public class CalculateRoof
 
     }
 
+    /**
+     * if the roof of a carport is flat the palstsmo plates are calculatet to put on the roof of the carport
+     * @param carport
+     * @param Plastmo
+     * @param Plastmotætning
+     */
     public void calculatePlatsmo(Carport carport, Material Plastmo, Material Plastmotætning)
     {
         int depth = carport.getDepth();
@@ -143,6 +167,27 @@ public class CalculateRoof
         carport.getRoof().setParts(parts);
     }
 
+    /**
+     * if the roof is sloped this method calculates all the materials needed to make the roof and puts it in the list of materials needed in the roof object
+     * @param carport
+     * @param spær
+     * @param taglægte
+     * @param spærBeslag
+     * @param BeslagSkruer
+     * @param screws
+     * @param universalV
+     * @param universalH
+     * @param ToplægteHolderen
+     * @param Tegl
+     * @param Rygsten
+     * @param RygstensBeslag
+     * @param Beklædning
+     * @param vandBræt
+     * @param trykImpBræt
+     * @param sternScrews
+     * @param Skrue1
+     * @param Skrue2
+     */
     public void calculateSlopeRoof(Carport carport, Material spær, Material taglægte, Material spærBeslag, Material BeslagSkruer, Material screws, Material universalV, Material universalH,
             Material ToplægteHolderen, Material Tegl, Material Rygsten, Material RygstensBeslag, Material Beklædning, Material vandBræt, Material trykImpBræt, Material sternScrews, Material Skrue1, Material Skrue2)
     {

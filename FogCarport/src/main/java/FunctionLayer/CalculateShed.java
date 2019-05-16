@@ -20,11 +20,30 @@ public class CalculateShed
 
     private CalculatePackages cp;
 
+    /**
+     *
+     * @param cp
+     */
     public CalculateShed(CalculatePackages cp)
     {
         this.cp = cp;
     }
 
+    /**
+     * Calculates what materials needed to bouild the shead for a carport and puts it in the list of materials for the shed
+     * @param carport
+     * @param stolpe
+     * @param bræt
+     * @param vinkelbeslag
+     * @param skruer
+     * @param beklædning
+     * @param skrue1
+     * @param skrue2
+     * @param Lægte
+     * @param stalddørsgrebene
+     * @param hængselet
+     * @param planker
+     */
     public void calcShedFlatRoof(Carport carport, Material stolpe, Material bræt, Material vinkelbeslag, Material skruer, Material beklædning, Material skrue1, Material skrue2, Material Lægte, Material stalddørsgrebene, Material hængselet, Material planker)
     {
         int depth = carport.getShed().getDepth();
@@ -82,6 +101,21 @@ public class CalculateShed
         parts.add(inderbrætSkruer);
     }
 
+    /**
+     * calculates the materials needed to make a shed when the roof of the carport is sloaped
+     * @param carport
+     * @param stolpe
+     * @param bræt
+     * @param vinkelbeslag
+     * @param skruer
+     * @param beklædning
+     * @param skrue1
+     * @param skrue2
+     * @param Lægte
+     * @param stalddørsgrebene
+     * @param hængselet
+     * @param planker
+     */
     public void calcShedSlopeRoof(Carport carport, Material stolpe, Material bræt, Material vinkelbeslag, Material skruer, Material beklædning, Material skrue1, Material skrue2, Material Lægte, Material stalddørsgrebene, Material hængselet, Material planker)
     {
         int depth = carport.getShed().getDepth();
