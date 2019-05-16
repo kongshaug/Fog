@@ -58,17 +58,21 @@ public class CommandController
 
         commands.put("employeeprofile", new EmployeeProfileCommand("employeeprofile.jsp"));
         commands.put("employeeupdatepassword", new PasswordCommand("employeeprofile.jsp"));
-        
+
         commands.put("materials", new MaterialsCommand("materials.jsp", "employee.jsp"));
         commands.put("material", new MaterialCommand("material.jsp"));
         commands.put("materialupdate", new UpdateMaterialCommand("material.jsp"));
-        commands.put("addmaterial", new AddMaterialCommand("materials.jsp","addmaterial.jsp"));
+        commands.put("addmaterial", new AddMaterialCommand("materials.jsp", "addmaterial.jsp"));
         commands.put("materialadd", new MaterialAddCommand("addmaterial.jsp"));
         commands.put("deletematerial", new DeleteMaterialCommand("materials.jsp"));
         commands.put("addrooftype", new RoofTypeCommand("addrooftype.jsp"));
         commands.put("rooftypeadd", new AddRoofTypeCommand("materials.jsp", "addrooftype.jsp"));
+        commands.put("rooftypes", new RooftypesCommand("rooftypes.jsp", "employee.jsp"));
+        commands.put("rooftype", new RooftypeInfoCommand("rooftype.jsp"));
+        commands.put("updaterooftype", new UpdateRooftypeCommand("rooftype.jsp"));
+        commands.put("deleterooftype", new DeleteRooftypeCommand("rooftypes.jsp"));
+
         commands.put("updatecarport", new UpdateCarportCommand("employeeorder.jsp"));
-        
 
     }
 

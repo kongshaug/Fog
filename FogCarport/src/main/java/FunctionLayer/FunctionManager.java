@@ -754,7 +754,7 @@ public class FunctionManager
 
         for (RoofType r : db.getRoofs())
         {
-            if (name.toLowerCase().equals(r.getName().toLowerCase()))
+            if (name.toLowerCase().equals(r.getName().toLowerCase()) && rooftype.getId() != r.getId())
             {
                 res += "Tagtype med samme navn eksisterer allerede\n";
             }
@@ -789,7 +789,7 @@ public class FunctionManager
 
         for (RoofType r : db.getRoofs())
         {
-            if (name.toLowerCase().equals(r.getName().toLowerCase()))
+            if (name.toLowerCase().equals(r.getName().toLowerCase()) && rooftype.getId() != r.getId())
             {
                 res += "Tagtype med samme navn eksisterer allerede\n";
             }

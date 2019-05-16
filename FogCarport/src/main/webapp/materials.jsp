@@ -38,6 +38,8 @@
             OBS! Hvis materialer, tilknyttet en tagtype, slettes,<br>
             slettes tagtypen også!<br><br>
             <button name="command" value="materialadd">Tilføj et materiale</button>
+            <br><br>
+            <button name="command" value="rooftypes">Se tagtyper</button>
             
         </form>
         

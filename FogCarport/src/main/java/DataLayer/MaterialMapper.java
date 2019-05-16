@@ -264,7 +264,7 @@ public class MaterialMapper
 
             String query = "UPDATE Fog.`roof_type`"
                     + "SET `roof_type_name` = ?, `roof_material1` = ?, `roof_material2` = ?"
-                    + "WHERE `roof_type_id` = ?;";
+                    + " WHERE `roof_type_id` = ?;";
 
             String roof_type_name = rooftype.getName();
             int material1 = rooftype.getM1().getId();
@@ -295,7 +295,7 @@ public class MaterialMapper
 
             String query = "UPDATE Fog.`roof_type`"
                     + "SET `roof_type_name` = ?, `roof_material1` = ?"
-                    + "WHERE `roof_type_id` = ?;";
+                    + " WHERE `roof_type_id` = ?;";
 
             String roof_type_name = rooftype.getName();
             int material1 = rooftype.getM1().getId();
