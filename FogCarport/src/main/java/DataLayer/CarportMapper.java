@@ -289,7 +289,7 @@ public class CarportMapper
             throw new DataException(ex.getMessage());
         }
     }
-    
+
     public void removeRoof(Roof roof) throws DataException
     {
         try
@@ -303,7 +303,7 @@ public class CarportMapper
             int roof_id = roof.getId();
             statement.setInt(1, roof_id);
             statement.executeUpdate();
-            
+
             dbc.close();
 
         } catch (SQLException ex)
@@ -311,8 +311,8 @@ public class CarportMapper
             throw new DataException(ex.getMessage());
         }
     }
-    
-     public void removeShed(Shed shed) throws DataException
+
+    public void removeShed(Shed shed) throws DataException
     {
         try
         {
@@ -325,7 +325,7 @@ public class CarportMapper
             int shed_id = shed.getId();
             statement.setInt(1, shed_id);
             statement.executeUpdate();
-            
+
             dbc.close();
 
         } catch (SQLException ex)
@@ -333,8 +333,29 @@ public class CarportMapper
             throw new DataException(ex.getMessage());
         }
     }
-     
-      public void removeCarport(Carport carport) throws DataException
+
+    public void removeShedId(Carport carport) throws DataException
+    {
+        try
+        {
+            dbc.open();
+
+            String query = "UPDATE Fog.`carport`"
+                    + "SET `shed_id` = null WHERE `carport_id` = ?;";
+            
+            PreparedStatement statement = dbc.preparedStatement(query);
+            statement.setInt(1, carport.getId());
+            statement.executeUpdate();
+
+            dbc.close();
+
+        } catch (SQLException ex)
+        {
+            throw new DataException(ex.getMessage());
+        }
+    }
+
+    public void removeCarport(Carport carport) throws DataException
     {
         try
         {
@@ -347,12 +368,117 @@ public class CarportMapper
             int carport_id = carport.getId();
             statement.setInt(1, carport_id);
             statement.executeUpdate();
-            
+
             dbc.close();
 
         } catch (SQLException ex)
         {
             throw new DataException(ex.getMessage());
+        }
+    }
+
+    public void updateCarport(Carport carport) throws DataException
+    {
+        try
+        {
+            dbc.open();
+
+            String queryNoShed = "UPDATE Fog.`carport`"
+                    + "SET `depth` = ?, `width` = ? WHERE `carport_id` = ?;";
+
+            String queryWithShed = "UPDATE Fog.`carport`"
+                    + "SET `depth` = ?, `width` = ?, `shed_id` = ? WHERE `carport_id` = ?;";
+
+            int carport_id = carport.getId();
+            int depth = carport.getDepth();
+            int width = carport.getWidth();
+            if (carport.getShed() != null)
+            {
+                int shed_id = carport.getShed().getId();
+
+                if (shed_id == 0)
+                {
+                    addShed(carport.getShed());
+                    shed_id = carport.getShed().getId();
+                }
+
+                PreparedStatement statement = dbc.preparedStatement(queryWithShed);
+                statement.setInt(1, depth);
+                statement.setInt(2, width);
+                statement.setInt(3, shed_id);
+                statement.setInt(4, carport_id);
+                statement.executeUpdate();
+            } else
+            {
+                PreparedStatement statement = dbc.preparedStatement(queryNoShed);
+                statement.setInt(1, depth);
+                statement.setInt(2, width);
+                statement.setInt(3, carport_id);
+                statement.executeUpdate();
+            }
+
+            dbc.close();
+
+        } catch (SQLException e)
+        {
+            throw new DataException(e.getMessage());
+        }
+
+    }
+
+    public void updateRoof(Roof roof) throws DataException
+    {
+        try
+        {
+            dbc.open();
+
+            String query = "UPDATE Fog.`roof`"
+                    + "SET `roof_slope` = ?, `roof_type` = ? WHERE `roof_id` = ?;";
+
+            int roof_id = roof.getId();
+            int roof_slope = roof.getSlope();
+            int roof_type = roof.getType().getId();
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+
+            statement.setInt(1, roof_slope);
+            statement.setInt(2, roof_type);
+            statement.setInt(3, roof_id);
+            statement.executeUpdate();
+
+            dbc.close();
+
+        } catch (SQLException e)
+        {
+            throw new DataException(e.getMessage());
+        }
+    }
+
+    public void updateShed(Shed shed) throws DataException
+    {
+        try
+        {
+            dbc.open();
+
+            String query = "UPDATE Fog.`shed`"
+                    + "SET `width` = ?, `depth` = ? WHERE `shed_id` = ?;";
+
+            int shed_id = shed.getId();
+            int width = shed.getWidth();
+            int depth = shed.getDepth();
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+
+            statement.setInt(1, width);
+            statement.setInt(2, depth);
+            statement.setInt(3, shed_id);
+            statement.executeUpdate();
+
+            dbc.close();
+
+        } catch (SQLException e)
+        {
+            throw new DataException(e.getMessage());
         }
     }
 
@@ -362,7 +488,6 @@ public class CarportMapper
         {
             RoofType rooftype = null;
 
-            dbc.open();
             String query = "SELECT * FROM Fog.`roof_type`"
                     + "WHERE (`roof_type_id` = ?);";
 
@@ -389,7 +514,6 @@ public class CarportMapper
                 }
             }
 
-            //dbc.close();
             return rooftype;
 
         } catch (SQLException ex)
@@ -402,7 +526,6 @@ public class CarportMapper
     {
         try
         {
-            dbc.open();
             String query = "INSERT INTO Fog.shed"
                     + "(`width`,`depth`)"
                     + "VALUES (?,?);";
@@ -722,7 +845,7 @@ public class CarportMapper
             statement.setInt(2, order_id);
 
             statement.executeUpdate();
-            
+
             dbc.close();
 
         } catch (SQLException e)
@@ -751,7 +874,7 @@ public class CarportMapper
             statement.setString(2, order_paid);
             statement.setInt(3, order_id);
             statement.executeUpdate();
-            
+
             dbc.close();
 
         } catch (SQLException e)
@@ -759,7 +882,7 @@ public class CarportMapper
             throw new DataException(e.getMessage());
         }
     }
-    
+
     public void removeOrder(Order order) throws DataException
     {
         try

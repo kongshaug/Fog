@@ -38,7 +38,7 @@ public class MaterialsCommand implements Command
         String password = request.getParameter("password");
         User user = (User) session.getAttribute("user");
 
-        if (user.getRole().equals(Role.ADMIN) || user.getRole().equals(Role.EMPLOYEE) && password.equals(user.getPassword()))
+        if (password.equals(user.getPassword()) && user.getRole().equals(Role.ADMIN) || password.equals(user.getPassword()) && user.getRole().equals(Role.EMPLOYEE))
         {
             List<Material> materials = manager.getAllMaterials();
             session.setAttribute("materials", materials);

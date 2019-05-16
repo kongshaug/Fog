@@ -26,6 +26,16 @@ public class Shed
         this.parts = new ArrayList<>();
     }
 
+    public void setDepth(int depth)
+    {
+        this.depth = depth;
+    }
+
+    public void setWidth(int width)
+    {
+        this.width = width;
+    }
+
     public Shed(int depth, int width)
     {
         this.depth = depth;
@@ -61,6 +71,11 @@ public class Shed
     public void setParts(ArrayList<Part> parts)
     {
         this.parts = parts;
+    }
+    
+    public void resetParts()
+    {
+        this.parts = new ArrayList<>();
     }
     
 }

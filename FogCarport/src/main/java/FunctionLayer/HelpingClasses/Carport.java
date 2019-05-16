@@ -43,6 +43,7 @@ public class Carport
 
     public Carport(int id, int width, int depth, Roof roof, Shed shed)
     {
+        this.id = id;
         this.width = width;
         this.depth = depth;
         this.roof = roof;
@@ -53,6 +54,7 @@ public class Carport
 
     public Carport(int id, int width, int depth, Roof roof)
     {
+        this.id = id;
         this.width = width;
         this.depth = depth;
         this.roof = roof;
@@ -63,6 +65,31 @@ public class Carport
     public int getId()
     {
         return id;
+    }
+
+    public void setWidth(int width)
+    {
+        this.width = width;
+    }
+
+    public void setDepth(int depth)
+    {
+        this.depth = depth;
+    }
+
+    public void setRoof(Roof roof)
+    {
+        this.roof = roof;
+    }
+
+    public void setShed(Shed shed)
+    {
+        this.shed = shed;
+    }
+
+    public void setTotal_price(double total_price)
+    {
+        this.total_price = total_price;
     }
 
     public int getWidth()
@@ -98,6 +125,11 @@ public class Carport
     public void setParts(ArrayList<Part> parts)
     {
         this.parts = parts;
+    }
+    
+    public void resetParts()
+    {
+        this.parts = new ArrayList<>();
     }
 
     private double calcTotalPrice()

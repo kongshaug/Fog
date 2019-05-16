@@ -160,12 +160,17 @@ public class DataFacade
     {
         cm.removeRoof(roof);
     }
+    
+    public void deleteShedId(Carport carport) throws DataException
+    {
+        cm.removeShedId(carport);
+    }
 
     public User getEmployeeByEmail(String email) throws DataException
     {
         return um.getEmployeeByEmail(email);
     }
-    
+
     public List<User> getEmployeesAndAdmins() throws DataException
     {
         return um.getEmployeesAndAdmins();
@@ -175,24 +180,45 @@ public class DataFacade
     {
         um.updateUser(user);
     }
-    
+
     public void updatePassword(int user_id, String password) throws DataException
     {
         um.updatePassword(user_id, password);
     }
-    
+
     public void updateMaterial(Material material) throws DataException
     {
         mm.updateMaterial(material);
     }
-    
+
     public void addMaterial(Material newMaterial) throws DataException
     {
         mm.addMaterial(newMaterial);
     }
-    
+
     public void deleteMaterial(Material material) throws DataException
     {
         mm.deleteMaterial(material);
+    }
+
+    public void updateCarport(Carport carport) throws DataException
+    {
+        if (carport.getShed() != null)
+        {
+            if (carport.getShed().getId() == 0)
+            {
+                cm.updateCarport(carport);
+                cm.updateRoof(carport.getRoof());
+            } else
+            {
+                cm.updateCarport(carport);
+                cm.updateRoof(carport.getRoof());
+                cm.updateShed(carport.getShed());
+            }
+        } else
+        {
+            cm.updateCarport(carport);
+            cm.updateRoof(carport.getRoof());
+        }
     }
 }
