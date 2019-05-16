@@ -1,0 +1,12 @@
+2019-05-14T18:52:24.297+02:00 OFF     Only this message will be logged
+2019-05-14T18:52:24.301+02:00 SEVERE  This is the message to be logged
+2019-05-14T18:52:24.301+02:00 WARNING Message to be logged
+2019-05-14T18:52:30.270+02:00 OFF     Only this message will be logged
+2019-05-14T18:52:30.271+02:00 SEVERE  This is the message to be logged
+2019-05-14T18:52:30.272+02:00 WARNING Message to be logged
+2019-05-14T18:54:31.993+02:00 OFF     Only this message will be logged
+2019-05-14T18:54:31.995+02:00 SEVERE  This is the program working to be logged
+2019-05-14T18:54:31.995+02:00 WARNING Message to be logged
+2019-05-14T18:54:38.525+02:00 OFF     Only this message will be logged
+2019-05-14T18:54:38.527+02:00 SEVERE  This is the program working to be logged
+2019-05-14T18:54:38.528+02:00 WARNING Message to be logged
