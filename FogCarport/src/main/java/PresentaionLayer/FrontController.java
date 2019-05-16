@@ -38,7 +38,11 @@ public class FrontController extends HttpServlet
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
+
     {
+        logger ld = new logger();
+        
+        
         try
         {
             FunctionManager manager = FunctionManager.getInstance();
@@ -56,12 +60,13 @@ public class FrontController extends HttpServlet
             request.setAttribute("message", ce.getMessage());
             RequestDispatcher dispatcher = request.getRequestDispatcher("error.jsp");
             dispatcher.forward(request, response);
-            
+            ld.run("could not find the command, you fucked up the presentaion layer, FIX IT!");
         } catch (IOException | ServletException | DataException e)
         {
             request.setAttribute("message", e.getMessage());
             RequestDispatcher dispatcher = request.getRequestDispatcher("error.jsp");
             dispatcher.forward(request, response);
+            ld.run(" you fucked up the system, FIX IT!");
         } 
         }
 

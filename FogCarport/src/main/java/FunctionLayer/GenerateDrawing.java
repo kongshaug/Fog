@@ -92,9 +92,9 @@ public class GenerateDrawing {
         double count = 0;
         double count2 = 0;
 
-        String drawing = "<SVG viewBox=\"0 0 " + (width + 250) + " " + (hight + 250) + "\" width= \"100%\" >"
+        String drawing = "<SVG viewBox=\"-100 0 " + (width + 250) + " " + (hight + 250) + "\" width= \"100%\" >"
                 + "<rect x=\"0\" y =\"0\" height=\"" + hight + "\" width=\"" + width + "\""
-                + "        style=\"stroke:#000000; fill: #ffffff\"/>\n";
+                + "        style=\"stroke:#000000; fill: #ffffff\" />\n";
 
         drawing += "<rect x =\"0\" y =\"0\" height=\"" + (hight) + "\" width=\"" + 30 + "\""
                 + "        style=\"stroke:#000000; fill: #000000\"/>";
@@ -191,7 +191,7 @@ public class GenerateDrawing {
 
         String drawing = "";
 
-        drawing += "<SVG viewBox=\"0 0 " + (width + 100) + " " + (hight + 100) + "\" width= \"100%\" hight= \"50%\">";
+        drawing += "<SVG viewBox=\"-30 0 " + (width + 100) + " " + (hight + 100) + "\" width= \"100%\" hight= \"50%\">";
         //fsdfsdf
            if (slope != 0) {
                
@@ -224,7 +224,7 @@ public class GenerateDrawing {
 
         }
 
-        drawing += "<text x=\"" + (width / 2 - 100) + "\" y=\"" + (roofHight+230) + "\" fill=\"white\">din carport set fra fronten har bredden " + width + " cm</text>";
+        drawing += "<text x=\"" + (width / 2 - 130) + "\" y=\"" + (roofHight+230) + "\" fill=\"white\">din carport set fra fronten har bredden " + width + " cm</text>";
 
         drawing += "</svg>";
 
@@ -250,7 +250,7 @@ public class GenerateDrawing {
 
         String drawing = "";
 
-        drawing += "<SVG viewBox=\"0 0 " + (width + 100) + " " + (hight + 100) + "\" width= \"100%\" hight= \"50%\">";
+        drawing += "<SVG viewBox=\"-50 0 " + (width + 100) + " " + (hight + 100) + "\" width= \"100%\" hight= \"50%\">";
         int roofHight = 0;
         if (carport.getRoof().getSlope() != 0) {
 
