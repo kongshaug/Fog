@@ -235,4 +235,9 @@ public class DataFacade
     {
         mm.updateRoofType(rooftype);
     }
+    
+    public void updateRoofTypeWith1Material(RoofType rooftype) throws DataException
+    {
+        mm.updateRoofTypeWith1Material(rooftype);
+    }
 }
