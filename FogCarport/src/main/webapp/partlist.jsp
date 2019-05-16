@@ -8,7 +8,7 @@
 <%@page import="FunctionLayer.HelpingClasses.Carport"%>
 <%@page import="FunctionLayer.HelpingClasses.Part"%>
 <%@page import="java.util.ArrayList"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@include file = "header.jsp" %>
 <%    Order order = (Order) session.getAttribute("order");
     Carport carport = order.getCarport();
@@ -18,10 +18,10 @@
         <form action="Fog" method="POST">
             <h1>Stykliste</h1>
             <table class="partlist" id="partlist">
-                <caption><h1>TrÃ¦</h1></caption>
+                <caption><h1>Træ</h1></caption>
                 <tr>
                     <th><b>Materiale</b></th>
-                    <th><b>LÃ¦ngde</b></th>
+                    <th><b>Længde</b></th>
                     <th><b>Antal</b></th>
                     <th><b>Enhed</b></th>
                     <th><b>Beskrivelse</b></th>
@@ -33,7 +33,7 @@
 
                     for (Part p : parts)
                     {
-                        if (p.getMaterial_class().equals("trÃ¦"))
+                        if (p.getMaterial_class().equals("træ"))
                         {
                             out.println("<tr>");
                             out.println("<td>" + p.getName() + "</td>");
@@ -53,7 +53,7 @@
 
                     for (Part p : roof_parts)
                     {
-                        if (p.getMaterial_class().equals("trÃ¦"))
+                        if (p.getMaterial_class().equals("træ"))
                         {
                             out.println("<tr>");
                             out.println("<td>" + p.getName() + "</td>");
@@ -76,7 +76,7 @@
                         ArrayList<Part> shed_parts = carport.getShed().getParts();
                         for (Part p : shed_parts)
                         {
-                            if (p.getMaterial_class().equals("trÃ¦"))
+                            if (p.getMaterial_class().equals("træ"))
                             {
                                 out.println("<tr>");
                                 out.println("<td>" + p.getName() + "</td>");
@@ -102,7 +102,7 @@
                 <caption><h1>Tag</h1></caption>
                 <tr>
                     <th><b>Materiale</b></th>
-                    <th><b>LÃ¦ngde</b></th>
+                    <th><b>Længde</b></th>
                     <th><b>Antal</b></th>
                     <th><b>Enhed</b></th>
                     <th><b>Beskrivelse</b></th>
@@ -134,7 +134,7 @@
                 <caption><h1>Beslag og skruer</h1></caption>
                 <tr>
                     <th><b>Materiale</b></th>
-                    <th><b>LÃ¦ngde</b></th>
+                    <th><b>Længde</b></th>
                     <th><b>Antal</b></th>
                     <th><b>Enhed</b></th>
                     <th><b>Beskrivelse</b></th>
@@ -206,7 +206,7 @@
                 %>
             </table>
             <br><br>
-            <button name="command" value="employeeorder">GÃ¥ tilbage</button>
+            <button name="command" value="employeeorder">Gå tilbage</button>
             <input type="hidden" id="order_id" name="selected" value="<%=order.getOrder_id()%>">
             </div>
             </center>

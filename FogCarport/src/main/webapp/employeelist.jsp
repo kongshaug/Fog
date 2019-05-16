@@ -5,15 +5,15 @@
 --%>
 
 <%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@include file = "header.jsp" %>
 
 <form action="Fog" method ="POST"> 
     <center class="order">
         <div>
             <h1>Alle medarbejdere</h1>
-            <input type="text" name="search" placeholder="SÃ¸g e-mail" value=""> 
-            <br><br><button name="command" value="employeelist">SÃ¸g</button><br>
+            <input type="text" name="search" placeholder="Søg e-mail" value=""> 
+            <br><br><button name="command" value="employeelist">Søg</button><br>
             <%    String message = (String) request.getAttribute("message");
                 if (message != null)
                 {

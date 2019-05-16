@@ -6,7 +6,7 @@
 
 <%@page import="java.util.List"%>
 <%@page import="FunctionLayer.HelpingClasses.Order"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@include file = "header.jsp" %>
 
 <form action="Fog" method ="POST"> 
@@ -20,8 +20,8 @@
                     out.println(message + "<br><br>");
                 }
             %>
-            <input type="text" name="search" placeholder="SÃ¸g e-mail" value=""> 
-            <br><br><button name="command" value="employee">SÃ¸g</button><br><br>
+            <input type="text" name="search" placeholder="Søg e-mail" value=""> 
+            <br><br><button name="command" value="employee">Søg</button><br><br>
 
             <%                List<Order> orders = (List<Order>) session.getAttribute("orders");
                 for (Order o : orders)

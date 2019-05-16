@@ -4,7 +4,7 @@
     Author     : aamandajuhl
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,7 +19,7 @@
         <div>
             <img src="images/logo.png" width="30%"><br>
             <form action="Fog" method="POST">
-                <button name="command" value="shop">GÃ¥ til shoppen</button>
+                <button name="command" value="shop">Gå til shoppen</button>
             </form>
             <br>
             <%

@@ -710,7 +710,7 @@ public class FunctionManager
                 }
             }
         }
-        if (!rooftype.getRoof_class().equals("flat") || !rooftype.getRoof_class().equals("slope"))
+        if (!rooftype.getRoof_class().equals("flat") && !rooftype.getRoof_class().equals("slope"))
         {
             res += "Vælg venligst imellem de to kategorier (fladt tag, tag med rejsning)\n";
         }

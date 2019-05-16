@@ -9,7 +9,7 @@
 <%@page import="java.util.List"%>
 <%@page import="FunctionLayer.HelpingClasses.RoofType"%>
 <%@page import="FunctionLayer.HelpingClasses.Order"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@include file = "header.jsp" %>
 
 <center class="index" id="index"> 
@@ -76,13 +76,13 @@
             %>
             Salgspris:&nbsp;&nbsp;<input type="number" name="salesprice" value="<%=order.getSales_price()%>"> Kr.
             <br><br>
-            KÃ¸bspris:&nbsp;&nbsp;<%=order.getCarport().getTotal_price()%> Kr. 
+            Købspris:&nbsp;&nbsp;<%=order.getCarport().getTotal_price()%> Kr. 
             <br>
             Profit:&nbsp;&nbsp;<%=order.getProfit()%>%
             <br><br>
             <button  name="command" value="profit" onclick="setUpdate(0)">Beregn profit</button>
             &nbsp;&nbsp;
-            <button  name="command" value="profit" onclick="setUpdate(1)">FastlÃ¦g prisen</button>
+            <button  name="command" value="profit" onclick="setUpdate(1)">Fastlæg prisen</button>
 
             <input type="hidden" id="update" name="update" value="0">
             <script>
@@ -124,7 +124,7 @@
             %>
             <br><br>
             <select name="type" id="type" disabled="disabled">
-                <option disabled value="0">VÃ¦lg tagtype</option> 
+                <option disabled value="0">Vælg tagtype</option> 
                 <%                    
                     List<RoofType> slopedroofs = (List<RoofType>) session.getAttribute("slopedroofs");
                     List<RoofType> flatroofs = (List<RoofType>) session.getAttribute("flatroofs");
@@ -170,7 +170,7 @@
                 %>
             </select>
             <br><br>
-            <select name="slope" id="hÃ¦ldning" disabled="disabled">
+            <select name="slope" id="hældning" disabled="disabled">
                 <option selected>0</option>
                 <%                    for (int i = 15; i <= 45; i = i + 5)
                     {
@@ -211,8 +211,8 @@
             }
         %>
 
-        OBS! Skuret skal have min. 15 cm udhÃ¦ng pÃ¥ alle sider <br>
-        og skal derfor vÃ¦re mindst 30 cm smallere og kortere end carporten 
+        OBS! Skuret skal have min. 15 cm udhæng på alle sider <br>
+        og skal derfor være mindst 30 cm smallere og kortere end carporten 
         <br><br>
         <%
             if (order.getCarport().getShed() != null)
@@ -232,7 +232,7 @@
         <br>
 
         <div>
-            <button id="save" name="command" value="updatecarport" style="display:none;">Gem Ã¦ndringer</button>
+            <button id="save" name="command" value="updatecarport" style="display:none;">Gem ændringer</button>
             &nbsp;&nbsp;
             <button name="command" value="viewpartlist">Se stykliste</button>
             &nbsp;&nbsp;
@@ -250,7 +250,7 @@
             document.getElementById("flat").removeAttribute("disabled");
             document.getElementById("sloped").removeAttribute("disabled");
             document.getElementById("type").removeAttribute("disabled");
-            document.getElementById("hÃ¦ldning").removeAttribute("disabled");
+            document.getElementById("hældning").removeAttribute("disabled");
             document.getElementById("shed").removeAttribute("disabled");
             document.getElementById("shedDepth").removeAttribute("disabled");
             document.getElementById("shedWidth").removeAttribute("disabled");
@@ -277,9 +277,9 @@
                 x.setAttribute("hidden", "hidden");
             });
 
-            document.getElementById("hÃ¦ldning").disabled = true;
+            document.getElementById("hældning").disabled = true;
             document.getElementById("type").value = 0;
-            document.getElementById("hÃ¦ldning").value = 0;
+            document.getElementById("hældning").value = 0;
 
         }
 
@@ -300,9 +300,9 @@
                 x.removeAttribute("hidden");
             });
 
-            document.getElementById("hÃ¦ldning").disabled = false;
+            document.getElementById("hældning").disabled = false;
             document.getElementById("type").value = 0;
-            document.getElementById("hÃ¦ldning").value = 0;
+            document.getElementById("hældning").value = 0;
         }
 
         function show(value)

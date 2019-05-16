@@ -5,7 +5,7 @@
 --%>
 <%@page import="FunctionLayer.HelpingClasses.Material"%>
 <%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@include file = "header.jsp" %>
 <center class="index" id="index"> 
     <br><br><br>
@@ -23,7 +23,7 @@
         %>
         <form action="Fog" method="POST">
            <select name="material" id="material">
-                <option disabled selected>VÃ¦lg Materiale</option>            
+                <option disabled selected>Vælg Materiale</option>            
                 <%
                     for (Material m : materials)
                     {
@@ -35,7 +35,7 @@
             <button name="command" value="material">Opdater materiale</button>
             <button name="command" value="deletematerial">Slet materiale</button>
             <br><br>
-            <button name="command" value="materialadd">TilfÃ¸j et materiale</button>
+            <button name="command" value="materialadd">Tilføj et materiale</button>
         </form>
         
     </div>
