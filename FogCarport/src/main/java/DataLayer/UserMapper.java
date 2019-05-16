@@ -23,12 +23,23 @@ public class UserMapper
 
     private DBConnector dbc;
 
+    /**
+     *
+     * @param dbc
+     */
     public UserMapper(DBConnector dbc)
     {
         this.dbc = dbc;
 
     }
 
+    /**
+     * used to varify the identity of a user when logging in
+     * @param email
+     * @param password
+     * @return the user with the asociated email and password
+     * @throws DataException
+     */
     public User login(String email, String password) throws DataException
     {
         try
@@ -71,6 +82,12 @@ public class UserMapper
         }
     }
 
+    /**
+     * gets a specific user from the database
+     * @param user_id
+     * @return user from database
+     * @throws DataException
+     */
     public User getUser(int user_id) throws DataException
     {
         try
@@ -113,6 +130,11 @@ public class UserMapper
 
     }
 
+    /**
+     * 
+     * @return all the users from the database
+     * @throws DataException
+     */
     public List<User> getUsers() throws DataException
     {
         try
@@ -154,6 +176,11 @@ public class UserMapper
         }
     }
 
+    /**
+     *
+     * @return all the users working for fog
+     * @throws DataException
+     */
     public List<User> getEmployeesAndAdmins() throws DataException
     {
         try
@@ -201,6 +228,12 @@ public class UserMapper
         }
     }
 
+    /**
+     * finds a specific employee in the database
+     * @param email
+     * @return
+     * @throws DataException
+     */
     public User getEmployeeByEmail(String email) throws DataException
     {
         try
@@ -243,6 +276,11 @@ public class UserMapper
 
     }
 
+    /**
+     * creates a new user in the database
+     * @param newUser
+     * @throws DataException
+     */
     public void addUser(User newUser) throws DataException
     {
         try
@@ -288,6 +326,11 @@ public class UserMapper
 
     }
 
+    /**
+     * change the info on a user in the database
+     * @param user
+     * @throws DataException
+     */
     public void updateUser(User user) throws DataException
     {
         try
@@ -323,6 +366,12 @@ public class UserMapper
         }
     }
     
+    /**
+     * change the password for a user in the database
+     * @param user_id
+     * @param password
+     * @throws DataException
+     */
     public void updatePassword(int user_id, String password) throws DataException
     {
         try{
@@ -346,6 +395,11 @@ public class UserMapper
         }
     }
 
+    /**
+     * deletes a user in the database
+     * @param user
+     * @throws DataException
+     */
     public void removeUser(User user) throws DataException
     {
         try
