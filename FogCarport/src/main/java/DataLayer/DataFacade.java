@@ -225,4 +225,14 @@ public class DataFacade
     {
         mm.addRoofType(rooftype);
     }
+    
+    public void deleteRoofType(RoofType rooftype) throws DataException
+    {
+        mm.deleteRooftype(rooftype);
+    }
+    
+    public void updateRoofType(RoofType rooftype) throws DataException
+    {
+        mm.updateRoofType(rooftype);
+    }
 }

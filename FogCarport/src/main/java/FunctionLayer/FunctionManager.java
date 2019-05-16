@@ -13,6 +13,7 @@ import FunctionLayer.Enum.Status;
 import FunctionLayer.HelpingClasses.Carport;
 import FunctionLayer.HelpingClasses.Material;
 import FunctionLayer.HelpingClasses.Order;
+import FunctionLayer.HelpingClasses.Roof;
 import FunctionLayer.HelpingClasses.RoofType;
 import FunctionLayer.HelpingClasses.Shed;
 import FunctionLayer.HelpingClasses.User;
@@ -726,5 +727,24 @@ public class FunctionManager
         }
         return res;
 
+    }
+    
+    public List<RoofType> getRoofs() throws DataException
+    {
+        return db.getRoofs();
+    }
+    
+    public String deleteRoofType(RoofType rooftype) throws DataException
+    {
+        String res = "";
+        if (rooftype != null)
+        {
+            db.deleteRoofType(rooftype);
+            res = "Tagtypen er slettet";
+        } else
+        {
+            res = "Tagtypen kunne ikke slettes";
+        }
+        return res;
     }
 }

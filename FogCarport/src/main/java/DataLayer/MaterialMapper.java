@@ -255,7 +255,61 @@ public class MaterialMapper
             throw new DataException(e.getMessage());
         }
     }
+    
+    public void updateRoofType(RoofType rooftype) throws DataException
+    {
+        try
+        {
+            dbc.open();
 
+            String query = "UPDATE Fog.`roof_type`"
+                    + "SET `roof_type_name` = ?, `roof_material1` = ?, `roof_material2` = ?"
+                    + "WHERE `roof_type_id` = ?;";
+
+            String roof_type_name = rooftype.getName();
+            int material1 = rooftype.getM1().getId();
+            int material2 = rooftype.getM2().getId();
+            int rooftype_id = rooftype.getId();
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+
+            statement.setString(1, roof_type_name);
+            statement.setInt(2, material1);
+            statement.setInt(3, material2);
+            statement.setInt(4, rooftype_id);
+            statement.executeUpdate();
+
+            dbc.close();
+
+        } catch (SQLException e)
+        {
+            throw new DataException(e.getMessage());
+        }
+    }
+    
+    public void deleteRooftype(RoofType rooftype) throws DataException
+    {
+        try
+        {
+            dbc.open();
+
+            String query = "DELETE FROM Fog.`roof_type`"
+                    + "WHERE `roof_type_id` = ?;";
+
+            int rooftypeId = rooftype.getId();
+
+            PreparedStatement statement = dbc.preparedStatement(query);
+            statement.setInt(1, rooftypeId);
+            statement.executeUpdate();
+
+            dbc.close();
+
+        } catch (SQLException e)
+        {
+            throw new DataException(e.getMessage());
+        }
+    }
+    
     public List<RoofType> getRoofs() throws DataException
     {
         try
