@@ -35,7 +35,10 @@
             <button name="command" value="material">Opdater materiale</button>
             <button name="command" value="deletematerial">Slet materiale</button>
             <br><br>
+            OBS! Hvis materialer, tilknyttet en tagtype, slettes,<br>
+            slettes tagtypen også!<br><br>
             <button name="command" value="materialadd">Tilføj et materiale</button>
+            
         </form>
         
     </div>
