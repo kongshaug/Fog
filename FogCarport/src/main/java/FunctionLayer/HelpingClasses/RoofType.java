@@ -35,6 +35,21 @@ public class RoofType
         this.m1 = m1;
     }
 
+    public RoofType(String name, String roof_class, Material m1)
+    {
+        this.name = name;
+        this.roof_class = roof_class;
+        this.m1 = m1;
+    }
+
+    public RoofType(String name, String roof_class, Material m1, Material m2)
+    {
+        this.name = name;
+        this.roof_class = roof_class;
+        this.m1 = m1;
+        this.m2 = m2;
+    }
+
     public int getId()
     {
         return id;
@@ -58,6 +73,31 @@ public class RoofType
     public Material getM2()
     {
         return m2;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public void setRoof_class(String roof_class)
+    {
+        this.roof_class = roof_class;
+    }
+
+    public void setM1(Material m1)
+    {
+        this.m1 = m1;
+    }
+
+    public void setM2(Material m2)
+    {
+        this.m2 = m2;
     }
 
 }

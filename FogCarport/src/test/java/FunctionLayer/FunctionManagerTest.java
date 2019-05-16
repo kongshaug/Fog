@@ -88,22 +88,22 @@ public class FunctionManagerTest
 
     }
     
-     /**
-     * Test of newUser method, of class FunctionManager.
-     * @throws DataLayer.DataException
-     */
-    @Test
-    public void testNegativeNewUser() throws DataException
-    {
-        String email = "customer@hotmail.dk";
-        String password = "1234";
-
-        User user = new User(email, password, "testname", "teststreeet", "2200", "11111111", Role.CUSTOMER);
-
-        String expResult = "Email er allerede i brug";
-        String result = fm.newUser(user);
-        assertEquals(expResult, result);
-    }
+//     /**
+//     * Test of newUser method, of class FunctionManager.
+//     * @throws DataLayer.DataException
+//     */
+//    @Test
+//    public void testNegativeNewUser() throws DataException
+//    {
+//        String email = "customer@hotmail.dk";
+//        String password = "1234";
+//
+//        User user = new User(email, password, "testname", "teststreeet", "2200", "11111111", Role.CUSTOMER);
+//
+//        String expResult = "Email er allerede i brug";
+//        String result = fm.newUser(user);
+//        assertEquals(expResult, result);
+//    }
 
     /**
      * Test of isShipped method, of class FunctionManager.

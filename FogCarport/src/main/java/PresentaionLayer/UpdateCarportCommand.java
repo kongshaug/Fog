@@ -35,11 +35,12 @@ public class UpdateCarportCommand implements Command
     {
         HttpSession session = request.getSession();
         Order order = (Order) session.getAttribute("order");
-     
+
         String rooftype = request.getParameter("roof");
         String typeId = request.getParameter("type");
-        String slope = request.getParameter("slope");
-        
+        String slope_str = request.getParameter("slope");
+        int slope;
+
         int depth = Integer.parseInt(request.getParameter("depth"));
         int width = Integer.parseInt(request.getParameter("width"));
 
@@ -52,7 +53,7 @@ public class UpdateCarportCommand implements Command
             request.setAttribute("errormessage", "Vælg venligst tagtype!");
             return target;
         }
-        if (rooftype.equals("sloped") && slope.equals("0"))
+        if (rooftype.equals("sloped") && slope_str.equals("0"))
         {
             request.setAttribute("errormessage", "Vælg venligst hældning!");
             return target;
@@ -78,8 +79,18 @@ public class UpdateCarportCommand implements Command
                 shedDepth = 0;
                 shedWidth = 0;
             }
+            if (slope_str == null)
+            {
+                slope = 0;
 
-            String res = manager.updateCarport(order.getCarport(), depth, width, type, Integer.parseInt(slope), shedWidth, shedDepth);
+            } else
+            {
+                slope = Integer.parseInt(slope_str);
+            }
+            String res = manager.updateCarport(order.getCarport(), depth, width, type, slope, shedWidth, shedDepth);
+
+            order.calcSalesPrice();
+
             request.setAttribute("errormessage", res);
             session.setAttribute("order", order);
 

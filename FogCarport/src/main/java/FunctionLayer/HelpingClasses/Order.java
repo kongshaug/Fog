@@ -42,7 +42,7 @@ public class Order
         this.carport = carport;
         this.paid = Paid.IKKE_BETALT;
         this.status = Status.MODTAGET;
-        this.sales_price = carport.getTotal_price() * 1.25;
+        calcSalesPrice();
     }
 
     public int getOrder_id()
@@ -84,6 +84,12 @@ public class Order
     public Paid getPaid()
     {
         return paid;
+    }
+    
+    public void calcSalesPrice()
+    {
+        sales_price = carport.getTotal_price() * 1.25;
+        sales_price = Math.round(sales_price*100.0)/100.0;
     }
 
     public double getSales_price()

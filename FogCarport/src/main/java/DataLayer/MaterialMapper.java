@@ -166,24 +166,24 @@ public class MaterialMapper
         try
         {
             dbc.open();
-            
+
             String query = "INSERT INTO Fog.`materials`"
                     + "(`material_name`, `unit`, `material_class`, `price`) VALUES (?,?,?,?);";
-            
+
             int material_id;
             String material_name = newMaterial.getName();
             String unit = newMaterial.getUnit();
             String material_class = newMaterial.getMaterial_class();
             Double price = newMaterial.getPrice();
-            
+
             PreparedStatement statement = dbc.preparedStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             statement.setString(1, material_name);
             statement.setString(2, unit);
             statement.setString(3, material_class);
             statement.setDouble(4, price);
-             statement.executeUpdate();
-            
+            statement.executeUpdate();
+
             ResultSet rs = statement.getGeneratedKeys();
             if (rs.next())
             {
@@ -198,57 +198,59 @@ public class MaterialMapper
         }
 
     }
-    
+
     public void deleteMaterial(Material material) throws DataException
     {
-        try{
+        try
+        {
             dbc.open();
-            
+
             String query = "DELETE FROM Fog.`materials`"
                     + "WHERE `material_id` = ?;";
-            
+
             int material_id = material.getId();
-            
-             PreparedStatement statement = dbc.preparedStatement(query);
+
+            PreparedStatement statement = dbc.preparedStatement(query);
             statement.setInt(1, material_id);
             statement.executeUpdate();
-            
+
             dbc.close();
-            
-        } catch(SQLException e)
+
+        } catch (SQLException e)
         {
             throw new DataException(e.getMessage());
         }
     }
-    
+
     public void updateMaterial(Material material) throws DataException
     {
-        try{
-            
+        try
+        {
+
             dbc.open();
-            
+
             String query = "UPDATE Fog.`materials`"
                     + "SET `material_name` = ?, `unit` = ?, `material_class` = ?, `price` = ? "
                     + "WHERE `material_id` = ?;";
-            
+
             String material_name = material.getName();
             String unit = material.getUnit();
             String material_class = material.getMaterial_class();
             Double price = material.getPrice();
             int material_id = material.getId();
-            
+
             PreparedStatement statement = dbc.preparedStatement(query);
-            
+
             statement.setString(1, material_name);
             statement.setString(2, unit);
             statement.setString(3, material_class);
             statement.setDouble(4, price);
             statement.setInt(5, material_id);
             statement.executeUpdate();
-            
+
             dbc.close();
-            
-        } catch(SQLException e)
+
+        } catch (SQLException e)
         {
             throw new DataException(e.getMessage());
         }
@@ -334,6 +336,58 @@ public class MaterialMapper
         {
             throw new DataException(ex.getMessage());
         }
+    }
+
+    public void addRoofType(RoofType rooftype) throws DataException
+    {
+        try
+        {
+            dbc.open();
+
+            String query = "INSERT INTO Fog.`roof_type`"
+                    + "(`roof_type_name`, `roof_material1`, `roof_material2`, `roof_type_class`) VALUES (?,?,?,?);";
+
+            String query2 = "INSERT INTO Fog.`roof_type`"
+                    + "(`roof_type_name`, `roof_material1`, `roof_type_class`) VALUES (?,?,?);";
+
+            int roof_type_id;
+            String roof_type_name = rooftype.getName();
+            int roofmaterial1 = rooftype.getM1().getId();
+            String rooftype_class = rooftype.getRoof_class();
+
+            PreparedStatement statement;
+
+            if (rooftype.getM2() != null)
+            {
+                int roofmaterial2 = rooftype.getM2().getId();
+                statement = dbc.preparedStatement(query, Statement.RETURN_GENERATED_KEYS);
+                statement.setString(1, roof_type_name);
+                statement.setInt(2, roofmaterial1);
+                statement.setInt(3, roofmaterial2);
+                statement.setString(4, rooftype_class);
+                statement.executeUpdate();
+            } else
+            {
+                statement = dbc.preparedStatement(query2, Statement.RETURN_GENERATED_KEYS);
+                statement.setString(1, roof_type_name);
+                statement.setInt(2, roofmaterial1);
+                statement.setString(3, rooftype_class);
+                statement.executeUpdate();
+            }
+
+            ResultSet rs = statement.getGeneratedKeys();
+            if (rs.next())
+            {
+                roof_type_id = rs.getInt(1);
+                rooftype.setId(roof_type_id);
+            }
+
+            dbc.close();
+        } catch (SQLException e)
+        {
+            throw new DataException(e.getMessage());
+        }
+
     }
 
 }

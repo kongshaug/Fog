@@ -52,14 +52,11 @@ public class EmployeeOrderCommand implements Command
 
             session.setAttribute("order", order);
 
-            if (session.getAttribute("slopedroofs") == null || session.getAttribute("flatroofs") == null)
-            {
-                List<RoofType> slopedRoofs = manager.getSlopedRoofs();
-                List<RoofType> flatRoofs = manager.getFlatRoofs();
+            List<RoofType> slopedRoofs = manager.getSlopedRoofs();
+            List<RoofType> flatRoofs = manager.getFlatRoofs();
 
-                session.setAttribute("slopedroofs", slopedRoofs);
-                session.setAttribute("flatroofs", flatRoofs);
-            }
+            session.setAttribute("slopedroofs", slopedRoofs);
+            session.setAttribute("flatroofs", flatRoofs);
 
             return target;
         } else

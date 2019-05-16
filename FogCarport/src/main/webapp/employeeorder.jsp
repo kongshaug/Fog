@@ -125,7 +125,8 @@
             <br><br>
             <select name="type" id="type" disabled="disabled">
                 <option disabled value="0">Vælg tagtype</option> 
-                <%                    List<RoofType> slopedroofs = (List<RoofType>) session.getAttribute("slopedroofs");
+                <%                    
+                    List<RoofType> slopedroofs = (List<RoofType>) session.getAttribute("slopedroofs");
                     List<RoofType> flatroofs = (List<RoofType>) session.getAttribute("flatroofs");
 
                     if (order.getCarport().getRoof().getSlope() == 0)
