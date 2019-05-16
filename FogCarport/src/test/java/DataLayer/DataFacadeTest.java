@@ -252,9 +252,9 @@ public class DataFacadeTest
         assertEquals("slope", rooftype.get(2).getRoof_class());
         assertEquals(14, rooftype.get(4).getM1().getId());
         
-        int expResult = 6;
+        
         int result = df.getRoofs().size();
-        assertEquals(expResult, result);
+        assertNotNull(result);
     }
 
     /**
@@ -384,15 +384,17 @@ public class DataFacadeTest
      *
      * @throws DataLayer.DataException
      */
-//    @Test
-//    public void testaddMaterial() throws DataException
-//    {
-//        
-//        List MaterialList = df.getMaterials();
-//        Material material = new Material("testMaterail", "stk", material_class, 10.00);
-//        
-//        assertEquals(MaterialList.size(), 2);
-//    }
+    @Test
+    public void testaddMaterial() throws DataException
+    {
+        
+        List MaterialList = df.getMaterials();
+        Material material = new Material("testMaterail", "stk", "træ", 10.00);
+        df.addMaterial(material);
+        List MaterialListAfter = df.getMaterials();
+        assertEquals(MaterialList.size(), (MaterialListAfter.size()-1));
+        df.deleteMaterial(material);
+    }
 
 //
 //    /**
