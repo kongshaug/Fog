@@ -31,6 +31,11 @@ public class CarportMapper
 
     private DBConnector dbc = new DBConnector();
 
+    /**
+     *
+     * @param dbc
+     * @throws DataException
+     */
     public CarportMapper(DBConnector dbc) throws DataException
     {
         this.dbc = dbc;
@@ -176,6 +181,11 @@ public class CarportMapper
         }
     }
 
+    /**
+     * when a customer places an order for a carpot with shed it is put in the database with this method
+     * @param carport
+     * @throws DataException
+     */
     public void orderCarportWithShed(Carport carport) throws DataException
     {
         try
@@ -218,6 +228,11 @@ public class CarportMapper
         }
     }
 
+    /**
+     *puts a order for a carport without a shed in the database
+     * @param carport
+     * @throws DataException
+     */
     public void orderCarportWithoutShed(Carport carport) throws DataException
     {
         try
@@ -290,6 +305,11 @@ public class CarportMapper
         }
     }
 
+    /**
+     * removes a roof from a carport in the database
+     * @param roof
+     * @throws DataException
+     */
     public void removeRoof(Roof roof) throws DataException
     {
         try
@@ -312,6 +332,11 @@ public class CarportMapper
         }
     }
 
+    /**
+     * removes a shed form a carport in the database
+     * @param shed
+     * @throws DataException
+     */
     public void removeShed(Shed shed) throws DataException
     {
         try
@@ -334,6 +359,11 @@ public class CarportMapper
         }
     }
 
+    /**
+     *
+     * @param carport
+     * @throws DataException
+     */
     public void removeShedId(Carport carport) throws DataException
     {
         try
@@ -355,6 +385,11 @@ public class CarportMapper
         }
     }
 
+    /**
+     *deletes a carport from the database
+     * @param carport
+     * @throws DataException
+     */
     public void removeCarport(Carport carport) throws DataException
     {
         try
@@ -377,6 +412,11 @@ public class CarportMapper
         }
     }
 
+    /**
+     *updates the specifications of a carport in the database
+     * @param carport
+     * @throws DataException
+     */
     public void updateCarport(Carport carport) throws DataException
     {
         try
@@ -426,6 +466,11 @@ public class CarportMapper
 
     }
 
+    /**
+     *opdates a roof on a carport in the database
+     * @param roof
+     * @throws DataException
+     */
     public void updateRoof(Roof roof) throws DataException
     {
         try
@@ -454,6 +499,11 @@ public class CarportMapper
         }
     }
 
+    /**
+     *updates the mesurments of a shed in the database
+     * @param shed
+     * @throws DataException
+     */
     public void updateShed(Shed shed) throws DataException
     {
         try
@@ -553,6 +603,11 @@ public class CarportMapper
         }
     }
 
+    /**
+     *
+     * @param order
+     * @throws DataException
+     */
     public void placeOrder(Order order) throws DataException
     {
         try
@@ -624,6 +679,12 @@ public class CarportMapper
         }
     }
 
+    /**
+     *chages the status of a order to shipped in the database
+     * @param order_id
+     * @return
+     * @throws DataException
+     */
     public String orderShipped(int order_id) throws DataException
     {
         try
@@ -662,6 +723,12 @@ public class CarportMapper
         }
     }
 
+    /**
+     * findes orders in the database
+     * @param order_id
+     * @return order from database connected to the id
+     * @throws DataException
+     */
     public Order getOrder(int order_id) throws DataException
     {
         try
@@ -706,6 +773,11 @@ public class CarportMapper
         }
     }
 
+    /**
+     * 
+     * @return all the orders in the database
+     * @throws DataException
+     */
     public List<Order> getOrders() throws DataException
     {
         try
@@ -749,6 +821,12 @@ public class CarportMapper
 
     }
 
+    /**
+     * 
+     * @param email
+     * @return all the orders in the database connected to a client 
+     * @throws DataException
+     */
     public List<Order> getOrdersByEmail(String email) throws DataException
     {
         try
@@ -830,6 +908,12 @@ public class CarportMapper
 
     }
 
+    /**
+     * changes the price of a order in the database
+     * @param order_id
+     * @param salesprice
+     * @throws DataException
+     */
     public void updateSalesPrice(int order_id, double salesprice) throws DataException
     {
         try
@@ -855,6 +939,13 @@ public class CarportMapper
 
     }
 
+    /**
+     *
+     * @param order_id
+     * @param status
+     * @param paid
+     * @throws DataException
+     */
     public void updateStatusAndPaid(int order_id, Status status, Paid paid) throws DataException
     {
         try
@@ -883,6 +974,11 @@ public class CarportMapper
         }
     }
 
+    /**
+     * deletes a order in the database
+     * @param order
+     * @throws DataException
+     */
     public void removeOrder(Order order) throws DataException
     {
         try
