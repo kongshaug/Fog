@@ -28,7 +28,7 @@ import java.util.Map;
  */
 public class FunctionManager
 {
-
+    
     private static FunctionManager instance = null;
     private DataFacade db;
     private Calculate c;
@@ -36,7 +36,7 @@ public class FunctionManager
     private CalculatePackages cp;
     private CalculateShed cs;
     private GenerateDrawing GD;
-
+    
     public FunctionManager() throws DataException
     {
         db = DataFacade.getInstance();
@@ -46,7 +46,7 @@ public class FunctionManager
         c = new Calculate();
         GD = new GenerateDrawing();
     }
-
+    
     public static FunctionManager getInstance() throws DataException
     {
         if (instance == null)
@@ -55,17 +55,17 @@ public class FunctionManager
         }
         return instance;
     }
-
+    
     public User login(String email, String password) throws DataException
     {
         return db.login(email, password);
     }
-
+    
     public String newUser(User user) throws DataException
     {
         String res = "";
         List<User> users = db.getUsers();
-
+        
         for (User u : users)
         {
             if (u.getEmail().equals(user.getEmail()))
@@ -73,7 +73,7 @@ public class FunctionManager
                 res += "Email er allerede i brug\n";
             }
         }
-
+        
         if (!user.getEmail().contains("@") && !user.getEmail().contains("."))
         {
             res += "Venligst indtast en gyldig email\n";
@@ -94,21 +94,21 @@ public class FunctionManager
         {
             res += "Venligst indtast et gyldigt postnummer på 4 cifre\n";
         }
-
+        
         if (user.getPhone().isEmpty() || user.getPhone() == null || user.getPhone().length() != 8 || isNumber(user.getPhone()) == false)
         {
             res += "Venligst indtast et gyldigt 8-cifret telefonnummer\n";
         }
-
+        
         if (res.isEmpty())
         {
             db.newUser(user);
             res = "Din bruger er nu oprettet";
         }
-
+        
         return res;
     }
-
+    
     private boolean isNumber(String str)
     {
         for (char c : str.toCharArray())
@@ -120,7 +120,7 @@ public class FunctionManager
         }
         return true;
     }
-
+    
     private boolean isCaracter(String str)
     {
         for (char c : str.toCharArray())
@@ -132,11 +132,11 @@ public class FunctionManager
         }
         return true;
     }
-
+    
     public String placeOrder(Order order) throws DataException
     {
         String res = "";
-
+        
         if (order != null)
         {
             db.orderCarport(order.getCarport());
@@ -148,14 +148,14 @@ public class FunctionManager
         }
         return res;
     }
-
+    
     public String removeUser(User user) throws DataException
     {
         String res = "";
         if (user != null)
         {
             db.removeUser(user);
-
+            
             if (user.getRole().equals(Role.CUSTOMER))
             {
                 res = "Din bruger er nu slettet";
@@ -169,38 +169,38 @@ public class FunctionManager
         }
         return res;
     }
-
+    
     public List<User> getEmployeesAndAdmins() throws DataException
     {
         return db.getEmployeesAndAdmins();
     }
-
+    
     public void isShipped(Order order) throws DataException
     {
         String shipped = db.orderShipped(order.getOrder_id());
         order.setShipped(shipped);
     }
-
+    
     public void calcCarport(Carport carport) throws DataException
     {
         if (carport.getWidth() <= 750 && carport.getDepth() <= 800)
         {
             Map<Integer, Material> map = getMaterials();
-
+            
             Material pole = map.get(2);
             Material rem = map.get(3);
             Material bolts = map.get(26);
             Material discs = map.get(27);
-
+            
             c.calculatepoles(carport, pole, bolts, discs);
             c.calculateRem(carport, rem);
         }
     }
-
+    
     private void calcFlatroof(Carport carport) throws DataException
     {
         Map<Integer, Material> map = getMaterials();
-
+        
         Material spær = map.get(3);
         Material universalV = map.get(19);
         Material universalH = map.get(18);
@@ -213,15 +213,15 @@ public class FunctionManager
         Material skruer = map.get(23);
         Material plastmo = map.get(12);
         Material plastmotætning = map.get(42);
-
+        
         cr.calculateFlatRoof(carport, spær, universalV, universalH, beslagSkruer, lægte, tagskruer, understern, overstern, vandbræt, skruer);
         cr.calculatePlatsmo(carport, plastmo, plastmotætning);
     }
-
+    
     private void calcSlopeRoof(Carport carport) throws DataException
     {
         Map<Integer, Material> map = getMaterials();
-
+        
         Material spær = map.get(3);
         Material taglægter = map.get(7);
         Material spærbeslag = map.get(43);
@@ -239,18 +239,18 @@ public class FunctionManager
         Material skruerTotal = map.get(23);
         Material skrue1 = map.get(28);
         Material skrue2 = map.get(29);
-
+        
         cr.calculateSlopeRoof(carport, spær, taglægter, spærbeslag, beslagSkruerSpær, skruer, universalV, universalH, toplægteholder, tegl, rygsten, rygstensbeslag, beklædning, vandbræt, trykimpbræt, skruerTotal, skrue1, skrue2);
-
+        
     }
-
+    
     public void calcShed(Carport carport) throws DataException
     {
         if (carport.getShed().getWidth() <= carport.getWidth() - 30 && carport.getShed().getDepth() <= carport.getDepth() - 30)
         {
-
+            
             Map<Integer, Material> map = getMaterials();
-
+            
             Material stolpe = map.get(2);
             Material bræt = map.get(4);
             Material vinkelbeslag = map.get(22);
@@ -262,24 +262,24 @@ public class FunctionManager
             Material stalddørsgrebene = map.get(20);
             Material hængselet = map.get(21);
             Material planker = map.get(5);
-
+            
             if (carport.getRoof().getSlope() == 0)
-
+            
             {
                 cs.calcShedFlatRoof(carport, stolpe, bræt, vinkelbeslag, skruer, beklædning, skrue1, skrue2, lægte, stalddørsgrebene, hængselet, planker);
-
+                
             } else
             {
                 cs.calcShedSlopeRoof(carport, stolpe, bræt, vinkelbeslag, skruer, beklædning, skrue1, skrue2, lægte, stalddørsgrebene, hængselet, planker);
             }
         }
     }
-
+    
     private Map<Integer, Material> getMaterials() throws DataException
     {
-
+        
         Map<Integer, Material> map = new HashMap<>();
-
+        
         List<Material> materials = db.getMaterials();
         for (Material material : materials)
         {
@@ -287,46 +287,46 @@ public class FunctionManager
         }
         return map;
     }
-
+    
     public List<RoofType> getSlopedRoofs() throws DataException
     {
         List<RoofType> rooftypes = db.getRoofs();
         List<RoofType> slopedRoofs = new ArrayList<>();
-
+        
         for (RoofType rooftype : rooftypes)
         {
             if (rooftype.getRoof_class().equals("slope"))
             {
                 slopedRoofs.add(rooftype);
             }
-
+            
         }
-
+        
         return slopedRoofs;
     }
-
+    
     public List<RoofType> getFlatRoofs() throws DataException
     {
         List<RoofType> rooftypes = db.getRoofs();
         List<RoofType> flatRoofs = new ArrayList<>();
-
+        
         for (RoofType rooftype : rooftypes)
         {
             if (rooftype.getRoof_class().equals("flat"))
             {
                 flatRoofs.add(rooftype);
             }
-
+            
         }
-
+        
         return flatRoofs;
     }
-
+    
     public RoofType getRoofTypeById(int typeId) throws DataException
     {
         return db.getRoof(typeId);
     }
-
+    
     public void calcRoof(Carport carport) throws DataException
     {
         if (carport.getRoof().getType().getRoof_class().equals("flat"))
@@ -337,47 +337,47 @@ public class FunctionManager
             calcSlopeRoof(carport);
         }
     }
-
+    
     public Order getOrder(int order_id) throws DataException
     {
         return db.getOrder(order_id);
     }
-
+    
     public List<Order> getOrders() throws DataException
     {
         return db.getOrders();
     }
-
+    
     public List<Order> getOrdersByEmail(String email) throws DataException
     {
         return db.getOrdersByEmail(email);
     }
-
+    
     public String drawingOfRoof(Carport carport)
     {
         return GD.drawRoofFromTop(carport);
     }
-
+    
     public void updateSalesPrice(int order_id, double salesprice) throws DataException
     {
         db.updateSalesPrice(order_id, salesprice);
     }
-
+    
     public void updateStatusAndPaid(int order_id, Status status, Paid paid) throws DataException
     {
         db.updateStatusAndPaid(order_id, status, paid);
     }
-
+    
     public User getEmployeeByEmail(String email) throws DataException
     {
         return db.getEmployeeByEmail(email);
     }
-
+    
     public String updateEmployee(User user, String email, String name, String address, String zipcode, String phone) throws DataException
     {
         String res = "";
         List<User> users = db.getUsers();
-
+        
         for (User u : users)
         {
             if (u.getEmail().equals(email) && u.getId() != user.getId())
@@ -385,17 +385,17 @@ public class FunctionManager
                 res += "Email er allerede i brug\n";
             }
         }
-
+        
         if (!email.contains("@") && !email.contains("."))
         {
             res += "Venligst indtast en gyldig email\n";
         }
-
+        
         if (name == null || name.isEmpty() || isCaracter(name) == false)
         {
             res += "Venligst indtast dit navn (må kun indeholde bogstaver)\n";
         }
-
+        
         if (address == null || address.isEmpty())
         {
             res += "Venligst indtast din adresse\n";
@@ -408,7 +408,7 @@ public class FunctionManager
         {
             res += "Venligst indtast et gyldigt 8-cifret telefonnummer\n";
         }
-
+        
         if (res.isEmpty())
         {
             user.setEmail(email);
@@ -419,16 +419,16 @@ public class FunctionManager
             db.updateUser(user);
             res = "Medarbejderens information er opdateret";
         }
-
+        
         return res;
-
+        
     }
-
+    
     public String updateCustomer(User user, String email, String name, String oldpassword, String newpassword, String address, String zipcode, String phone) throws DataException
     {
         String res = "";
         List<User> users = db.getUsers();
-
+        
         for (User u : users)
         {
             if (u.getEmail().equals(email) && u.getId() != user.getId())
@@ -440,7 +440,7 @@ public class FunctionManager
         {
             res += "Venligst indtast en gyldig email\n";
         }
-
+        
         if (!user.getPassword().equals(oldpassword))
         {
             res += "Venligst indtast din nuværende adgangskode, for at ændre adgangskoden\n";
@@ -449,12 +449,12 @@ public class FunctionManager
         {
             res += "Venligst indtast en adgangskode med en minimumslængde på 4\n";
         }
-
+        
         if (name == null || name.isEmpty() || isCaracter(name) == false)
         {
             res += "Venligst indtast dit navn (må kun indeholde bogstaver)\n";
         }
-
+        
         if (address == null || address.isEmpty())
         {
             res += "Venligst indtast din adresse\n";
@@ -467,7 +467,7 @@ public class FunctionManager
         {
             res += "Venligst indtast et gyldigt 8-cifret telefonnummer\n";
         }
-
+        
         if (res.isEmpty())
         {
             user.setEmail(email);
@@ -479,15 +479,15 @@ public class FunctionManager
             db.updateUser(user);
             res = "Dine information er opdateret";
         }
-
+        
         return res;
-
+        
     }
-
+    
     public String updatePassword(User user, String oldpassword, String newpassword) throws DataException
     {
         String res = "";
-
+        
         if (!user.getPassword().equals(oldpassword))
         {
             res += "Venligst indtast din nuværende adgangskode, for at ændre adgangskoden\n";
@@ -496,27 +496,27 @@ public class FunctionManager
         {
             res += "Venligst indtast en adgangskode med en minimumslængde på 4\n";
         }
-
+        
         if (res.isEmpty())
         {
             user.setPassword(newpassword);
             db.updatePassword(user.getId(), newpassword);
             res = "Din adgangskode er ændret";
         }
-
+        
         return res;
-
+        
     }
-
+    
     public User getUser(int user_id) throws DataException
     {
         return db.getUser(user_id);
     }
-
+    
     public String updateMaterial(Material material, String material_name, String unit, String material_class, double price) throws DataException
     {
         String res = "";
-
+        
         for (Material m : getAllMaterials())
         {
             if (material_name.toLowerCase().equals(m.getName().toLowerCase()) && material.getId() != m.getId())
@@ -524,7 +524,7 @@ public class FunctionManager
                 res += "Materiale med samme navn eksisterer allerede\n";
             }
         }
-
+        
         if (material_name == null || material_name.isEmpty())
         {
             res += "Udfyld venligst materialets nye navn\n";
@@ -537,12 +537,12 @@ public class FunctionManager
         {
             res += "Angiv venligst en passende kategori for materialet\n";
         }
-
+        
         if (price == 0)
         {
             res += "Angiv venligst en ny pris for materialet\n";
         }
-
+        
         if (res.isEmpty())
         {
             material.setName(material_name);
@@ -550,14 +550,14 @@ public class FunctionManager
             material.setMaterial_class(material_class);
             material.setPrice(price);
             db.updateMaterial(material);
-
+            
             res = "Materialet er opdateret";
         }
-
+        
         return res;
-
+        
     }
-
+    
     public String deleteMaterial(Material material) throws DataException
     {
         String res = "";
@@ -571,11 +571,11 @@ public class FunctionManager
         }
         return res;
     }
-
+    
     public String addMaterial(Material newMaterial) throws DataException
     {
         String res = "";
-
+        
         for (Material m : getAllMaterials())
         {
             if (newMaterial.getName().toLowerCase().equals(m.getName().toLowerCase()))
@@ -583,7 +583,7 @@ public class FunctionManager
                 res += "Materiale med samme navn eksisterer allerede\n";
             }
         }
-
+        
         if (newMaterial.getName() == null || newMaterial.getName().isEmpty())
         {
             res += "Udfyld venligst materialets navn\n";
@@ -596,36 +596,36 @@ public class FunctionManager
         {
             res += "Angiv venligst en passende kategori for materialet\n";
         }
-
+        
         if (newMaterial.getPrice() == 0)
         {
             res += "Angiv venligst en pris for materialet\n";
         }
-
+        
         if (res.isEmpty())
         {
             db.addMaterial(newMaterial);
             res = "Materialet er tilføjet til listen";
         }
-
+        
         return res;
-
+        
     }
-
+    
     public List<Material> getAllMaterials() throws DataException
     {
         return db.getMaterials();
     }
-
+    
     public Material getMaterial(int material_id) throws DataException
     {
         return db.getMaterial(material_id);
     }
-
+    
     public String updateCarport(Carport carport, int carport_depth, int carport_width, RoofType rooftype, int roofslope, int shed_width, int shed_depth) throws DataException
     {
         String res = "";
-
+        
         if (carport_width > 750 || carport_depth > 800)
         {
             res += "Carporten må maksimum være 750 cm bred og 800 cm dyb\n";
@@ -638,7 +638,7 @@ public class FunctionManager
         {
             res += "Skuret må minimum være 30 cm kortere end selve carporten på begge led\n";
         }
-
+        
         if (res.isEmpty())
         {
             carport.setDepth(carport_depth);
@@ -657,10 +657,10 @@ public class FunctionManager
                 {
                     carport.getShed().setDepth(shed_depth);
                     carport.getShed().setWidth(shed_width);
-
+                    
                     res = "Carporten er opdateret";
                 }
-
+                
             } else if (shed_width != 0 && shed_depth != 0)
             {
                 Shed shed = new Shed(shed_depth, shed_width);
@@ -671,28 +671,28 @@ public class FunctionManager
                 res = "Carporten er opdateret";
             }
         }
-
+        
         db.updateCarport(carport);
-
+        
         carport.resetParts();
         carport.getRoof().resetParts();
         calcCarport(carport);
         calcRoof(carport);
-
+        
         if (carport.getShed() != null)
         {
             carport.getShed().resetParts();
             calcShed(carport);
         }
-
+        
         return res;
-
+        
     }
-
+    
     public String addRoofType(RoofType rooftype) throws DataException
     {
         String res = "";
-
+        
         for (RoofType r : db.getRoofs())
         {
             if (rooftype.getName().toLowerCase().equals(r.getName().toLowerCase()))
@@ -715,18 +715,18 @@ public class FunctionManager
         {
             res += "Vælg venligst imellem de to kategorier (fladt tag, tag med rejsning)\n";
         }
-        if(rooftype.getM1() == rooftype.getM2())
+        if (rooftype.getM1() == rooftype.getM2())
         {
             res += "Vælg venligst to forskellige materialer eller kun en enkelt\n";
         }
-
+        
         if (res.isEmpty())
         {
             db.addRoofType(rooftype);
             res = "Tagtypen er tilføjet";
         }
         return res;
-
+        
     }
     
     public List<RoofType> getRoofs() throws DataException
@@ -746,5 +746,40 @@ public class FunctionManager
             res = "Tagtypen kunne ikke slettes";
         }
         return res;
+    }
+    
+    public String updateRoofType(RoofType rooftype, String name, Material m1, Material m2) throws DataException
+    {
+        String res = "";
+        
+        for (RoofType r : db.getRoofs())
+        {
+            if (name.toLowerCase().equals(r.getName().toLowerCase()))
+            {
+                res += "Tagtype med samme navn eksisterer allerede\n";
+            }
+        }
+        if (m1 == rooftype.getM1())
+        {
+            res += "Materialet er allerede tilknyttet en anden tagtype\n";
+        }
+        if (m2 != null)
+        {
+            if (m2 == rooftype.getM2())
+            {
+                res += "Materialet er allerede tilknyttet en anden tagtype\n";
+            }
+        }
+        
+        if (res.isEmpty())
+        {
+            rooftype.setName(name);
+            rooftype.setM1(m1);
+            rooftype.setM2(m2);
+            db.updateRoofType(rooftype);
+            res = "Tagtypen er opdateret";
+        }
+        return res;
+        
     }
 }
