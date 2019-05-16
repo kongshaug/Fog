@@ -7,7 +7,7 @@
 <%@page import="FunctionLayer.Enum.Paid"%>
 <%@page import="FunctionLayer.Enum.Status"%>
 <%@page import="FunctionLayer.HelpingClasses.Order"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@include file = "header.jsp" %>
 
 <center class="index" id="index"> 
@@ -57,7 +57,7 @@
                 %>
             </select>
             <br><br>
-            <select name="slope" id="hÃ¦ldning" disabled="disabled">
+            <select name="slope" id="hældning" disabled="disabled">
                 <%
                     out.println("<option selected> " + order.getCarport().getRoof().getSlope() + "</option>");
                 %>
@@ -87,8 +87,8 @@
             }
         %>
 
-        OBS! Skuret skal have min. 15 cm udhÃ¦ng pÃ¥ alle sider <br>
-        og skal derfor vÃ¦re mindst 30 cm smallere og kortere end carporten 
+        OBS! Skuret skal have min. 15 cm udhæng på alle sider <br>
+        og skal derfor være mindst 30 cm smallere og kortere end carporten 
         <br><br>
         <%
             if (order.getCarport().getShed() != null)

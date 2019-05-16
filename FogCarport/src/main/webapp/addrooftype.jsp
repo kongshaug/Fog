@@ -6,7 +6,7 @@
 
 <%@page import="FunctionLayer.HelpingClasses.Material"%>
 <%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@include file = "header.jsp" %>
 <center class="index" id="index"> 
     <br><br><br>
@@ -24,9 +24,9 @@
         <form action="Fog" method="POST">
             Tagtype navn<br>
             <input type="text" id="name" name="name" value="" placeholder="Indtast navn"> <br><br>
-            1. Materiale (Ved tag med rejsning: beklÃ¦dning til tagryggen)<br>
+            1. Materiale (Ved tag med rejsning: beklædning til tagryggen)<br>
             <select name="material1">
-                <option disabled selected>VÃ¦lg materiale</option>  
+                <option disabled selected>Vælg materiale</option>  
                 <%                    
                     for (Material m : materials)
                     {
@@ -40,7 +40,7 @@
             <br><br>
             2. Materiale (Valgfri)<br>
             <select  name="material2">
-                <option disabled selected>VÃ¦lg materiale</option>  
+                <option disabled selected>Vælg materiale</option>  
                 <option value="0"> - </option>
                 <%
                     for (Material m : materials)
@@ -54,12 +54,12 @@
             </select>
             <br><br>
             <select name="roof_class">
-                <option disabled selected>VÃ¦lg kategori</option>  
+                <option disabled selected>Vælg kategori</option>  
                 <option value="flat">Fladt tag</option>
                 <option value="slope">Tag med rejsning</option>
             </select>
             <br><br>
-            <button name="command" value="rooftypeadd">TilfÃ¸j tagtype</button><br><br>
+            <button name="command" value="rooftypeadd">Tilføj tagtype</button><br><br>
 
         </form>
     </div>

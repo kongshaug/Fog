@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@include file = "header.jsp" %>
 <center class="index" id="index"> 
     <br><br><br>
@@ -27,7 +27,7 @@
             <input type="text" id="unit" name="unit" value="" placeholder="Indtast enhed"> <br><br>
             Kategori<br>
             <select id="material_class" name="material_class">
-                <option disabled selected value="0">VÃ¦lg kategori</option>  
+                <option disabled selected value="0">Vælg kategori</option>  
                 <%                    for (String m : material_classes)
                     {
                         out.println("<option> " + m + "</option>");
@@ -38,10 +38,10 @@
             Pris<br>
             <input type="number" id="price" name="price" value="" placeholder="Indtast pris"> <br><br>
 
-            <button id="save" name="command" value="addmaterial">TilfÃ¸j materiale</button><br><br>
-            OBS! For at tilfÃ¸je en tagtype, skal der fÃ¸rst <br>
-            tilfÃ¸jes materiale(r) til tagtypen <br><br>
-            <button name="command" value="addrooftype">TilfÃ¸j en tagtype</button>
+            <button id="save" name="command" value="addmaterial">Tilføj materiale</button><br><br>
+            OBS! For at tilføje en tagtype, skal der først <br>
+            tilføjes materiale(r) til tagtypen <br><br>
+            <button name="command" value="addrooftype">Tilføj en tagtype</button>
         </form>
     </div>
 </center>

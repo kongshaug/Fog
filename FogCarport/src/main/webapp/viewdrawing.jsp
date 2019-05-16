@@ -6,7 +6,7 @@
 
 <%@page import="FunctionLayer.HelpingClasses.Order"%>
 <%@page import="FunctionLayer.HelpingClasses.Carport"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@include file = "header.jsp" %>
 <%        
     Order order = (Order) session.getAttribute("order");
@@ -18,11 +18,11 @@
             <%
                 if(user.getRole().equals(Role.CUSTOMER))
                 {
-                    out.println("<button name=\"command\" value=\"customerorder\">GÃ¥ tilbage</button>");
+                    out.println("<button name=\"command\" value=\"customerorder\">Gå tilbage</button>");
                 }
                 else{
                     
-                    out.println("<button name=\"command\" value=\"employeeorder\">GÃ¥ tilbage</button>");
+                    out.println("<button name=\"command\" value=\"employeeorder\">Gå tilbage</button>");
                 }
             %>
             <input type="hidden" id="order_id" name="selected" value="<%=order.getOrder_id()%>">

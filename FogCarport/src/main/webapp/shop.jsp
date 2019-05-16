@@ -8,7 +8,7 @@
 <%@page import="FunctionLayer.HelpingClasses.RoofType"%>
 <%@page import="java.util.List"%>
 <%@page import="javafx.scene.control.RadioButton"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@include file = "header.jsp" %>
 
 <center class="index" id="index"> 
@@ -34,7 +34,7 @@
 
             <br><br>
             <select name="type" id="type">
-                <option disabled selected value="0">VÃ¦lg tagtype</option>            
+                <option disabled selected value="0">Vælg tagtype</option>            
                 <%
                     List<RoofType> slopedroofs = (List<RoofType>) session.getAttribute("slopedroofs");
                     List<RoofType> flatroofs = (List<RoofType>) session.getAttribute("flatroofs");
@@ -53,8 +53,8 @@
             </select>
 
             <br><br>
-            <select name="slope" id="hÃ¦ldning">
-                <option disabled selected value="0">VÃ¦lg hÃ¦ldning</option>
+            <select name="slope" id="hældning">
+                <option disabled selected value="0">Vælg hældning</option>
                 <%                    for (int i = 15;
                             i <= 45; i = i + 5)
                     {
@@ -66,15 +66,15 @@
             <br><br>
 
             <select name="shed" onchange="show(this.value)">
-                <option disabled selected>VÃ¦lg skur</option>
+                <option disabled selected>Vælg skur</option>
                 <option value="Med skur">Med skur</option>
                 <option value="Uden skur">Uden skur</option>
             </select>       
     </div>
     <br>
     <div id="skur" hidden="true">
-        OBS! Skuret skal have min. 15 cm udhÃ¦ng pÃ¥ alle sider <br>
-        og skal derfor vÃ¦re mindst 30 cm smallere og kortere end carporten 
+        OBS! Skuret skal have min. 15 cm udhæng på alle sider <br>
+        og skal derfor være mindst 30 cm smallere og kortere end carporten 
         <br><br>
         Bredde af skur:&nbsp;&nbsp;<input type="number" pattern="[0-2000]*" name="shedWidth" value="210" min="210" max="720">
         &nbsp;&nbsp;
@@ -104,9 +104,9 @@
                 x.setAttribute("hidden", "hidden");
             });
 
-            document.getElementById("hÃ¦ldning").disabled = true;
+            document.getElementById("hældning").disabled = true;
             document.getElementById("type").value = 0;
-            document.getElementById("hÃ¦ldning").value = 0;
+            document.getElementById("hældning").value = 0;
 
         }
 
@@ -127,9 +127,9 @@
                 x.removeAttribute("hidden");
             });
 
-            document.getElementById("hÃ¦ldning").disabled = false;
+            document.getElementById("hældning").disabled = false;
             document.getElementById("type").value = 0;
-            document.getElementById("hÃ¦ldning").value = 0;
+            document.getElementById("hældning").value = 0;
         }
 
         function show(value)

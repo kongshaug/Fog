@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="FunctionLayer.HelpingClasses.Order"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@include file = "header.jsp" %>
 <form action="Fog" method="POST">
     <center id="index" class="index">
@@ -17,7 +17,7 @@
 
             %>
             <br><br>
-            <button name="command" value="back">GÃ¥ til shop</button>
+            <button name="command" value="back">Gå til shop</button>
             </form>
         </div>
     </center>
