@@ -66,7 +66,7 @@ public class FrontController extends HttpServlet
             request.setAttribute("message", e.getMessage());
             RequestDispatcher dispatcher = request.getRequestDispatcher("error.jsp");
             dispatcher.forward(request, response);
-            ld.run(" you fucked up the system, FIX IT!");
+            ld.run(e.getMessage()+" you fucked up the system, FIX IT!");
         } 
         }
 
