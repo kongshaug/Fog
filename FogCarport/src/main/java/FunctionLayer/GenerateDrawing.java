@@ -15,57 +15,12 @@ import java.util.ArrayList;
  */
 public class GenerateDrawing {
 
-//    public String drawFlatRoofFromTop(Carport carport) {
-//        int hight = carport.getDepth();
-//        int width = carport.getWidth();
-//        int numberOflægter = 0;
-//
-//        for (Part part : carport.getRoof().getParts()) {
-//            if ("45x195 spærtræ ubh.".equals(part.getName())) {
-//                numberOflægter = part.getQuantity();
-//                //try to add: to safe time inside loop break;
-//            }
-//        }
-//
-//        double count = 100;
-//
-//        String drawing = "<SVG viewBox=\"0 0 " + (width + 500) + " " + (hight + 500) + "\" width= \"100%\" hight= \"50%\">"
-//                + "<rect x=\"100\" y =\"100\" height=\"" + hight + "\" width=\"" + width + "\""
-//                + "        style=\"stroke:#000000; fill: #ffffff\"/>\n";
-//
-//        drawing += "<rect x =\"100\" y =\"100\" height=\"" + (hight) + "\" width=\"" + 30 + "\""
-//                + "        style=\"stroke:#000000; fill: #fff000\"/>";
-//
-//        drawing += "<rect x =\"" + (width + 70) + "\" y =\"100\" height=\"" + (hight) + "\" width=\"" + 30 + "\""
-//                + "        style=\"stroke:#000000; fill: #fff000\"/>";
-//
-//        //first and last spær
-//        drawing += "<rect x =\"100\" y =\"" + 100 + "\" height=\"" + (15) + "\" width=\"" + (width) + "\""
-//                + "        style=\"stroke:#000000; fill: #f00000\"/>";
-//
-//        drawing += "<rect x =\"100\" y =\"" + (hight + 100 - 15) + "\" height=\"" + (15) + "\" width=\"" + (width) + "\""
-//                + "        style=\"stroke:#000000; fill: #f00000\"/>";
-//        for (int i = 1; i <= numberOflægter - 2; i++) {
-//            count += ((hight) / (numberOflægter - 1));
-//            drawing += "<rect x =\"100\" y =\"" + (count) + "\" height=\"" + (15) + "\" width=\"" + (width) + "\""
-//                    + "        style=\"stroke:#000000; fill: #ff0000\"/>";
-//
-//        }
-//
-//        drawing += "<line x1=\"80\" y1=\"100\" x2=\"80\" y2=\"" + (hight + 100) + "\" style=\"stroke:#000000;\" stroke-width=\"5\" />";
-//
-//        drawing += "<line x1=\"100\" y1=\"" + (hight + 120) + "\" x2=\"" + (width + 100) + "\" y2=\"" + (hight + 120) + "\" style=\"stroke:#000000;\" stroke-width=\"5\" />";
-//
-//        drawing += "<text x=\"" + (width / 2) + "\" y=\"" + (hight + 140) + "\" fill=\"white\">brede " + width + " cm</text>";
-//
-//        drawing += "<text  x=\"" + (width + 110) + "\" y=\"" + (hight / 2 + 100) + "\" fill=\"white\"  >længde " + hight + " cm</text>";
-//
-//        drawing += "</svg>";
-//
-//        return drawing;
-//    }
-///start metoden
-
+    /**
+     * draws the roof of a carport seen from the top 
+     * and calls the other functions to create drawings of the carport seen from the other sides 
+     * @param carport
+     * @return 
+     */
     public String drawRoofFromTop(Carport carport) {
         int hight = carport.getDepth();
         int width = carport.getWidth();
@@ -77,7 +32,7 @@ public class GenerateDrawing {
             if (!isSlope && 7 == part.getId()) {
                 numberOflægter = part.getQuantity();
 
-                //this is for flat roof, what is used for not flat roof?
+              
             } else if (!isSlope && 3 == part.getId()) {
                 numberOfSpær = part.getQuantity();
             } else if (isSlope && 3 == part.getId() && part.getDescription().equals("Midterstykker til spær")) {
@@ -129,7 +84,8 @@ public class GenerateDrawing {
                     + "        style=\"stroke:#000000; fill: #C0C0C0\"/>";
         }
 
-        drawing += "<text x=\"" + (width / 2 - 150) + "\" y=\"" + (hight + 30) + "\" fill=\"white\">din carport set fra toppen har bredden " + width + " cm</text>";
+        drawing += "<text x=\"" + (width / 2 - 150) + "\" y=\"" + (hight + 30) + "\" fill=\"white\">Din carport set fra toppen har bredden " + width + " cm.  </text>";
+         drawing += "<text x=\"" + (width / 2 - 150) + "\" y=\"" + (hight + 50) + "\" fill=\"white\"> OBS! Skuret og døren til skuret kan placeres efter behov. </text>";
 
         drawing += "<text  x=\"" + (width + 10) + "\" y=\"" + (hight / 2 + 15) + "\" fill=\"white\"  >dybde " + hight + "</text>";
 
@@ -139,12 +95,18 @@ public class GenerateDrawing {
         drawing += "</svg>";
 
         drawing += drawFront(carport);
-        drawing += drawflatSide(carport);
+        drawing += drawSide(carport);
 
         return drawing;
 
     }
 
+    /**
+     * drawes the sheed for a carport seen from the top and puts it inside the svg drawing of the carport seen from the top 
+     * 
+     * @param carport
+     * @return drawing of shed seen from top
+     */
     public String drawShed(Carport carport) {
         int carportHight = carport.getDepth();
         int carportWidth = carport.getWidth();
@@ -181,9 +143,14 @@ public class GenerateDrawing {
         return drawing;
     }
 
+    /**
+     * drawes the carport seen from the front in svg format, both with and without a slope roof.
+     * @param carport
+     * @return returns the drawing of the carport seen from the side
+     */
     public String drawFront(Carport carport) {
 
-        // this method could be change to flat roof side by adding beams from side
+      
         int hight = carport.getDepth();
         int width = carport.getWidth();
         int slope = carport.getRoof().getSlope();
@@ -192,7 +159,7 @@ public class GenerateDrawing {
         String drawing = "";
 
         drawing += "<SVG viewBox=\"-30 0 " + (width + 100) + " " + (hight + 100) + "\" width= \"100%\" hight= \"50%\">";
-        //fsdfsdf
+    
            if (slope != 0) {
                
         
@@ -231,7 +198,12 @@ public class GenerateDrawing {
         return drawing;
     }
 
-    public String drawflatSide(Carport carport) {
+    /**
+     * drawes the side of a carport in svg
+     * @param carport
+     * @return returns the drawing of the carport seen from the side
+     */
+    public String drawSide(Carport carport) {
 
         int hight = carport.getDepth();
         int width = carport.getWidth();
@@ -250,7 +222,7 @@ public class GenerateDrawing {
 
         String drawing = "";
 
-        drawing += "<SVG viewBox=\"-50 0 " + (width + 100) + " " + (hight + 100) + "\" width= \"100%\" hight= \"50%\">";
+        drawing += "<SVG viewBox=\"-50 0 " + (width + 100) + " " + (hight+20) + "\" width= \"100%\" hight= \"50%\">";
         int roofHight = 0;
         if (carport.getRoof().getSlope() != 0) {
 
@@ -298,6 +270,11 @@ public class GenerateDrawing {
         return drawing;
     }
 
+    /**
+     * generates the svg drawing of the sloped roof for a carport seen from the side
+     * @param carport
+     * @return returns the slope roof drawing on top of the carport seen from the side
+     */
     public String drawSlopeRoofSide(Carport carport) {
 
         int hight = carport.getDepth();

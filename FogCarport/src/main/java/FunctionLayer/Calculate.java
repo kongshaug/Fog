@@ -17,6 +17,13 @@ import java.util.ArrayList;
 public class Calculate
 {
 
+    /**
+     * calculates the amount of poles, bolts and discs for the poles needed to bouild the carport and adds it to the list of materials needed.
+     * @param carport
+     * @param pole
+     * @param bolt
+     * @param disc
+     */
     public void calculatepoles(Carport carport, Material pole, Material bolt, Material disc)
     {
         int depth = carport.getDepth();
@@ -36,6 +43,11 @@ public class Calculate
 
     }
 
+    /**
+     *calculates the length of the rem needed to bouild the carport and adds it to the list of materials needed.
+     * @param carport
+     * @param rem
+     */
     public void calculateRem(Carport carport, Material rem)
     {
         int depth = carport.getDepth();
