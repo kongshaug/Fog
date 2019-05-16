@@ -11,8 +11,7 @@
     <br><br><br>
     <div>
         <img src="images/logo.png" width="30%"><br>
-        <%            
-            List<String> material_classes = (List<String>) session.getAttribute("material_classes");
+        <%            List<String> material_classes = (List<String>) session.getAttribute("material_classes");
             String message = (String) request.getAttribute("message");
 
             if (message != null)
@@ -29,10 +28,9 @@
             Kategori<br>
             <select id="material_class" name="material_class">
                 <option disabled selected value="0">Vælg kategori</option>  
-                <%
-                    for (String m : material_classes)
-                    {                   
-                            out.println("<option> " + m + "</option>");        
+                <%                    for (String m : material_classes)
+                    {
+                        out.println("<option> " + m + "</option>");
                     }
                 %>
             </select>
@@ -40,7 +38,10 @@
             Pris<br>
             <input type="number" id="price" name="price" value="" placeholder="Indtast pris"> <br><br>
 
-            <button id="save" name="command" value="addmaterial">Tilføj materiale</button>
+            <button id="save" name="command" value="addmaterial">Tilføj materiale</button><br><br>
+            OBS! For at tilføje en tagtype, skal der først <br>
+            tilføjes materiale(r) til tagtypen <br><br>
+            <button name="command" value="addrooftype">Tilføj en tagtype</button>
         </form>
     </div>
 </center>

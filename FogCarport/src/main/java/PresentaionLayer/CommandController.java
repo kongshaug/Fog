@@ -65,7 +65,10 @@ public class CommandController
         commands.put("addmaterial", new AddMaterialCommand("materials.jsp","addmaterial.jsp"));
         commands.put("materialadd", new MaterialAddCommand("addmaterial.jsp"));
         commands.put("deletematerial", new DeleteMaterialCommand("materials.jsp"));
+        commands.put("addrooftype", new RoofTypeCommand("addrooftype.jsp"));
+        commands.put("rooftypeadd", new AddRoofTypeCommand("materials.jsp", "addrooftype.jsp"));
         commands.put("updatecarport", new UpdateCarportCommand("employeeorder.jsp"));
+        
 
     }
 
