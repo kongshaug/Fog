@@ -77,9 +77,9 @@ public class AddRoofTypeCommand implements Command
         request.setAttribute("message", message);
 
         if (message.equals("Tagtype er tilføjet"))
-        {
-            List<Material> materials = manager.getAllMaterials();
-            session.setAttribute("materials", materials);
+        {  
+            List<RoofType> rooftypes = manager.getRoofs();
+            session.setAttribute("rooftypes", rooftypes);
             return target;
 
         } else

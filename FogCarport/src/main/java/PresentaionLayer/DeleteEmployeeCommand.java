@@ -33,10 +33,8 @@ public class DeleteEmployeeCommand implements Command
         User employee = (User) session.getAttribute("employee");
 
         session.removeAttribute("employee");
-        session.removeAttribute("users");
 
         String message = manager.removeUser(employee);
-
         request.setAttribute("message", message);
         List<User> users = manager.getEmployeesAndAdmins();
         session.setAttribute("users", users);

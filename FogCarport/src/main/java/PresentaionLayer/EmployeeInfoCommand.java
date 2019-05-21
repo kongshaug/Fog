@@ -38,7 +38,6 @@ public class EmployeeInfoCommand implements Command
         if (user.getRole().equals(Role.ADMIN))
         {
             User employee = manager.getUser(user_id);
-
             session.setAttribute("employee", employee);
 
             return target;
