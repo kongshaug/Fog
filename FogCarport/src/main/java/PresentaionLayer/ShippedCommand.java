@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 public class ShippedCommand implements Command
 {
     private String target;
-    
+
     public ShippedCommand(String target)
     {
         this.target = target;
@@ -28,14 +28,10 @@ public class ShippedCommand implements Command
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
-         HttpSession session = request.getSession();
-         
-         Order order = (Order) session.getAttribute("order");
-         manager.isShipped(order);
-         
-         return target;
-    
-    }
+        HttpSession session = request.getSession();
+        Order order = (Order) session.getAttribute("order");
+        manager.isShipped(order);
 
-    
+        return target;
+    }
 }

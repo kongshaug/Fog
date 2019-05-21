@@ -22,7 +22,6 @@ import javax.servlet.http.HttpSession;
  */
 public class UpdateCarportCommand implements Command
 {
-
     private String target;
 
     public UpdateCarportCommand(String target)
@@ -35,7 +34,7 @@ public class UpdateCarportCommand implements Command
     {
         HttpSession session = request.getSession();
         Order order = (Order) session.getAttribute("order");
-
+        
         String rooftype = request.getParameter("roof");
         String typeId = request.getParameter("type");
         String slope_str = request.getParameter("slope");
@@ -87,10 +86,9 @@ public class UpdateCarportCommand implements Command
             {
                 slope = Integer.parseInt(slope_str);
             }
+            
             String res = manager.updateCarport(order.getCarport(), depth, width, type, slope, shedWidth, shedDepth);
-
             order.calcSalesPrice();
-
             request.setAttribute("errormessage", res);
             session.setAttribute("order", order);
 
@@ -101,7 +99,5 @@ public class UpdateCarportCommand implements Command
             request.setAttribute("errormessage", "Vælg venligst dybte og bredde på carporten!");
             return target;
         }
-
     }
-
 }

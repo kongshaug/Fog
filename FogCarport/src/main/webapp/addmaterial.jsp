@@ -13,12 +13,10 @@
         <img src="images/logo.png" width="30%"><br>
         <%            List<String> material_classes = (List<String>) session.getAttribute("material_classes");
             String message = (String) request.getAttribute("message");
-
             if (message != null)
             {
                 out.println(message + "<br><br>");
             }
-
         %>
         <form action="Fog" method="POST">
             Materiale navn<br>
@@ -28,7 +26,8 @@
             Kategori<br>
             <select id="material_class" name="material_class">
                 <option disabled selected value="0">Vælg kategori</option>  
-                <%                    for (String m : material_classes)
+                <%                    
+                    for (String m : material_classes)
                     {
                         out.println("<option> " + m + "</option>");
                     }
@@ -36,9 +35,10 @@
             </select>
             <br><br>
             Pris<br>
-            <input type="number" id="price" name="price" value="" placeholder="Indtast pris"> <br><br>
-
-            <button id="save" name="command" value="addmaterial">Tilføj materiale</button><br><br>
+            <input type="number" id="price" name="price" value="" placeholder="Indtast pris"> 
+            <br><br>
+            <button id="save" name="command" value="addmaterial">Tilføj materiale</button>
+            <br><br>
         </form>
     </div>
 </center>

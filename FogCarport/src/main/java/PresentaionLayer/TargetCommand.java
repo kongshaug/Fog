@@ -12,14 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author aamandajuhl
+ * @author sofieamalielandt
  */
-public class NewUserCommand implements Command
+public class TargetCommand implements Command
 {
-
     private String target;
-
-    public NewUserCommand(String target)
+    
+    public TargetCommand(String target)
     {
         this.target = target;
     }
@@ -28,6 +27,5 @@ public class NewUserCommand implements Command
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
         return target;
-    }
-
+    } 
 }

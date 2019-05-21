@@ -19,7 +19,6 @@ import javax.servlet.http.HttpSession;
  */
 public class UpdateRooftypeCommand implements Command
 {
-
     private String target;
 
     public UpdateRooftypeCommand(String target)
@@ -42,7 +41,6 @@ public class UpdateRooftypeCommand implements Command
         {
             int m1 = Integer.parseInt(m1_str);
             int m2 = Integer.parseInt(m2_str);
-
             Material material1 = manager.getMaterial(m1);
 
             if (m2 != 0)
@@ -63,5 +61,4 @@ public class UpdateRooftypeCommand implements Command
             return target;
         }
     }
-
 }

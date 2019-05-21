@@ -12,14 +12,13 @@
     <br><br><br>
     <div>
         <img src="images/logo.png" width="30%"><br>
-        <%            List<Material> materials = (List<Material>) session.getAttribute("materials");
+        <%            
+            List<Material> materials = (List<Material>) session.getAttribute("materials");
             String message = (String) request.getAttribute("message");
-
             if (message != null)
             {
                 out.println(message + "<br><br>");
             }
-
         %>
         <form action="Fog" method="POST">
             Tagtype navn<br>
@@ -60,7 +59,6 @@
             </select>
             <br><br>
             <button name="command" value="rooftypeadd">Tilføj tagtype</button><br><br>
-
         </form>
     </div>
 </center>

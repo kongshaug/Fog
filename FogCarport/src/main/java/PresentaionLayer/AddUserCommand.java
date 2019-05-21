@@ -19,7 +19,6 @@ import javax.servlet.http.HttpSession;
  */
 public class AddUserCommand implements Command
 {
-
     private String target;
     private String error;
     private String noUser;
@@ -63,5 +62,4 @@ public class AddUserCommand implements Command
             return error;
         }
     }
-
 }

@@ -13,7 +13,6 @@ import FunctionLayer.Enum.Role;
  */
 public class User
 {
-
     private int id;
     private String email;
     private String password;
@@ -46,25 +45,54 @@ public class User
         this.role = role;
     }
 
-    public String getZipcode()
+    public Role getRole()
     {
-        return zipcode;
+        return role;
     }
-
-    @Override
-    public String toString()
+    
+    public int getId()
     {
-        return "Bruger: " + email + ", navn: " + name + ", mobilnr: " + phone;
+        return id;
     }
-
+    
     public void setId(int id)
     {
         this.id = id;
     }
 
+    public String getName()
+    {
+        return name;
+    }
+    
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+    
+    public String getZipcode()
+    {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode)
+    {
+        this.zipcode = zipcode;
+    }
+    
+    public String getEmail()
+    {
+        return email;
+    }
+    
     public void setEmail(String email)
     {
         this.email = email;
+    }
+    
+    public String getPassword()
+    {
+        return password;
     }
 
     public void setPassword(String password)
@@ -72,49 +100,14 @@ public class User
         this.password = password;
     }
 
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
-    public void setAddress(String address)
-    {
-        this.address = address;
-    }
-
-    public void setZipcode(String zipcode)
-    {
-        this.zipcode = zipcode;
-    }
-
-    public void setPhone(String phone)
-    {
-        this.phone = phone;
-    }
-
-    public int getId()
-    {
-        return id;
-    }
-
-    public String getEmail()
-    {
-        return email;
-    }
-
-    public String getPassword()
-    {
-        return password;
-    }
-
-    public String getName()
-    {
-        return name;
-    }
-
     public String getAddress()
     {
         return address;
+    }
+    
+    public void setAddress(String address)
+    {
+        this.address = address;
     }
 
     public String getPhone()
@@ -122,9 +115,14 @@ public class User
         return phone;
     }
 
-    public Role getRole()
+    public void setPhone(String phone)
     {
-        return role;
+        this.phone = phone;
     }
 
+    @Override
+    public String toString()
+    {
+        return "Bruger: " + email + ", navn: " + name + ", mobilnr: " + phone;
+    }
 }

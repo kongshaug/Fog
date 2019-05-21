@@ -14,20 +14,18 @@
     <br><br><br>
     <div>
         <img src="images/logo.png" width="30%"><br>
-        <%       
+        <%            
             List<RoofType> rooftypes = (List<RoofType>) session.getAttribute("rooftypes");
             String message = (String) request.getAttribute("message");
-
             if (message != null)
             {
                 out.println(message + "<br><br>");
             }
-
         %>
         <form action="Fog" method="POST">
-           <select name="rooftype" id="rooftype">
+            <select name="rooftype" id="rooftype">
                 <option disabled selected>Vælg tagtype</option>            
-                <%
+                <%                    
                     for (RoofType r : rooftypes)
                     {
                         out.println("<option value=\"" + r.getId() + "\">" + r.getName() + "</option>");
@@ -42,7 +40,6 @@
             tilføjes materiale(r) til tagtypen <br><br>
             <button name="command" value="addrooftype">Tilføj en tagtype</button>
         </form>
-        
     </div>
 </center>
 </body>

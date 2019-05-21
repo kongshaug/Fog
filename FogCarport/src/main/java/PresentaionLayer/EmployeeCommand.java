@@ -19,7 +19,6 @@ import javax.servlet.http.HttpSession;
  */
 public class EmployeeCommand implements Command
 {
-
     private String target;
 
     public EmployeeCommand(String target)
@@ -42,10 +41,7 @@ public class EmployeeCommand implements Command
         {
             List<Order> orders = manager.getOrdersByEmail(search);
             session.setAttribute("orders", orders);
-
         }
-
         return target;
     }
-
 }

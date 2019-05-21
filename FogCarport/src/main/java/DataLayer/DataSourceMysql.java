@@ -18,7 +18,7 @@ public class DataSourceMysql
 
     /**
      * Initializes the information for connection to database.
-     * 
+     *
      */
     public DataSourceMysql()
     {
@@ -34,7 +34,6 @@ public class DataSourceMysql
         {
             System.out.println(ex.getMessage());
         }
-
     }
 
     /**

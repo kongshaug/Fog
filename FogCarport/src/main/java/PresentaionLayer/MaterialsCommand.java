@@ -21,7 +21,6 @@ import javax.servlet.http.HttpSession;
  */
 public class MaterialsCommand implements Command
 {
-
     private String target;
     private String denied;
 
@@ -48,7 +47,5 @@ public class MaterialsCommand implements Command
             request.setAttribute("message", "Adgang nægtet");
             return denied;
         }
-
     }
-
 }

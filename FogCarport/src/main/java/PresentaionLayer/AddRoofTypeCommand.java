@@ -20,7 +20,6 @@ import javax.servlet.http.HttpSession;
  */
 public class AddRoofTypeCommand implements Command
 {
-
     private String target;
     private String error;
 
@@ -33,7 +32,6 @@ public class AddRoofTypeCommand implements Command
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
-
         HttpSession session = request.getSession();
         RoofType rooftype;
         String message = "";
@@ -41,20 +39,20 @@ public class AddRoofTypeCommand implements Command
         String m1_str = request.getParameter("material1");
         String m2_str = request.getParameter("material2");
         String roof_class = request.getParameter("roof_class");
-        
-        if(name == null)
+
+        if (name == null)
         {
             message = "Venligst indtast navn på tagtypen";
             request.setAttribute("message", message);
             return error;
         }
-        if(m1_str == null || m2_str == null)
+        if (m1_str == null || m2_str == null)
         {
             message = "Vælg venligst materialer til tagtypen";
             request.setAttribute("message", message);
             return error;
         }
-        if(roof_class == null)
+        if (roof_class == null)
         {
             message = "Vælg venligst kategori";
             request.setAttribute("message", message);
@@ -64,10 +62,12 @@ public class AddRoofTypeCommand implements Command
         int m1 = Integer.parseInt(m1_str);
         int m2 = Integer.parseInt(m2_str);
         Material material1 = manager.getMaterial(m1);
+        
         if (m2 != 0)
         {
             Material material2 = manager.getMaterial(m2);
             rooftype = new RoofType(name, roof_class, material1, material2);
+            
         } else
         {
             rooftype = new RoofType(name, roof_class, material1);
@@ -81,7 +81,7 @@ public class AddRoofTypeCommand implements Command
             List<Material> materials = manager.getAllMaterials();
             session.setAttribute("materials", materials);
             return target;
-            
+
         } else
         {
             return error;

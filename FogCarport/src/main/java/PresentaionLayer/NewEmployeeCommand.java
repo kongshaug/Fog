@@ -19,7 +19,6 @@ import javax.servlet.http.HttpSession;
  */
 public class NewEmployeeCommand implements Command
 {
-
     private String target;
     private String denied;
 
@@ -44,5 +43,4 @@ public class NewEmployeeCommand implements Command
             return denied;
         }
     }
-
 }

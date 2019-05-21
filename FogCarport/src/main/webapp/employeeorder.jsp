@@ -11,17 +11,17 @@
 <%@page import="FunctionLayer.HelpingClasses.Order"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@include file = "header.jsp" %>
-
 <center class="index" id="index"> 
     <form action="Fog" method="POST">
         <div id="shop">
-            <%            Order order = (Order) session.getAttribute("order");
+            <%            
+                Order order = (Order) session.getAttribute("order");
                 out.println("Ordrer: " + order.getOrder_id() + "Carport: " + order.getCarport().getId() + ", Bestilt: " + order.getOrder_date() + "<br><br>");
                 out.println("Kundenummer: " + order.getUser().getId() + " - Navn: " + order.getUser().getName() + "<br>");
                 out.println("E-mail: " + order.getUser().getEmail() + " - Telefon: " + order.getUser().getPhone() + "<br>");
                 out.println("Adresse: " + order.getUser().getAddress() + ", " + order.getUser().getZipcode() + "<br><br>");
                 out.println("Afsendt: " + order.getShipped() + "<br>");
-
+                
                 if (order.getShipped().equals("Ordren er endnu ikke afsendt"))
                 {
                     out.println("<br><button name=\"command\" value=\"shipped\">Afsend ordren</button><br>");
@@ -37,7 +37,6 @@
                             out.println("<option selected> " + s + "</option>");
                         } else
                         {
-
                             out.println("<option> " + s + "</option>");
                         }
                     }
@@ -53,7 +52,6 @@
                             out.println("<option selected> " + p + "</option>");
                         } else
                         {
-
                             out.println("<option> " + p + "</option>");
                         }
                     }
@@ -63,7 +61,6 @@
         </div>
     </form>
     <br>
-
     <form action="Fog" method="POST">
         <div>
             <%
@@ -71,7 +68,7 @@
                 if (pricemessage != null)
                 {
             %>
-            <p><%=pricemessage%></p><br>
+            <p><%=pricemessage%></p><br>  
             <%            }
             %>
             Salgspris:&nbsp;&nbsp;<input type="number" name="salesprice" value="<%=order.getSales_price()%>"> Kr.
@@ -117,10 +114,7 @@
                 {
                     out.println("<label> <input type=\"radio\" name=\"roof\" id=\"flat\" value=\"flat\" onclick=\"disable()\" disabled=\"disabled\"><span>Fladt tag</span></label>");
                     out.println("<label> <input type=\"radio\" name=\"roof\" id=\"sloped\" value=\"sloped\" onclick=\"enable()\" checked=\"checked\" disabled=\"disabled\"><span>Tag med rejsning</span></label>");
-
                 }
-
-
             %>
             <br><br>
             <select name="type" id="type" disabled="disabled">
@@ -172,7 +166,8 @@
             <br><br>
             <select name="slope" id="hældning" disabled="disabled">
                 <option selected>0</option>
-                <%                    for (int i = 15; i <= 45; i = i + 5)
+                <%                    
+                    for (int i = 15; i <= 45; i = i + 5)
                     {
                         out.println("<option> " + i + "</option>");
 
@@ -199,14 +194,13 @@
                 %>
             </select>       
         </div>
-
         <br>
-        <%        if (order.getCarport().getShed() == null)
+        <%        
+            if (order.getCarport().getShed() == null)
             {
                 out.println("<div id=\"skur\" hidden=\"true\">");
             } else
             {
-
                 out.println("<div id=\"skur\">");
             }
         %>
@@ -224,13 +218,10 @@
             {
                 out.println("Bredde af skur:&nbsp;&nbsp;<input type=\"number\" pattern=\"[0-2000]*\" name=\"shedWidth\" id=\"shedWidth\" value=\"0\" min=\"210\" max=\"770\" disabled=\"disabled\">");
                 out.println("Dybde af skur:&nbsp;&nbsp;<input type=\"number\" pattern=\"[0-2000]*\" name=\"shedDepth\" id=\"shedDepth\" value=\"0\"min=\"210\" max=\"720\" disabled=\"disabled\">&nbsp;&nbsp;");
-
             }
-
         %>
         </div>
         <br>
-
         <div>
             <button id="save" name="command" value="updatecarport" style="display:none;">Gem ændringer</button>
             &nbsp;&nbsp;
@@ -272,7 +263,6 @@
 
             slopeoptions.forEach(function (x)
             {
-
                 x.setAttribute("disabled", "disabled");
                 x.setAttribute("hidden", "hidden");
             });
@@ -280,7 +270,6 @@
             document.getElementById("hældning").disabled = true;
             document.getElementById("type").value = 0;
             document.getElementById("hældning").value = 0;
-
         }
 
         function enable()
@@ -315,7 +304,6 @@
                 document.getElementById("skur").setAttribute("hidden", "true");
             }
         }
-
 
     </script>
 </center>

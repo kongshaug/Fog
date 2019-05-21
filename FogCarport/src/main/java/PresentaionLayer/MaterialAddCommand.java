@@ -21,7 +21,6 @@ import javax.servlet.http.HttpSession;
  */
 public class MaterialAddCommand implements Command
 {
-
     private String target;
 
     public MaterialAddCommand(String target)
@@ -32,7 +31,6 @@ public class MaterialAddCommand implements Command
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
-
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 

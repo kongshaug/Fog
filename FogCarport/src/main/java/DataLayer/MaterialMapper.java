@@ -13,14 +13,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  *
  * @author sofieamalielandt
  */
 public class MaterialMapper
 {
-
     private DBConnector dbc;
 
     public MaterialMapper(DBConnector dbc) throws DataException
@@ -226,7 +224,6 @@ public class MaterialMapper
     {
         try
         {
-
             dbc.open();
 
             String query = "UPDATE Fog.`materials`"
@@ -255,7 +252,7 @@ public class MaterialMapper
             throw new DataException(e.getMessage());
         }
     }
-    
+
     public void updateRoofType(RoofType rooftype) throws DataException
     {
         try
@@ -286,7 +283,7 @@ public class MaterialMapper
             throw new DataException(e.getMessage());
         }
     }
-    
+
     public void updateRoofTypeWith1Material(RoofType rooftype) throws DataException
     {
         try
@@ -315,7 +312,7 @@ public class MaterialMapper
             throw new DataException(e.getMessage());
         }
     }
-    
+
     public void deleteRooftype(RoofType rooftype) throws DataException
     {
         try
@@ -338,7 +335,7 @@ public class MaterialMapper
             throw new DataException(e.getMessage());
         }
     }
-    
+
     public List<RoofType> getRoofs() throws DataException
     {
         try
@@ -368,9 +365,8 @@ public class MaterialMapper
                 {
                     rooftypes.add(new RoofType(id, name, roof_class, m1, m2));
                 }
-
             }
-
+            
             dbc.close();
             return rooftypes;
 
@@ -409,7 +405,6 @@ public class MaterialMapper
                 {
                     rooftypes = new RoofType(id, name, roof_class, m1, m2);
                 }
-
             }
 
             dbc.close();
@@ -470,7 +465,5 @@ public class MaterialMapper
         {
             throw new DataException(e.getMessage());
         }
-
     }
-
 }

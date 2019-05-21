@@ -10,13 +10,9 @@ package PresentaionLayer;
  *
  * @author benja
  */
-
-
-
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Formatter;
 import java.util.logging.Level;
@@ -40,8 +36,6 @@ public class logger {
 //    static final Logger LOGGER = DefaultLogger.getLogger(false, true);
     static final Logger LOGGER = Logger.getLogger(logger.class.getName());
 
-
-
     public void run(String message) throws IOException {
       
          try{
@@ -57,21 +51,11 @@ public class logger {
         LOGGER.log(Level.WARNING, "Message to be logged", new RuntimeException("ERROR"));
         handler.close();
         } 
-
-           
+         
          catch (IOException | SecurityException ex) {
             ex.printStackTrace();
-        }
-       
-        
-        
-        
+        }  
     }
-
-
-  
-        
-    
 
     private class VerySimpleFormatter extends Formatter {
 

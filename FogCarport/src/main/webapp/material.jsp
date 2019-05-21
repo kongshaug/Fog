@@ -21,7 +21,6 @@
             {
                 out.println(message + "<br><br>");
             }
-
         %>
         <form action="Fog" method="POST">
             Navn<br>
@@ -47,12 +46,10 @@
             <br><br>
             Pris<br>
             <input type="text" id="price" name="price" value="<%=material.getPrice()%>" disabled="disabled"> <br><br>
-
             <button id="save" name="command" value="materialupdate" style="display:none;">Gem</button>
         </form>
 
         <button id="update" onclick="update()">Opdater</button> <br><br>
-
     </div>
 </center>
 <script>

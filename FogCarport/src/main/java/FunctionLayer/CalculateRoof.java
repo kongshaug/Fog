@@ -17,7 +17,6 @@ import java.util.ArrayList;
  */
 public class CalculateRoof
 {
-
     private CalculatePackages cp;
 
     /**
@@ -30,7 +29,9 @@ public class CalculateRoof
     }
 
     /**
-     * calculates all the materials needed to make a flat roof and puts it in the list of materials in the carport object
+     * calculates all the materials needed to make a flat roof and puts it in
+     * the list of materials in the carport object
+     *
      * @param carport
      * @param spær
      * @param beslagV
@@ -134,11 +135,12 @@ public class CalculateRoof
 
         Part skruer = new Part(Skruer, 0, skruerPackage, "Til montering af stern og vandbrædder");
         parts.add(skruer);
-
     }
 
     /**
-     * if the roof of a carport is flat the palstsmo plates are calculatet to put on the roof of the carport
+     * if the roof of a carport is flat the palstsmo plates are calculatet to
+     * put on the roof of the carport
+     *
      * @param carport
      * @param Plastmo
      * @param Plastmotætning
@@ -168,7 +170,10 @@ public class CalculateRoof
     }
 
     /**
-     * if the roof is sloped this method calculates all the materials needed to make the roof and puts it in the list of materials needed in the roof object
+     * if the roof is sloped this method calculates all the materials needed to
+     * make the roof and puts it in the list of materials needed in the roof
+     * object
+     *
      * @param carport
      * @param spær
      * @param taglægte
@@ -200,16 +205,14 @@ public class CalculateRoof
         //length of roof from edge to top
         //which one? --- find out in next episode
         //double angleinradians = slope * Math.PI / 180.0;
-      //  double halfRooff = (width / 2) / angleinradians;
+        //  double halfRooff = (width / 2) / angleinradians;
         //cos(A)/b=c HHHHEREre
         double cosAngle = Math.cos(Math.toRadians(slope));
-        double halfRoofD  = (width / 2)/  cosAngle;
+        double halfRoofD = (width / 2) / cosAngle;
         int halfRoof = (int) halfRoofD;
-        
 
         //hight of roof
-        int height = (int) (sqrt(halfRoof * halfRoof -( (width/2) * (width/2))));
-    
+        int height = (int) (sqrt(halfRoof * halfRoof - ((width / 2) * (width / 2))));
 
         //calculate taglægter
         int NumberOfTaglægter = calcTaglægter(halfRoof, depth, taglægte, parts);
@@ -229,15 +232,15 @@ public class CalculateRoof
 
         //calculations for toplægte, tegl and beklædning 
         calcToplægte(depth, parts, numberOfSpær, taglægte, ToplægteHolderen);
-        
-        if(carport.getRoof().getType().getName().contains("Betontagsten"))
+
+        if (carport.getRoof().getType().getName().contains("Betontagsten"))
         {
             calcTegl(depth, NumberOfTaglægter, parts, Tegl, Rygsten, RygstensBeslag);
         } else
         {
             calcEternit(slope, depth, width, parts, Tegl, Rygsten, BeslagSkruer);
         }
-        
+
         calcBeklædning(width, height, carport, Beklædning, Skrue1, Skrue2, parts);
 
         Part vindskeder = new Part(trykImpBræt, (int) halfRoof, 4, "Vindskeder på rejsning");
@@ -259,7 +262,6 @@ public class CalculateRoof
         parts.add(sternscrews);
 
         carport.getRoof().setParts(parts);
-
     }
 
     private Integer calcTaglægter(double halfRoof, int depth, Material taglægte, ArrayList<Part> parts)
@@ -276,7 +278,6 @@ public class CalculateRoof
     }
 
     private Integer calcSpær(int depth, int width, int height, double halfRoof, Material spær, ArrayList<Part> parts)
-
     {
         int numberOfSpær = depth / 75 + 1;
 
@@ -298,7 +299,6 @@ public class CalculateRoof
         parts.add(sideSpærPart);
 
         return numberOfSpær;
-
     }
 
     private void calcSpærBeslag(int numberOfSpær, ArrayList<Part> parts, Material spærBeslag, Material BeslagSkruer, Material universalH, Material universalV)
@@ -332,7 +332,6 @@ public class CalculateRoof
         //toplægte for the middle
         Part toplægte = new Part(taglægte, depth, 1, "Toplægte til	montering af rygsten");
         parts.add(toplægte);
-
     }
 
     private void calcTegl(int depth, int NumberOfTaglægter, ArrayList<Part> parts, Material Tegl, Material Rygsten, Material RygstensBeslag)
@@ -357,11 +356,10 @@ public class CalculateRoof
         //beslag for rygsten
         Part rygstensBeslag = new Part(RygstensBeslag, 0, numberOfRygsten, "Beslag til montering af rygsten");
         parts.add(rygstensBeslag);
-
     }
 
-    private void calcEternit(int slope, int depth, int width, ArrayList<Part> parts, 
-                            Material Eternit, Material Vinkelrygning, Material BeslagSkruer)
+    private void calcEternit(int slope, int depth, int width, ArrayList<Part> parts,
+            Material Eternit, Material Vinkelrygning, Material BeslagSkruer)
     {
         //plates mesurments 110 x 57 cm with 20 cm overlay they become 90 cm x 37 cm
         int numberOfEternit = (width / 37) * (depth / 90);
@@ -379,15 +377,15 @@ public class CalculateRoof
 
         Part vinkelrygning = new Part(Vinkelrygning, 0, numberOfVinkelrygning, "Vinkelrygning til montering på toplægten med en vinkel på: " + slope);
         parts.add(vinkelrygning);
-        
+
         //screws for plates 4 pr. vinkelrygning or plate
-        int numberOfScrews = ((numberOfEternit  + numberOfVinkelrygning) * 4);
+        int numberOfScrews = ((numberOfEternit + numberOfVinkelrygning) * 4);
         int packages = cp.calcPackage250(numberOfScrews);
 
         Part rygstensskruer = new Part(BeslagSkruer, 0, packages, "Skruer til montering af vinkelrygning og eternitplader");
         parts.add(rygstensskruer);
-
     }
+
     private void calcBeklædning(int width, int height, Carport carport, Material Beklædning, Material Skrue1, Material Skrue2, ArrayList<Part> parts)
     {
         //calculate beklædning they overlap with 3 cm
@@ -415,6 +413,5 @@ public class CalculateRoof
 
         Part inderbrætSkruer = new Part(Skrue2, 0, packagesInderbræt, "Til montering af inderbræt, ved beklædning af gavl");
         parts.add(inderbrætSkruer);
-
     }
 }

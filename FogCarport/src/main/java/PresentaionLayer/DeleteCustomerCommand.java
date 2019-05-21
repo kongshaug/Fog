@@ -8,7 +8,6 @@ package PresentaionLayer;
 import DataLayer.DataException;
 import FunctionLayer.FunctionManager;
 import FunctionLayer.HelpingClasses.User;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,7 +18,6 @@ import javax.servlet.http.HttpSession;
  */
 public class DeleteCustomerCommand implements Command
 {
-
     private String target;
 
     public DeleteCustomerCommand(String target)
@@ -39,9 +37,9 @@ public class DeleteCustomerCommand implements Command
         String message = manager.removeUser(user);
 
         request.setAttribute("message", message);
-        
+
         return target;
-        
+
     }
 
 }

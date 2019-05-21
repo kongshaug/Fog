@@ -19,12 +19,10 @@
             <img src="images/logo.png" width="30%"><br>
             <%
                 String message = (String) request.getAttribute("message");
-
                 if (message != null)
                 {
                     out.println(message + "<br><br>");
                 }
-
             %>
             <form action="Fog" method="POST">
                 Navn<br>
@@ -40,8 +38,6 @@
                 Adgangskode<br>
                 <input type="password" name="password" placeholder=" Indtast adgangskode" value="" minlength="4" required> <br><br>
                 <br><button name="command" value="adduser">Opret bruger</button> <br><br>
-
-
             </form>
         </div>
     </center>

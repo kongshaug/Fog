@@ -11,21 +11,18 @@
     <br><br><br>
     <div>
         <img src="images/logo.png" width="30%"><br>
-        <%                
+        <%            
             String message = (String) request.getAttribute("message");
-
             if (message != null)
             {
                 out.println(message + "<br><br>");
             }
-
         %>
         <form action="Fog" method="POST">
             <select name="role">
                 <%                    
                     out.println("<option>Medarbejder</option>");
                     out.println("<option>Administrator</option>");
-
                 %>
             </select><br><br>
             Navn<br>
@@ -41,10 +38,7 @@
             Adgangskode<br>
             <input type="password" name="password" value="1234" minlength="4" required disabled="disabled">
             <br>(Altid 1234 for nye medarbejdere)
-           
             <br><br><button name="command" value="addemployee">Opret medarbejder</button> <br><br>
-
-
         </form>
     </div>
 </center>

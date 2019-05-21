@@ -19,7 +19,6 @@ import javax.servlet.http.HttpSession;
  */
 public class DeleteEmployeeCommand implements Command
 {
-
     private String target;
 
     public DeleteEmployeeCommand(String target)
@@ -35,7 +34,7 @@ public class DeleteEmployeeCommand implements Command
 
         session.removeAttribute("employee");
         session.removeAttribute("users");
-        
+
         String message = manager.removeUser(employee);
 
         request.setAttribute("message", message);
@@ -43,7 +42,5 @@ public class DeleteEmployeeCommand implements Command
         session.setAttribute("users", users);
 
         return target;
-
     }
-
 }

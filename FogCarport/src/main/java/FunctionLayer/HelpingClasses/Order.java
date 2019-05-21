@@ -14,7 +14,6 @@ import FunctionLayer.Enum.Status;
  */
 public class Order
 {
-
     private int order_id;
     private User user;
     private Carport carport;
@@ -50,9 +49,19 @@ public class Order
         return order_id;
     }
 
+    public void setOrder_id(int order_id)
+    {
+        this.order_id = order_id;
+    }
+
     public User getUser()
     {
         return user;
+    }
+
+    public void setUser(User user)
+    {
+        this.user = user;
     }
 
     public Carport getCarport()
@@ -60,14 +69,29 @@ public class Order
         return carport;
     }
 
+    public void setCarport(Carport carport)
+    {
+        this.carport = carport;
+    }
+
     public String getOrder_date()
     {
         return order_date;
     }
 
+    public void setOrder_date(String order_date)
+    {
+        this.order_date = order_date;
+    }
+
     public Status getStatus()
     {
         return status;
+    }
+
+    public void setStatus(Status status)
+    {
+        this.status = status;
     }
 
     public String getShipped()
@@ -81,60 +105,14 @@ public class Order
         }
     }
 
-    public Paid getPaid()
-    {
-        return paid;
-    }
-    
-    public void calcSalesPrice()
-    {
-        sales_price = carport.getTotal_price() * 1.25;
-        sales_price = Math.round(sales_price*100.0)/100.0;
-    }
-
-    public double getSales_price()
-    {
-        return sales_price;
-    }
-
-    public double getProfit()
-    {
-        double profit = ((sales_price - carport.getTotal_price()) / carport.getTotal_price()) * 100;
-        
-        profit = Math.round(profit * 100.0)/100.0;
-        
-        return profit;
-    
-    }
-
-    public void setOrder_id(int order_id)
-    {
-        this.order_id = order_id;
-    }
-
-    public void setUser(User user)
-    {
-        this.user = user;
-    }
-
-    public void setCarport(Carport carport)
-    {
-        this.carport = carport;
-    }
-
-    public void setOrder_date(String order_date)
-    {
-        this.order_date = order_date;
-    }
-
-    public void setStatus(Status status)
-    {
-        this.status = status;
-    }
-
     public void setShipped(String shipped)
     {
         this.shipped = shipped;
+    }
+
+    public Paid getPaid()
+    {
+        return paid;
     }
 
     public void setPaid(Paid paid)
@@ -142,9 +120,30 @@ public class Order
         this.paid = paid;
     }
 
+    public void calcSalesPrice()
+    {
+        this.sales_price = carport.getTotal_price() * 1.25;
+        this.sales_price = Math.round(this.sales_price * 100.0) / 100.0;
+    }
+
+    public double getSales_price()
+    {
+        return sales_price;
+    }
+
     public void setSales_price(double sales_price)
     {
         this.sales_price = sales_price;
+    }
+
+    public double getProfit()
+    {
+        double profit = ((sales_price - carport.getTotal_price()) / carport.getTotal_price()) * 100;
+
+        profit = Math.round(profit * 100.0) / 100.0;
+
+        return profit;
+
     }
 
     @Override

@@ -30,17 +30,14 @@ public class UpdateMaterialCommand implements Command
     {
         HttpSession session = request.getSession();
         Material material = (Material) session.getAttribute("material");
-
         String name = request.getParameter("name");
         String unit = request.getParameter("unit");
         String material_class = request.getParameter("material_class");
         double price = Double.parseDouble(request.getParameter("price"));
         
         String message = manager.updateMaterial(material, name, unit, material_class, price);
-        
         request.setAttribute("message", message);
         
         return target; 
     }
-    
 }

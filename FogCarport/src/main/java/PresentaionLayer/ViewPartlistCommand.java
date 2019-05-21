@@ -21,7 +21,7 @@ public class ViewPartlistCommand implements Command
 {
     private String emptarget;
     private String custarget;
-    
+
     public ViewPartlistCommand(String emptarget, String custarget)
     {
         this.emptarget = emptarget;
@@ -33,15 +33,15 @@ public class ViewPartlistCommand implements Command
     {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        
+
         if (user.getRole().equals(Role.ADMIN) || user.getRole().equals(Role.EMPLOYEE))
         {
             return emptarget;
-        }
-        else{
-            
+        } else
+        {
+
             return custarget;
         }
     }
-    
+
 }

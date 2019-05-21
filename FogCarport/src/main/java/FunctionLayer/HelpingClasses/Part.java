@@ -11,7 +11,6 @@ package FunctionLayer.HelpingClasses;
  */
 public class Part
 {
-
     private Material material;
     private int length;
     private int quantity;
@@ -83,7 +82,7 @@ public class Part
     private double calcTotalPrice()
     {
         double price;
-        
+
         if (length == 0)
         {
             price = (material.getPrice() * quantity);
@@ -93,8 +92,8 @@ public class Part
             double Qua = quantity;
             price = ((Qua * length_meter) / 100.0) * material.getPrice();
         }
-        
-        price = Math.round(price * 100.0)/100.0;
+
+        price = Math.round(price * 100.0) / 100.0;
         return price;
     }
 

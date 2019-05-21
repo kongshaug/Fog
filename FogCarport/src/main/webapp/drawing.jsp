@@ -9,7 +9,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@include file = "header.jsp" %>
-<%        Carport carport = (Carport) session.getAttribute("carport");
+<%        
     String roofDrawing = (String) session.getAttribute("roofDrawing");
 %>
 <center id="partlist" class="partlist">
@@ -21,11 +21,9 @@
         </div>
         <br><br>
     </form>
-    
     <div>
     <%=roofDrawing%>
     </div>
-    
 </center>
 </body>
 </html>

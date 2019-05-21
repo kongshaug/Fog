@@ -20,14 +20,13 @@ import javax.servlet.http.HttpSession;
  */
 public class PlaceOrderCommand implements Command
 {
-
     private String target;
     private String noUser;
 
     public PlaceOrderCommand(String target, String noUser)
     {
         this.target = target;
-        this.noUser =  noUser;
+        this.noUser = noUser;
     }
 
     @Override
@@ -37,12 +36,12 @@ public class PlaceOrderCommand implements Command
 
         User user = (User) session.getAttribute("user");
         Carport carport = (Carport) session.getAttribute("carport");
-        
-        if(user == null)
+
+        if (user == null)
         {
             return noUser;
         }
-        
+
         Order order = new Order(user, carport);
         session.setAttribute("order", order);
 
@@ -57,5 +56,4 @@ public class PlaceOrderCommand implements Command
 
         return target;
     }
-
 }

@@ -18,7 +18,6 @@ import javax.servlet.http.HttpSession;
  */
 public class CustomerOrderCommand implements Command
 {
-
     private String target;
 
     public CustomerOrderCommand(String target)
@@ -42,8 +41,7 @@ public class CustomerOrderCommand implements Command
         manager.calcRoof(order.getCarport());
 
         session.setAttribute("order", order);
-        
-        
+
         return target;
     }
 

@@ -67,29 +67,9 @@ public class Carport
         return id;
     }
 
-    public void setWidth(int width)
+    public void setId(int id)
     {
-        this.width = width;
-    }
-
-    public void setDepth(int depth)
-    {
-        this.depth = depth;
-    }
-
-    public void setRoof(Roof roof)
-    {
-        this.roof = roof;
-    }
-
-    public void setShed(Shed shed)
-    {
-        this.shed = shed;
-    }
-
-    public void setTotal_price(double total_price)
-    {
-        this.total_price = total_price;
+        this.id = id;
     }
 
     public int getWidth()
@@ -97,9 +77,19 @@ public class Carport
         return width;
     }
 
+    public void setWidth(int width)
+    {
+        this.width = width;
+    }
+
     public int getDepth()
     {
         return depth;
+    }
+
+    public void setDepth(int depth)
+    {
+        this.depth = depth;
     }
 
     public Roof getRoof()
@@ -107,14 +97,19 @@ public class Carport
         return roof;
     }
 
+    public void setRoof(Roof roof)
+    {
+        this.roof = roof;
+    }
+
     public Shed getShed()
     {
         return shed;
     }
 
-    public void setId(int id)
+    public void setShed(Shed shed)
     {
-        this.id = id;
+        this.shed = shed;
     }
 
     public ArrayList<Part> getParts()
@@ -126,7 +121,7 @@ public class Carport
     {
         this.parts = parts;
     }
-    
+
     public void resetParts()
     {
         this.parts = new ArrayList<>();
@@ -156,8 +151,12 @@ public class Carport
     public double getTotal_price()
     {
         total_price = calcTotalPrice();
-        total_price = Math.round(total_price*100.0)/100.0;
+        total_price = Math.round(total_price * 100.0) / 100.0;
         return total_price;
     }
-
+    
+    public void setTotal_price(double total_price)
+    {
+        this.total_price = total_price;
+    }
 }

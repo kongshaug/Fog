@@ -10,13 +10,12 @@
     <br><br><br>
     <div>
         <img src="images/logo.png" width="30%"><br>
-        <%            String message = (String) request.getAttribute("message");
-
+        <%            
+            String message = (String) request.getAttribute("message");
             if (message != null)
             {
                 out.println(message + "<br><br>");
             }
-
         %>
         <form action="Fog" method="POST">
             Navn<br>
@@ -33,12 +32,13 @@
             Adgangskode &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ny adgangskode
             <input type="password" id="oldpassword" name="oldpassword" value="<%=user.getPassword()%>" minlength="4" required disabled="disabled"> 
             &nbsp;&nbsp;
-            <input type="password" id="newpassword" name="newpassword" value="<%=user.getPassword()%>" onclick="password()" minlength="4" required disabled="disabled"> <br><br>
-
-
+            <input type="password" id="newpassword" name="newpassword" value="<%=user.getPassword()%>" onclick="password()" minlength="4" required disabled="disabled"> 
+            <br><br>
             <button id="save" name="command" value="customerupdate" style="display:none;">Gem</button>
         </form>
+            
         <button id="update" onclick="update()">Opdater</button> <br><br>
+        
         <form action="Fog" method="POST">
             <button id="delete" name="command" value="deletecustomer">Slet bruger</button>
         </form>
@@ -56,11 +56,11 @@
         document.getElementById("save").style.display = "inline-block";
         document.getElementById("update").style.display = "none";
     }
-    
+
     function password() {
-                    document.getElementById("newpassword").value = '';
-                    document.getElementById("oldpassword").value = '';
-                }
+        document.getElementById("newpassword").value = '';
+        document.getElementById("oldpassword").value = '';
+    }
 </script>
 </body>
 </html>

@@ -18,7 +18,6 @@ import javax.servlet.http.HttpSession;
  */
 public class ProfitCommand implements Command
 {
-
     private String target;
 
     public ProfitCommand(String target)
@@ -43,11 +42,11 @@ public class ProfitCommand implements Command
             }
         } else
         {
+            
             String errormessage = "Der skal minimum være en profit på 10%";
             request.setAttribute("pricemessage", errormessage);
         }
 
         return target;
     }
-
 }

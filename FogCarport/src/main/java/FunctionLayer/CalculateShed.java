@@ -10,14 +10,12 @@ import FunctionLayer.HelpingClasses.Material;
 import FunctionLayer.HelpingClasses.Part;
 import static java.lang.Math.sqrt;
 import java.util.ArrayList;
-
 /**
  *
  * @author benja
  */
 public class CalculateShed
 {
-
     private CalculatePackages cp;
 
     /**
@@ -30,7 +28,9 @@ public class CalculateShed
     }
 
     /**
-     * Calculates what materials needed to bouild the shead for a carport and puts it in the list of materials for the shed
+     * Calculates what materials needed to bouild the shead for a carport and
+     * puts it in the list of materials for the shed
+     *
      * @param carport
      * @param stolpe
      * @param bræt
@@ -102,7 +102,9 @@ public class CalculateShed
     }
 
     /**
-     * calculates the materials needed to make a shed when the roof of the carport is sloaped
+     * calculates the materials needed to make a shed when the roof of the
+     * carport is sloaped
+     *
      * @param carport
      * @param stolpe
      * @param bræt
@@ -184,7 +186,6 @@ public class CalculateShed
         parts.add(inderbrætSkruer);
 
         carport.getShed().setParts(parts);
-
     }
 
     private ArrayList<Integer> calculatedoorForShed(Carport carport, Material Lægte, Material stalddørsgrebene, Material hængselet, Material planker)
@@ -216,6 +217,5 @@ public class CalculateShed
         carport.getShed().setParts(parts);
 
         return skruer;
-
     }
 }

@@ -20,7 +20,6 @@ import javax.servlet.http.HttpSession;
  */
 public class CustomerCommand implements Command
 {
-
     private String target;
 
     public CustomerCommand(String target)

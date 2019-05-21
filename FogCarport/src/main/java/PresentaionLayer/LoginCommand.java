@@ -33,10 +33,8 @@ public class LoginCommand implements Command
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
         HttpSession session = request.getSession();
-
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-
         User user = manager.login(email, password);
 
         if (user != null)
@@ -53,7 +51,5 @@ public class LoginCommand implements Command
         request.setAttribute("message", "Forkert email eller adgangskode!");
 
         return "index.jsp";
-
     }
-
 }

@@ -10,21 +10,19 @@ import FunctionLayer.FunctionManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 /**
  *
  * @author aamandajuhl
  */
 public class RegretOrderCommand implements Command
 {
-
     private String target;
-    
+
     public RegretOrderCommand(String target)
     {
         this.target = target;
     }
-    
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
@@ -32,5 +30,4 @@ public class RegretOrderCommand implements Command
         session.removeAttribute("carport");
         return target;
     }
-    
 }

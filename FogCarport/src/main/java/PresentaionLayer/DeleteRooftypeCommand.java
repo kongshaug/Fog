@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 public class DeleteRooftypeCommand implements Command
 {
     private String target;
-    
+
     public DeleteRooftypeCommand(String target)
     {
         this.target = target;
@@ -30,7 +30,6 @@ public class DeleteRooftypeCommand implements Command
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
         HttpSession session = request.getSession();
-
         String rooftype_str = request.getParameter("rooftype");
 
         if (rooftype_str == null)
@@ -53,5 +52,3 @@ public class DeleteRooftypeCommand implements Command
         return target;
     }
 }
-
-

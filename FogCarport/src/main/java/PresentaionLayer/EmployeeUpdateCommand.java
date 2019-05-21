@@ -19,7 +19,6 @@ import javax.servlet.http.HttpSession;
  */
 public class EmployeeUpdateCommand implements Command
 {
-
     private String target;
 
     public EmployeeUpdateCommand(String target)
@@ -32,7 +31,6 @@ public class EmployeeUpdateCommand implements Command
     {
         HttpSession session = request.getSession();
         User employee = (User) session.getAttribute("employee");
-
         String email = request.getParameter("email");
         String name = request.getParameter("name");
         String address = request.getParameter("address");
@@ -42,8 +40,6 @@ public class EmployeeUpdateCommand implements Command
         String message = manager.updateEmployee(employee, email, name, address, zipcode, phone);
 
         request.setAttribute("message", message);
-
         return target;
-
     }
 }

@@ -19,7 +19,6 @@ import javax.servlet.http.HttpSession;
  */
 public class AddMaterialCommand implements Command
 {
-
     private String target;
     private String error;
 
@@ -32,7 +31,6 @@ public class AddMaterialCommand implements Command
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
-
         HttpSession session = request.getSession();
 
         String name = request.getParameter("name");
@@ -50,13 +48,10 @@ public class AddMaterialCommand implements Command
             List<Material> materials = manager.getAllMaterials();
             session.setAttribute("materials", materials);
             return target;
-        }
-        else
+            
+        } else
         {
             return error;
         }
-
-        
     }
-
 }

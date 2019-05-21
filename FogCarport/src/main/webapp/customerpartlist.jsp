@@ -11,7 +11,8 @@
 <%@page import="FunctionLayer.Enum.Role"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@include file = "header.jsp" %>
-<%    Order order = (Order) session.getAttribute("order");
+<%    
+    Order order = (Order) session.getAttribute("order");
     Carport carport = order.getCarport();
 %>
 <center id="partlist" class="partlist">
@@ -70,7 +71,6 @@
                     }
                     if (carport.getShed() != null)
                     {
-
                         ArrayList<Part> shed_parts = carport.getShed().getParts();
                         for (Part p : shed_parts)
                         {
@@ -104,7 +104,8 @@
                     <th><b>Enhed</b></th>
                     <th><b>Beskrivelse</b></th>
                 </tr>
-                <%                    for (Part p : roof_parts)
+                <%                    
+                    for (Part p : roof_parts)
                     {
                         if (p.getMaterial_class().equals("tag"))
                         {

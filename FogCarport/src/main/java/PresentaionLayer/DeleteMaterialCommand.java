@@ -19,7 +19,6 @@ import javax.servlet.http.HttpSession;
  */
 public class DeleteMaterialCommand implements Command
 {
-
     private String target;
 
     public DeleteMaterialCommand(String target)
@@ -31,15 +30,14 @@ public class DeleteMaterialCommand implements Command
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
         HttpSession session = request.getSession();
-
         String material_str = request.getParameter("material");
-        
-        if(material_str == null)
+
+        if (material_str == null)
         {
             request.setAttribute("message", "Vælg venligst et materiale");
             return "materials.jsp";
         }
-        
+
         int material_id = Integer.parseInt(material_str);
         Material material = manager.getMaterial(material_id);
 
@@ -53,5 +51,4 @@ public class DeleteMaterialCommand implements Command
         }
         return target;
     }
-
 }

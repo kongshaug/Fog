@@ -21,7 +21,6 @@ import javax.servlet.http.HttpSession;
  */
 public class DrawingCommand implements Command
 {
-
     private String target;
 
     public DrawingCommand(String target)
@@ -76,7 +75,7 @@ public class DrawingCommand implements Command
             Carport carport = null;
             Roof roof = null;
             RoofType type = manager.getRoofTypeById(Integer.parseInt(typeId));
-            
+
             if (rooftype.equals("flat"))
             {
                 roof = new Roof(0, type);
@@ -102,15 +101,12 @@ public class DrawingCommand implements Command
 
             session.setAttribute("carport", carport);
             session.setAttribute("roofDrawing", roofDrawing);
-            
 
             return target;
-            
+
         } else
         {
             return target;
         }
-
     }
-
 }

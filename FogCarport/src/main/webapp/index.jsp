@@ -11,7 +11,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <title>Fog</title>
-
     </head>
     <body>  
     <center class="index" id="index"> 
@@ -30,7 +29,6 @@
                     out.println(message + "<br><br>");
                 }
             %>
-
             <form action="Fog" method="POST">
                 E-mail<br>
                 <input type="text" name="email" placeholder="Indtast e-mail" value="" minlength="6" required> <br><br>
@@ -41,9 +39,6 @@
             <form action="Fog" method="POST">
                 <br><br><button name="command" value="newuser">Opret ny bruger</button>
             </form>
-
-
-
         </div>
     </center>
 </body>

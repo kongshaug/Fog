@@ -31,7 +31,6 @@
             <br><br>
             <label> <input type="radio" name="roof" id="flat" value="flat" onclick="disable()"><span>Fladt tag</span></label>
             <label> <input type="radio" name="roof" id="sloped" value="sloped"onclick="enable()" checked="checked"><span>Tag med rejsning</span></label>
-
             <br><br>
             <select name="type" id="type">
                 <option disabled selected value="0">Vælg tagtype</option>            
@@ -48,23 +47,19 @@
                     {
                         out.println("<option value=\"" + r.getId() + "\" class=\"rejsning\">" + r.getName() + "</option>");
                     }
-
                 %>
             </select>
-
             <br><br>
             <select name="slope" id="hældning">
                 <option disabled selected value="0">Vælg hældning</option>
-                <%                    for (int i = 15;
-                            i <= 45; i = i + 5)
+                <%                    
+                    for (int i = 15; i <= 45; i = i + 5)
                     {
                         out.println("<option> " + i + "</option>");
                     }
                 %>
             </select>
-
             <br><br>
-
             <select name="shed" onchange="show(this.value)">
                 <option disabled selected>Vælg skur</option>
                 <option value="Med skur">Med skur</option>
@@ -82,7 +77,6 @@
     </div>
     <br>
     <div><button name="command" value="drawing">Beregn carport</button></div>
-
     <br><br>
     <script>
 
@@ -99,7 +93,6 @@
 
             slopeoptions.forEach(function (x)
             {
-
                 x.setAttribute("disabled", "disabled");
                 x.setAttribute("hidden", "hidden");
             });
@@ -107,7 +100,6 @@
             document.getElementById("hældning").disabled = true;
             document.getElementById("type").value = 0;
             document.getElementById("hældning").value = 0;
-
         }
 
         function enable()

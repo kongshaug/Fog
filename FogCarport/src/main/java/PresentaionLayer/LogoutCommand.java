@@ -17,7 +17,6 @@ import javax.servlet.http.HttpSession;
  */
 public class LogoutCommand implements Command
 {
-
     private String target;
 
     public LogoutCommand(String target)
@@ -33,7 +32,7 @@ public class LogoutCommand implements Command
         session.removeAttribute("order");
         session.removeAttribute("carport");
         session.removeAttribute("orders");
-        
+
         return target;
     }
 

@@ -7,19 +7,19 @@
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@include file = "header.jsp" %>
-
 <form action="Fog" method ="POST"> 
     <center class="order">
         <div>
             <h1>Alle medarbejdere</h1>
             <input type="text" name="search" placeholder="Søg e-mail" value=""> 
             <br><br><button name="command" value="employeelist">Søg</button><br>
-            <%    String message = (String) request.getAttribute("message");
+            <%    
+                String message = (String) request.getAttribute("message");
                 if (message != null)
                 {
                     out.println(message + "<br><br>");
                 }
-           
+                
                 List<User> users = (List<User>) session.getAttribute("users");
                 for (User u : users)
                 {
@@ -34,7 +34,6 @@
                 document.getElementById('user_id').value = Id;
             }
         </script>
-
     </center>
 </form>
 </body>

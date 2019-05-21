@@ -10,14 +10,13 @@
     <br><br><br>
     <div>
         <img src="images/logo.png" width="30%"><br>
-        <%            User employee = (User) session.getAttribute("employee");
+        <%            
+            User employee = (User) session.getAttribute("employee");
             String message = (String) request.getAttribute("message");
-
             if (message != null)
             {
                 out.println(message + "<br><br>");
             }
-
         %>
         <form action="Fog" method="POST">
             Navn<br>
@@ -32,9 +31,11 @@
             <input type="text" id="phone" name="phone" value="<%=employee.getPhone()%>" minlength="8" maxlength="8" required hidden="hidden"> <br><br>
 
             <button id="save" name="command" value="employeeupdate" style="display:none;">Gem</button>
+            
         </form>
             <button id="update" onclick="update()">Opdater</button> <br><br>
         <form action="Fog" method="POST">
+            
         <button id="delete" name="command" value="deleteemployee">Slet medarbejder</button>
         </form>
     </div>

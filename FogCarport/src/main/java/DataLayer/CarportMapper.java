@@ -21,16 +21,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  *
  * @author sofieamalielandt
  */
 public class CarportMapper
 {
-
     private DBConnector dbc = new DBConnector();
-
     /**
      *
      * @param dbc
@@ -70,7 +67,6 @@ public class CarportMapper
                 } else
                 {
                     carport = new Carport(id, width, depth, roof);
-
                 }
             }
             return carport;
@@ -86,7 +82,7 @@ public class CarportMapper
         try
         {
             Roof roof = null;
-
+            
             dbc.open();
             String query = "SELECT * FROM Fog.`roof`"
                     + "WHERE (`roof_id` = ?);";
@@ -103,7 +99,6 @@ public class CarportMapper
                 RoofType roof_type = getRoofType(roof_type_id);
 
                 roof = new Roof(id, roof_slope, roof_type);
-
             }
 
             return roof;
@@ -136,7 +131,6 @@ public class CarportMapper
                 int depth = rs.getInt("depth");
 
                 shed = new Shed(id, width, depth);
-
             }
 
             return shed;
@@ -145,7 +139,6 @@ public class CarportMapper
         {
             throw new DataException(ex.getMessage());
         }
-
     }
 
     private Material getMaterial(int material_id) throws DataException
@@ -182,7 +175,9 @@ public class CarportMapper
     }
 
     /**
-     * when a customer places an order for a carpot with shed it is put in the database with this method
+     * when a customer places an order for a carpot with shed it is put in the
+     * database with this method
+     *
      * @param carport
      * @throws DataException
      */
@@ -229,7 +224,8 @@ public class CarportMapper
     }
 
     /**
-     *puts a order for a carport without a shed in the database
+     * puts a order for a carport without a shed in the database
+     *
      * @param carport
      * @throws DataException
      */
@@ -307,6 +303,7 @@ public class CarportMapper
 
     /**
      * removes a roof from a carport in the database
+     *
      * @param roof
      * @throws DataException
      */
@@ -334,6 +331,7 @@ public class CarportMapper
 
     /**
      * removes a shed form a carport in the database
+     *
      * @param shed
      * @throws DataException
      */
@@ -372,7 +370,7 @@ public class CarportMapper
 
             String query = "UPDATE Fog.`carport`"
                     + "SET `shed_id` = null WHERE `carport_id` = ?;";
-            
+
             PreparedStatement statement = dbc.preparedStatement(query);
             statement.setInt(1, carport.getId());
             statement.executeUpdate();
@@ -386,7 +384,8 @@ public class CarportMapper
     }
 
     /**
-     *deletes a carport from the database
+     * deletes a carport from the database
+     *
      * @param carport
      * @throws DataException
      */
@@ -413,7 +412,8 @@ public class CarportMapper
     }
 
     /**
-     *updates the specifications of a carport in the database
+     * updates the specifications of a carport in the database
+     *
      * @param carport
      * @throws DataException
      */
@@ -467,7 +467,8 @@ public class CarportMapper
     }
 
     /**
-     *opdates a roof on a carport in the database
+     * opdates a roof on a carport in the database
+     *
      * @param roof
      * @throws DataException
      */
@@ -500,7 +501,8 @@ public class CarportMapper
     }
 
     /**
-     *updates the mesurments of a shed in the database
+     * updates the mesurments of a shed in the database
+     *
      * @param shed
      * @throws DataException
      */
@@ -680,7 +682,8 @@ public class CarportMapper
     }
 
     /**
-     *chages the status of a order to shipped in the database
+     * chages the status of a order to shipped in the database
+     *
      * @param order_id
      * @return
      * @throws DataException
@@ -701,7 +704,6 @@ public class CarportMapper
 
             PreparedStatement statement = dbc.preparedStatement(query);
             statement.setInt(1, order_id);
-
             statement.executeUpdate();
 
             PreparedStatement statement2 = dbc.preparedStatement(query2);
@@ -725,6 +727,7 @@ public class CarportMapper
 
     /**
      * findes orders in the database
+     *
      * @param order_id
      * @return order from database connected to the id
      * @throws DataException
@@ -774,7 +777,7 @@ public class CarportMapper
     }
 
     /**
-     * 
+     *
      * @return all the orders in the database
      * @throws DataException
      */
@@ -822,9 +825,9 @@ public class CarportMapper
     }
 
     /**
-     * 
+     *
      * @param email
-     * @return all the orders in the database connected to a client 
+     * @return all the orders in the database connected to a client
      * @throws DataException
      */
     public List<Order> getOrdersByEmail(String email) throws DataException
@@ -834,7 +837,6 @@ public class CarportMapper
             List<Order> orders = new ArrayList<>();
 
             dbc.open();
-
             String query = "SELECT * FROM Fog.`order` JOIN `user` ON (`order`.user_id = `user`.user_id) WHERE email = ?;";
 
             PreparedStatement statement = dbc.preparedStatement(query);
@@ -910,6 +912,7 @@ public class CarportMapper
 
     /**
      * changes the price of a order in the database
+     *
      * @param order_id
      * @param salesprice
      * @throws DataException
@@ -976,6 +979,7 @@ public class CarportMapper
 
     /**
      * deletes a order in the database
+     *
      * @param order
      * @throws DataException
      */
@@ -1000,6 +1004,5 @@ public class CarportMapper
         {
             throw new DataException(e.getMessage());
         }
-
     }
 }

@@ -22,7 +22,6 @@ import javax.servlet.http.HttpSession;
  */
 public class RooftypesCommand implements Command
 {
-
     private String target;
     private String denied;
 

@@ -22,7 +22,6 @@ import javax.servlet.http.HttpSession;
  */
 public class EmployeeOrderCommand implements Command
 {
-
     private String target;
     private String denied;
 
@@ -49,12 +48,10 @@ public class EmployeeOrderCommand implements Command
 
             manager.calcCarport(order.getCarport());
             manager.calcRoof(order.getCarport());
-
             session.setAttribute("order", order);
 
             List<RoofType> slopedRoofs = manager.getSlopedRoofs();
             List<RoofType> flatRoofs = manager.getFlatRoofs();
-
             session.setAttribute("slopedroofs", slopedRoofs);
             session.setAttribute("flatroofs", flatRoofs);
 
@@ -65,5 +62,4 @@ public class EmployeeOrderCommand implements Command
             return denied;
         }
     }
-
 }

@@ -11,21 +11,18 @@
     <br><br><br>
     <div>
         <img src="images/logo.png" width="30%"><br>
-        <%       
+        <%            
             List<Material> materials = (List<Material>) session.getAttribute("materials");
             String message = (String) request.getAttribute("message");
-
             if (message != null)
             {
                 out.println(message + "<br><br>");
             }
-
         %>
         <form action="Fog" method="POST">
-           <select name="material" id="material">
+            <select name="material" id="material">
                 <option disabled selected>Vælg Materiale</option>            
-                <%
-                    for (Material m : materials)
+                <%                    for (Material m : materials)
                     {
                         out.println("<option value=\"" + m.getId() + "\">" + m.getName() + "</option>");
                     }
@@ -40,9 +37,7 @@
             <button name="command" value="materialadd">Tilføj et materiale</button>
             <br><br>
             <button name="command" value="rooftypes">Se tagtyper</button>
-            
         </form>
-        
     </div>
 </center>
 </body>

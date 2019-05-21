@@ -19,7 +19,6 @@ import javax.servlet.http.HttpSession;
  */
 public class EmployeeInfoCommand implements Command
 {
-
     private String target;
     private String denied;
 
@@ -43,12 +42,11 @@ public class EmployeeInfoCommand implements Command
             session.setAttribute("employee", employee);
 
             return target;
-            
+
         } else
         {
             request.setAttribute("message", "Adgang nægtet");
             return denied;
         }
     }
-
 }

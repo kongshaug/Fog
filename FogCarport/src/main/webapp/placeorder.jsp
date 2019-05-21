@@ -11,10 +11,9 @@
     <center id="index" class="index">
         <div>
             <img src="images/logo.png" width="30%"><br>
-            <%            
+            <%                
                 String message = (String) request.getAttribute("message");
                 out.println(message);
-
             %>
             <br><br>
             <button name="command" value="back">Gå til shop</button>

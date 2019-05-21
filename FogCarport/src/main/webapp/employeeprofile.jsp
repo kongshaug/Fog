@@ -17,7 +17,6 @@
             {
                 out.println(message + "<br><br>");
             }
-
         %>
         <form action="Fog" method="POST">
             Navn: 
@@ -33,9 +32,8 @@
             Adgangskode &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ny adgangskode
             <input type="password" id="oldpassword" name="oldpassword" value="<%=user.getPassword()%>" minlength="4" required disabled="disabled"> 
             &nbsp;&nbsp;
-            <input type="password" id="newpassword" name="newpassword" value="<%=user.getPassword()%>" onclick="password()" minlength="4" required disabled="disabled"> <br><br>
-
-
+            <input type="password" id="newpassword" name="newpassword" value="<%=user.getPassword()%>" onclick="password()" minlength="4" required disabled="disabled"> 
+            <br><br>
             <button id="save" name="command" value="employeeupdatepassword" style="display:none;">Gem</button>
         </form>
         <button id="update" onclick="update()">Opdater</button> <br><br>

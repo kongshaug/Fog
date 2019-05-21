@@ -13,17 +13,15 @@
     <br><br><br>
     <div>
         <img src="images/logo.png" width="30%"><br>
-        <%
+        <%            
             RoofType rooftype = (RoofType) session.getAttribute("rooftype");
             List<Material> materials = (List<Material>) session.getAttribute("materials");
 
             String message = (String) request.getAttribute("message");
-
             if (message != null)
             {
                 out.println(message + "<br><br>");
             }
-
         %>
         <form action="Fog" method="POST">
             Tagtype navn<br>
@@ -89,9 +87,7 @@
             <br><br>
             <button id="save" name="command" value="updaterooftype" style="display:none;">Gem</button>
         </form>
-
         <button id="update" onclick="update()">Opdater</button> <br><br>
-
     </div>
 </center>
 <script>

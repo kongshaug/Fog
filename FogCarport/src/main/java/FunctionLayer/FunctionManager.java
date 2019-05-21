@@ -13,7 +13,6 @@ import FunctionLayer.Enum.Status;
 import FunctionLayer.HelpingClasses.Carport;
 import FunctionLayer.HelpingClasses.Material;
 import FunctionLayer.HelpingClasses.Order;
-import FunctionLayer.HelpingClasses.Roof;
 import FunctionLayer.HelpingClasses.RoofType;
 import FunctionLayer.HelpingClasses.Shed;
 import FunctionLayer.HelpingClasses.User;
@@ -21,14 +20,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 /**
  *
  * @author sofieamalielandt
  */
 public class FunctionManager
 {
-
     private static FunctionManager instance = null;
     private DataFacade db;
     private Calculate c;
@@ -316,7 +313,6 @@ public class FunctionManager
             {
                 flatRoofs.add(rooftype);
             }
-
         }
 
         return flatRoofs;
@@ -419,9 +415,8 @@ public class FunctionManager
             db.updateUser(user);
             res = "Medarbejderens information er opdateret";
         }
-
+        
         return res;
-
     }
 
     public String updateCustomer(User user, String email, String name, String oldpassword, String newpassword, String address, String zipcode, String phone) throws DataException
@@ -481,7 +476,6 @@ public class FunctionManager
         }
 
         return res;
-
     }
 
     public String updatePassword(User user, String oldpassword, String newpassword) throws DataException
@@ -505,7 +499,6 @@ public class FunctionManager
         }
 
         return res;
-
     }
 
     public User getUser(int user_id) throws DataException
@@ -555,7 +548,6 @@ public class FunctionManager
         }
 
         return res;
-
     }
 
     public String deleteMaterial(Material material) throws DataException
@@ -609,7 +601,6 @@ public class FunctionManager
         }
 
         return res;
-
     }
 
     public List<Material> getAllMaterials() throws DataException
@@ -686,7 +677,6 @@ public class FunctionManager
         }
 
         return res;
-
     }
 
     public String addRoofType(RoofType rooftype) throws DataException
@@ -726,7 +716,6 @@ public class FunctionManager
             res = "Tagtypen er tilføjet";
         }
         return res;
-
     }
 
     public List<RoofType> getRoofs() throws DataException
@@ -780,7 +769,6 @@ public class FunctionManager
             res = "Tagtypen er opdateret";
         }
         return res;
-
     }
 
     public String updateRoofTypeWith1Material(RoofType rooftype, String name, Material m1) throws DataException
@@ -807,6 +795,5 @@ public class FunctionManager
             res = "Tagtypen er opdateret";
         }
         return res;
-
     }
 }

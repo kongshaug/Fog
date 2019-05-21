@@ -11,7 +11,6 @@ import FunctionLayer.FunctionManager;
 import FunctionLayer.HelpingClasses.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -19,7 +18,6 @@ import javax.servlet.http.HttpSession;
  */
 public class AddEmployeeCommand implements Command
 {
-
     private String target;
 
     public AddEmployeeCommand(String target)
@@ -37,6 +35,7 @@ public class AddEmployeeCommand implements Command
         String phone = request.getParameter("phone");
         String choosen_role = request.getParameter("role");
         Role role;
+        
         if (choosen_role.equals("Administrator"))
         {
             role = Role.ADMIN;
@@ -51,6 +50,5 @@ public class AddEmployeeCommand implements Command
         request.setAttribute("message", message);
 
         return target;
-
     }
 }

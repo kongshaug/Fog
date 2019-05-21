@@ -20,7 +20,6 @@ import javax.servlet.http.HttpSession;
  */
 public class UpdateCommand implements Command
 {
-
     private String target;
 
     public UpdateCommand(String target)
@@ -31,7 +30,6 @@ public class UpdateCommand implements Command
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
-
         HttpSession session = request.getSession();
         Order order = (Order) session.getAttribute("order");
         String change_paid = request.getParameter("paid");
@@ -44,9 +42,6 @@ public class UpdateCommand implements Command
         order.setStatus(status);
         manager.updateStatusAndPaid(order.getOrder_id(), status, paid);
 
-
         return target;
-
     }
-
 }

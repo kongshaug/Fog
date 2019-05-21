@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 public class Shed
 {
+
     private int id;
     private int depth;
     private int width;
@@ -24,16 +25,6 @@ public class Shed
         this.depth = depth;
         this.width = width;
         this.parts = new ArrayList<>();
-    }
-
-    public void setDepth(int depth)
-    {
-        this.depth = depth;
-    }
-
-    public void setWidth(int width)
-    {
-        this.width = width;
     }
 
     public Shed(int depth, int width)
@@ -48,19 +39,29 @@ public class Shed
         return id;
     }
 
-    public int getDepth()
-    {
-        return depth;
-    }
-
     public void setId(int id)
     {
         this.id = id;
     }
 
+    public int getDepth()
+    {
+        return depth;
+    }
+
+    public void setDepth(int depth)
+    {
+        this.depth = depth;
+    }
+
     public int getWidth()
     {
         return width;
+    }
+
+    public void setWidth(int width)
+    {
+        this.width = width;
     }
 
     public ArrayList<Part> getParts()
@@ -72,10 +73,10 @@ public class Shed
     {
         this.parts = parts;
     }
-    
+
     public void resetParts()
     {
         this.parts = new ArrayList<>();
     }
-    
+
 }

@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package FunctionLayer.Enum;
-
 /**
  *
  * @author aamandajuhl
@@ -12,5 +11,4 @@ package FunctionLayer.Enum;
 public enum Status
 {
     MODTAGET, BEHANDLES, AFBESTILT, SENDT, LEVERET
-    
 }

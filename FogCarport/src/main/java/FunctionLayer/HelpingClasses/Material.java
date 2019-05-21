@@ -11,7 +11,6 @@ package FunctionLayer.HelpingClasses;
  */
 public class Material
 {
-
     private int id;
     private String name;
     private String unit;
@@ -45,11 +44,6 @@ public class Material
         this.price = price;
     }
 
-    public String getMaterial_class()
-    {
-        return material_class;
-    }
-
     public int getId()
     {
         return id;
@@ -60,9 +54,19 @@ public class Material
         this.id = id;
     }
 
+    public String getUnit()
+    {
+        return unit;
+    }
+
     public void setUnit(String unit)
     {
         this.unit = unit;
+    }
+
+    public String getMaterial_class()
+    {
+        return material_class;
     }
 
     public void setMaterial_class(String material_class)
@@ -75,14 +79,8 @@ public class Material
         return name;
     }
 
-    public String getUnit()
-    {
-        return unit;
-    }
-
     public void setName(String name)
     {
         this.name = name;
     }
-
 }

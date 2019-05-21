@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 public class RooftypeInfoCommand implements Command
 {
     private String target;
-    
+
     public RooftypeInfoCommand(String target)
     {
         this.target = target;
@@ -32,31 +32,26 @@ public class RooftypeInfoCommand implements Command
     {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        
+
         if (user.getRole().equals(Role.ADMIN) || user.getRole().equals(Role.EMPLOYEE))
         {
+            String rooftype_str = request.getParameter("rooftype");
 
-        String rooftype_str = request.getParameter("rooftype");
-        
-        if(rooftype_str == null)
-        {
-            request.setAttribute("message", "Vælg venligst en tagtype");
-            return "rooftypes.jsp";
-        }
-        
-        int rooftype_id = Integer.parseInt(rooftype_str);
-        
-        RoofType rooftype = manager.getRoofTypeById(rooftype_id);
-        
-        session.setAttribute("rooftype", rooftype);
-        
-        return target;
-        
-        }
-        else
+            if (rooftype_str == null)
+            {
+                request.setAttribute("message", "Vælg venligst en tagtype");
+                return "rooftypes.jsp";
+            }
+
+            int rooftype_id = Integer.parseInt(rooftype_str);
+            RoofType rooftype = manager.getRoofTypeById(rooftype_id);
+            session.setAttribute("rooftype", rooftype);
+            return target;
+
+        } else
         {
             request.setAttribute("errormessage", "Adgang nægtet");
             return "shop.jsp";
-        } }
-    
+        }
+    }
 }

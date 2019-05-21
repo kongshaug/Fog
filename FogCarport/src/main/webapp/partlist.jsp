@@ -10,7 +10,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@include file = "header.jsp" %>
-<%    Order order = (Order) session.getAttribute("order");
+<%    
+    Order order = (Order) session.getAttribute("order");
     Carport carport = order.getCarport();
 %>
 <center id="partlist" class="partlist">
@@ -108,7 +109,8 @@
                     <th><b>Beskrivelse</b></th>
                     <th><b>Pris</b></th>
                 </tr>
-                <%                    for (Part p : roof_parts)
+                <%                    
+                    for (Part p : roof_parts)
                     {
                         if (p.getMaterial_class().equals("tag"))
                         {

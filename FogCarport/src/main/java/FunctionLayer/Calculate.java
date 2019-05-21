@@ -16,9 +16,10 @@ import java.util.ArrayList;
  */
 public class Calculate
 {
-
     /**
-     * calculates the amount of poles, bolts and discs for the poles needed to bouild the carport and adds it to the list of materials needed.
+     * calculates the amount of poles, bolts and discs for the poles needed to
+     * bouild the carport and adds it to the list of materials needed.
+     *
      * @param carport
      * @param pole
      * @param bolt
@@ -40,11 +41,12 @@ public class Calculate
         parts.add(bolts);
         parts.add(discs);
         carport.setParts(parts);
-
     }
 
     /**
-     *calculates the length of the rem needed to bouild the carport and adds it to the list of materials needed.
+     * calculates the length of the rem needed to bouild the carport and adds it
+     * to the list of materials needed.
+     *
      * @param carport
      * @param rem
      */
@@ -60,7 +62,6 @@ public class Calculate
         Part remmene = new Part(rem, remmen, 2, "Remme i sider, sadles ned i stolper");
         parts.add(remmene);
         carport.setParts(parts);
-
     }
 
 }

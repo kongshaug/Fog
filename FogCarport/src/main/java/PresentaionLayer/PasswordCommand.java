@@ -38,7 +38,5 @@ public class PasswordCommand implements Command
 
         request.setAttribute("message", message);
         return target;
-
     }
-    
 }

@@ -58,14 +58,11 @@ public class MaterialCommand implements Command
         session.setAttribute("material_classes", material_classes);
         
         return target;
-        
         }
         else
         {
             request.setAttribute("errormessage", "Adgang nægtet");
             return "shop.jsp";
-        }
-        
-    }
-    
+        } 
+    }   
 }

@@ -13,7 +13,6 @@ import java.util.ArrayList;
  */
 public class Roof
 {
-
     private int id;
     private int slope;
     private RoofType type;
@@ -34,34 +33,29 @@ public class Roof
         this.parts = new ArrayList<>();
     }
 
+    public int getId()
+    {
+        return id;
+    }
+
     public void setId(int id)
     {
         this.id = id;
+    }
+
+    public ArrayList<Part> getParts()
+    {
+        return parts;
     }
 
     public void setParts(ArrayList<Part> parts)
     {
         this.parts = parts;
     }
-    
+
     public void resetParts()
     {
         this.parts = new ArrayList<>();
-    }
-
-    public int getId()
-    {
-        return id;
-    }
-
-    public void setSlope(int slope)
-    {
-        this.slope = slope;
-    }
-
-    public void setType(RoofType type)
-    {
-        this.type = type;
     }
 
     public int getSlope()
@@ -69,16 +63,18 @@ public class Roof
         return slope;
     }
 
+    public void setSlope(int slope)
+    {
+        this.slope = slope;
+    }
+
     public RoofType getType()
     {
         return type;
     }
 
-    public ArrayList<Part> getParts()
+    public void setType(RoofType type)
     {
-        return parts;
+        this.type = type;
     }
-    
-    
-
 }

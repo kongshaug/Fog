@@ -18,7 +18,6 @@ import javax.servlet.http.HttpSession;
  */
 public class CustomerUpdateCommand implements Command
 {
-
     private String target;
 
     public CustomerUpdateCommand(String target)
@@ -39,11 +38,10 @@ public class CustomerUpdateCommand implements Command
         String phone = request.getParameter("phone");
         String oldpassword = request.getParameter("oldpassword");
         String newpassword = request.getParameter("newpassword");
-        
+
         String message = manager.updateCustomer(user, email, name, oldpassword, newpassword, address, zipcode, phone);
 
         request.setAttribute("message", message);
         return target;
     }
-
 }

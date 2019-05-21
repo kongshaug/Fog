@@ -13,16 +13,15 @@
     <center class="order">
         <div>
             <h1>Order historik</h1>
-
-            <%                List<Order> orders = (List<Order>) session.getAttribute("orders");
+            <%                
+                List<Order> orders = (List<Order>) session.getAttribute("orders");
                 for (Order o : orders)
                 {
-                    out.println("<button name=\"command\" value=\"customerorder\" onclick=\"setId("+ o.getOrder_id() + ")\">" + o + "</button>");
+                    out.println("<button name=\"command\" value=\"customerorder\" onclick=\"setId(" + o.getOrder_id() + ")\">" + o + "</button>");
                 }
             %>
             <input type="hidden" id="order_id" name="selected" value="">
         </div>
-
         <script>
             function setId(Id) {
                 document.getElementById('order_id').value = Id;

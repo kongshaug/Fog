@@ -20,7 +20,6 @@ import java.util.List;
  */
 public class UserMapper
 {
-
     private DBConnector dbc;
 
     /**
@@ -30,11 +29,11 @@ public class UserMapper
     public UserMapper(DBConnector dbc)
     {
         this.dbc = dbc;
-
     }
 
     /**
      * used to varify the identity of a user when logging in
+     *
      * @param email
      * @param password
      * @return the user with the asociated email and password
@@ -84,6 +83,7 @@ public class UserMapper
 
     /**
      * gets a specific user from the database
+     *
      * @param user_id
      * @return user from database
      * @throws DataException
@@ -92,9 +92,8 @@ public class UserMapper
     {
         try
         {
-            dbc.open();
-
             User user = null;
+            dbc.open();
 
             String query = "SELECT * FROM Fog.`user`"
                     + "WHERE (`user_id` = ?);";
@@ -127,11 +126,10 @@ public class UserMapper
         {
             throw new DataException(e.getMessage());
         }
-
     }
 
     /**
-     * 
+     *
      * @return all the users from the database
      * @throws DataException
      */
@@ -164,7 +162,6 @@ public class UserMapper
 
                 User u = new User(id, email, password, name, address, zipcode, phonenumber, r);
                 users.add(u);
-
             }
 
             dbc.close();
@@ -230,6 +227,7 @@ public class UserMapper
 
     /**
      * finds a specific employee in the database
+     *
      * @param email
      * @return
      * @throws DataException
@@ -273,11 +271,11 @@ public class UserMapper
         {
             throw new DataException(e.getMessage());
         }
-
     }
 
     /**
      * creates a new user in the database
+     *
      * @param newUser
      * @throws DataException
      */
@@ -323,11 +321,11 @@ public class UserMapper
         {
             throw new DataException(e.getMessage());
         }
-
     }
 
     /**
      * change the info on a user in the database
+     *
      * @param user
      * @throws DataException
      */
@@ -365,31 +363,32 @@ public class UserMapper
             throw new DataException(e.getMessage());
         }
     }
-    
+
     /**
      * change the password for a user in the database
+     *
      * @param user_id
      * @param password
      * @throws DataException
      */
     public void updatePassword(int user_id, String password) throws DataException
     {
-        try{
-            
+        try
+        {
             dbc.open();
-            
+
             String query = "UPDATE Fog.`user`"
                     + "SET `password` = ? WHERE `user_id` = ?;";
-            
+
             PreparedStatement statement = dbc.preparedStatement(query);
-            
+
             statement.setString(1, password);
             statement.setInt(2, user_id);
             statement.executeUpdate();
-            
+
             dbc.close();
-            
-        } catch(SQLException e)
+
+        } catch (SQLException e)
         {
             throw new DataException(e.getMessage());
         }
@@ -397,6 +396,7 @@ public class UserMapper
 
     /**
      * deletes a user in the database
+     *
      * @param user
      * @throws DataException
      */
@@ -421,7 +421,5 @@ public class UserMapper
         {
             throw new DataException(e.getMessage());
         }
-
     }
-
 }
