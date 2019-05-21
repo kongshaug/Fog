@@ -16,7 +16,7 @@
         <div id="shop">
             <%            
                 Order order = (Order) session.getAttribute("order");
-                out.println("Ordrer: " + order.getOrder_id() + "Carport: " + order.getCarport().getId() + ", Bestilt: " + order.getOrder_date() + "<br><br>");
+                out.println("Ordrer: " + order.getOrder_id() + ", Bestilt: " + order.getOrder_date() + "<br><br>");
                 out.println("Kundenummer: " + order.getUser().getId() + " - Navn: " + order.getUser().getName() + "<br>");
                 out.println("E-mail: " + order.getUser().getEmail() + " - Telefon: " + order.getUser().getPhone() + "<br>");
                 out.println("Adresse: " + order.getUser().getAddress() + ", " + order.getUser().getZipcode() + "<br><br>");
