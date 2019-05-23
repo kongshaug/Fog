@@ -34,8 +34,8 @@ public class UserMapper
     /**
      * used to varify the identity of a user when logging in
      *
-     * @param email
-     * @param password
+     * @param email String
+     * @param password String
      * @return the user with the asociated email and password
      * @throws DataException
      */
@@ -82,9 +82,9 @@ public class UserMapper
     }
 
     /**
-     * gets a specific user from the database
+     * Gets a specific user from the database
      *
-     * @param user_id
+     * @param user_id String
      * @return user from database
      * @throws DataException
      */
@@ -130,7 +130,7 @@ public class UserMapper
 
     /**
      *
-     * @return all the users from the database
+     * @return All the users from the database
      * @throws DataException
      */
     public List<User> getUsers() throws DataException
@@ -175,7 +175,7 @@ public class UserMapper
 
     /**
      *
-     * @return all the users working for fog
+     * @return All the users working for fog
      * @throws DataException
      */
     public List<User> getEmployeesAndAdmins() throws DataException
@@ -226,10 +226,10 @@ public class UserMapper
     }
 
     /**
-     * finds a specific employee in the database
+     * Finds a specific employee in the database
      *
-     * @param email
-     * @return
+     * @param email String
+     * @return employee user with associated email that is passed
      * @throws DataException
      */
     public User getEmployeeByEmail(String email) throws DataException
@@ -324,9 +324,9 @@ public class UserMapper
     }
 
     /**
-     * change the info on a user in the database
+     * Change the info on a user in the database
      *
-     * @param user
+     * @param user object
      * @throws DataException
      */
     public void updateUser(User user) throws DataException
@@ -395,9 +395,9 @@ public class UserMapper
     }
 
     /**
-     * deletes a user in the database
+     * Deletes a user in the database
      *
-     * @param user
+     * @param user obhect
      * @throws DataException
      */
     public void removeUser(User user) throws DataException
