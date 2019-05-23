@@ -403,7 +403,7 @@ public class FunctionManager
     }
 
     /**
-     * gets a roof in the database with the id passed
+     * Gets a roof in the database with the id passed
      *
      * @param typeId int
      * @return a roof with the id passed
@@ -415,7 +415,7 @@ public class FunctionManager
     }
 
     /**
-     * calculates the materials needed to build the roofe and puts them in a
+     * Calculates the materials needed to build the roofe and puts them in a
      * list on the roof object
      *
      * @param carport object
@@ -455,7 +455,7 @@ public class FunctionManager
     }
 
     /**
-     * gets all the orders that is from a client with the email passed
+     * Gets all the orders that is from a client with the email passed
      *
      * @param email String
      * @return a list of all the orders with the email passed
@@ -480,7 +480,7 @@ public class FunctionManager
     }
 
     /**
-     * changes the price of a order in the database
+     * Changes the price of a order in the database
      *
      * @param order_id int
      * @param salesprice double
@@ -493,7 +493,7 @@ public class FunctionManager
     }
 
     /**
-     * updates the status of shippment and order status in the database of an
+     * Updates the status of shippment and order status in the database of an
      * order
      *
      * @param order_id int
@@ -584,7 +584,7 @@ public class FunctionManager
     }
 
     /**
-     *
+     * Updates information about a customer in the database
      * @param user Object
      * @param email String
      * @param name String
@@ -593,8 +593,9 @@ public class FunctionManager
      * @param address String
      * @param zipcode int
      * @param phone int
-     * @return
+     * @return status for update, if wrong information was entered the string contains the mistake
      * @throws DataException
+     * @see DataLayer.DataFacade#updateUser(FunctionLayer.HelpingClasses.User) 
      */
     public String updateCustomer(User user, String email, String name, String oldpassword, String newpassword, String address, String zipcode, String phone) throws DataException
     {
@@ -657,10 +658,10 @@ public class FunctionManager
 
     /**
      *
-     * @param user
-     * @param oldpassword
-     * @param newpassword
-     * @return
+     * @param user Object
+     * @param oldpassword String
+     * @param newpassword String
+     * @return Status for update, if wrong information was entered the string contains the mistake
      * @throws DataException
      */
     public String updatePassword(User user, String oldpassword, String newpassword) throws DataException
@@ -754,7 +755,7 @@ public class FunctionManager
     /**
      *
      * @param material
-     * @return
+     * @return status for update, if wrong information was entered the string contains the mistake
      * @throws DataException
      */
     public String deleteMaterial(Material material) throws DataException
@@ -845,7 +846,7 @@ public class FunctionManager
      * @param roofslope
      * @param shed_width
      * @param shed_depth
-     * @return
+     * @return status for update, if wrong information was entered the string contains the mistake
      * @throws DataException
      */
     public String updateCarport(Carport carport, int carport_depth, int carport_width, RoofType rooftype, int roofslope, int shed_width, int shed_depth) throws DataException
@@ -917,7 +918,7 @@ public class FunctionManager
     /**
      *
      * @param rooftype
-     * @return
+     * @return status for update, if wrong information was entered the string contains the mistake
      * @throws DataException
      */
     public String addRoofType(RoofType rooftype) throws DataException
@@ -961,7 +962,8 @@ public class FunctionManager
 
     /**
      *
-     * @return @throws DataException
+     * @return status for update, if wrong information was entered the string contains the mistake
+     * @throws DataException
      */
     public List<RoofType> getRoofs() throws DataException
     {
@@ -994,7 +996,7 @@ public class FunctionManager
      * @param name
      * @param m1
      * @param m2
-     * @return
+     * @return status for update, if wrong information was entered the string contains the mistake
      * @throws DataException
      */
     public String updateRoofType(RoofType rooftype, String name, Material m1, Material m2) throws DataException
@@ -1036,7 +1038,7 @@ public class FunctionManager
      * @param rooftype
      * @param name
      * @param m1
-     * @return
+     * @return status for update, if wrong information was entered the string contains the mistake
      * @throws DataException
      */
     public String updateRoofTypeWith1Material(RoofType rooftype, String name, Material m1) throws DataException
