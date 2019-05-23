@@ -34,6 +34,10 @@ public class FunctionManager
     private CalculateShed cs;
     private GenerateDrawing GD;
 
+    /**
+     *
+     * @throws DataException
+     */
     public FunctionManager() throws DataException
     {
         db = DataFacade.getInstance();
@@ -44,6 +48,11 @@ public class FunctionManager
         GD = new GenerateDrawing();
     }
 
+    /**
+     *
+     * @return instance of Function Manager as a singelton
+     * @throws DataException
+     */
     public static FunctionManager getInstance() throws DataException
     {
         if (instance == null)
@@ -53,11 +62,26 @@ public class FunctionManager
         return instance;
     }
 
+    /**
+     * finds the user in the database with the information passed
+     * @param email String
+     * @param password String
+     * @return  User with the given login input or null if not exists
+     * @throws DataException
+     * @see DataLayer.DataFacade#login(java.lang.String, java.lang.String) 
+     */
     public User login(String email, String password) throws DataException
     {
         return db.login(email, password);
     }
 
+    /**
+     * creates a new user in the database
+     * @param user object
+     * @return if information entered is wrong the String returned tells the user what they did wrong, else it returns sayting that everything ok
+     * @throws DataException
+     * @see DataLayer.DataFacade#newUser(FunctionLayer.HelpingClasses.User) 
+     */
     public String newUser(User user) throws DataException
     {
         String res = "";
@@ -130,6 +154,13 @@ public class FunctionManager
         return true;
     }
 
+    /**
+     * places an order in the database
+     * @param order object
+     * @return if information entered is wrong the String returned tells the user what they did wrong, else it returns sayting that everything ok
+     * @throws DataException
+     * @see DataLayer.DataFacade#placeOrder(FunctionLayer.HelpingClasses.Order) 
+     */
     public String placeOrder(Order order) throws DataException
     {
         String res = "";
@@ -146,6 +177,13 @@ public class FunctionManager
         return res;
     }
 
+    /**
+     * Removes a user from the database
+     * @param user Object
+     * @return information on how the database call whent
+     * @throws DataException
+     * @see DataLayer.DataFacade#removeOrder(FunctionLayer.HelpingClasses.Order) 
+     */
     public String removeUser(User user) throws DataException
     {
         String res = "";
@@ -167,17 +205,34 @@ public class FunctionManager
         return res;
     }
 
+    /**
+     * findes all the employees and admins in the database and returnes them
+     * @return a list of all users that are employees and admins
+     * @throws DataException
+     * @see DataLayer.DataFacade#getEmployeesAndAdmins() 
+     */
     public List<User> getEmployeesAndAdmins() throws DataException
     {
         return db.getEmployeesAndAdmins();
     }
 
+    /**
+     * findes a order based on the id passed and returns the shipping status
+     * @param order Object
+     * @throws DataException
+     * @see DataLayer.DataFacade#
+     */
     public void isShipped(Order order) throws DataException
     {
         String shipped = db.orderShipped(order.getOrder_id());
         order.setShipped(shipped);
     }
 
+    /**
+     * calculates the Materials needed to bouild the carport and puts the Materials in a list on the carport
+     * @param carport object
+     * @throws DataException
+     */
     public void calcCarport(Carport carport) throws DataException
     {
         if (carport.getWidth() <= 750 && carport.getDepth() <= 800)
@@ -241,6 +296,11 @@ public class FunctionManager
 
     }
 
+    /**
+     * calculates the materials needed to build the shed and puts the Materials in a list on the shead
+     * @param carport Object
+     * @throws DataException
+     */
     public void calcShed(Carport carport) throws DataException
     {
         if (carport.getShed().getWidth() <= carport.getWidth() - 30 && carport.getShed().getDepth() <= carport.getDepth() - 30)
@@ -285,6 +345,11 @@ public class FunctionManager
         return map;
     }
 
+    /**
+     *
+     * @return
+     * @throws DataException
+     */
     public List<RoofType> getSlopedRoofs() throws DataException
     {
         List<RoofType> rooftypes = db.getRoofs();
@@ -302,6 +367,11 @@ public class FunctionManager
         return slopedRoofs;
     }
 
+    /**
+     * gets a list of all the flat roofs in the database
+     * @return a list of all the Falt Roofs 
+     * @throws DataException
+     */
     public List<RoofType> getFlatRoofs() throws DataException
     {
         List<RoofType> rooftypes = db.getRoofs();
@@ -318,11 +388,22 @@ public class FunctionManager
         return flatRoofs;
     }
 
+    /**
+     * gets a roof in the database with the id passed
+     * @param typeId int
+     * @return a roof with the id passed
+     * @throws DataException
+     */
     public RoofType getRoofTypeById(int typeId) throws DataException
     {
         return db.getRoof(typeId);
     }
 
+    /**
+     * calculates the materials needed to build the roofe and puts them in a list on the roof object
+     * @param carport object
+     * @throws DataException
+     */
     public void calcRoof(Carport carport) throws DataException
     {
         if (carport.getRoof().getType().getRoof_class().equals("flat"))
@@ -334,41 +415,100 @@ public class FunctionManager
         }
     }
 
+    /**
+     * Findes the order with the id passed in the datbase 
+     * @param order_id int
+     * @return a order from the database
+     * @throws DataException
+     * @see DataLayer.DataFacade#getOrder(int) 
+     */
     public Order getOrder(int order_id) throws DataException
     {
         return db.getOrder(order_id);
     }
 
+    /**
+     *
+     * @return
+     * @throws DataException
+     */
     public List<Order> getOrders() throws DataException
     {
         return db.getOrders();
     }
 
+    /**
+     * gets all the orders that is from a client with the email passed
+     * @param email String
+     * @return a list of all the orders with the email passed
+     * @throws DataException
+     * @see DataLayer.DataFacade#getOrdersByEmail(java.lang.String) 
+     */
     public List<Order> getOrdersByEmail(String email) throws DataException
     {
         return db.getOrdersByEmail(email);
     }
 
+    /**
+     * Makes a drawing of a Roof for a Carport in SVG format
+     * @param carport Object
+     * @return a SVG format Drawing in a String format 
+     * 
+     */
     public String drawingOfRoof(Carport carport)
     {
         return GD.drawRoofFromTop(carport);
     }
 
+    /**
+     * changes the price of a order in the database
+     * @param order_id int
+     * @param salesprice double
+     * @throws DataException
+     * @see DataLayer.DataFacade#updateSalesPrice(int, double) 
+     */
     public void updateSalesPrice(int order_id, double salesprice) throws DataException
     {
         db.updateSalesPrice(order_id, salesprice);
     }
 
+    /**
+     * updates the status of shippment and order status in the database of an order
+     * @param order_id int
+     * @param status enum  
+     * @param paid enum
+     * @throws DataException
+     * @see DataLayer.DataFacade#updateStatusAndPaid(int, FunctionLayer.Enum.Status, FunctionLayer.Enum.Paid) 
+     */
     public void updateStatusAndPaid(int order_id, Status status, Paid paid) throws DataException
     {
         db.updateStatusAndPaid(order_id, status, paid);
     }
 
+    /**
+     *
+     * @param email String
+     * @return a employee user with the passed email
+     * @throws DataException
+     * @see DataLayer.DataFacade#getEmployeeByEmail(java.lang.String) 
+     */
     public User getEmployeeByEmail(String email) throws DataException
     {
         return db.getEmployeeByEmail(email);
     }
 
+    /**
+     * updates the information of a employee in the database
+     * @param user Object
+     * @param email String
+     * @param name String
+     * @param address String
+     * @param zipcode int
+     * @param phone int
+     * @return status of opdate, or mistake if data entered is wrong
+     * @throws DataException
+     * @see DataLayer.DataFacade#updateUser(FunctionLayer.HelpingClasses.User) 
+     */
     public String updateEmployee(User user, String email, String name, String address, String zipcode, String phone) throws DataException
     {
         String res = "";
@@ -419,6 +559,19 @@ public class FunctionManager
         return res;
     }
 
+    /**
+     *
+     * @param user Object
+     * @param email String
+     * @param name String
+     * @param oldpassword String
+     * @param newpassword String
+     * @param address String
+     * @param zipcode int
+     * @param phone int
+     * @return 
+     * @throws DataException
+     */
     public String updateCustomer(User user, String email, String name, String oldpassword, String newpassword, String address, String zipcode, String phone) throws DataException
     {
         String res = "";
@@ -478,6 +631,14 @@ public class FunctionManager
         return res;
     }
 
+    /**
+     *
+     * @param user
+     * @param oldpassword
+     * @param newpassword
+     * @return
+     * @throws DataException
+     */
     public String updatePassword(User user, String oldpassword, String newpassword) throws DataException
     {
         String res = "";
@@ -501,11 +662,27 @@ public class FunctionManager
         return res;
     }
 
+    /**
+     *
+     * @param user_id
+     * @return
+     * @throws DataException
+     */
     public User getUser(int user_id) throws DataException
     {
         return db.getUser(user_id);
     }
 
+    /**
+     *
+     * @param material
+     * @param material_name
+     * @param unit
+     * @param material_class
+     * @param price
+     * @return
+     * @throws DataException
+     */
     public String updateMaterial(Material material, String material_name, String unit, String material_class, double price) throws DataException
     {
         String res = "";
@@ -550,6 +727,12 @@ public class FunctionManager
         return res;
     }
 
+    /**
+     *
+     * @param material
+     * @return
+     * @throws DataException
+     */
     public String deleteMaterial(Material material) throws DataException
     {
         String res = "";
@@ -564,6 +747,12 @@ public class FunctionManager
         return res;
     }
 
+    /**
+     *
+     * @param newMaterial
+     * @return
+     * @throws DataException
+     */
     public String addMaterial(Material newMaterial) throws DataException
     {
         String res = "";
@@ -603,16 +792,39 @@ public class FunctionManager
         return res;
     }
 
+    /**
+     *
+     * @return
+     * @throws DataException
+     */
     public List<Material> getAllMaterials() throws DataException
     {
         return db.getMaterials();
     }
 
+    /**
+     *
+     * @param material_id
+     * @return
+     * @throws DataException
+     */
     public Material getMaterial(int material_id) throws DataException
     {
         return db.getMaterial(material_id);
     }
 
+    /**
+     *
+     * @param carport
+     * @param carport_depth
+     * @param carport_width
+     * @param rooftype
+     * @param roofslope
+     * @param shed_width
+     * @param shed_depth
+     * @return
+     * @throws DataException
+     */
     public String updateCarport(Carport carport, int carport_depth, int carport_width, RoofType rooftype, int roofslope, int shed_width, int shed_depth) throws DataException
     {
         String res = "";
@@ -679,6 +891,12 @@ public class FunctionManager
         return res;
     }
 
+    /**
+     *
+     * @param rooftype
+     * @return
+     * @throws DataException
+     */
     public String addRoofType(RoofType rooftype) throws DataException
     {
         String res = "";
@@ -718,11 +936,22 @@ public class FunctionManager
         return res;
     }
 
+    /**
+     *
+     * @return
+     * @throws DataException
+     */
     public List<RoofType> getRoofs() throws DataException
     {
         return db.getRoofs();
     }
 
+    /**
+     *
+     * @param rooftype
+     * @return
+     * @throws DataException
+     */
     public String deleteRoofType(RoofType rooftype) throws DataException
     {
         String res = "";
@@ -737,6 +966,15 @@ public class FunctionManager
         return res;
     }
 
+    /**
+     *
+     * @param rooftype
+     * @param name
+     * @param m1
+     * @param m2
+     * @return
+     * @throws DataException
+     */
     public String updateRoofType(RoofType rooftype, String name, Material m1, Material m2) throws DataException
     {
         String res = "";
@@ -771,6 +1009,14 @@ public class FunctionManager
         return res;
     }
 
+    /**
+     *
+     * @param rooftype
+     * @param name
+     * @param m1
+     * @return
+     * @throws DataException
+     */
     public String updateRoofTypeWith1Material(RoofType rooftype, String name, Material m1) throws DataException
     {
         String res = "";
