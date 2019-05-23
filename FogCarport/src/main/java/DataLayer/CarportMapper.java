@@ -178,7 +178,7 @@ public class CarportMapper
      * when a customer places an order for a carpot with shed it is put in the
      * database with this method
      *
-     * @param carport
+     * @param carport object
      * @throws DataException
      */
     public void orderCarportWithShed(Carport carport) throws DataException
@@ -224,9 +224,9 @@ public class CarportMapper
     }
 
     /**
-     * puts a order for a carport without a shed in the database
+     * Puts a order for a carport without a shed in the database
      *
-     * @param carport
+     * @param carport object
      * @throws DataException
      */
     public void orderCarportWithoutShed(Carport carport) throws DataException
@@ -330,7 +330,7 @@ public class CarportMapper
     }
 
     /**
-     * removes a shed form a carport in the database
+     * removes/deletes a shed in the database
      *
      * @param shed
      * @throws DataException
@@ -358,7 +358,7 @@ public class CarportMapper
     }
 
     /**
-     *
+     * removes the id from a shed in the database
      * @param carport
      * @throws DataException
      */
@@ -469,7 +469,7 @@ public class CarportMapper
     /**
      * opdates a roof on a carport in the database
      *
-     * @param roof
+     * @param roof object
      * @throws DataException
      */
     public void updateRoof(Roof roof) throws DataException
@@ -503,7 +503,7 @@ public class CarportMapper
     /**
      * updates the mesurments of a shed in the database
      *
-     * @param shed
+     * @param shed object
      * @throws DataException
      */
     public void updateShed(Shed shed) throws DataException
@@ -728,7 +728,7 @@ public class CarportMapper
     /**
      * findes orders in the database
      *
-     * @param order_id
+     * @param order_id integer
      * @return order from database connected to the id
      * @throws DataException
      */
@@ -777,7 +777,7 @@ public class CarportMapper
     }
 
     /**
-     *
+     * finds all orders in the database and returns them
      * @return all the orders in the database
      * @throws DataException
      */
@@ -825,7 +825,8 @@ public class CarportMapper
     }
 
     /**
-     *
+     *finds orders related to a specific email, used by employees to find orders related to a specific client 
+     * and by clients to show them all their orders
      * @param email
      * @return all the orders in the database connected to a client
      * @throws DataException
@@ -913,8 +914,8 @@ public class CarportMapper
     /**
      * changes the price of a order in the database
      *
-     * @param order_id
-     * @param salesprice
+     * @param order_id integer
+     * @param salesprice integer
      * @throws DataException
      */
     public void updateSalesPrice(int order_id, double salesprice) throws DataException
@@ -943,10 +944,11 @@ public class CarportMapper
     }
 
     /**
-     *
-     * @param order_id
-     * @param status
-     * @param paid
+     * updates the status of the order and changes the paied state 
+     * used by eployees to update order status and change the status of payment
+     * @param order_id integer
+     * @param status enum
+     * @param paid enum
      * @throws DataException
      */
     public void updateStatusAndPaid(int order_id, Status status, Paid paid) throws DataException
@@ -979,8 +981,8 @@ public class CarportMapper
 
     /**
      * deletes a order in the database
-     *
-     * @param order
+     * 
+     * @param order object
      * @throws DataException
      */
     public void removeOrder(Order order) throws DataException
