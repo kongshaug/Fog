@@ -23,15 +23,15 @@ public class User
     private Role role;
 
     /**
-     *
-     * @param id
-     * @param email
-     * @param password
-     * @param name
-     * @param address
-     * @param zipcode
-     * @param phone
-     * @param role
+     * constructor for user from database
+     * @param id int
+     * @param email String
+     * @param password String
+     * @param name String
+     * @param address String
+     * @param zipcode int
+     * @param phone int
+     * @param role enum
      */
     public User(int id, String email, String password, String name, String address, String zipcode, String phone, Role role)
     {
@@ -46,14 +46,14 @@ public class User
     }
 
     /**
-     *
-     * @param email
-     * @param password
-     * @param name
-     * @param address
-     * @param zipcode
-     * @param phone
-     * @param role
+     * constructor for user
+     * @param email String
+     * @param password String
+     * @param name String
+     * @param address String
+     * @param zipcode int
+     * @param phone int
+     * @param role enum
      */
     public User(String email, String password, String name, String address, String zipcode, String phone, Role role)
     {
@@ -67,8 +67,8 @@ public class User
     }
 
     /**
-     *
-     * @return
+     * the role identifyes if the user is a customer, employee or admin
+     * @return the role of the user
      */
     public Role getRole()
     {
@@ -77,7 +77,7 @@ public class User
     
     /**
      *
-     * @return
+     * @return the id of the user
      */
     public int getId()
     {
@@ -85,8 +85,8 @@ public class User
     }
     
     /**
-     *
-     * @param id
+     *sets the id of a user
+     * @param id int
      */
     public void setId(int id)
     {
@@ -95,7 +95,7 @@ public class User
 
     /**
      *
-     * @return
+     * @return the name of the user as a string
      */
     public String getName()
     {
@@ -103,8 +103,8 @@ public class User
     }
     
     /**
-     *
-     * @param name
+     * sets the name of the user
+     * @param name String
      */
     public void setName(String name)
     {
@@ -113,7 +113,7 @@ public class User
     
     /**
      *
-     * @return
+     * @return the zipcode of the user
      */
     public String getZipcode()
     {
@@ -121,8 +121,8 @@ public class User
     }
 
     /**
-     *
-     * @param zipcode
+     * sets the zipcode of the user
+     * @param zipcode int
      */
     public void setZipcode(String zipcode)
     {
@@ -131,7 +131,7 @@ public class User
     
     /**
      *
-     * @return
+     * @return the email of the user
      */
     public String getEmail()
     {
@@ -149,7 +149,7 @@ public class User
     
     /**
      *
-     * @return
+     * @return the password of the user
      */
     public String getPassword()
     {
@@ -157,7 +157,7 @@ public class User
     }
 
     /**
-     *
+     * sets the password of the user
      * @param password
      */
     public void setPassword(String password)
@@ -167,7 +167,7 @@ public class User
 
     /**
      *
-     * @return
+     * @return the address of the user
      */
     public String getAddress()
     {
@@ -176,7 +176,7 @@ public class User
     
     /**
      *
-     * @param address
+     * @param address String
      */
     public void setAddress(String address)
     {
@@ -185,7 +185,7 @@ public class User
 
     /**
      *
-     * @return
+     * @return the phonenumber of the user
      */
     public String getPhone()
     {
@@ -193,7 +193,7 @@ public class User
     }
 
     /**
-     *
+     * sets the phonenumber of the user
      * @param phone
      */
     public void setPhone(String phone)
