@@ -29,11 +29,20 @@ public class DataFacade
     private CarportMapper cm = new CarportMapper(dbc);
     private UserMapper um = new UserMapper(dbc);
 
+    /**
+     *
+     * @throws DataException
+     */
     public DataFacade() throws DataException
     {
         dbc.setDataSource(dataSource.getDataSource());
     }
 
+    /**
+     * call to get a instance of DataFacade
+     * @return an instance of DataFacade as a singelton
+     * @throws DataException
+     */
     public static DataFacade getInstance() throws DataException
     {
         if (instance == null)
@@ -43,21 +52,51 @@ public class DataFacade
         return instance;
     }
 
+    /**
+     * findes and returns a material from the database that has the same name 
+     * as the paramater name passed when calling the method
+     * @param material_name String
+     * @return a singel material from the database 
+     * @throws DataException
+     * @see DataLayer.MaterialMapper#getMaterial(java.lang.String) 
+     */
     public Material getMaterial(String material_name) throws DataException
     {
         return mm.getMaterial(material_name);
     }
 
+    /**
+     * Findes and returns a material from the database that has the same id 
+     * as the paramater id passed when calling the method
+     * @param material_id
+     * @return a singel material from the database
+     * @throws DataException
+     * @see DataLayer.MaterialMapper#getMaterial(int) 
+     */
     public Material getMaterial(int material_id) throws DataException
     {
         return mm.getMaterial(material_id);
     }
 
+    /**
+     * Gets all the materials in the database in a list
+     * @return All materials from the database as a list
+     * @throws DataException
+     * @see DataLayer.MaterialMapper#getMaterials() 
+     */
     public List<Material> getMaterials() throws DataException
     {
         return mm.getMaterials();
     }
 
+    /**
+     *places an order in the database 
+     * the method findes out if the order has a shed or not and puts it in the database accordingly
+     * @param carport object 
+     * @throws DataException
+     * @see DataLayer.CarportMapper#orderCarportWithShed(FunctionLayer.HelpingClasses.Carport) 
+     * @see DataLayer.CarportMapper#orderCarportWithoutShed(FunctionLayer.HelpingClasses.Carport) 
+     */
     public void orderCarport(Carport carport) throws DataException
     {
         if (carport.getShed() == null)
@@ -69,136 +108,302 @@ public class DataFacade
         }
     }
 
+    /**
+     *gets all the roofs from the database
+     * @return list of roofs from the database
+     * @throws DataException
+     * @see DataLayer.MaterialMapper#getRoofs() 
+     */
     public List<RoofType> getRoofs() throws DataException
     {
         return mm.getRoofs();
     }
 
+    /**
+     *Gets a single roof from the database
+     * Finds the roof with the same id as the paramater entered
+     * @param id integer
+     * @return a single roof with a specific id
+     * @throws DataException
+     * @see DataLayer.MaterialMapper#getRoof(int) 
+     */
     public RoofType getRoof(int id) throws DataException
     {
         return mm.getRoof(id);
     }
 
+    /**
+     *
+     * @param user_id
+     * @return
+     * @throws DataException
+     */
     public User getUser(int user_id) throws DataException
     {
         return um.getUser(user_id);
     }
 
+    /**
+     * gets a list of all the users in the database
+     * @return all users in the database
+     * @throws DataException
+     * @see DataLayer.UserMapper#getUsers() 
+     */
     public List<User> getUsers() throws DataException
     {
         return um.getUsers();
     }
 
+    /**
+     * puts a new user in the database
+     * @param newUser
+     * @throws DataException
+     * @see DataLayer.UserMapper#addUser(FunctionLayer.HelpingClasses.User) 
+     */
     public void newUser(User newUser) throws DataException
     {
         um.addUser(newUser);
     }
 
+    /**
+     * this method is used to check if a user enters the correct information
+     * finds the user associated with the information passed
+     * @param email String
+     * @param password String
+     * @return a user if the correct email and password is passed otherwise it returns null
+     * @throws DataException
+     *  @see DataLayer.UserMapper#login(java.lang.String, java.lang.String) 
+     */
     public User login(String email, String password) throws DataException
     {
         return um.login(email, password);
     }
 
+    /**
+     * puts an order in the database
+     * @param order object
+     * @throws DataException
+     *  @see DataLayer.CarportMapper#placeOrder(FunctionLayer.HelpingClasses.Order) 
+     */
     public void placeOrder(Order order) throws DataException
     {
         cm.placeOrder(order);
     }
 
+    /**
+     * findes a order based on the id passed and returns the shipping status
+     * @param order_id integer
+     * @return status of shipping
+     * @throws DataException
+     *  @see DataLayer.CarportMapper#orderShipped(int) 
+     */
     public String orderShipped(int order_id) throws DataException
     {
         return cm.orderShipped(order_id);
     }
 
+    /**
+     * removes  a user from the database 
+     * @param user object
+     * @throws DataException
+     */
     public void removeUser(User user) throws DataException
     {
         um.removeUser(user);
     }
 
+    /**
+     * findes and gets the order in the database with the passed id
+     * @param order_id int
+     * @return order associated with the id passed
+     * @throws DataException
+     */
     public Order getOrder(int order_id) throws DataException
     {
         return cm.getOrder(order_id);
     }
 
+    /**
+     * gets all the orders in the database
+     * @return a list with all the orders in the database
+     * @throws DataException
+     */
     public List<Order> getOrders() throws DataException
     {
         return cm.getOrders();
     }
 
+    /**
+     * 
+     * @param email String
+     * @return all the orders with the passed email
+     * @throws DataException
+     *  @see DataLayer.CarportMapper#getOrdersByEmail(java.lang.String) 
+     */
     public List<Order> getOrdersByEmail(String email) throws DataException
     {
         return cm.getOrdersByEmail(email);
     }
 
+    /**
+     * update the price of an order in the database
+     * @param order_id int
+     * @param salesprice int
+     * @throws DataException
+     *  @see DataLayer.CarportMapper#updateSalesPrice(int, double) 
+     */
     public void updateSalesPrice(int order_id, double salesprice) throws DataException
     {
         cm.updateSalesPrice(order_id, salesprice);
     }
 
+    /**
+     *  updates the enum status and enum paid in the database
+     * @param order_id int
+     * @param status enum
+     * @param paid enum
+     * @throws DataException
+     *  @see DataLayer.CarportMapper#updateStatusAndPaid(int, FunctionLayer.Enum.Status, FunctionLayer.Enum.Paid) 
+     */
     public void updateStatusAndPaid(int order_id, Status status, Paid paid) throws DataException
     {
         cm.updateStatusAndPaid(order_id, status, paid);
     }
 
+    /**
+     * Deletes an order from the database
+     * @param order
+     * @throws DataException
+     * @see DataLayer.CarportMapper#removeOrder(FunctionLayer.HelpingClasses.Order) 
+     */
     public void removeOrder(Order order) throws DataException
     {
         cm.removeOrder(order);
     }
 
+    /**
+     * Removes a carport from the database
+     * @param carport object
+     * @throws DataException
+     *  @see DataLayer.CarportMapper#removeCarport(FunctionLayer.HelpingClasses.Carport) 
+     */
     public void removeCarport(Carport carport) throws DataException
     {
         cm.removeCarport(carport);
     }
 
+    /**
+     * removes a shed from the database
+     * @param shed object
+     * @throws DataException
+     * @see DataLayer.CarportMapper#removeShed(FunctionLayer.HelpingClasses.Shed) 
+     */
     public void removeShed(Shed shed) throws DataException
     {
         cm.removeShed(shed);
     }
 
+    /**
+     * removes a roof in the database
+     * @param roof object
+     * @throws DataException
+     *  @see DataLayer.CarportMapper#removeRoof(FunctionLayer.HelpingClasses.Roof) 
+     */
     public void removeRoof(Roof roof) throws DataException
     {
         cm.removeRoof(roof);
     }
 
+    /**
+     *deletes the id of a shed in the database from the caport 
+     * this method is used to remove the forain key in order to be able to delete the shed afterwards
+     * @param carport object
+     * @throws DataException
+     *  @see DataLayer.CarportMapper#removeShedId(FunctionLayer.HelpingClasses.Carport) 
+     */
     public void deleteShedId(Carport carport) throws DataException
     {
         cm.removeShedId(carport);
     }
 
+    /**
+     * 
+     * @param email String
+     * @return employee with the email passed 
+     * @throws DataException
+     *  @see DataLayer.UserMapper#getEmployeeByEmail(java.lang.String) 
+     */
     public User getEmployeeByEmail(String email) throws DataException
     {
         return um.getEmployeeByEmail(email);
     }
 
+    /**
+     *
+     * @return
+     * @throws DataException
+     */
     public List<User> getEmployeesAndAdmins() throws DataException
     {
         return um.getEmployeesAndAdmins();
     }
 
+    /**
+     *
+     * @param user
+     * @throws DataException
+     */
     public void updateUser(User user) throws DataException
     {
         um.updateUser(user);
     }
 
+    /**
+     *
+     * @param user_id
+     * @param password
+     * @throws DataException
+     */
     public void updatePassword(int user_id, String password) throws DataException
     {
         um.updatePassword(user_id, password);
     }
 
+    /**
+     *
+     * @param material
+     * @throws DataException
+     */
     public void updateMaterial(Material material) throws DataException
     {
         mm.updateMaterial(material);
     }
 
+    /**
+     *
+     * @param newMaterial
+     * @throws DataException
+     */
     public void addMaterial(Material newMaterial) throws DataException
     {
         mm.addMaterial(newMaterial);
     }
 
+    /**
+     *
+     * @param material
+     * @throws DataException
+     */
     public void deleteMaterial(Material material) throws DataException
     {
         mm.deleteMaterial(material);
     }
 
+    /**
+     *
+     * @param carport
+     * @throws DataException
+     */
     public void updateCarport(Carport carport) throws DataException
     {
         if (carport.getShed() != null)
@@ -220,21 +425,41 @@ public class DataFacade
         }
     }
 
+    /**
+     *
+     * @param rooftype
+     * @throws DataException
+     */
     public void addRoofType(RoofType rooftype) throws DataException
     {
         mm.addRoofType(rooftype);
     }
 
+    /**
+     *
+     * @param rooftype
+     * @throws DataException
+     */
     public void deleteRoofType(RoofType rooftype) throws DataException
     {
         mm.deleteRooftype(rooftype);
     }
 
+    /**
+     *
+     * @param rooftype
+     * @throws DataException
+     */
     public void updateRoofType(RoofType rooftype) throws DataException
     {
         mm.updateRoofType(rooftype);
     }
 
+    /**
+     *
+     * @param rooftype
+     * @throws DataException
+     */
     public void updateRoofTypeWith1Material(RoofType rooftype) throws DataException
     {
         mm.updateRoofTypeWith1Material(rooftype);
