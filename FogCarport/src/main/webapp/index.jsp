@@ -10,6 +10,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        <style>
+            .footer {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                color: white;
+                text-align: right;
+                font-size: 10px;
+            }
+        </style>
         <title>Fog</title>
     </head>
     <body>  
@@ -41,5 +52,9 @@
             </form>
         </div>
     </center>
+
+    <div class="footer">
+        <p>&copy; Copyright 2019 Amanda Juhl Hansen, Sofie Amalie Landt & Benjamin Kongshaug&nbsp;&nbsp;</p>
+    </div>
 </body>
 </html>

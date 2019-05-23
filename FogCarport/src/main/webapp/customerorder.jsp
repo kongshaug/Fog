@@ -13,14 +13,13 @@
 <center class="index" id="index"> 
     <form action="Fog" method="POST">
         <div id="shop">
-            <%                
-                Order order = (Order) session.getAttribute("order");
+            <%                Order order = (Order) session.getAttribute("order");
                 out.println("Ordrer: " + order.getOrder_id() + ", Bestilt: " + order.getOrder_date() + "<br><br>");
                 out.println("Afsendt: " + order.getShipped() + "<br>");
             %>
             <br>
             <select name="status" disabled="disabled">
-                <%                    
+                <%
                     out.println("<option selected> " + order.getStatus() + "</option>");
                 %>
             </select>
@@ -42,7 +41,7 @@
             &nbsp;&nbsp;
             Dybde:&nbsp;&nbsp;<input type="number" pattern="[0-2000]*" name="depth" id="depth" value="<%=order.getCarport().getDepth()%>" min="240" max="800" disabled="disabled">
             <br><br>
-            <% 
+            <%
                 if (order.getCarport().getRoof().getSlope() == 0)
                 {
                     out.println("<label> <input type=\"radio\" name=\"roof\" id=\"flat\" value=\"flat\" onclick=\"disable()\" checked=\"checked\" disabled=\"disabled\"><span>Fladt tag</span></label>");
@@ -55,7 +54,7 @@
             %>
             <br><br>
             <select name="type" id="type" disabled="disabled">
-                <%                    
+                <%
                     out.println("<option selected value=\"" + order.getCarport().getRoof().getId() + "\" class=\"fladt\">" + order.getCarport().getRoof().getType().getName() + "</option>");
                 %>
             </select>
@@ -103,7 +102,7 @@
         </div>
         <br>
         <div>
-            <%            
+            <%
                 if (order.getPaid().equals(Paid.BETALT))
                 {
                     out.println("<button name=\"command\" value=\"viewpartlist\">Se stykliste</button>&nbsp;&nbsp;");
@@ -112,5 +111,9 @@
             <button name="command" value="viewdrawing">Se tegning</button>
         </div>
     </form>
+    <br><br><br>
+    <div class="footer">
+        <p>&copy; Copyright 2019 Amanda Juhl Hansen, Sofie Amalie Landt & Benjamin Kongshaug&nbsp;&nbsp;</p>
+    </div>
 </body>
 </html>

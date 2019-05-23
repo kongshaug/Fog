@@ -14,8 +14,7 @@
     <br><br><br>
     <div>
         <img src="images/logo.png" width="30%"><br>
-        <%            
-            List<RoofType> rooftypes = (List<RoofType>) session.getAttribute("rooftypes");
+        <%            List<RoofType> rooftypes = (List<RoofType>) session.getAttribute("rooftypes");
             String message = (String) request.getAttribute("message");
             if (message != null)
             {
@@ -25,7 +24,7 @@
         <form action="Fog" method="POST">
             <select name="rooftype" id="rooftype">
                 <option disabled selected>Vælg tagtype</option>            
-                <%                    
+                <%
                     for (RoofType r : rooftypes)
                     {
                         out.println("<option value=\"" + r.getId() + "\">" + r.getName() + "</option>");
@@ -42,6 +41,10 @@
         </form>
     </div>
 </center>
+<br><br><br>
+<div class="footer">
+    <p>&copy; Copyright 2019 Amanda Juhl Hansen, Sofie Amalie Landt & Benjamin Kongshaug&nbsp;&nbsp;</p>
+</div>
 </body>
 </html>
 

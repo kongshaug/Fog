@@ -14,14 +14,13 @@
 <center class="index" id="index"> 
     <form action="Fog" method="POST">
         <div id="shop">
-            <%            
-                Order order = (Order) session.getAttribute("order");
+            <%                Order order = (Order) session.getAttribute("order");
                 out.println("Ordrer: " + order.getOrder_id() + ", Bestilt: " + order.getOrder_date() + "<br><br>");
                 out.println("Kundenummer: " + order.getUser().getId() + " - Navn: " + order.getUser().getName() + "<br>");
                 out.println("E-mail: " + order.getUser().getEmail() + " - Telefon: " + order.getUser().getPhone() + "<br>");
                 out.println("Adresse: " + order.getUser().getAddress() + ", " + order.getUser().getZipcode() + "<br><br>");
                 out.println("Afsendt: " + order.getShipped() + "<br>");
-                
+
                 if (order.getShipped().equals("Ordren er endnu ikke afsendt"))
                 {
                     out.println("<br><button name=\"command\" value=\"shipped\">Afsend ordren</button><br>");
@@ -119,7 +118,7 @@
             <br><br>
             <select name="type" id="type" disabled="disabled">
                 <option disabled value="0">Vælg tagtype</option> 
-                <%                    
+                <%
                     List<RoofType> slopedroofs = (List<RoofType>) session.getAttribute("slopedroofs");
                     List<RoofType> flatroofs = (List<RoofType>) session.getAttribute("flatroofs");
 
@@ -166,8 +165,7 @@
             <br><br>
             <select name="slope" id="hældning" disabled="disabled">
                 <option selected>0</option>
-                <%                    
-                    for (int i = 15; i <= 45; i = i + 5)
+                <%                    for (int i = 15; i <= 45; i = i + 5)
                     {
                         out.println("<option> " + i + "</option>");
 
@@ -195,8 +193,7 @@
             </select>       
         </div>
         <br>
-        <%        
-            if (order.getCarport().getShed() == null)
+        <%            if (order.getCarport().getShed() == null)
             {
                 out.println("<div id=\"skur\" hidden=\"true\">");
             } else
@@ -307,5 +304,9 @@
 
     </script>
 </center>
+<br><br><br>
+<div class="footer">
+    <p>&copy; Copyright 2019 Amanda Juhl Hansen, Sofie Amalie Landt & Benjamin Kongshaug&nbsp;&nbsp;</p>
+</div>
 </body>
 </html>

@@ -12,19 +12,19 @@
 <%@include file = "header.jsp" %>
 
 <center class="index" id="index"> 
-    <div id="shop">
-        <img src="images/logo.png" width="30%"><br>
-        <%            
-            String errormessage = (String) request.getAttribute("errormessage");
-            if (errormessage != null)
-            {
-        %>
-        <p><%=errormessage%></p><br>
-        <%
-            }
-        %>
-        <br>
-        <form action="Fog" method="POST">
+    <form action="Fog" method="POST">
+        <div id="shop">
+            <img src="images/logo.png" width="30%"><br>
+            <%            String errormessage = (String) request.getAttribute("errormessage");
+                if (errormessage != null)
+                {
+            %>
+            <p><%=errormessage%></p><br>
+            <%
+                }
+            %>
+            <br>
+
             Bredde:&nbsp;&nbsp;<input type="number" pattern="[0-2000]*" name="width" value="240" min="240" max="750">
             &nbsp;&nbsp;
             Dybde:&nbsp;&nbsp;<input type="number" pattern="[0-2000]*" name="depth" value="240" min="240" max="800">
@@ -52,7 +52,7 @@
             <br><br>
             <select name="slope" id="hældning">
                 <option disabled selected value="0">Vælg hældning</option>
-                <%                    
+                <%
                     for (int i = 15; i <= 45; i = i + 5)
                     {
                         out.println("<option> " + i + "</option>");
@@ -65,78 +65,82 @@
                 <option value="Med skur">Med skur</option>
                 <option value="Uden skur">Uden skur</option>
             </select>       
-    </div>
-    <br>
-    <div id="skur" hidden="true">
-        OBS! Skuret skal have min. 15 cm udhæng på alle sider <br>
-        og skal derfor være mindst 30 cm smallere og kortere end carporten 
+        </div>
+        <br>
+        <div id="skur" hidden="true">
+            OBS! Skuret skal have min. 15 cm udhæng på alle sider <br>
+            og skal derfor være mindst 30 cm smallere og kortere end carporten 
+            <br><br>
+            Bredde af skur:&nbsp;&nbsp;<input type="number" pattern="[0-2000]*" name="shedWidth" value="210" min="210" max="720">
+            &nbsp;&nbsp;
+            Dybde af skur:&nbsp;&nbsp;<input type="number" pattern="[0-2000]*" name="shedDepth" value="210" min="210" max="770">
+        </div>
+        <br>
+        <div><button name="command" value="drawing">Beregn carport</button></div>
         <br><br>
-        Bredde af skur:&nbsp;&nbsp;<input type="number" pattern="[0-2000]*" name="shedWidth" value="210" min="210" max="720">
-        &nbsp;&nbsp;
-        Dybde af skur:&nbsp;&nbsp;<input type="number" pattern="[0-2000]*" name="shedDepth" value="210" min="210" max="770">
-    </div>
-    <br>
-    <div><button name="command" value="drawing">Beregn carport</button></div>
-    <br><br>
-    <script>
+        <script>
 
-        function disable()
-        {
-            var flatoptions = [...document.getElementsByClassName("fladt")];
-
-            flatoptions.forEach(function (x)
+            function disable()
             {
-                x.removeAttribute("disabled");
-                x.removeAttribute("hidden");
-            });
-            var slopeoptions = [...document.getElementsByClassName("rejsning")];
+                var flatoptions = [...document.getElementsByClassName("fladt")];
 
-            slopeoptions.forEach(function (x)
-            {
-                x.setAttribute("disabled", "disabled");
-                x.setAttribute("hidden", "hidden");
-            });
+                flatoptions.forEach(function (x)
+                {
+                    x.removeAttribute("disabled");
+                    x.removeAttribute("hidden");
+                });
+                var slopeoptions = [...document.getElementsByClassName("rejsning")];
 
-            document.getElementById("hældning").disabled = true;
-            document.getElementById("type").value = 0;
-            document.getElementById("hældning").value = 0;
-        }
+                slopeoptions.forEach(function (x)
+                {
+                    x.setAttribute("disabled", "disabled");
+                    x.setAttribute("hidden", "hidden");
+                });
 
-        function enable()
-        {
-            var flatoptions = [...document.getElementsByClassName("fladt")];
-
-            flatoptions.forEach(function (x)
-            {
-                x.setAttribute("disabled", "disabled");
-                x.setAttribute("hidden", "hidden");
-            });
-            var slopeoptions = [...document.getElementsByClassName("rejsning")];
-
-            slopeoptions.forEach(function (x)
-            {
-                x.removeAttribute("disabled");
-                x.removeAttribute("hidden");
-            });
-
-            document.getElementById("hældning").disabled = false;
-            document.getElementById("type").value = 0;
-            document.getElementById("hældning").value = 0;
-        }
-
-        function show(value)
-        {
-            if (value === "Med skur")
-            {
-                document.getElementById("skur").removeAttribute("hidden");
-            } else
-            {
-                document.getElementById("skur").setAttribute("hidden", "true");
+                document.getElementById("hældning").disabled = true;
+                document.getElementById("type").value = 0;
+                document.getElementById("hældning").value = 0;
             }
-        }
 
-    </script>
+            function enable()
+            {
+                var flatoptions = [...document.getElementsByClassName("fladt")];
+
+                flatoptions.forEach(function (x)
+                {
+                    x.setAttribute("disabled", "disabled");
+                    x.setAttribute("hidden", "hidden");
+                });
+                var slopeoptions = [...document.getElementsByClassName("rejsning")];
+
+                slopeoptions.forEach(function (x)
+                {
+                    x.removeAttribute("disabled");
+                    x.removeAttribute("hidden");
+                });
+
+                document.getElementById("hældning").disabled = false;
+                document.getElementById("type").value = 0;
+                document.getElementById("hældning").value = 0;
+            }
+
+            function show(value)
+            {
+                if (value === "Med skur")
+                {
+                    document.getElementById("skur").removeAttribute("hidden");
+                } else
+                {
+                    document.getElementById("skur").setAttribute("hidden", "true");
+                }
+            }
+
+        </script>
+    </form>
 </center>
-</form> 
+<br><br><br>
+<div class="footer">
+    <p>&copy; Copyright 2019 Amanda Juhl Hansen, Sofie Amalie Landt & Benjamin Kongshaug&nbsp;&nbsp;</p>
+</div>
 </body>
 </html>

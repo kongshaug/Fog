@@ -33,26 +33,32 @@ public class LogoutCommand implements Command
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
-        if (user.getRole().equals(Role.EMPLOYEE) || user.getRole().equals(Role.ADMIN))
+        if (user == null)
         {
-            session.removeAttribute("materials");
-            session.removeAttribute("marterial");
-            session.removeAttribute("material_classes");
-            session.removeAttribute("employee");
-            session.removeAttribute("users");
-            session.removeAttribute("rooftype");
-            session.removeAttribute("rooftypes");
-        }
-        
-        session.removeAttribute("order");
-        session.removeAttribute("carport");
-        session.removeAttribute("orders");
-        session.removeAttribute("roofDrawing");
-        session.removeAttribute("slopedroofs");
-        session.removeAttribute("flatroofs");
-        session.removeAttribute("user");
+            return target;
+        } else
+        {
+            if (user.getRole().equals(Role.EMPLOYEE) || user.getRole().equals(Role.ADMIN))
+            {
+                session.removeAttribute("materials");
+                session.removeAttribute("marterial");
+                session.removeAttribute("material_classes");
+                session.removeAttribute("employee");
+                session.removeAttribute("users");
+                session.removeAttribute("rooftype");
+                session.removeAttribute("rooftypes");
+            }
 
-        return target;
+            session.removeAttribute("order");
+            session.removeAttribute("carport");
+            session.removeAttribute("orders");
+            session.removeAttribute("roofDrawing");
+            session.removeAttribute("slopedroofs");
+            session.removeAttribute("flatroofs");
+            session.removeAttribute("user");
+
+            return target;
+        }
     }
 
 }

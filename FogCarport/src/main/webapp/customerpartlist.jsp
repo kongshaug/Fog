@@ -11,8 +11,7 @@
 <%@page import="FunctionLayer.Enum.Role"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@include file = "header.jsp" %>
-<%    
-    Order order = (Order) session.getAttribute("order");
+<%    Order order = (Order) session.getAttribute("order");
     Carport carport = order.getCarport();
 %>
 <center id="partlist" class="partlist">
@@ -104,8 +103,7 @@
                     <th><b>Enhed</b></th>
                     <th><b>Beskrivelse</b></th>
                 </tr>
-                <%                    
-                    for (Part p : roof_parts)
+                <%                    for (Part p : roof_parts)
                     {
                         if (p.getMaterial_class().equals("tag"))
                         {
@@ -202,6 +200,10 @@
             <input type="hidden" id="order_id" name="selected" value="<%=order.getOrder_id()%>">
             </div>
             </center>
+            <br><br><br>
+            <div class="footer">
+                <p>&copy; Copyright 2019 Amanda Juhl Hansen, Sofie Amalie Landt & Benjamin Kongshaug&nbsp;&nbsp;</p>
+            </div>
         </form>
         </body>
         </html>

@@ -10,8 +10,7 @@
     <br><br><br>
     <div>
         <img src="images/logo.png" width="30%"><br>
-        <%            
-            String message = (String) request.getAttribute("message");
+        <%            String message = (String) request.getAttribute("message");
 
             if (message != null)
             {
@@ -25,7 +24,7 @@
             <%=user.getEmail()%><br><br>
             Adresse: 
             <%=user.getAddress()%>, <%=user.getZipcode()%><br><br>
-            
+
             Telefonnummer: 
             <%=user.getPhone()%><br><br>
 
@@ -46,11 +45,15 @@
         document.getElementById("save").style.display = "inline-block";
         document.getElementById("update").style.display = "none";
     }
-    
+
     function password() {
-                    document.getElementById("newpassword").value = '';
-                    document.getElementById("oldpassword").value = '';
-                }
+        document.getElementById("newpassword").value = '';
+        document.getElementById("oldpassword").value = '';
+    }
 </script>
+<br><br><br>
+<div class="footer">
+    <p>&copy; Copyright 2019 Amanda Juhl Hansen, Sofie Amalie Landt & Benjamin Kongshaug&nbsp;&nbsp;</p>
+</div>
 </body>
 </html>

@@ -13,8 +13,7 @@
     <center class="order">
         <div>
             <h1>Alle ordrer</h1>
-            <%                
-                String message = (String) request.getAttribute("message");
+            <%                String message = (String) request.getAttribute("message");
                 if (message != null)
                 {
                     out.println(message + "<br><br>");
@@ -22,7 +21,7 @@
             %>
             <input type="text" name="search" placeholder="Søg e-mail" value=""> 
             <br><br><button name="command" value="employee">Søg</button><br><br>
-            <%               
+            <%
                 List<Order> orders = (List<Order>) session.getAttribute("orders");
                 for (Order o : orders)
                 {
@@ -37,5 +36,9 @@
             }
         </script>
     </center>
+    <br><br><br>
+    <div class="footer">
+        <p>&copy; Copyright 2019 Amanda Juhl Hansen, Sofie Amalie Landt & Benjamin Kongshaug&nbsp;&nbsp;</p>
+    </div>
 </form>
 </html>

@@ -41,5 +41,9 @@
             </form>
         </div>
     </center>
+    <br><br><br>
+    <div class="footer">
+        <p>&copy; Copyright 2019 Amanda Juhl Hansen, Sofie Amalie Landt & Benjamin Kongshaug&nbsp;&nbsp;</p>
+    </div>
 </body>
 </html>

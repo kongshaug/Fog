@@ -239,6 +239,17 @@
                 opacity: 0.8;
 
             }
+
+            .footer {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                color: white;
+                text-align: right;
+                font-size: 10px;
+                z-index: -1;
+            }
         </style>
     </head>
     <body>

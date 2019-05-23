@@ -11,8 +11,7 @@
     <br><br><br>
     <div>
         <img src="images/logo.png" width="30%"><br>
-        <%            
-            List<Material> materials = (List<Material>) session.getAttribute("materials");
+        <%            List<Material> materials = (List<Material>) session.getAttribute("materials");
             String message = (String) request.getAttribute("message");
             if (message != null)
             {
@@ -40,5 +39,9 @@
         </form>
     </div>
 </center>
+<br><br><br>
+<div class="footer">
+    <p>&copy; Copyright 2019 Amanda Juhl Hansen, Sofie Amalie Landt & Benjamin Kongshaug&nbsp;&nbsp;</p>
+</div>
 </body>
 </html>

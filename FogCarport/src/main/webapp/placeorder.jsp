@@ -11,8 +11,7 @@
     <center id="index" class="index">
         <div>
             <img src="images/logo.png" width="30%"><br>
-            <%                
-                String message = (String) request.getAttribute("message");
+            <%                String message = (String) request.getAttribute("message");
                 out.println(message);
             %>
             <br><br>
@@ -20,5 +19,9 @@
             </form>
         </div>
     </center>
+    <br><br><br>
+    <div class="footer">
+        <p>&copy; Copyright 2019 Amanda Juhl Hansen, Sofie Amalie Landt & Benjamin Kongshaug&nbsp;&nbsp;</p>
+    </div>
 </body>
 </html>

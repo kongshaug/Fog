@@ -8,8 +8,7 @@
 <%@page import="FunctionLayer.HelpingClasses.Carport"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@include file = "header.jsp" %>
-<%    
-    Order order = (Order) session.getAttribute("order");
+<%    Order order = (Order) session.getAttribute("order");
     String roofDrawing = (String) session.getAttribute("roofDrawing");
 %>
 <center id="partlist" class="partlist">
@@ -33,5 +32,9 @@
         <%=roofDrawing%>
     </div>
 </center>
+<br><br><br>
+<div class="footer">
+    <p>&copy; Copyright 2019 Amanda Juhl Hansen, Sofie Amalie Landt & Benjamin Kongshaug&nbsp;&nbsp;</p>
+</div>
 </body>
 </html>

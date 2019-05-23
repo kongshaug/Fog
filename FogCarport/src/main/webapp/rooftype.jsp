@@ -13,8 +13,7 @@
     <br><br><br>
     <div>
         <img src="images/logo.png" width="30%"><br>
-        <%            
-            RoofType rooftype = (RoofType) session.getAttribute("rooftype");
+        <%            RoofType rooftype = (RoofType) session.getAttribute("rooftype");
             List<Material> materials = (List<Material>) session.getAttribute("materials");
 
             String message = (String) request.getAttribute("message");
@@ -99,5 +98,9 @@
         document.getElementById("update").style.display = "none";
     }
 </script>
+<br><br><br>
+<div class="footer">
+    <p>&copy; Copyright 2019 Amanda Juhl Hansen, Sofie Amalie Landt & Benjamin Kongshaug&nbsp;&nbsp;</p>
+</div>
 </body>
 </html>

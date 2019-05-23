@@ -12,8 +12,7 @@
     <br><br><br>
     <div>
         <img src="images/logo.png" width="30%"><br>
-        <%            
-            Material material = (Material) session.getAttribute("material");
+        <%            Material material = (Material) session.getAttribute("material");
             List<String> material_classes = (List<String>) session.getAttribute("material_classes");
             String message = (String) request.getAttribute("message");
 
@@ -62,5 +61,9 @@
         document.getElementById("update").style.display = "none";
     }
 </script>
+<br><br><br>
+<div class="footer">
+    <p>&copy; Copyright 2019 Amanda Juhl Hansen, Sofie Amalie Landt & Benjamin Kongshaug&nbsp;&nbsp;</p>
+</div>
 </body>
 </html>

@@ -9,8 +9,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@include file = "header.jsp" %>
-<%        
-    String roofDrawing = (String) session.getAttribute("roofDrawing");
+<%    String roofDrawing = (String) session.getAttribute("roofDrawing");
 %>
 <center id="partlist" class="partlist">
     <form action="Fog" method="POST">
@@ -22,8 +21,12 @@
         <br><br>
     </form>
     <div>
-    <%=roofDrawing%>
+        <%=roofDrawing%>
     </div>
 </center>
+<br><br><br>
+<div class="footer">
+    <p>&copy; Copyright 2019 Amanda Juhl Hansen, Sofie Amalie Landt & Benjamin Kongshaug&nbsp;&nbsp;</p>
+</div>
 </body>
 </html>

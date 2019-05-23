@@ -13,8 +13,7 @@
     <center class="order">
         <div>
             <h1>Order historik</h1>
-            <%                
-                List<Order> orders = (List<Order>) session.getAttribute("orders");
+            <%                List<Order> orders = (List<Order>) session.getAttribute("orders");
                 for (Order o : orders)
                 {
                     out.println("<button name=\"command\" value=\"customerorder\" onclick=\"setId(" + o.getOrder_id() + ")\">" + o + "</button>");
@@ -28,5 +27,9 @@
             }
         </script>
     </center>
+    <br><br><br>
+    <div class="footer">
+        <p>&copy; Copyright 2019 Amanda Juhl Hansen, Sofie Amalie Landt & Benjamin Kongshaug&nbsp;&nbsp;</p>
+    </div>
 </form>
 </html>

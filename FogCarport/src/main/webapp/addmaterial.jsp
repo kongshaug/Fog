@@ -26,7 +26,7 @@
             Kategori<br>
             <select id="material_class" name="material_class">
                 <option disabled selected value="0">Vælg kategori</option>  
-                <%                    
+                <%
                     for (String m : material_classes)
                     {
                         out.println("<option> " + m + "</option>");
@@ -42,5 +42,9 @@
         </form>
     </div>
 </center>
+<br><br><br>
+<div class="footer">
+    <p>&copy; Copyright 2019 Amanda Juhl Hansen, Sofie Amalie Landt & Benjamin Kongshaug&nbsp;&nbsp;</p>
+</div>
 </body>
 </html>

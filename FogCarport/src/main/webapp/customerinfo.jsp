@@ -10,8 +10,7 @@
     <br><br><br>
     <div>
         <img src="images/logo.png" width="30%"><br>
-        <%            
-            String message = (String) request.getAttribute("message");
+        <%            String message = (String) request.getAttribute("message");
             if (message != null)
             {
                 out.println(message + "<br><br>");
@@ -36,9 +35,9 @@
             <br><br>
             <button id="save" name="command" value="customerupdate" style="display:none;">Gem</button>
         </form>
-            
+
         <button id="update" onclick="update()">Opdater</button> <br><br>
-        
+
         <form action="Fog" method="POST">
             <button id="delete" name="command" value="deletecustomer">Slet bruger</button>
         </form>
@@ -62,5 +61,9 @@
         document.getElementById("oldpassword").value = '';
     }
 </script>
+<br><br><br>
+<div class="footer">
+    <p>&copy; Copyright 2019 Amanda Juhl Hansen, Sofie Amalie Landt & Benjamin Kongshaug&nbsp;&nbsp;</p>
+</div>
 </body>
 </html>
