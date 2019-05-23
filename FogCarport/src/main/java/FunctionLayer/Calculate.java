@@ -17,13 +17,13 @@ import java.util.ArrayList;
 public class Calculate
 {
     /**
-     * calculates the amount of poles, bolts and discs for the poles needed to
+     * Valculates the amount of poles, bolts and discs for the poles needed to
      * bouild the carport and adds it to the list of materials needed.
      *
-     * @param carport
-     * @param pole
-     * @param bolt
-     * @param disc
+     * @param carport object
+     * @param pole Material
+     * @param bolt Material
+     * @param disc Material
      */
     public void calculatepoles(Carport carport, Material pole, Material bolt, Material disc)
     {
@@ -44,11 +44,11 @@ public class Calculate
     }
 
     /**
-     * calculates the length of the rem needed to bouild the carport and adds it
+     * Calculates the length of the rem needed to bouild the carport and adds it
      * to the list of materials needed.
      *
-     * @param carport
-     * @param rem
+     * @param carport object
+     * @param rem Material
      */
     public void calculateRem(Carport carport, Material rem)
     {
