@@ -70,7 +70,7 @@ public class DataFacadeTest
     }
 
     /**
-     * Test of newUser method, of class DataFacade.
+     * Test of newUser and removeUser method, of class DataFacade.
      *
      * @throws DataLayer.DataException
      */
@@ -115,6 +115,22 @@ public class DataFacadeTest
     }
 
     /**
+     * Negative test of login method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void NegativetestLogin() throws DataException
+    {
+        String email = "customer@hotmail.dk";
+        String password = "4321";
+        User user = df.login(email, password);
+
+        //method returns null, when no user with the email and password combination is found in the database
+        assertNull(user);
+    }
+
+    /**
      * Test of getUser method, of class DataFacade.
      *
      * @throws DataLayer.DataException
@@ -132,7 +148,7 @@ public class DataFacadeTest
     }
 
     /**
-     * Test of getUser method, of class DataFacade.
+     * Negative test of getUser method, of class DataFacade.
      *
      * @throws DataLayer.DataException
      */
@@ -172,6 +188,10 @@ public class DataFacadeTest
         assertNotNull(m2);
         assertEquals("beslag og skruer", m2.getMaterial_class());
 
+        //Negative test
+        Material m3 = df.getMaterial("TestMateriale");
+        assertNull(m3);
+
     }
 
     /**
@@ -189,6 +209,10 @@ public class DataFacadeTest
         Material m2 = df.getMaterial(22);
         assertNotNull(m2);
         assertEquals("beslag og skruer", m2.getMaterial_class());
+
+        //Negative test
+        Material m3 = df.getMaterial(22222222);
+        assertNull(m3);
     }
 
     /**
@@ -224,10 +248,15 @@ public class DataFacadeTest
         assertNotNull(rooftype);
         assertEquals("Plasttrapezplader", rooftype.getName());
         assertEquals("flat", rooftype.getRoof_class());
+
+        //Negative test
+        RoofType roof = df.getRoof(2222222);
+        assertNull(roof);
     }
 
     /**
-     * Test of orderCarport method, of class DataFacade.
+     * Test of orderCarport, placeOrder, orderShipped, removeOrder,
+     * removeCarport, removeRoof and removeShed method, of class DataFacade.
      *
      * @throws DataLayer.DataException
      */
@@ -283,13 +312,13 @@ public class DataFacadeTest
 
         assertTrue(order1.getOrder_id() != 0);
         assertNotNull(order1.getOrder_date());
-        
+
         //test orderShipped
         assertEquals("Ordren er endnu ikke afsendt", order.getShipped());
         df.orderShipped(order.getOrder_id());
         assertNotEquals("Ordren er endnu ikke afsendt", df.getOrder(order.getOrder_id()).getShipped());
 
-        //test removeOrder, test removeCarport
+        //test removeOrder, test removeCarport, test removeRoof and test removeShed
         df.removeOrder(order);
         df.removeCarport(order.getCarport());
         df.removeRoof(order.getCarport().getRoof());
@@ -303,7 +332,7 @@ public class DataFacadeTest
     }
 
     /**
-     * Test of getAllOrders method, of class DataFacade.
+     * Test of updateCarport method, of class DataFacade.
      *
      * @throws DataLayer.DataException
      */
@@ -345,16 +374,21 @@ public class DataFacadeTest
         //changing attributes back to original
         assertTrue(order.getCarport().getWidth() != width);
         assertTrue(order.getCarport().getRoof().getType() != rooftype);
-        
+
         order.getCarport().setWidth(width);
         order.getCarport().getRoof().setType(rooftype);
-        
+
         assertTrue(order.getCarport().getWidth() == width);
         assertTrue(order.getCarport().getRoof().getType() == rooftype);
-        
+
         df.updateCarport(order.getCarport());
     }
 
+    /**
+     * Test of getOrder method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
     @Test
     public void testGetOrder() throws DataException
     {
@@ -363,7 +397,7 @@ public class DataFacadeTest
         assertEquals(2, order.getUser().getId());
         assertEquals(Status.MODTAGET, order.getStatus());
     }
-    
+
     /**
      * Test of getAllOrders method, of class DataFacade.
      *
@@ -392,12 +426,12 @@ public class DataFacadeTest
     }
 
     /**
-     * Test of getAllOrdersByEmail method, of class DataFacade.
+     * Test of addMaterial and deleteMaterial method, of class DataFacade.
      *
      * @throws DataLayer.DataException
      */
     @Test
-    public void testaddMaterialAndRemoveMaterial() throws DataException
+    public void testAddMaterialAndDeleteMaterial() throws DataException
     {
         List<Material> MaterialList = df.getMaterials();
         Material material = new Material("testMaterial", "stk", "træ", 10.00);
@@ -412,9 +446,9 @@ public class DataFacadeTest
         assertEquals(MaterialList.size(), df.getMaterials().size());
     }
 
-
     /**
      * Test of updateSalesPrice method, of class DataFacade.
+     *
      * @throws DataLayer.DataException
      */
     @Test
@@ -422,17 +456,18 @@ public class DataFacadeTest
     {
         Order order = df.getOrder(2);
         double salesprice = order.getSales_price();
-        
+
         assertTrue(order.getSales_price() != 10000.0);
         df.updateSalesPrice(order.getOrder_id(), 10000.0);
-        order = df.getOrder(2);        
-        assertTrue(order.getSales_price() == 10000.0);
-        
+        order = df.getOrder(2);
+        assertEquals(10000.0, order.getSales_price(), 0.01);
+
         df.updateSalesPrice(order.getOrder_id(), salesprice);
     }
 
     /**
      * Test of updateStatusAndPaid method, of class DataFacade.
+     *
      * @throws DataLayer.DataException
      */
     @Test
@@ -445,171 +480,180 @@ public class DataFacadeTest
         order = df.getOrder(1);
         assertTrue(order.getPaid() == Paid.BETALT);
         assertTrue(order.getStatus() == Status.BEHANDLES);
-        
+
         df.updateStatusAndPaid(order.getOrder_id(), Status.MODTAGET, Paid.IKKE_BETALT);
     }
+
     /**
      * Test of getEmployeeByEmail method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
      */
     @Test
     public void testGetEmployeeByEmail() throws DataException
     {
-        
+        String email = "hans@hotmail.dk";
+        User user = df.getEmployeeByEmail(email);
+        assertNotNull(user);
+        assertEquals(email, user.getEmail());
+        assertEquals("Hans", user.getName());
     }
 
-//    /**
-//     * Test of getEmployeesAndAdmins method, of class DataFacade.
-//     */
-//    @Test
-//    public void testGetEmployeesAndAdmins() throws Exception
-//    {
-//        System.out.println("getEmployeesAndAdmins");
-//        DataFacade instance = new DataFacade();
-//        List<User> expResult = null;
-//        List<User> result = instance.getEmployeesAndAdmins();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of updateUser method, of class DataFacade.
-//     */
-//    @Test
-//    public void testUpdateUser() throws Exception
-//    {
-//        System.out.println("updateUser");
-//        User user = null;
-//        DataFacade instance = new DataFacade();
-//        instance.updateUser(user);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of updatePassword method, of class DataFacade.
-//     */
-//    @Test
-//    public void testUpdatePassword() throws Exception
-//    {
-//        System.out.println("updatePassword");
-//        int user_id = 0;
-//        String password = "";
-//        DataFacade instance = new DataFacade();
-//        instance.updatePassword(user_id, password);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of updateMaterial method, of class DataFacade.
-//     */
-//    @Test
-//    public void testUpdateMaterial() throws Exception
-//    {
-//        System.out.println("updateMaterial");
-//        Material material = null;
-//        DataFacade instance = new DataFacade();
-//        instance.updateMaterial(material);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of addMaterial method, of class DataFacade.
-//     */
-//    @Test
-//    public void testAddMaterial() throws Exception
-//    {
-//        System.out.println("addMaterial");
-//        Material newMaterial = null;
-//        DataFacade instance = new DataFacade();
-//        instance.addMaterial(newMaterial);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of deleteMaterial method, of class DataFacade.
-//     */
-//    @Test
-//    public void testDeleteMaterial() throws Exception
-//    {
-//        System.out.println("deleteMaterial");
-//        Material material = null;
-//        DataFacade instance = new DataFacade();
-//        instance.deleteMaterial(material);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of updateCarport method, of class DataFacade.
-//     */
-//    @Test
-//    public void testUpdateCarport() throws Exception
-//    {
-//        System.out.println("updateCarport");
-//        Carport carport = null;
-//        DataFacade instance = new DataFacade();
-//        instance.updateCarport(carport);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of addRoofType method, of class DataFacade.
-//     */
-//    @Test
-//    public void testAddRoofType() throws Exception
-//    {
-//        System.out.println("addRoofType");
-//        RoofType rooftype = null;
-//        DataFacade instance = new DataFacade();
-//        instance.addRoofType(rooftype);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of deleteRoofType method, of class DataFacade.
-//     */
-//    @Test
-//    public void testDeleteRoofType() throws Exception
-//    {
-//        System.out.println("deleteRoofType");
-//        RoofType rooftype = null;
-//        DataFacade instance = new DataFacade();
-//        instance.deleteRoofType(rooftype);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of updateRoofType method, of class DataFacade.
-//     */
-//    @Test
-//    public void testUpdateRoofType() throws Exception
-//    {
-//        System.out.println("updateRoofType");
-//        RoofType rooftype = null;
-//        DataFacade instance = new DataFacade();
-//        instance.updateRoofType(rooftype);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of updateRoofTypeWith1Material method, of class DataFacade.
-//     */
-//    @Test
-//    public void testUpdateRoofTypeWith1Material() throws Exception
-//    {
-//        System.out.println("updateRoofTypeWith1Material");
-//        RoofType rooftype = null;
-//        DataFacade instance = new DataFacade();
-//        instance.updateRoofTypeWith1Material(rooftype);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    /**
+     * Test of getEmployeesAndAdmins method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testGetEmployeesAndAdmins() throws DataException
+    {
+        List<User> users = df.getEmployeesAndAdmins();
+
+        for (User user : users)
+        {
+            assertTrue(user.getRole() == Role.EMPLOYEE || user.getRole() == Role.ADMIN);
+        }
+    }
+
+    /**
+     * Test of updateUser method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testUpdateUser() throws DataException
+    {
+        User user = df.getUser(3);
+
+        assertEquals("hans@hotmail.dk", user.getEmail());
+        assertEquals("Hans", user.getName());
+
+        user.setName("Henrik");
+        user.setEmail("henrik@hotmail.dk");
+        df.updateUser(user);
+
+        assertEquals("henrik@hotmail.dk", user.getEmail());
+        assertEquals("Henrik", user.getName());
+
+        user.setName("Hans");
+        user.setEmail("hans@hotmail.dk");
+        df.updateUser(user);
+    }
+
+    /**
+     * Test of updatePassword method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testUpdatePassword() throws DataException
+    {
+        User user = df.getUser(1);
+        assertEquals("1234", user.getPassword());
+        df.updatePassword(1, "4321");
+
+        user = df.getUser(1);
+        assertEquals("4321", user.getPassword());
+
+        df.updatePassword(1, "1234");
+    }
+
+    /**
+     * Test of updateMaterial method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testUpdateMaterial() throws DataException
+    {
+        Material material = df.getMaterial(1);
+        assertEquals("25x150 mm trykimp. bræt", material.getName());
+        assertEquals(1, material.getId());
+        assertEquals(50.00, material.getPrice(), 0.01);
+
+        material.setPrice(25.00);
+        df.updateMaterial(material);
+
+        material = df.getMaterial(1);
+        assertEquals(25.00, material.getPrice(), 0.01);
+
+        material.setPrice(50.00);
+        df.updateMaterial(material);
+    }
+
+    /**
+     * Test of addRoofType and deleteRoofType method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testAddRoofTypeAndDeleteRoofType() throws DataException
+    {
+        List<RoofType> rooftypes = df.getRoofs();
+        RoofType roof = new RoofType("TestRoof", "slope", df.getMaterial(1), df.getMaterial(2));
+
+        assertTrue(roof.getId() == 0);
+        df.addRoofType(roof);
+        assertTrue(roof.getId() != 0);
+
+        //test deleteRoofType
+        List<RoofType> rooftypesAfter = df.getRoofs();
+        assertEquals(1 + rooftypes.size(), rooftypesAfter.size());
+        df.deleteRoofType(roof);
+        assertEquals(rooftypes.size(), df.getRoofs().size());
+    }
+
+    /**
+     * Test of updateRoofType method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testUpdateRoofType() throws DataException
+    {
+        RoofType rooftype = df.getRoof(2);
+        assertEquals("Betontagsten - rød", rooftype.getName());
+        assertEquals(39, rooftype.getM1().getId());
+        assertEquals(36, rooftype.getM2().getId());
+
+        rooftype.setName("test");
+        rooftype.setM1(df.getMaterial(1));
+        rooftype.setM2(df.getMaterial(2));
+        df.updateRoofType(rooftype);
+
+        rooftype = df.getRoof(2);
+        assertEquals("test", rooftype.getName());
+        assertEquals(1, rooftype.getM1().getId());
+        assertEquals(2, rooftype.getM2().getId());
+
+        rooftype.setName("Betontagsten - rød");
+        rooftype.setM1(df.getMaterial(39));
+        rooftype.setM2(df.getMaterial(36));
+        df.updateRoofType(rooftype);
+    }
+
+    /**
+     * Test of updateRoofTypeWith1Material method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testUpdateRoofTypeWith1Material() throws DataException
+    {
+        RoofType rooftype = df.getRoof(1);
+        assertEquals("Plasttrapezplader", rooftype.getName());
+        assertEquals(12, rooftype.getM1().getId());
+
+        rooftype.setName("test");
+        rooftype.setM1(df.getMaterial(2));
+        df.updateRoofTypeWith1Material(rooftype);
+
+        rooftype = df.getRoof(1);
+        assertEquals("test", rooftype.getName());
+        assertEquals(2, rooftype.getM1().getId());
+
+        rooftype.setName("Plasttrapezplader");
+        rooftype.setM1(df.getMaterial(12));
+        df.updateRoofTypeWith1Material(rooftype);
+    }
 }
