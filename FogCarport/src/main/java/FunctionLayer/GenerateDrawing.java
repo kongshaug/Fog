@@ -108,7 +108,7 @@ public class GenerateDrawing
      * drawes the sheed for a carport seen from the top and puts it inside the
      * svg drawing of the carport seen from the top
      *
-     * @param carport
+     * @param carport object
      * @return drawing of shed seen from top
      */
     public String drawShed(Carport carport)
