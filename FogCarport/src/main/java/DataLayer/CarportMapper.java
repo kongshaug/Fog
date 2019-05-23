@@ -304,7 +304,7 @@ public class CarportMapper
     /**
      * removes a roof from a carport in the database
      *
-     * @param roof
+     * @param roof object
      * @throws DataException
      */
     public void removeRoof(Roof roof) throws DataException
