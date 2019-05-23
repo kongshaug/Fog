@@ -781,9 +781,9 @@ public class FunctionManager
     }
 
     /**
-     *
-     * @param newMaterial
-     * @return
+     * adds a material in the database
+     * @param newMaterial Material
+     * @return status for update, if wrong informations is added String contains mistake
      * @throws DataException
      */
     public String addMaterial(Material newMaterial) throws DataException
@@ -826,8 +826,9 @@ public class FunctionManager
     }
 
     /**
-     *
-     * @return @throws DataException
+     * gets all the materials from the database 
+     * @return all materials in a list 
+     * @throws DataException
      */
     public List<Material> getAllMaterials() throws DataException
     {
@@ -835,9 +836,9 @@ public class FunctionManager
     }
 
     /**
-     *
-     * @param material_id
-     * @return
+     * Gets a material with the passed id
+     * @param material_id int
+     * @return material from database with same id as passed
      * @throws DataException
      */
     public Material getMaterial(int material_id) throws DataException
@@ -846,14 +847,14 @@ public class FunctionManager
     }
 
     /**
-     *
-     * @param carport
-     * @param carport_depth
-     * @param carport_width
-     * @param rooftype
-     * @param roofslope
-     * @param shed_width
-     * @param shed_depth
+     * updates the information on a carport in the database
+     * @param carport object
+     * @param carport_depth int
+     * @param carport_width int
+     * @param rooftype rooftype object
+     * @param roofslope int 
+     * @param shed_width int
+     * @param shed_depth int
      * @return status for update, if wrong information was entered the string
      * contains the mistake
      * @throws DataException
@@ -925,9 +926,9 @@ public class FunctionManager
     }
 
     /**
-     *
-     * @param rooftype
-     * @return status for update, if wrong information was entered the string
+     * Adds a rooftype in the database
+     * @param rooftype object
+     * @return Status for update, if wrong information was entered the string
      * contains the mistake
      * @throws DataException
      */
@@ -971,8 +972,8 @@ public class FunctionManager
     }
 
     /**
-     *
-     * @return status for update, if wrong information was entered the string
+     * Gets all the roofs from the database
+     * @return list of all roofs
      * contains the mistake
      * @throws DataException
      */
@@ -982,9 +983,10 @@ public class FunctionManager
     }
 
     /**
-     *
-     * @param rooftype
-     * @return
+     * deletes a rooftype from the database
+     * @param rooftype object
+     * @return Status for update, if wrong information was entered the string
+     * contains the mistake
      * @throws DataException
      */
     public String deleteRoofType(RoofType rooftype) throws DataException
@@ -1002,11 +1004,11 @@ public class FunctionManager
     }
 
     /**
-     *
-     * @param rooftype
-     * @param name
-     * @param m1
-     * @param m2
+     * updates a roof type in the database
+     * @param rooftype object
+     * @param name String
+     * @param m1 Material
+     * @param m2 Material
      * @return status for update, if wrong information was entered the string
      * contains the mistake
      * @throws DataException
@@ -1046,10 +1048,10 @@ public class FunctionManager
     }
 
     /**
-     *
-     * @param rooftype
-     * @param name
-     * @param m1
+     *  updates the information on a rooftype in the database
+     * @param rooftype rooftype object
+     * @param name String
+     * @param m1 Material
      * @return status for update, if wrong information was entered the string
      * contains the mistake
      * @throws DataException
