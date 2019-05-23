@@ -56,13 +56,13 @@ public class FrontController extends HttpServlet
             request.setAttribute("message", ce.getMessage());
             RequestDispatcher dispatcher = request.getRequestDispatcher("error.jsp");
             dispatcher.forward(request, response);
-            ld.run("could not find the command, you fucked up the presentaion layer, FIX IT!");
+            ld.run("could not find the command, the presentationlayer isn't working, please fix it!");
         } catch (IOException | ServletException | DataException e)
         {
             request.setAttribute("message", e.getMessage());
             RequestDispatcher dispatcher = request.getRequestDispatcher("error.jsp");
             dispatcher.forward(request, response);
-            ld.run(e.getMessage() + " you fucked up the system, FIX IT!");
+            ld.run(e.getMessage() + " it's not working, please fix it!");
         }
     }
 
