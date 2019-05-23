@@ -16,7 +16,11 @@ import FunctionLayer.HelpingClasses.Order;
 import FunctionLayer.HelpingClasses.RoofType;
 import FunctionLayer.HelpingClasses.Shed;
 import FunctionLayer.HelpingClasses.User;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -585,6 +589,7 @@ public class FunctionManager
 
     /**
      * Updates information about a customer in the database
+     *
      * @param user Object
      * @param email String
      * @param name String
@@ -593,9 +598,10 @@ public class FunctionManager
      * @param address String
      * @param zipcode int
      * @param phone int
-     * @return status for update, if wrong information was entered the string contains the mistake
+     * @return status for update, if wrong information was entered the string
+     * contains the mistake
      * @throws DataException
-     * @see DataLayer.DataFacade#updateUser(FunctionLayer.HelpingClasses.User) 
+     * @see DataLayer.DataFacade#updateUser(FunctionLayer.HelpingClasses.User)
      */
     public String updateCustomer(User user, String email, String name, String oldpassword, String newpassword, String address, String zipcode, String phone) throws DataException
     {
@@ -661,7 +667,8 @@ public class FunctionManager
      * @param user Object
      * @param oldpassword String
      * @param newpassword String
-     * @return Status for update, if wrong information was entered the string contains the mistake
+     * @return Status for update, if wrong information was entered the string
+     * contains the mistake
      * @throws DataException
      */
     public String updatePassword(User user, String oldpassword, String newpassword) throws DataException
@@ -755,7 +762,8 @@ public class FunctionManager
     /**
      *
      * @param material
-     * @return status for update, if wrong information was entered the string contains the mistake
+     * @return status for update, if wrong information was entered the string
+     * contains the mistake
      * @throws DataException
      */
     public String deleteMaterial(Material material) throws DataException
@@ -846,7 +854,8 @@ public class FunctionManager
      * @param roofslope
      * @param shed_width
      * @param shed_depth
-     * @return status for update, if wrong information was entered the string contains the mistake
+     * @return status for update, if wrong information was entered the string
+     * contains the mistake
      * @throws DataException
      */
     public String updateCarport(Carport carport, int carport_depth, int carport_width, RoofType rooftype, int roofslope, int shed_width, int shed_depth) throws DataException
@@ -918,7 +927,8 @@ public class FunctionManager
     /**
      *
      * @param rooftype
-     * @return status for update, if wrong information was entered the string contains the mistake
+     * @return status for update, if wrong information was entered the string
+     * contains the mistake
      * @throws DataException
      */
     public String addRoofType(RoofType rooftype) throws DataException
@@ -962,7 +972,8 @@ public class FunctionManager
 
     /**
      *
-     * @return status for update, if wrong information was entered the string contains the mistake
+     * @return status for update, if wrong information was entered the string
+     * contains the mistake
      * @throws DataException
      */
     public List<RoofType> getRoofs() throws DataException
@@ -996,7 +1007,8 @@ public class FunctionManager
      * @param name
      * @param m1
      * @param m2
-     * @return status for update, if wrong information was entered the string contains the mistake
+     * @return status for update, if wrong information was entered the string
+     * contains the mistake
      * @throws DataException
      */
     public String updateRoofType(RoofType rooftype, String name, Material m1, Material m2) throws DataException
@@ -1038,7 +1050,8 @@ public class FunctionManager
      * @param rooftype
      * @param name
      * @param m1
-     * @return status for update, if wrong information was entered the string contains the mistake
+     * @return status for update, if wrong information was entered the string
+     * contains the mistake
      * @throws DataException
      */
     public String updateRoofTypeWith1Material(RoofType rooftype, String name, Material m1) throws DataException
@@ -1067,7 +1080,24 @@ public class FunctionManager
         return res;
     }
 
-    public void removeOrder(Order order) throws DataException
+    public void GDPRCheck(List<Order> orders) throws ParseException, DataException
+    {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date today = new Date();
+
+        for (Order order : orders)
+        {
+            Date date = dateFormatter.parse(order.getOrder_date());
+            long days = ChronoUnit.DAYS.between(date.toInstant(), today.toInstant());
+
+            if (days > 1095)
+            {
+                removeOrder(order);
+            }
+        }
+    }
+
+    private void removeOrder(Order order) throws DataException
     {
         db.removeOrder(order);
         db.removeCarport(order.getCarport());

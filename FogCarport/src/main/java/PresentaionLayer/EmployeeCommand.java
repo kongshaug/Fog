@@ -38,23 +38,14 @@ public class EmployeeCommand implements Command
     {
         HttpSession session = request.getSession();
         String search = request.getParameter("search");
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date today = new Date();
+        
         
         if (search == null || search.isEmpty())
         {
             try
             {
                 List<Order> orders = manager.getOrders();
-                for (Order order : orders)
-                {
-                    Date date = dateFormatter.parse(order.getOrder_date());
-                    long days = ChronoUnit.DAYS.between(date.toInstant(), today.toInstant());
-                        
-                    System.out.println(today);
-                    System.out.println(date);
-                }
-
+                manager.GDPRCheck(orders);
                 session.setAttribute("orders", orders);
 
             } catch (ParseException ex)
