@@ -606,8 +606,8 @@ public class CarportMapper
     }
 
     /**
-     *
-     * @param order
+     * places an order in the database
+     * @param order object 
      * @throws DataException
      */
     public void placeOrder(Order order) throws DataException

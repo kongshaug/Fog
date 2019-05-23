@@ -10,3 +10,9 @@
 2019-05-14T18:54:38.525+02:00 OFF     Only this message will be logged
 2019-05-14T18:54:38.527+02:00 SEVERE  This is the program working to be logged
 2019-05-14T18:54:38.528+02:00 WARNING Message to be logged
+2019-05-23T13:06:30.953+02:00 OFF     Only this message will be logged
+2019-05-23T13:06:30.954+02:00 OFF     Only this message will be logged
+2019-05-23T13:06:30.958+02:00 SEVERE  This is the ResultSet is from UPDATE. No Data. it's not working, please fix it! to be logged
+2019-05-23T13:06:30.957+02:00 SEVERE  This is the No operations allowed after statement closed. it's not working, please fix it! to be logged
+2019-05-23T13:06:30.959+02:00 WARNING Message to be logged
+2019-05-23T13:06:30.973+02:00 WARNING Message to be logged

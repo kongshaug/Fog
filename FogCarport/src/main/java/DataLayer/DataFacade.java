@@ -339,9 +339,10 @@ public class DataFacade
     }
 
     /**
-     *
-     * @return
+     * gets all the employees and admins from the database
+     * @return list of all the employees and admins
      * @throws DataException
+     *  @see DataLayer.UserMapper#getEmployeesAndAdmins() 
      */
     public List<User> getEmployeesAndAdmins() throws DataException
     {
@@ -349,9 +350,10 @@ public class DataFacade
     }
 
     /**
-     *
-     * @param user
+     * updates the information about a user in the database
+     * @param user object
      * @throws DataException
+     *  @see DataLayer.UserMapper#updateUser(FunctionLayer.HelpingClasses.User) 
      */
     public void updateUser(User user) throws DataException
     {
@@ -359,10 +361,11 @@ public class DataFacade
     }
 
     /**
-     *
-     * @param user_id
-     * @param password
+     * updates the password of a user assosiated with the id passed
+     * @param user_id int   
+     * @param password String
      * @throws DataException
+     *  @see DataLayer.UserMapper#updatePassword(int, java.lang.String) 
      */
     public void updatePassword(int user_id, String password) throws DataException
     {
@@ -370,9 +373,10 @@ public class DataFacade
     }
 
     /**
-     *
-     * @param material
+     * updates information on the material passed in the database
+     * @param material object
      * @throws DataException
+     *  @see DataLayer.MaterialMapper#updateMaterial(FunctionLayer.HelpingClasses.Material) 
      */
     public void updateMaterial(Material material) throws DataException
     {
@@ -380,9 +384,10 @@ public class DataFacade
     }
 
     /**
-     *
+     * adds a new material in the database
      * @param newMaterial
      * @throws DataException
+     *  @see DataLayer.MaterialMapper#addMaterial(FunctionLayer.HelpingClasses.Material) 
      */
     public void addMaterial(Material newMaterial) throws DataException
     {
@@ -390,9 +395,10 @@ public class DataFacade
     }
 
     /**
-     *
-     * @param material
+     * Removes a material from the database
+     * @param material object
      * @throws DataException
+     *  @see DataLayer.MaterialMapper#deleteMaterial(FunctionLayer.HelpingClasses.Material) 
      */
     public void deleteMaterial(Material material) throws DataException
     {
@@ -400,35 +406,27 @@ public class DataFacade
     }
 
     /**
-     *
-     * @param carport
+     * updates information on a carport in the database
+     * also updates information on the roof and shead associated with the carport
+     * @param carport object
      * @throws DataException
+     *  @see DataLayer.CarportMapper#updateCarport(FunctionLayer.HelpingClasses.Carport) 
      */
     public void updateCarport(Carport carport) throws DataException
     {
-        if (carport.getShed() != null)
+        cm.updateCarport(carport);
+        cm.updateRoof(carport.getRoof());
+        if (carport.getShed() != null && carport.getShed().getId() != 0)
         {
-            if (carport.getShed().getId() == 0)
-            {
-                cm.updateCarport(carport);
-                cm.updateRoof(carport.getRoof());
-            } else
-            {
-                cm.updateCarport(carport);
-                cm.updateRoof(carport.getRoof());
-                cm.updateShed(carport.getShed());
-            }
-        } else
-        {
-            cm.updateCarport(carport);
-            cm.updateRoof(carport.getRoof());
-        }
+              cm.updateShed(carport.getShed());
+        } 
     }
 
     /**
-     *
-     * @param rooftype
+     * adds a new roof type in the database
+     * @param rooftype Object
      * @throws DataException
+     * @see DataLayer.MaterialMapper#addRoofType(FunctionLayer.HelpingClasses.RoofType) 
      */
     public void addRoofType(RoofType rooftype) throws DataException
     {
@@ -436,9 +434,10 @@ public class DataFacade
     }
 
     /**
-     *
-     * @param rooftype
+     * deletes a roof type in the database
+     * @param rooftype Object
      * @throws DataException
+     * @see DataLayer.MaterialMapper#deleteRooftype(FunctionLayer.HelpingClasses.RoofType) 
      */
     public void deleteRoofType(RoofType rooftype) throws DataException
     {
@@ -446,9 +445,10 @@ public class DataFacade
     }
 
     /**
-     *
-     * @param rooftype
+     *Updates information on a roof rype in the database
+     * @param rooftype Object
      * @throws DataException
+     * @see DataLayer.MaterialMapper#updateRoofType(FunctionLayer.HelpingClasses.RoofType) 
      */
     public void updateRoofType(RoofType rooftype) throws DataException
     {
@@ -456,9 +456,10 @@ public class DataFacade
     }
 
     /**
-     *
-     * @param rooftype
+     *updates information on a roof type that has materials associated with it
+     * @param rooftype object
      * @throws DataException
+     * @see DataLayer.MaterialMapper#updateRoofTypeWith1Material(FunctionLayer.HelpingClasses.RoofType) 
      */
     public void updateRoofTypeWith1Material(RoofType rooftype) throws DataException
     {
