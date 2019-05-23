@@ -11,6 +11,13 @@ package FunctionLayer;
  */
 public class CalculatePackages
 {
+
+    /**
+     * Calculates the number of packages of screws needed.
+     * 
+     * @param amount int
+     * @return Number of packages needed
+     */
     public Integer calcPackage100(int amount)
     {
         int packages = amount / 100;
@@ -21,6 +28,11 @@ public class CalculatePackages
         return packages;
     }
 
+    /**
+     *  Calculates the number of packages of screws needed.
+     * @param amount int
+     * @return Number of packages needed
+     */
     public Integer calcPackage200(int amount)
     {
         int packages = amount / 200;
@@ -31,6 +43,11 @@ public class CalculatePackages
         return packages;
     }
 
+    /**
+     * Calculates the number of packages of screws needed.
+     * @param amount int
+     * @return Number of packages needed
+     */
     public Integer calcPackage250(int amount)
     {
         int packages = amount / 250;
@@ -41,6 +58,11 @@ public class CalculatePackages
         return packages;
     }
 
+    /**
+     * Calculates the number of packages of screws needed.
+     * @param amount int
+     * @return Number of packages needed
+     */
     public Integer calcPackage300(int amount)
     {
         int packages = amount / 300;
@@ -51,6 +73,11 @@ public class CalculatePackages
         return packages;
     }
 
+    /**
+     * Calculates the number of packages of screws needed.
+     * @param amount int
+     * @return Number of packages needed
+     */
     public Integer calcPackage350(int amount)
     {
         int packages = amount / 350;
@@ -61,6 +88,11 @@ public class CalculatePackages
         return packages;
     }
 
+    /**
+     * Calculates the number of packages of screws needed.
+     * @param amount int
+     * @return Number of packages needed
+     */
     public Integer calcPackage400(int amount)
     {
         int packages = amount / 400;
