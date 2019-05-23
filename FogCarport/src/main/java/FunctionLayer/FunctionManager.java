@@ -264,6 +264,26 @@ public class FunctionManager
             c.calculateRem(carport, rem);
         }
     }
+    
+    
+    /**
+     * Calculates the materials needed to build the roofe and puts them in a
+     * list on the roof object
+     *
+     * @param carport object
+     * @throws DataException
+     * 
+     */
+    public void calcRoof(Carport carport) throws DataException
+    {
+        if (carport.getRoof().getType().getRoof_class().equals("flat"))
+        {
+            calcFlatroof(carport);
+        } else
+        {
+            calcSlopeRoof(carport);
+        }
+    }
 
     private void calcFlatroof(Carport carport) throws DataException
     {
@@ -417,25 +437,6 @@ public class FunctionManager
     public RoofType getRoofTypeById(int typeId) throws DataException
     {
         return db.getRoof(typeId);
-    }
-
-    /**
-     * Calculates the materials needed to build the roofe and puts them in a
-     * list on the roof object
-     *
-     * @param carport object
-     * @throws DataException
-     * 
-     */
-    public void calcRoof(Carport carport) throws DataException
-    {
-        if (carport.getRoof().getType().getRoof_class().equals("flat"))
-        {
-            calcFlatroof(carport);
-        } else
-        {
-            calcSlopeRoof(carport);
-        }
     }
 
     /**
@@ -1111,7 +1112,7 @@ public class FunctionManager
         }
     }
 
-    private void removeOrder(Order order) throws DataException
+    public void removeOrder(Order order) throws DataException
     {
         db.removeOrder(order);
         db.removeCarport(order.getCarport());

@@ -30,7 +30,7 @@ public class Calculate
         int depth = carport.getDepth();
 
         ArrayList<Part> parts = carport.getParts();
-        //a pole is placed for each 2.5 meter on the right and left side of the carport
+        //a pole is placed for each 2 meter on the right and left side of the carport
         int numberOfPoles = (depth / 200 * 2) + 2;
         int boltParts = numberOfPoles * 4;
 

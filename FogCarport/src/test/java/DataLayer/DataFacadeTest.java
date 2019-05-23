@@ -15,6 +15,8 @@ import FunctionLayer.HelpingClasses.Roof;
 import FunctionLayer.HelpingClasses.RoofType;
 import FunctionLayer.HelpingClasses.Shed;
 import FunctionLayer.HelpingClasses.User;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -263,9 +265,10 @@ public class DataFacadeTest
     @Test
     public void testOrderCarportAndPlaceOrderAndOrderShipped() throws DataException
     {
-        RoofType rooftype = df.getRoof(1);
-
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        
         //test orderCarport with roof and without shed
+        RoofType rooftype = df.getRoof(1);
         Roof roof = new Roof(0, rooftype);
         Carport carport = new Carport(300, 400, roof);
 
@@ -316,7 +319,8 @@ public class DataFacadeTest
         //test orderShipped
         assertEquals("Ordren er endnu ikke afsendt", order.getShipped());
         df.orderShipped(order.getOrder_id());
-        assertNotEquals("Ordren er endnu ikke afsendt", df.getOrder(order.getOrder_id()).getShipped());
+        Date today = new Date();
+        assertEquals(dateFormatter.format(today), df.getOrder(order.getOrder_id()).getShipped());
 
         //test removeOrder, test removeCarport, test removeRoof and test removeShed
         df.removeOrder(order);
