@@ -31,18 +31,18 @@ public class CalculateShed
      * Calculates what materials needed to bouild the shead for a carport and
      * puts it in the list of materials for the shed
      *
-     * @param carport
-     * @param stolpe
-     * @param bræt
-     * @param vinkelbeslag
-     * @param skruer
-     * @param beklædning
-     * @param skrue1
-     * @param skrue2
-     * @param Lægte
-     * @param stalddørsgrebene
-     * @param hængselet
-     * @param planker
+     * @param carport Objecy
+     * @param stolpe Material
+     * @param bræt Material
+     * @param vinkelbeslag Material
+     * @param skruer Material
+     * @param beklædning Material
+     * @param skrue1 Material
+     * @param skrue2 Material 
+     * @param Lægte Material
+     * @param stalddørsgrebene Material
+     * @param hængselet Material
+     * @param planker Material  
      */
     public void calcShedFlatRoof(Carport carport, Material stolpe, Material bræt, Material vinkelbeslag, Material skruer, Material beklædning, Material skrue1, Material skrue2, Material Lægte, Material stalddørsgrebene, Material hængselet, Material planker)
     {
@@ -105,18 +105,18 @@ public class CalculateShed
      * calculates the materials needed to make a shed when the roof of the
      * carport is sloaped
      *
-     * @param carport
-     * @param stolpe
-     * @param bræt
-     * @param vinkelbeslag
-     * @param skruer
-     * @param beklædning
-     * @param skrue1
-     * @param skrue2
-     * @param Lægte
-     * @param stalddørsgrebene
-     * @param hængselet
-     * @param planker
+     * @param carport Object 
+     * @param stolpe Material
+     * @param bræt Material
+     * @param vinkelbeslag Material
+     * @param skruer Material
+     * @param beklædning Material
+     * @param skrue1 Material
+     * @param skrue2 Material 
+     * @param Lægte Material
+     * @param stalddørsgrebene Material
+     * @param hængselet Material
+     * @param planker Material
      */
     public void calcShedSlopeRoof(Carport carport, Material stolpe, Material bræt, Material vinkelbeslag, Material skruer, Material beklædning, Material skrue1, Material skrue2, Material Lægte, Material stalddørsgrebene, Material hængselet, Material planker)
     {

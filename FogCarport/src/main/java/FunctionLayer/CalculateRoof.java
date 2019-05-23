@@ -29,20 +29,20 @@ public class CalculateRoof
     }
 
     /**
-     * calculates all the materials needed to make a flat roof and puts it in
+     * Calculates all the materials needed to make a flat roof and puts it in
      * the list of materials in the carport object
      *
-     * @param carport
-     * @param spær
-     * @param beslagV
-     * @param beslagH
-     * @param BeslagSkruer
-     * @param lægte
-     * @param RoofScrews
-     * @param understern
-     * @param overstern
-     * @param vandbræt
-     * @param skruer
+     * @param carport Object
+     * @param spær Material
+     * @param beslagV Material
+     * @param beslagH Material
+     * @param BeslagSkruer Material
+     * @param lægte Material
+     * @param RoofScrews Material
+     * @param understern Material
+     * @param overstern Material
+     * @param vandbræt Material
+     * @param skruer Material 
      */
     public void calculateFlatRoof(Carport carport, Material spær, Material beslagV, Material beslagH, Material BeslagSkruer,
             Material lægte, Material RoofScrews, Material understern, Material overstern, Material vandbræt, Material skruer)
@@ -170,28 +170,28 @@ public class CalculateRoof
     }
 
     /**
-     * if the roof is sloped this method calculates all the materials needed to
+     * If the roof is sloped this method calculates all the materials needed to
      * make the roof and puts it in the list of materials needed in the roof
      * object
      *
-     * @param carport
-     * @param spær
-     * @param taglægte
-     * @param spærBeslag
-     * @param BeslagSkruer
-     * @param screws
-     * @param universalV
-     * @param universalH
-     * @param ToplægteHolderen
-     * @param Tegl
-     * @param Rygsten
-     * @param RygstensBeslag
-     * @param Beklædning
-     * @param vandBræt
-     * @param trykImpBræt
-     * @param sternScrews
-     * @param Skrue1
-     * @param Skrue2
+     * @param carport Object
+     * @param spær Material
+     * @param taglægte Material
+     * @param spærBeslag Material
+     * @param BeslagSkruer Material
+     * @param screws Material
+     * @param universalV Material
+     * @param universalH Material
+     * @param ToplægteHolderen Material
+     * @param Tegl Material
+     * @param Rygsten Material
+     * @param RygstensBeslag Material
+     * @param Beklædning Material
+     * @param vandBræt Material
+     * @param trykImpBræt Material
+     * @param sternScrews Material
+     * @param Skrue1 Material
+     * @param Skrue2 Material
      */
     public void calculateSlopeRoof(Carport carport, Material spær, Material taglægte, Material spærBeslag, Material BeslagSkruer, Material screws, Material universalV, Material universalH,
             Material ToplægteHolderen, Material Tegl, Material Rygsten, Material RygstensBeslag, Material Beklædning, Material vandBræt, Material trykImpBræt, Material sternScrews, Material Skrue1, Material Skrue2)
