@@ -412,6 +412,7 @@ public class FunctionManager
      * @param typeId int
      * @return a roof with the id passed
      * @throws DataException
+     * @see DataLayer.DataFacade#getRoof(int) 
      */
     public RoofType getRoofTypeById(int typeId) throws DataException
     {
@@ -424,6 +425,7 @@ public class FunctionManager
      *
      * @param carport object
      * @throws DataException
+     * 
      */
     public void calcRoof(Carport carport) throws DataException
     {
@@ -670,6 +672,7 @@ public class FunctionManager
      * @return Status for update, if wrong information was entered the string
      * contains the mistake
      * @throws DataException
+     * @see DataLayer.DataFacade#updatePassword(int, java.lang.String) 
      */
     public String updatePassword(User user, String oldpassword, String newpassword) throws DataException
     {
@@ -714,6 +717,7 @@ public class FunctionManager
      * @param price
      * @return
      * @throws DataException
+     * @see DataLayer.DataFacade#updateMaterial(FunctionLayer.HelpingClasses.Material) 
      */
     public String updateMaterial(Material material, String material_name, String unit, String material_class, double price) throws DataException
     {
@@ -765,6 +769,7 @@ public class FunctionManager
      * @return status for update, if wrong information was entered the string
      * contains the mistake
      * @throws DataException
+     * @see DataLayer.DataFacade#deleteMaterial(FunctionLayer.HelpingClasses.Material) 
      */
     public String deleteMaterial(Material material) throws DataException
     {
@@ -785,6 +790,7 @@ public class FunctionManager
      * @param newMaterial Material
      * @return status for update, if wrong informations is added String contains mistake
      * @throws DataException
+     * @see DataLayer.DataFacade#addMaterial(FunctionLayer.HelpingClasses.Material) 
      */
     public String addMaterial(Material newMaterial) throws DataException
     {
@@ -858,6 +864,7 @@ public class FunctionManager
      * @return status for update, if wrong information was entered the string
      * contains the mistake
      * @throws DataException
+     * @see DataLayer.DataFacade#updateCarport(FunctionLayer.HelpingClasses.Carport) 
      */
     public String updateCarport(Carport carport, int carport_depth, int carport_width, RoofType rooftype, int roofslope, int shed_width, int shed_depth) throws DataException
     {
@@ -931,6 +938,7 @@ public class FunctionManager
      * @return Status for update, if wrong information was entered the string
      * contains the mistake
      * @throws DataException
+     * @see DataLayer.DataFacade#addRoofType(FunctionLayer.HelpingClasses.RoofType) 
      */
     public String addRoofType(RoofType rooftype) throws DataException
     {
@@ -976,6 +984,7 @@ public class FunctionManager
      * @return list of all roofs
      * contains the mistake
      * @throws DataException
+     * @see DataLayer.DataFacade#getRoofs() 
      */
     public List<RoofType> getRoofs() throws DataException
     {
@@ -988,6 +997,7 @@ public class FunctionManager
      * @return Status for update, if wrong information was entered the string
      * contains the mistake
      * @throws DataException
+     * @see DataLayer.DataFacade#deleteRoofType(FunctionLayer.HelpingClasses.RoofType) 
      */
     public String deleteRoofType(RoofType rooftype) throws DataException
     {
@@ -1012,6 +1022,7 @@ public class FunctionManager
      * @return status for update, if wrong information was entered the string
      * contains the mistake
      * @throws DataException
+     * @see DataLayer.DataFacade#updateRoofType(FunctionLayer.HelpingClasses.RoofType) 
      */
     public String updateRoofType(RoofType rooftype, String name, Material m1, Material m2) throws DataException
     {
@@ -1055,6 +1066,7 @@ public class FunctionManager
      * @return status for update, if wrong information was entered the string
      * contains the mistake
      * @throws DataException
+     * @see DataLayer.DataFacade#updateRoofTypeWith1Material(FunctionLayer.HelpingClasses.RoofType) 
      */
     public String updateRoofTypeWith1Material(RoofType rooftype, String name, Material m1) throws DataException
     {
