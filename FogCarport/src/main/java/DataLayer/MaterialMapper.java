@@ -32,9 +32,9 @@ public class MaterialMapper
     }
 
     /**
-     *
-     * @param material_name
-     * @return
+     * 
+     * @param material_name String
+     * @return return a material from the database with the name passed
      * @throws DataException
      */
     public Material getMaterial(String material_name) throws DataException
@@ -73,8 +73,8 @@ public class MaterialMapper
 
     /**
      *
-     * @param material_id
-     * @return
+     * @param material_id int
+     * @return a material from the database with the id passed 
      * @throws DataException
      */
     public Material getMaterial(int material_id) throws DataException
@@ -146,7 +146,7 @@ public class MaterialMapper
 
     /**
      *
-     * @return
+     * @return a list of all the mateirals from the database
      * @throws DataException
      */
     public List<Material> getMaterials() throws DataException
@@ -182,8 +182,8 @@ public class MaterialMapper
     }
 
     /**
-     *
-     * @param newMaterial
+     * Adds the passed material in the database
+     * @param newMaterial object
      * @throws DataException
      */
     public void addMaterial(Material newMaterial) throws DataException
@@ -225,8 +225,8 @@ public class MaterialMapper
     }
 
     /**
-     *
-     * @param material
+     * deletes a material from the database
+     * @param material object
      * @throws DataException
      */
     public void deleteMaterial(Material material) throws DataException
@@ -253,8 +253,8 @@ public class MaterialMapper
     }
 
     /**
-     *
-     * @param material
+     * updates information on a material in the database
+     * @param material object
      * @throws DataException
      */
     public void updateMaterial(Material material) throws DataException
@@ -291,8 +291,8 @@ public class MaterialMapper
     }
 
     /**
-     *
-     * @param rooftype
+     * updates information on a roof type in the database
+     * @param rooftype object
      * @throws DataException
      */
     public void updateRoofType(RoofType rooftype) throws DataException
@@ -327,8 +327,8 @@ public class MaterialMapper
     }
 
     /**
-     *
-     * @param rooftype
+     * updates the information on a material with one material asosiated with it in the database
+     * @param rooftype object
      * @throws DataException
      */
     public void updateRoofTypeWith1Material(RoofType rooftype) throws DataException
@@ -361,8 +361,8 @@ public class MaterialMapper
     }
 
     /**
-     *
-     * @param rooftype
+     * Deletes a roof type in the database
+     * @param rooftype object
      * @throws DataException
      */
     public void deleteRooftype(RoofType rooftype) throws DataException
@@ -390,7 +390,7 @@ public class MaterialMapper
 
     /**
      *
-     * @return
+     * @return a list of all the roofs in the database
      * @throws DataException
      */
     public List<RoofType> getRoofs() throws DataException
@@ -434,9 +434,9 @@ public class MaterialMapper
     }
 
     /**
-     *
-     * @param theId
-     * @return
+     * gets a roof from the database with the id passed
+     * @param theId int
+     * @return roof from database with passed id
      * @throws DataException
      */
     public RoofType getRoof(int theId) throws DataException
@@ -480,8 +480,8 @@ public class MaterialMapper
     }
 
     /**
-     *
-     * @param rooftype
+     * adds a roof type in the database
+     * @param rooftype object
      * @throws DataException
      */
     public void addRoofType(RoofType rooftype) throws DataException
