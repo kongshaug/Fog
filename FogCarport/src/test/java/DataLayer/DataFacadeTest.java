@@ -232,7 +232,7 @@ public class DataFacadeTest
      * @throws DataLayer.DataException
      */
     @Test
-    public void testOrderCarportAndPlaceOrder() throws DataException
+    public void testOrderCarportAndPlaceOrderAndOrderShipped() throws DataException
     {
         RoofType rooftype = df.getRoof(1);
 
@@ -283,6 +283,11 @@ public class DataFacadeTest
 
         assertTrue(order1.getOrder_id() != 0);
         assertNotNull(order1.getOrder_date());
+        
+        //test orderShipped
+        assertEquals("Ordren er endnu ikke afsendt", order.getShipped());
+        df.orderShipped(order.getOrder_id());
+        assertNotEquals("Ordren er endnu ikke afsendt", df.getOrder(order.getOrder_id()).getShipped());
 
         //test removeOrder, test removeCarport
         df.removeOrder(order);
@@ -331,12 +336,13 @@ public class DataFacadeTest
         assertTrue(order.getCarport().getShed().getId() != 0);
         assertEquals(244, Result.getCarport().getShed().getWidth());
 
-        //changing everything back to the original order information 
+        //test deleteShedId and removeShed
         df.deleteShedId(order.getCarport());
         df.removeShed(order.getCarport().getShed());
         order.getCarport().setShed(null);
         assertNull(df.getOrder(order.getOrder_id()).getCarport().getShed());
 
+        //changing attributes back to original
         assertTrue(order.getCarport().getWidth() != width);
         assertTrue(order.getCarport().getRoof().getType() != rooftype);
         
@@ -349,13 +355,22 @@ public class DataFacadeTest
         df.updateCarport(order.getCarport());
     }
 
+    @Test
+    public void testGetOrder() throws DataException
+    {
+        Order order = df.getOrder(1);
+        assertNotNull(order);
+        assertEquals(2, order.getUser().getId());
+        assertEquals(Status.MODTAGET, order.getStatus());
+    }
+    
     /**
      * Test of getAllOrders method, of class DataFacade.
      *
      * @throws DataLayer.DataException
      */
     @Test
-    public void testGetAllOrders() throws DataException
+    public void testGetOrders() throws DataException
     {
         List<Order> orders = df.getOrders();
         assertNotNull(orders);
@@ -368,7 +383,7 @@ public class DataFacadeTest
      * @throws DataLayer.DataException
      */
     @Test
-    public void testGetAllOrdersByEmail_String() throws DataException
+    public void testGetOrdersByEmail_String() throws DataException
     {
         String email = "hans@hotmail.dk";
         List<Order> orders = df.getOrdersByEmail(email);
@@ -394,195 +409,54 @@ public class DataFacadeTest
         List MaterialListAfter = df.getMaterials();
         assertEquals(1 + MaterialList.size(), MaterialListAfter.size());
         df.deleteMaterial(material);
-        assertEquals(MaterialList.size(), df.getMaterials());
+        assertEquals(MaterialList.size(), df.getMaterials().size());
     }
 
-//    /**
-//     * Test of removeUser method, of class DataFacade.
-//     */
-//    @Test
-//    public void testRemoveUser() throws Exception
-//    {
-//        System.out.println("removeUser");
-//        User user = null;
-//        DataFacade instance = new DataFacade();
-//        instance.removeUser(user);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+
     /**
-     * Test of getOrder method, of class DataFacade.
-     *
+     * Test of updateSalesPrice method, of class DataFacade.
      * @throws DataLayer.DataException
      */
     @Test
-    public void testGetOrderAndOrderShipped() throws DataException
+    public void testUpdateSalesPrice() throws DataException
     {
-//        Order order = df.getOrder(testOrder.getOrder_id());
-//        assertEquals(1, order.getUser().getId());
-//        assertEquals(Status.MODTAGET, order.getStatus());
-//        assertEquals("Ordren er endnu ikke afsendt", order.getShipped());
-//
-//        df.orderShipped(1);
-//
-//        assertNotEquals("Ordren er endnu ikke afsendt", order.getShipped());
-//
-//        test removeOrder, test removeCarport
-//        df.removeOrder(testOrder);
-//        df.removeCarport(testOrder.getCarport());
-//        df.removeRoof(testOrder.getCarport().getRoof());
-//        assertNull(df.getOrder(testOrder.getOrder_id()));
-
+        Order order = df.getOrder(2);
+        double salesprice = order.getSales_price();
+        
+        assertTrue(order.getSales_price() != 10000.0);
+        df.updateSalesPrice(order.getOrder_id(), 10000.0);
+        order = df.getOrder(2);        
+        assertTrue(order.getSales_price() == 10000.0);
+        
+        df.updateSalesPrice(order.getOrder_id(), salesprice);
     }
 
-//    /**
-//     * Test of getOrders method, of class DataFacade.
-//     */
-//    @Test
-//    public void testGetOrders() throws Exception
-//    {
-//        System.out.println("getOrders");
-//        DataFacade instance = new DataFacade();
-//        List<Order> expResult = null;
-//        List<Order> result = instance.getOrders();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getOrdersByEmail method, of class DataFacade.
-//     */
-//    @Test
-//    public void testGetOrdersByEmail() throws Exception
-//    {
-//        System.out.println("getOrdersByEmail");
-//        String email = "";
-//        DataFacade instance = new DataFacade();
-//        List<Order> expResult = null;
-//        List<Order> result = instance.getOrdersByEmail(email);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of updateSalesPrice method, of class DataFacade.
-//     */
-//    @Test
-//    public void testUpdateSalesPrice() throws Exception
-//    {
-//        System.out.println("updateSalesPrice");
-//        int order_id = 0;
-//        double salesprice = 0.0;
-//        DataFacade instance = new DataFacade();
-//        instance.updateSalesPrice(order_id, salesprice);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of updateStatusAndPaid method, of class DataFacade.
-//     */
-//    @Test
-//    public void testUpdateStatusAndPaid() throws Exception
-//    {
-//        System.out.println("updateStatusAndPaid");
-//        int order_id = 0;
-//        Status status = null;
-//        Paid paid = null;
-//        DataFacade instance = new DataFacade();
-//        instance.updateStatusAndPaid(order_id, status, paid);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of removeOrder method, of class DataFacade.
-//     */
-//    @Test
-//    public void testRemoveOrder() throws Exception
-//    {
-//        System.out.println("removeOrder");
-//        Order order = null;
-//        DataFacade instance = new DataFacade();
-//        instance.removeOrder(order);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of removeCarport method, of class DataFacade.
-//     */
-//    @Test
-//    public void testRemoveCarport() throws Exception
-//    {
-//        System.out.println("removeCarport");
-//        Carport carport = null;
-//        DataFacade instance = new DataFacade();
-//        instance.removeCarport(carport);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of removeShed method, of class DataFacade.
-//     */
-//    @Test
-//    public void testRemoveShed() throws Exception
-//    {
-//        System.out.println("removeShed");
-//        Shed shed = null;
-//        DataFacade instance = new DataFacade();
-//        instance.removeShed(shed);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of removeRoof method, of class DataFacade.
-//     */
-//    @Test
-//    public void testRemoveRoof() throws Exception
-//    {
-//        System.out.println("removeRoof");
-//        Roof roof = null;
-//        DataFacade instance = new DataFacade();
-//        instance.removeRoof(roof);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of deleteShedId method, of class DataFacade.
-//     */
-//    @Test
-//    public void testDeleteShedId() throws Exception
-//    {
-//        System.out.println("deleteShedId");
-//        Carport carport = null;
-//        DataFacade instance = new DataFacade();
-//        instance.deleteShedId(carport);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getEmployeeByEmail method, of class DataFacade.
-//     */
-//    @Test
-//    public void testGetEmployeeByEmail() throws Exception
-//    {
-//        System.out.println("getEmployeeByEmail");
-//        String email = "";
-//        DataFacade instance = new DataFacade();
-//        User expResult = null;
-//        User result = instance.getEmployeeByEmail(email);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
+    /**
+     * Test of updateStatusAndPaid method, of class DataFacade.
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testUpdateStatusAndPaid() throws DataException
+    {
+        Order order = df.getOrder(1);
+        assertTrue(order.getPaid() == Paid.IKKE_BETALT);
+        assertTrue(order.getStatus() == Status.MODTAGET);
+        df.updateStatusAndPaid(order.getOrder_id(), Status.BEHANDLES, Paid.BETALT);
+        order = df.getOrder(1);
+        assertTrue(order.getPaid() == Paid.BETALT);
+        assertTrue(order.getStatus() == Status.BEHANDLES);
+        
+        df.updateStatusAndPaid(order.getOrder_id(), Status.MODTAGET, Paid.IKKE_BETALT);
+    }
+    /**
+     * Test of getEmployeeByEmail method, of class DataFacade.
+     */
+    @Test
+    public void testGetEmployeeByEmail() throws DataException
+    {
+        
+    }
+
 //    /**
 //     * Test of getEmployeesAndAdmins method, of class DataFacade.
 //     */
