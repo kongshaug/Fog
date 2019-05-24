@@ -18,8 +18,8 @@ import FunctionLayer.HelpingClasses.Shed;
 import FunctionLayer.HelpingClasses.User;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -463,29 +463,38 @@ public class FunctionManager
     public void GDPRCheck(List<Order> orders) throws ParseException, DataException
     {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date today = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.YEAR, -3); 
+        Date date3YearsAgo = cal.getTime();
+        List<Order> oldOrders = new ArrayList<>();
 
         for (Order order : orders)
         {
             Date date = dateFormatter.parse(order.getOrder_date());
-            long days = ChronoUnit.DAYS.between(date.toInstant(), today.toInstant());
 
-            if (days > 1095)
+            if (date.before(date3YearsAgo))
             {
                 removeOrder(order);
+                oldOrders.add(order);
             }
+        }
+        
+        for (Order oldOrder : oldOrders)
+        {
+            orders.remove(oldOrder);
         }
     }
 
     public void removeOrder(Order order) throws DataException
     {
-        db.removeOrder(order);
-        db.removeCarport(order.getCarport());
-        db.removeRoof(order.getCarport().getRoof());
         if (order.getCarport().getShed() != null)
         {
             db.removeShed(order.getCarport());
         }
+        db.removeOrder(order);
+        db.removeCarport(order.getCarport());
+        db.removeRoof(order.getCarport().getRoof());
+        
     }
     
     /**
@@ -798,44 +807,6 @@ public class FunctionManager
         }
         return res;
     }
-
-    /**
-     * updates the information on a rooftype in the database
-     *
-     * @param rooftype rooftype object
-     * @param name String
-     * @param m1 Material
-     * @return status for update, if wrong information was entered the string
-     * contains the mistake
-     * @throws DataException
-     * @see
-     * DataLayer.DataFacade#updateRoofTypeWith1Material(FunctionLayer.HelpingClasses.RoofType)
-     */
-//    public String updateRoofTypeWith1Material(RoofType rooftype, String name, Material m1) throws DataException
-//    {
-//        String res = "";
-//
-//        for (RoofType r : db.getRoofs())
-//        {
-//            if (name.toLowerCase().equals(r.getName().toLowerCase()) && rooftype.getId() != r.getId())
-//            {
-//                res += "Tagtype med samme navn eksisterer allerede\n";
-//            }
-//        }
-//        if (m1 == rooftype.getM1())
-//        {
-//            res += "Materialet er allerede tilknyttet en anden tagtype\n";
-//        }
-//
-//        if (res.isEmpty())
-//        {
-//            rooftype.setName(name);
-//            rooftype.setM1(m1);
-//            db.updateRoofType(rooftype);
-//            res = "Tagtypen er opdateret";
-//        }
-//        return res;
-//    }
 
     /**
      * Gets a material with the passed id

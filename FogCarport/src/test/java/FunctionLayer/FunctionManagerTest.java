@@ -13,11 +13,12 @@ import FunctionLayer.Enum.Status;
 import FunctionLayer.HelpingClasses.Carport;
 import FunctionLayer.HelpingClasses.RoofType;
 import FunctionLayer.HelpingClasses.User;
-import FunctionLayer.HelpingClasses.Material;
 import FunctionLayer.HelpingClasses.Order;
 import FunctionLayer.HelpingClasses.Roof;
 import FunctionLayer.HelpingClasses.Shed;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import org.junit.After;
@@ -72,7 +73,6 @@ public class FunctionManagerTest
     {
         FunctionManager result = FunctionManager.getInstance();
         assertNotNull(result);
-
     }
 
     /**
@@ -191,8 +191,8 @@ public class FunctionManagerTest
         assertEquals(expResult, result);
 
     }
-    
-     /**
+
+    /**
      * Test of updateCustomer method, of class FunctionManager.
      *
      * @throws DataLayer.DataException
@@ -247,7 +247,7 @@ public class FunctionManagerTest
         expResult = "Venligst indtast en adgangskode med en minimumslængde på 4\n";
         result = fm.updateCustomer(user, email, name, "1234", "123", adress, zipcode, phone);
         assertEquals(expResult, result);
-        
+
         //test name must only contain letters
         expResult = "Venligst indtast dit navn (må kun indeholde bogstaver)\n";
         result = fm.updateCustomer(user, email, "Test123", password, password, adress, zipcode, phone);
@@ -278,7 +278,7 @@ public class FunctionManagerTest
         result = fm.updateCustomer(user, email, name, password, password, adress, zipcode, "1111A111");
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Test of updateEmployee and updatePassword method, of class
      * FunctionManager.
@@ -384,7 +384,6 @@ public class FunctionManagerTest
     public void testPlaceOrderAndIsShipped() throws DataException
     {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
         RoofType rooftype = fm.getRoofTypeById(2);
         Roof roof = new Roof(15, rooftype);
         Shed shed = new Shed(470, 270);
@@ -419,7 +418,7 @@ public class FunctionManagerTest
         fm.removeOrder(order);
         assertNull(fm.getOrder(order.getOrder_id()));
     }
-    
+
     /**
      * Negative test of placeOrder method, of class FunctionManager.
      *
@@ -432,15 +431,35 @@ public class FunctionManagerTest
         Order order = null;
         assertEquals("Din forespørgsel kunne ikke blive sendt", fm.placeOrder(order));
     }
-    
-    //    /**
-//     * Test of GDPRCheck method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testGDPRCheck() throws Exception
-//    {
-//    }
-    
+
+    /**
+     * Test of GDPRCheck method, of class FunctionManager.
+     *
+     * @throws DataLayer.DataException
+     * @throws java.text.ParseException
+     */
+    @Test
+    public void testGDPRCheck() throws DataException, ParseException
+    {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.YEAR, -3); 
+        Date date = cal.getTime();
+        List<Order> orders = fm.getOrders();
+ 
+        User user = fm.getUser(1);
+        RoofType rooftype = fm.getRoofTypeById(2);
+        Roof roof = new Roof(15, rooftype);
+        Carport carport = new Carport(500, 500, roof);
+        Order order = new Order(user, carport);
+        order.setOrder_date(dateFormatter.format(date));
+        orders.add(order);
+        
+        int expResult = orders.size() - 1;
+        fm.GDPRCheck(orders);
+        assertEquals(expResult, orders.size());
+    }
+
 //    /**
 //     * Test of updateCarport method, of class FunctionManager.
 //     */
@@ -448,7 +467,6 @@ public class FunctionManagerTest
 //    public void testUpdateCarport() throws Exception
 //    {
 //    }
-//  
     /**
      * Test of getSlopedRoofs method, of class FunctionManager.
      *
@@ -480,12 +498,12 @@ public class FunctionManagerTest
             assertTrue(flatroof.getRoof_class().equals("flat"));
         }
     }
+
     /**
      * Test of calcCarport method, of class FunctionManager.
      *
      * @throws DataLayer.DataException
      */
-    
 //    /**
 //     * Test of addRoofType method, of class FunctionManager.
 //     */
@@ -530,7 +548,6 @@ public class FunctionManagerTest
 //    public void testAddMaterial() throws Exception
 //    {
 //    }
-
 //    /**
 //     * Test of deleteMaterial method, of class FunctionManager.
 //     */
@@ -538,8 +555,6 @@ public class FunctionManagerTest
 //    public void testDeleteMaterial() throws Exception
 //    {
 //    }
-    
-
 //    /**
 //     * Test of updateMaterial method, of class FunctionManager.
 //     */

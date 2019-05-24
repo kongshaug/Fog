@@ -27,7 +27,7 @@ import org.junit.Test;
 
 /**
  *
- * @author aamandajuhl
+ * @author aamandajuhl and sofieamalielandt
  */
 public class DataFacadeTest
 {
@@ -516,6 +516,7 @@ public class DataFacadeTest
     @Test
     public void testUpdateRoofType() throws DataException
     {
+        //updating rooftype with 2 materials
         RoofType rooftype = df.getRoof(2);
         assertEquals("Betontagsten - rød", rooftype.getName());
         assertEquals(39, rooftype.getM1().getId());
@@ -536,6 +537,7 @@ public class DataFacadeTest
         rooftype.setM2(df.getMaterial(36));
         df.updateRoofType(rooftype);
         
+        //updating rooftype with 1 material
         rooftype = df.getRoof(1);
         assertEquals("Plasttrapezplader", rooftype.getName());
         assertEquals(12, rooftype.getM1().getId());
@@ -559,6 +561,27 @@ public class DataFacadeTest
      * @throws DataLayer.DataException
      */
     @Test
+    public void testGetMaterial_int() throws DataException
+    {
+        Material m = df.getMaterial(12);
+        assertNotNull(m);
+        assertEquals("tag", m.getMaterial_class());
+
+        Material m2 = df.getMaterial(22);
+        assertNotNull(m2);
+        assertEquals("beslag og skruer", m2.getMaterial_class());
+
+        //Negative test
+        Material m3 = df.getMaterial(22222222);
+        assertNull(m3);
+    }
+    
+    /**
+     * Test of getMaterial method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
     public void testGetMaterial_String() throws DataException
     {
         Material m = df.getMaterial("38x73 mm taglægte T1");
@@ -574,28 +597,7 @@ public class DataFacadeTest
         assertNull(m3);
 
     }
-
-    /**
-     * Test of getMaterial method, of class DataFacade.
-     *
-     * @throws DataLayer.DataException
-     */
-    @Test
-    public void testGetMaterial_int() throws DataException
-    {
-        Material m = df.getMaterial(12);
-        assertNotNull(m);
-        assertEquals("tag", m.getMaterial_class());
-
-        Material m2 = df.getMaterial(22);
-        assertNotNull(m2);
-        assertEquals("beslag og skruer", m2.getMaterial_class());
-
-        //Negative test
-        Material m3 = df.getMaterial(22222222);
-        assertNull(m3);
-    }
-
+    
     /**
      * Test of getMaterials method, of class DataFacade.
      *
@@ -609,12 +611,6 @@ public class DataFacadeTest
         assertTrue(materials.size() >= 45);
     }
 
-    
-
-    
-
-
-    
     /**
      * Test of addMaterial and deleteMaterial method, of class DataFacade.
      *
@@ -635,10 +631,6 @@ public class DataFacadeTest
         df.deleteMaterial(material);
         assertEquals(MaterialList.size(), df.getMaterials().size());
     }
-
-
-
-    
 
     /**
      * Test of updateMaterial method, of class DataFacade.
@@ -662,6 +654,4 @@ public class DataFacadeTest
         material.setPrice(50.00);
         df.updateMaterial(material);
     }
-
-    
 }
