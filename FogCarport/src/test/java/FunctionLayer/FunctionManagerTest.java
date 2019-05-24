@@ -130,60 +130,247 @@ public class FunctionManagerTest
         String zipcode = "2200";
         String phone = "11111111";
 
-        User user = new User("customer@hotmail.dk", password, name, adress, zipcode, phone, Role.CUSTOMER);
+        User user = new User(email, password, name, adress, zipcode, phone, Role.CUSTOMER);
 
+        user.setEmail("customer@hotmail.dk");
         String expResult = "Email er allerede i brug\n";
         String result = fm.newUser(user);
         assertEquals(expResult, result);
 
         //test email must contain "." and "@"
-        user = new User("customerhotmaildk", password, name, adress, zipcode, phone, Role.CUSTOMER);
+        user.setEmail("customerhotmaildk");
         expResult = "Venligst indtast en gyldig email\n";
         result = fm.newUser(user);
         assertEquals(expResult, result);
+        user.setEmail(email);
 
         //test name must only contain letters
-        user = new User(email, password, "Navn1234", adress, zipcode, phone, Role.CUSTOMER);
+        user.setName("Navn1234");
         expResult = "Venligst indtast dit navn (må kun indeholde bogstaver)\n";
         result = fm.newUser(user);
         assertEquals(expResult, result);
+        user.setName(name);
 
         //test password must be 4 characters
-        user = new User(email, "123", name, adress, zipcode, phone, Role.CUSTOMER);
+        user.setPassword("123");
         expResult = "Venligst indtast en adgangskode med en minimumslængde på 4\n";
         result = fm.newUser(user);
         assertEquals(expResult, result);
+        user.setPassword(password);
 
         //test adress not empty
-        user = new User(email, password, name, "", zipcode, phone, Role.CUSTOMER);
+        user.setAddress("");
         expResult = "Venligst indtast din adresse\n";
         result = fm.newUser(user);
         assertEquals(expResult, result);
+        user.setAddress(adress);
 
         //test zipcode must be 4 characters
-        user = new User(email, password, name, adress, "123", phone, Role.CUSTOMER);
+        user.setZipcode("123");
         expResult = "Venligst indtast et gyldigt postnummer på 4 cifre\n";
         result = fm.newUser(user);
         assertEquals(expResult, result);
 
         //test zipcode must be digits
-        user = new User(email, password, name, adress, "abcd", phone, Role.CUSTOMER);
+        user.setZipcode("abcd");
         expResult = "Venligst indtast et gyldigt postnummer på 4 cifre\n";
         result = fm.newUser(user);
         assertEquals(expResult, result);
+        user.setZipcode(zipcode);
 
         //test phonenumber must be 8 characters
-        user = new User(email, password, name, adress, zipcode, "123456789", Role.CUSTOMER);
+        user.setPhone("123456789");
         expResult = "Venligst indtast et gyldigt 8-cifret telefonnummer\n";
         result = fm.newUser(user);
         assertEquals(expResult, result);
 
         //test phonenumber must be digits
-        user = new User(email, password, name, adress, zipcode, "acbdefghi", Role.CUSTOMER);
+        user.setPhone("acbdefghi");
         expResult = "Venligst indtast et gyldigt 8-cifret telefonnummer\n";
         result = fm.newUser(user);
         assertEquals(expResult, result);
 
+    }
+    
+     /**
+     * Test of updateCustomer method, of class FunctionManager.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testUpdateCustomer() throws DataException
+    {
+        User user = fm.getUser(1);
+
+        //test updateCustomer
+        String result = fm.updateCustomer(user, user.getEmail(), "Bo", user.getPassword(), "4321", user.getAddress(), user.getZipcode(), "22222222");
+        assertEquals("Dine information er opdateret", result);
+        assertEquals("Bo", user.getName());
+        assertEquals("22222222", user.getPhone());
+
+        fm.updateCustomer(user, user.getEmail(), "Bent", user.getPassword(), "1234", user.getAddress(), user.getZipcode(), "11111111");
+    }
+
+    /**
+     * Test of updateCustomer method, of class FunctionManager.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void negativeTestUpdateCustomer() throws DataException
+    {
+        //test email allready in use
+        User user = fm.getUser(1);
+
+        String email = user.getEmail();
+        String password = user.getPassword();
+        String name = user.getName();
+        String adress = user.getAddress();
+        String zipcode = user.getZipcode();
+        String phone = user.getPhone();
+
+        String expResult = "Email er allerede i brug\n";
+        String result = fm.updateCustomer(user, "customer@hotmail.dk", name, password, password, adress, zipcode, phone);
+        assertEquals(expResult, result);
+
+        //test email must contain "." and "@"
+        expResult = "Venligst indtast en gyldig email\n";
+        result = fm.updateCustomer(user, "testhotmaildk", name, password, password, adress, zipcode, phone);
+        assertEquals(expResult, result);
+
+        //test must enter current password 
+        expResult = "Venligst indtast din nuværende adgangskode, for at ændre adgangskoden\n";
+        result = fm.updateCustomer(user, email, name, "4321", "5555", adress, zipcode, phone);
+        assertEquals(expResult, result);
+
+        //test password must be 4 characters
+        expResult = "Venligst indtast en adgangskode med en minimumslængde på 4\n";
+        result = fm.updateCustomer(user, email, name, "1234", "123", adress, zipcode, phone);
+        assertEquals(expResult, result);
+        
+        //test name must only contain letters
+        expResult = "Venligst indtast dit navn (må kun indeholde bogstaver)\n";
+        result = fm.updateCustomer(user, email, "Test123", password, password, adress, zipcode, phone);
+        assertEquals(expResult, result);
+
+        //test adress not empty
+        expResult = "Venligst indtast din adresse\n";
+        result = fm.updateCustomer(user, email, name, password, password, "", zipcode, phone);
+        assertEquals(expResult, result);
+
+        //test zipcode must be 4 characters
+        expResult = "Venligst indtast et gyldigt postnummer på 4 cifre\n";
+        result = fm.updateCustomer(user, email, name, password, password, adress, "123", phone);
+        assertEquals(expResult, result);
+
+        //test zipcode must be digits
+        expResult = "Venligst indtast et gyldigt postnummer på 4 cifre\n";
+        result = fm.updateCustomer(user, email, name, password, password, adress, "abcd", phone);
+        assertEquals(expResult, result);
+
+        //test phonenumber must be 8 characters
+        expResult = "Venligst indtast et gyldigt 8-cifret telefonnummer\n";
+        result = fm.updateCustomer(user, email, name, password, password, adress, zipcode, "1234567");
+        assertEquals(expResult, result);
+
+        //test phonenumber must be digits
+        expResult = "Venligst indtast et gyldigt 8-cifret telefonnummer\n";
+        result = fm.updateCustomer(user, email, name, password, password, adress, zipcode, "1111A111");
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Test of updateEmployee and updatePassword method, of class
+     * FunctionManager.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testUpdateEmployeeAndUpdatePassword() throws DataException
+    {
+        User employee = new User("test@hotmail.com", "1234", "Test", "Adresse", "2200", "11111111", Role.EMPLOYEE);
+        fm.newUser(employee);
+
+        //test updateEmployee
+        String result = fm.updateEmployee(employee, employee.getEmail(), "Nyt navn", employee.getAddress(), employee.getZipcode(), "22222222");
+        assertEquals("Medarbejderens information er opdateret", result);
+        assertEquals("Nyt navn", employee.getName());
+        assertEquals("22222222", employee.getPhone());
+
+        //test updatePassword
+        result = fm.updatePassword(employee, employee.getPassword(), "4321");
+        assertEquals("Din adgangskode er ændret", result);
+        assertEquals("4321", employee.getPassword());
+    }
+
+    /**
+     * Test of updateEmployee and updatePassword method, of class
+     * FunctionManager.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void negativeTestUpdateEmployeeAndUpdatePassword() throws DataException
+    {
+        //test email allready in use
+        User employee = fm.getEmployeeByEmail("test@hotmail.com");
+
+        String email = employee.getEmail();
+        String password = employee.getPassword();
+        String name = employee.getName();
+        String adress = employee.getPassword();
+        String zipcode = employee.getZipcode();
+        String phone = employee.getPhone();
+
+        String expResult = "Email er allerede i brug\n";
+        String result = fm.updateEmployee(employee, "customer@hotmail.dk", name, adress, zipcode, phone);
+        assertEquals(expResult, result);
+
+        //test email must contain "." and "@"
+        expResult = "Venligst indtast en gyldig email\n";
+        result = fm.updateEmployee(employee, "testhotmaildk", name, adress, zipcode, phone);
+        assertEquals(expResult, result);
+
+        //test name must only contain letters
+        expResult = "Venligst indtast dit navn (må kun indeholde bogstaver)\n";
+        result = fm.updateEmployee(employee, email, "Test123", adress, zipcode, phone);
+        assertEquals(expResult, result);
+
+        //test adress not empty
+        expResult = "Venligst indtast din adresse\n";
+        result = fm.updateEmployee(employee, email, name, "", zipcode, phone);
+        assertEquals(expResult, result);
+
+        //test zipcode must be 4 characters
+        expResult = "Venligst indtast et gyldigt postnummer på 4 cifre\n";
+        result = fm.updateEmployee(employee, email, name, adress, "123", phone);
+        assertEquals(expResult, result);
+
+        //test zipcode must be digits
+        expResult = "Venligst indtast et gyldigt postnummer på 4 cifre\n";
+        result = fm.updateEmployee(employee, email, name, adress, "abcd", phone);
+        assertEquals(expResult, result);
+
+        //test phonenumber must be 8 characters
+        expResult = "Venligst indtast et gyldigt 8-cifret telefonnummer\n";
+        result = fm.updateEmployee(employee, email, name, adress, zipcode, "1234567");
+        assertEquals(expResult, result);
+
+        //test phonenumber must be digits
+        expResult = "Venligst indtast et gyldigt 8-cifret telefonnummer\n";
+        result = fm.updateEmployee(employee, email, name, adress, zipcode, "111A1111");
+        assertEquals(expResult, result);
+
+        //test updatePassword
+        expResult = "Venligst indtast din nuværende adgangskode, for at ændre adgangskoden\n";
+        result = fm.updatePassword(employee, "1234", "5555");
+        assertEquals(expResult, result);
+
+        expResult = "Venligst indtast en adgangskode med en minimumslængde på 4\n";
+        result = fm.updatePassword(employee, employee.getPassword(), "123");
+        assertEquals(expResult, result);
+
+        fm.removeUser(employee);
     }
 
     /**
@@ -232,7 +419,7 @@ public class FunctionManagerTest
         fm.removeOrder(order);
         assertNull(fm.getOrder(order.getOrder_id()));
     }
-
+    
     /**
      * Negative test of placeOrder method, of class FunctionManager.
      *
@@ -245,12 +432,123 @@ public class FunctionManagerTest
         Order order = null;
         assertEquals("Din forespørgsel kunne ikke blive sendt", fm.placeOrder(order));
     }
+    
+    //    /**
+//     * Test of GDPRCheck method, of class FunctionManager.
+//     */
+//    @Test
+//    public void testGDPRCheck() throws Exception
+//    {
+//    }
+    
+//    /**
+//     * Test of updateCarport method, of class FunctionManager.
+//     */
+//    @Test
+//    public void testUpdateCarport() throws Exception
+//    {
+//    }
+//  
+    /**
+     * Test of getSlopedRoofs method, of class FunctionManager.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testGetSlopedRoofs() throws DataException
+    {
+        List<RoofType> slopedroofs = fm.getSlopedRoofs();
 
+        for (RoofType roof : slopedroofs)
+        {
+            assertTrue(roof.getRoof_class().equals("slope"));
+        }
+    }
+
+    /**
+     * Test of getFlatRoofs method, of class FunctionManager.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testGetFlatRoofs() throws DataException
+    {
+        List<RoofType> flatroofs = fm.getFlatRoofs();
+
+        for (RoofType flatroof : flatroofs)
+        {
+            assertTrue(flatroof.getRoof_class().equals("flat"));
+        }
+    }
     /**
      * Test of calcCarport method, of class FunctionManager.
      *
      * @throws DataLayer.DataException
      */
+    
+//    /**
+//     * Test of addRoofType method, of class FunctionManager.
+//     */
+//    @Test
+//    public void testAddRoofType() throws Exception
+//    {
+//   
+//    }
+//
+    //    /**
+//     * Test of deleteRoofType method, of class FunctionManager.
+//     */
+//    @Test
+//    public void testDeleteRoofType() throws Exception
+//    {
+//        
+//    }
+//
+//    /**
+//     * Test of updateRoofType method, of class FunctionManager.
+//     */
+//    @Test
+//    public void testUpdateRoofType() throws Exception
+//    {
+//       
+//    }
+//
+//    /**
+//     * Test of updateRoofTypeWith1Material method, of class FunctionManager.
+//     */
+//    @Test
+//    public void testUpdateRoofTypeWith1Material() throws Exception
+//    {
+//       
+//    }
+//
+    //
+//    /**
+//     * Test of addMaterial method, of class FunctionManager.
+//     */
+//    @Test
+//    public void testAddMaterial() throws Exception
+//    {
+//    }
+
+//    /**
+//     * Test of deleteMaterial method, of class FunctionManager.
+//     */
+//    @Test
+//    public void testDeleteMaterial() throws Exception
+//    {
+//    }
+    
+
+//    /**
+//     * Test of updateMaterial method, of class FunctionManager.
+//     */
+//    @Test
+//    public void testUpdateMaterial() throws Exception
+//    {
+//    
+//    }
+//
     @Test
     public void testCalcCarport() throws DataException
     {
@@ -351,497 +649,49 @@ public class FunctionManagerTest
         Shed shed = new Shed(200, 200);
         Carport carport = new Carport(500, 450, roof, shed);
 
+        //The method calcShed has two methods, one for sloped roof and one for flat roof, each method puts 14 elements in the partlist,
         fm.calcShed(carport);
         assertEquals(13, carport.getShed().getParts().size());
+
+        assertEquals("Stolper til hjørner af skur og siderne af døren til skuret", carport.getShed().getParts().get(4).getDescription());
+        assertEquals(6, carport.getShed().getParts().get(4).getQuantity());
+        assertEquals(300, carport.getShed().getParts().get(4).getLength());
+
+        // the beklædning uses  19x100 mm. trykimp. Bræt
+        // each bræt for BackFront and Sides is 10 cm, and each with a 3 cm overlay to the next one, therefor we divide with 7
+        // 42 is retracted because the material for the door has already been added, a door is 84 cm therefor half is removed 
+        assertEquals("Beklædning til skurets for- og bagside", carport.getShed().getParts().get(9).getDescription());
+        assertEquals(44, carport.getShed().getParts().get(9).getQuantity());
+
+        //bekældning is same height as carport, so that the customer can choose where to place it
+        assertEquals("Beklædning til skurets sider (skal skæres til efter ønsket placering)", carport.getShed().getParts().get(10).getDescription());
+        assertEquals(56, carport.getShed().getParts().get(10).getQuantity());
+        assertEquals(263, carport.getShed().getParts().get(10).getLength());
     }
 
-//    /**
-//     * Test of getSlopedRoofs method, of class FunctionManager.
-//     * @throws DataLayer.DataException
-//     */
-//    @Test
-//    public void testGetSlopedRoofsListSize() throws DataException
-//    {
-//        int result = fm.getSlopedRoofs().size();
-//        assertNotNull(result);
-//    }
-//
-//    /**
-//     * Test of getRoofType method, of class FunctionManager.
-//     * @throws DataLayer.DataException
-//     */
-//    @Test
-//    public void testGetRoofType() throws DataException
-//    {
-//        int typeId = 2;
-//        RoofType result = fm.getRoofTypeById(typeId);
-//        assertEquals("Betontagsten - rød", result.getName());
-//
-//    }
     /**
-     * Test of getFlatRoofs method, of class FunctionManager.
+     * Test of drawingOfRoof method, of class FunctionManager.
      *
      * @throws DataLayer.DataException
      */
     @Test
-    public void testGetFlatRoofs() throws DataException
+    public void testDrawingOfRoof() throws DataException
     {
-        List<RoofType> flatroofs = fm.getFlatRoofs();
+        Roof roof = new Roof(15, fm.getRoofTypeById(2));
+        Shed shed = new Shed(200, 200);
+        Carport carportWithShed = new Carport(500, 450, roof, shed);
 
-        for (RoofType flatroof : flatroofs)
-        {
-            assertTrue(flatroof.getRoof_class().equals("flat"));
-        }
+        String drawingWithShed = "";
+        assertEquals("", drawingWithShed);
+        drawingWithShed = fm.drawingOfRoof(carportWithShed);
+        assertTrue(drawingWithShed.length() > 200);
+
+        roof = new Roof(15, fm.getRoofTypeById(2));
+        Carport carportWithoutShed = new Carport(500, 450, roof);
+
+        String drawingWithoutShed = "";
+        assertEquals("", drawingWithoutShed);
+        drawingWithoutShed = fm.drawingOfRoof(carportWithoutShed);
+        assertTrue(drawingWithoutShed.length() < drawingWithShed.length());
     }
-
-//    /**
-//     * Test of getEmployeesAndAdmins method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testGetEmployeesAndAdmins() throws Exception
-//    {
-//        System.out.println("getEmployeesAndAdmins");
-//        FunctionManager instance = new FunctionManager();
-//        List<User> expResult = null;
-//        List<User> result = instance.getEmployeesAndAdmins();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getSlopedRoofs method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testGetSlopedRoofs() throws Exception
-//    {
-//        System.out.println("getSlopedRoofs");
-//        FunctionManager instance = new FunctionManager();
-//        List<RoofType> expResult = null;
-//        List<RoofType> result = instance.getSlopedRoofs();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getRoofTypeById method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testGetRoofTypeById() throws Exception
-//    {
-//        System.out.println("getRoofTypeById");
-//        int typeId = 0;
-//        FunctionManager instance = new FunctionManager();
-//        RoofType expResult = null;
-//        RoofType result = instance.getRoofTypeById(typeId);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of calcRoof method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testCalcRoof() throws Exception
-//    {
-//        System.out.println("calcRoof");
-//        Carport carport = null;
-//        FunctionManager instance = new FunctionManager();
-//        instance.calcRoof(carport);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getOrder method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testGetOrder() throws Exception
-//    {
-//        System.out.println("getOrder");
-//        int order_id = 0;
-//        FunctionManager instance = new FunctionManager();
-//        Order expResult = null;
-//        Order result = instance.getOrder(order_id);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getOrders method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testGetOrders() throws Exception
-//    {
-//        System.out.println("getOrders");
-//        FunctionManager instance = new FunctionManager();
-//        List<Order> expResult = null;
-//        List<Order> result = instance.getOrders();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getOrdersByEmail method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testGetOrdersByEmail() throws Exception
-//    {
-//        System.out.println("getOrdersByEmail");
-//        String email = "";
-//        FunctionManager instance = new FunctionManager();
-//        List<Order> expResult = null;
-//        List<Order> result = instance.getOrdersByEmail(email);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of drawingOfRoof method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testDrawingOfRoof() throws DataException
-//    {
-//        System.out.println("drawingOfRoof");
-//        Carport carport = null;
-//        FunctionManager instance = new FunctionManager();
-//        String expResult = "";
-//        String result = instance.drawingOfRoof(carport);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of updateSalesPrice method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testUpdateSalesPrice() throws Exception
-//    {
-//        System.out.println("updateSalesPrice");
-//        int order_id = 0;
-//        double salesprice = 0.0;
-//        FunctionManager instance = new FunctionManager();
-//        instance.updateSalesPrice(order_id, salesprice);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of updateStatusAndPaid method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testUpdateStatusAndPaid() throws Exception
-//    {
-//        System.out.println("updateStatusAndPaid");
-//        int order_id = 0;
-//        Status status = null;
-//        Paid paid = null;
-//        FunctionManager instance = new FunctionManager();
-//        instance.updateStatusAndPaid(order_id, status, paid);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getEmployeeByEmail method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testGetEmployeeByEmail() throws Exception
-//    {
-//        System.out.println("getEmployeeByEmail");
-//        String email = "";
-//        FunctionManager instance = new FunctionManager();
-//        User expResult = null;
-//        User result = instance.getEmployeeByEmail(email);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of updateEmployee method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testUpdateEmployee() throws Exception
-//    {
-//        System.out.println("updateEmployee");
-//        User user = null;
-//        String email = "";
-//        String name = "";
-//        String address = "";
-//        String zipcode = "";
-//        String phone = "";
-//        FunctionManager instance = new FunctionManager();
-//        String expResult = "";
-//        String result = instance.updateEmployee(user, email, name, address, zipcode, phone);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of updateCustomer method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testUpdateCustomer() throws Exception
-//    {
-//        System.out.println("updateCustomer");
-//        User user = null;
-//        String email = "";
-//        String name = "";
-//        String oldpassword = "";
-//        String newpassword = "";
-//        String address = "";
-//        String zipcode = "";
-//        String phone = "";
-//        FunctionManager instance = new FunctionManager();
-//        String expResult = "";
-//        String result = instance.updateCustomer(user, email, name, oldpassword, newpassword, address, zipcode, phone);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of updatePassword method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testUpdatePassword() throws Exception
-//    {
-//        System.out.println("updatePassword");
-//        User user = null;
-//        String oldpassword = "";
-//        String newpassword = "";
-//        FunctionManager instance = new FunctionManager();
-//        String expResult = "";
-//        String result = instance.updatePassword(user, oldpassword, newpassword);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getUser method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testGetUser() throws Exception
-//    {
-//        System.out.println("getUser");
-//        int user_id = 0;
-//        FunctionManager instance = new FunctionManager();
-//        User expResult = null;
-//        User result = instance.getUser(user_id);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of updateMaterial method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testUpdateMaterial() throws Exception
-//    {
-//        System.out.println("updateMaterial");
-//        Material material = null;
-//        String material_name = "";
-//        String unit = "";
-//        String material_class = "";
-//        double price = 0.0;
-//        FunctionManager instance = new FunctionManager();
-//        String expResult = "";
-//        String result = instance.updateMaterial(material, material_name, unit, material_class, price);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of deleteMaterial method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testDeleteMaterial() throws Exception
-//    {
-//        System.out.println("deleteMaterial");
-//        Material material = null;
-//        FunctionManager instance = new FunctionManager();
-//        String expResult = "";
-//        String result = instance.deleteMaterial(material);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of addMaterial method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testAddMaterial() throws Exception
-//    {
-//        System.out.println("addMaterial");
-//        Material newMaterial = null;
-//        FunctionManager instance = new FunctionManager();
-//        String expResult = "";
-//        String result = instance.addMaterial(newMaterial);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getAllMaterials method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testGetAllMaterials() throws Exception
-//    {
-//        System.out.println("getAllMaterials");
-//        FunctionManager instance = new FunctionManager();
-//        List<Material> expResult = null;
-//        List<Material> result = instance.getAllMaterials();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getMaterial method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testGetMaterial() throws Exception
-//    {
-//        System.out.println("getMaterial");
-//        int material_id = 0;
-//        FunctionManager instance = new FunctionManager();
-//        Material expResult = null;
-//        Material result = instance.getMaterial(material_id);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of updateCarport method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testUpdateCarport() throws Exception
-//    {
-//        System.out.println("updateCarport");
-//        Carport carport = null;
-//        int carport_depth = 0;
-//        int carport_width = 0;
-//        RoofType rooftype = null;
-//        int roofslope = 0;
-//        int shed_width = 0;
-//        int shed_depth = 0;
-//        FunctionManager instance = new FunctionManager();
-//        String expResult = "";
-//        String result = instance.updateCarport(carport, carport_depth, carport_width, rooftype, roofslope, shed_width, shed_depth);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of addRoofType method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testAddRoofType() throws Exception
-//    {
-//        System.out.println("addRoofType");
-//        RoofType rooftype = null;
-//        FunctionManager instance = new FunctionManager();
-//        String expResult = "";
-//        String result = instance.addRoofType(rooftype);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of getRoofs method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testGetRoofs() throws Exception
-//    {
-//        System.out.println("getRoofs");
-//        FunctionManager instance = new FunctionManager();
-//        List<RoofType> expResult = null;
-//        List<RoofType> result = instance.getRoofs();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of deleteRoofType method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testDeleteRoofType() throws Exception
-//    {
-//        System.out.println("deleteRoofType");
-//        RoofType rooftype = null;
-//        FunctionManager instance = new FunctionManager();
-//        String expResult = "";
-//        String result = instance.deleteRoofType(rooftype);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of updateRoofType method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testUpdateRoofType() throws Exception
-//    {
-//        System.out.println("updateRoofType");
-//        RoofType rooftype = null;
-//        String name = "";
-//        Material m1 = null;
-//        Material m2 = null;
-//        FunctionManager instance = new FunctionManager();
-//        String expResult = "";
-//        String result = instance.updateRoofType(rooftype, name, m1, m2);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of updateRoofTypeWith1Material method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testUpdateRoofTypeWith1Material() throws Exception
-//    {
-//        System.out.println("updateRoofTypeWith1Material");
-//        RoofType rooftype = null;
-//        String name = "";
-//        Material m1 = null;
-//        FunctionManager instance = new FunctionManager();
-//        String expResult = "";
-//        String result = instance.updateRoofTypeWith1Material(rooftype, name, m1);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of GDPRCheck method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testGDPRCheck() throws Exception
-//    {
-//        System.out.println("GDPRCheck");
-//        List<Order> orders = null;
-//        FunctionManager instance = new FunctionManager();
-//        instance.GDPRCheck(orders);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
 }

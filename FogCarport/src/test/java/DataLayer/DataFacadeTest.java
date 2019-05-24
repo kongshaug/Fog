@@ -70,68 +70,7 @@ public class DataFacadeTest
         DataFacade result = DataFacade.getInstance();
         assertNotNull(result);
     }
-
-    /**
-     * Test of newUser and removeUser method, of class DataFacade.
-     *
-     * @throws DataLayer.DataException
-     */
-    @Test
-    public void testNewUserAndRemoveUser() throws DataException
-    {
-        String email = "test@hotmail.com";
-        String password = "1234";
-        String name = "test";
-        String address = "testvej 1";
-        String zipcode = "1234";
-        String phone = "88888888";
-        Role role = Role.CUSTOMER;
-
-        User newUser = new User(email, password, name, address, zipcode, phone, role);
-        assertEquals(0, newUser.getId());
-        df.newUser(newUser);
-        assertTrue(newUser.getId() != 0);
-
-        int before = df.getUsers().size();
-        df.removeUser(newUser);
-        int after = df.getUsers().size();
-        assertNull(df.getUser(newUser.getId()));
-        assertEquals(before - 1, after);
-    }
-
-    /**
-     * Test of login method, of class DataFacade.
-     *
-     * @throws DataLayer.DataException
-     */
-    @Test
-    public void testLogin() throws DataException
-    {
-        String email = "customer@hotmail.dk";
-        String password = "1234";
-        User user = df.login(email, password);
-
-        assertNotNull(user);
-        assertEquals(email, user.getEmail());
-        assertEquals(password, user.getPassword());
-    }
-
-    /**
-     * Negative test of login method, of class DataFacade.
-     *
-     * @throws DataLayer.DataException
-     */
-    @Test
-    public void NegativetestLogin() throws DataException
-    {
-        String email = "customer@hotmail.dk";
-        String password = "4321";
-        User user = df.login(email, password);
-
-        //method returns null, when no user with the email and password combination is found in the database
-        assertNull(user);
-    }
-
+    
     /**
      * Test of getUser method, of class DataFacade.
      *
@@ -173,89 +112,184 @@ public class DataFacadeTest
         assertNotNull(users);
         assertTrue(users.size() >= 4);
     }
-
-    /**
-     * Test of getMaterial method, of class DataFacade.
+    
+     /**
+     * Test of getEmployeeByEmail method, of class DataFacade.
      *
      * @throws DataLayer.DataException
      */
     @Test
-    public void testGetMaterial_String() throws DataException
+    public void testGetEmployeeByEmail() throws DataException
     {
-        Material m = df.getMaterial("38x73 mm taglægte T1");
-        assertNotNull(m);
-        assertEquals("træ", m.getMaterial_class());
-
-        Material m2 = df.getMaterial("1x20 mm hulbånd 10 mtr");
-        assertNotNull(m2);
-        assertEquals("beslag og skruer", m2.getMaterial_class());
-
-        //Negative test
-        Material m3 = df.getMaterial("TestMateriale");
-        assertNull(m3);
-
+        String email = "hans@hotmail.dk";
+        User user = df.getEmployeeByEmail(email);
+        assertNotNull(user);
+        assertEquals(email, user.getEmail());
+        assertEquals("Hans", user.getName());
     }
 
     /**
-     * Test of getMaterial method, of class DataFacade.
+     * Test of getEmployeesAndAdmins method, of class DataFacade.
      *
      * @throws DataLayer.DataException
      */
     @Test
-    public void testGetMaterial_int() throws DataException
+    public void testGetEmployeesAndAdmins() throws DataException
     {
-        Material m = df.getMaterial(12);
-        assertNotNull(m);
-        assertEquals("tag", m.getMaterial_class());
+        List<User> users = df.getEmployeesAndAdmins();
 
-        Material m2 = df.getMaterial(22);
-        assertNotNull(m2);
-        assertEquals("beslag og skruer", m2.getMaterial_class());
-
-        //Negative test
-        Material m3 = df.getMaterial(22222222);
-        assertNull(m3);
+        for (User user : users)
+        {
+            assertTrue(user.getRole() == Role.EMPLOYEE || user.getRole() == Role.ADMIN);
+        }
     }
 
+
     /**
-     * Test of getMaterials method, of class DataFacade.
+     * Test of login method, of class DataFacade.
      *
      * @throws DataLayer.DataException
      */
     @Test
-    public void testGetMaterials() throws DataException
+    public void testLogin() throws DataException
     {
-        List<Material> materials = df.getMaterials();
-        assertNotNull(materials);
-        assertTrue(materials.size() >= 45);
+        String email = "customer@hotmail.dk";
+        String password = "1234";
+        User user = df.login(email, password);
+
+        assertNotNull(user);
+        assertEquals(email, user.getEmail());
+        assertEquals(password, user.getPassword());
     }
 
     /**
-     * Test of getRoofs method, of class DataFacade.
+     * Negative test of login method, of class DataFacade.
      *
      * @throws DataLayer.DataException
      */
     @Test
-    public void testGetRoofs() throws DataException
+    public void NegativetestLogin() throws DataException
     {
-        List<RoofType> rooftypes = df.getRoofs();
-        assertNotNull(rooftypes);
-        assertTrue(rooftypes.size() >= 5);
-    }
+        String email = "customer@hotmail.dk";
+        String password = "4321";
+        User user = df.login(email, password);
 
+        //method returns null, when no user with the email and password combination is found in the database
+        assertNull(user);
+    }
+    
+    /**
+     * Test of newUser and removeUser method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
     @Test
-    public void testGetRoof() throws Exception
+    public void testNewUserAndRemoveUser() throws DataException
     {
-        RoofType rooftype = df.getRoof(1);
-        assertNotNull(rooftype);
-        assertEquals("Plasttrapezplader", rooftype.getName());
-        assertEquals("flat", rooftype.getRoof_class());
+        String email = "test@hotmail.com";
+        String password = "1234";
+        String name = "test";
+        String address = "testvej 1";
+        String zipcode = "1234";
+        String phone = "88888888";
+        Role role = Role.CUSTOMER;
 
-        //Negative test
-        RoofType roof = df.getRoof(2222222);
-        assertNull(roof);
+        User newUser = new User(email, password, name, address, zipcode, phone, role);
+        assertEquals(0, newUser.getId());
+        df.newUser(newUser);
+        assertTrue(newUser.getId() != 0);
+
+        int before = df.getUsers().size();
+        df.removeUser(newUser);
+        int after = df.getUsers().size();
+        assertNull(df.getUser(newUser.getId()));
+        assertEquals(before - 1, after);
     }
 
+    /**
+     * Test of updateUser method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testUpdateUser() throws DataException
+    {
+        User user = df.getUser(3);
+
+        assertEquals("hans@hotmail.dk", user.getEmail());
+        assertEquals("Hans", user.getName());
+
+        user.setName("Henrik");
+        user.setEmail("henrik@hotmail.dk");
+        df.updateUser(user);
+
+        assertEquals("henrik@hotmail.dk", user.getEmail());
+        assertEquals("Henrik", user.getName());
+
+        user.setName("Hans");
+        user.setEmail("hans@hotmail.dk");
+        df.updateUser(user);
+    }
+
+    /**
+     * Test of updatePassword method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testUpdatePassword() throws DataException
+    {
+        User user = df.getUser(1);
+        assertEquals("1234", user.getPassword());
+        df.updatePassword(1, "4321");
+
+        user = df.getUser(1);
+        assertEquals("4321", user.getPassword());
+
+        df.updatePassword(1, "1234");
+    }
+
+    /**
+     * Test of getOrder method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testGetOrder() throws DataException
+    {
+        Order order = df.getOrder(1);
+        assertNotNull(order);
+        assertEquals(2, order.getUser().getId());
+        assertEquals(Status.MODTAGET, order.getStatus());
+    }
+
+    /**
+     * Test of getAllOrders method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testGetOrders() throws DataException
+    {
+        List<Order> orders = df.getOrders();
+        assertNotNull(orders);
+        assertTrue(orders.size() >= 4);
+    }
+
+    /**
+     * Test of getAllOrdersByEmail method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testGetOrdersByEmail_String() throws DataException
+    {
+        String email = "hans@hotmail.dk";
+        List<Order> orders = df.getOrdersByEmail(email);
+        assertNotNull(orders);
+        assertTrue(orders.size() >= 2);
+    }
+    
     /**
      * Test of orderCarport, placeOrder, orderShipped, removeOrder,
      * removeCarport, removeRoof and removeShed method, of class DataFacade.
@@ -329,127 +363,13 @@ public class DataFacadeTest
         assertNull(df.getOrder(order.getOrder_id()));
 
         df.removeOrder(order1);
+        df.removeShed(order1.getCarport());
         df.removeCarport(order1.getCarport());
         df.removeRoof(order1.getCarport().getRoof());
-        df.removeShed(order1.getCarport().getShed());
+        
         assertNull(df.getOrder(order1.getOrder_id()));
     }
-
-    /**
-     * Test of updateCarport method, of class DataFacade.
-     *
-     * @throws DataLayer.DataException
-     */
-    @Test
-    public void testUpdateCarport() throws DataException
-    {
-        Order order = df.getOrder(2);
-        int width = order.getCarport().getWidth();
-        RoofType rooftype = order.getCarport().getRoof().getType();
-
-        Shed shed = new Shed(244, 244);
-        assertTrue(shed.getId() == 0);
-        order.getCarport().setShed(shed);
-
-        assertTrue(order.getCarport().getWidth() != 444);
-        order.getCarport().setWidth(444);
-        assertTrue(order.getCarport().getWidth() == 444);
-
-        assertTrue(order.getCarport().getRoof().getType().getId() != 2);
-        order.getCarport().getRoof().setType(df.getRoof(2));
-        assertTrue(order.getCarport().getRoof().getType().getId() == 2);
-
-        df.updateCarport(order.getCarport());
-
-        //checking if the update is in the database
-        Order Result = df.getOrder(order.getOrder_id());
-
-        assertEquals(444, Result.getCarport().getWidth());
-        assertEquals(2, Result.getCarport().getRoof().getType().getId());
-        assertTrue(order.getCarport().getShed().getId() != 0);
-        assertEquals(244, Result.getCarport().getShed().getWidth());
-
-        //test deleteShedId and removeShed
-        df.deleteShedId(order.getCarport());
-        df.removeShed(order.getCarport().getShed());
-        order.getCarport().setShed(null);
-        assertNull(df.getOrder(order.getOrder_id()).getCarport().getShed());
-
-        //changing attributes back to original
-        assertTrue(order.getCarport().getWidth() != width);
-        assertTrue(order.getCarport().getRoof().getType() != rooftype);
-
-        order.getCarport().setWidth(width);
-        order.getCarport().getRoof().setType(rooftype);
-
-        assertTrue(order.getCarport().getWidth() == width);
-        assertTrue(order.getCarport().getRoof().getType() == rooftype);
-
-        df.updateCarport(order.getCarport());
-    }
-
-    /**
-     * Test of getOrder method, of class DataFacade.
-     *
-     * @throws DataLayer.DataException
-     */
-    @Test
-    public void testGetOrder() throws DataException
-    {
-        Order order = df.getOrder(1);
-        assertNotNull(order);
-        assertEquals(2, order.getUser().getId());
-        assertEquals(Status.MODTAGET, order.getStatus());
-    }
-
-    /**
-     * Test of getAllOrders method, of class DataFacade.
-     *
-     * @throws DataLayer.DataException
-     */
-    @Test
-    public void testGetOrders() throws DataException
-    {
-        List<Order> orders = df.getOrders();
-        assertNotNull(orders);
-        assertTrue(orders.size() >= 4);
-    }
-
-    /**
-     * Test of getAllOrdersByEmail method, of class DataFacade.
-     *
-     * @throws DataLayer.DataException
-     */
-    @Test
-    public void testGetOrdersByEmail_String() throws DataException
-    {
-        String email = "hans@hotmail.dk";
-        List<Order> orders = df.getOrdersByEmail(email);
-        assertNotNull(orders);
-        assertTrue(orders.size() >= 2);
-    }
-
-    /**
-     * Test of addMaterial and deleteMaterial method, of class DataFacade.
-     *
-     * @throws DataLayer.DataException
-     */
-    @Test
-    public void testAddMaterialAndDeleteMaterial() throws DataException
-    {
-        List<Material> MaterialList = df.getMaterials();
-        Material material = new Material("testMaterial", "stk", "træ", 10.00);
-
-        assertTrue(material.getId() == 0);
-        df.addMaterial(material);
-        assertTrue(material.getId() != 0);
-
-        List MaterialListAfter = df.getMaterials();
-        assertEquals(1 + MaterialList.size(), MaterialListAfter.size());
-        df.deleteMaterial(material);
-        assertEquals(MaterialList.size(), df.getMaterials().size());
-    }
-
+    
     /**
      * Test of updateSalesPrice method, of class DataFacade.
      *
@@ -487,102 +407,83 @@ public class DataFacadeTest
 
         df.updateStatusAndPaid(order.getOrder_id(), Status.MODTAGET, Paid.IKKE_BETALT);
     }
-
+    
     /**
-     * Test of getEmployeeByEmail method, of class DataFacade.
+     * Test of updateCarport method, of class DataFacade.
      *
      * @throws DataLayer.DataException
      */
     @Test
-    public void testGetEmployeeByEmail() throws DataException
+    public void testUpdateCarport() throws DataException
     {
-        String email = "hans@hotmail.dk";
-        User user = df.getEmployeeByEmail(email);
-        assertNotNull(user);
-        assertEquals(email, user.getEmail());
-        assertEquals("Hans", user.getName());
+        Order order = df.getOrder(2);
+        int width = order.getCarport().getWidth();
+        RoofType rooftype = order.getCarport().getRoof().getType();
+
+        Shed shed = new Shed(244, 244);
+        assertTrue(shed.getId() == 0);
+        order.getCarport().setShed(shed);
+
+        assertTrue(order.getCarport().getWidth() != 444);
+        order.getCarport().setWidth(444);
+        assertTrue(order.getCarport().getWidth() == 444);
+
+        assertTrue(order.getCarport().getRoof().getType().getId() != 2);
+        order.getCarport().getRoof().setType(df.getRoof(2));
+        assertTrue(order.getCarport().getRoof().getType().getId() == 2);
+
+        df.updateCarport(order.getCarport());
+
+        //checking if the update is in the database
+        Order Result = df.getOrder(order.getOrder_id());
+
+        assertEquals(444, Result.getCarport().getWidth());
+        assertEquals(2, Result.getCarport().getRoof().getType().getId());
+        assertTrue(order.getCarport().getShed().getId() != 0);
+        assertEquals(244, Result.getCarport().getShed().getWidth());
+
+        //test deleteShedId and removeShed
+        df.removeShed(order.getCarport());
+        order.getCarport().setShed(null);
+        assertNull(df.getOrder(order.getOrder_id()).getCarport().getShed());
+
+        //changing attributes back to original
+        assertTrue(order.getCarport().getWidth() != width);
+        assertTrue(order.getCarport().getRoof().getType() != rooftype);
+
+        order.getCarport().setWidth(width);
+        order.getCarport().getRoof().setType(rooftype);
+
+        assertTrue(order.getCarport().getWidth() == width);
+        assertTrue(order.getCarport().getRoof().getType() == rooftype);
+
+        df.updateCarport(order.getCarport());
     }
-
-    /**
-     * Test of getEmployeesAndAdmins method, of class DataFacade.
-     *
-     * @throws DataLayer.DataException
-     */
+    
     @Test
-    public void testGetEmployeesAndAdmins() throws DataException
+    public void testGetRoof() throws Exception
     {
-        List<User> users = df.getEmployeesAndAdmins();
+        RoofType rooftype = df.getRoof(1);
+        assertNotNull(rooftype);
+        assertEquals("Plasttrapezplader", rooftype.getName());
+        assertEquals("flat", rooftype.getRoof_class());
 
-        for (User user : users)
-        {
-            assertTrue(user.getRole() == Role.EMPLOYEE || user.getRole() == Role.ADMIN);
-        }
+        //Negative test
+        RoofType roof = df.getRoof(2222222);
+        assertNull(roof);
     }
-
+    
     /**
-     * Test of updateUser method, of class DataFacade.
+     * Test of getRoofs method, of class DataFacade.
      *
      * @throws DataLayer.DataException
      */
     @Test
-    public void testUpdateUser() throws DataException
+    public void testGetRoofs() throws DataException
     {
-        User user = df.getUser(3);
-
-        assertEquals("hans@hotmail.dk", user.getEmail());
-        assertEquals("Hans", user.getName());
-
-        user.setName("Henrik");
-        user.setEmail("henrik@hotmail.dk");
-        df.updateUser(user);
-
-        assertEquals("henrik@hotmail.dk", user.getEmail());
-        assertEquals("Henrik", user.getName());
-
-        user.setName("Hans");
-        user.setEmail("hans@hotmail.dk");
-        df.updateUser(user);
-    }
-
-    /**
-     * Test of updatePassword method, of class DataFacade.
-     *
-     * @throws DataLayer.DataException
-     */
-    @Test
-    public void testUpdatePassword() throws DataException
-    {
-        User user = df.getUser(1);
-        assertEquals("1234", user.getPassword());
-        df.updatePassword(1, "4321");
-
-        user = df.getUser(1);
-        assertEquals("4321", user.getPassword());
-
-        df.updatePassword(1, "1234");
-    }
-
-    /**
-     * Test of updateMaterial method, of class DataFacade.
-     *
-     * @throws DataLayer.DataException
-     */
-    @Test
-    public void testUpdateMaterial() throws DataException
-    {
-        Material material = df.getMaterial(1);
-        assertEquals("25x150 mm trykimp. bræt", material.getName());
-        assertEquals(1, material.getId());
-        assertEquals(50.00, material.getPrice(), 0.01);
-
-        material.setPrice(25.00);
-        df.updateMaterial(material);
-
-        material = df.getMaterial(1);
-        assertEquals(25.00, material.getPrice(), 0.01);
-
-        material.setPrice(50.00);
-        df.updateMaterial(material);
+        List<RoofType> rooftypes = df.getRoofs();
+        assertNotNull(rooftypes);
+        assertTrue(rooftypes.size() >= 5);
     }
 
     /**
@@ -634,23 +535,14 @@ public class DataFacadeTest
         rooftype.setM1(df.getMaterial(39));
         rooftype.setM2(df.getMaterial(36));
         df.updateRoofType(rooftype);
-    }
-
-    /**
-     * Test of updateRoofTypeWith1Material method, of class DataFacade.
-     *
-     * @throws DataLayer.DataException
-     */
-    @Test
-    public void testUpdateRoofTypeWith1Material() throws DataException
-    {
-        RoofType rooftype = df.getRoof(1);
+        
+        rooftype = df.getRoof(1);
         assertEquals("Plasttrapezplader", rooftype.getName());
         assertEquals(12, rooftype.getM1().getId());
 
         rooftype.setName("test");
         rooftype.setM1(df.getMaterial(2));
-        df.updateRoofTypeWith1Material(rooftype);
+        df.updateRoofType(rooftype);
 
         rooftype = df.getRoof(1);
         assertEquals("test", rooftype.getName());
@@ -658,6 +550,118 @@ public class DataFacadeTest
 
         rooftype.setName("Plasttrapezplader");
         rooftype.setM1(df.getMaterial(12));
-        df.updateRoofTypeWith1Material(rooftype);
+        df.updateRoofType(rooftype);
     }
+    
+    /**
+     * Test of getMaterial method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testGetMaterial_String() throws DataException
+    {
+        Material m = df.getMaterial("38x73 mm taglægte T1");
+        assertNotNull(m);
+        assertEquals("træ", m.getMaterial_class());
+
+        Material m2 = df.getMaterial("1x20 mm hulbånd 10 mtr");
+        assertNotNull(m2);
+        assertEquals("beslag og skruer", m2.getMaterial_class());
+
+        //Negative test
+        Material m3 = df.getMaterial("TestMateriale");
+        assertNull(m3);
+
+    }
+
+    /**
+     * Test of getMaterial method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testGetMaterial_int() throws DataException
+    {
+        Material m = df.getMaterial(12);
+        assertNotNull(m);
+        assertEquals("tag", m.getMaterial_class());
+
+        Material m2 = df.getMaterial(22);
+        assertNotNull(m2);
+        assertEquals("beslag og skruer", m2.getMaterial_class());
+
+        //Negative test
+        Material m3 = df.getMaterial(22222222);
+        assertNull(m3);
+    }
+
+    /**
+     * Test of getMaterials method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testGetMaterials() throws DataException
+    {
+        List<Material> materials = df.getMaterials();
+        assertNotNull(materials);
+        assertTrue(materials.size() >= 45);
+    }
+
+    
+
+    
+
+
+    
+    /**
+     * Test of addMaterial and deleteMaterial method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testAddMaterialAndDeleteMaterial() throws DataException
+    {
+        List<Material> MaterialList = df.getMaterials();
+        Material material = new Material("testMaterial", "stk", "træ", 10.00);
+
+        assertTrue(material.getId() == 0);
+        df.addMaterial(material);
+        assertTrue(material.getId() != 0);
+
+        List MaterialListAfter = df.getMaterials();
+        assertEquals(1 + MaterialList.size(), MaterialListAfter.size());
+        df.deleteMaterial(material);
+        assertEquals(MaterialList.size(), df.getMaterials().size());
+    }
+
+
+
+    
+
+    /**
+     * Test of updateMaterial method, of class DataFacade.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testUpdateMaterial() throws DataException
+    {
+        Material material = df.getMaterial(1);
+        assertEquals("25x150 mm trykimp. bræt", material.getName());
+        assertEquals(1, material.getId());
+        assertEquals(50.00, material.getPrice(), 0.01);
+
+        material.setPrice(25.00);
+        df.updateMaterial(material);
+
+        material = df.getMaterial(1);
+        assertEquals(25.00, material.getPrice(), 0.01);
+
+        material.setPrice(50.00);
+        df.updateMaterial(material);
+    }
+
+    
 }

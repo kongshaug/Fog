@@ -164,7 +164,7 @@ public class CalculateShed
         // 42 is retracted because the material for the door has already been added, a door is 84 cm therefor half is removed 
         int numberOfBræderForFrontBack = ((width - 42) / 7) * 2;
 
-        Part beklædningen = new Part(beklædning, 200, numberOfBræderForFrontBack, "beklædning til skurets for- og bagside");
+        Part beklædningen = new Part(beklædning, 200, numberOfBræderForFrontBack, "Beklædning til skurets for- og bagside");
         parts.add(beklædningen);
 
         int numberOfBræderForSides = (depth / 7) * 2;

@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
  */
 public class UpdateRooftypeCommand implements Command
 {
+
     private String target;
 
     public UpdateRooftypeCommand(String target)
@@ -42,15 +43,14 @@ public class UpdateRooftypeCommand implements Command
             int m1 = Integer.parseInt(m1_str);
             int m2 = Integer.parseInt(m2_str);
             Material material1 = manager.getMaterial(m1);
+            Material material2 = null;
 
             if (m2 != 0)
             {
-                Material material2 = manager.getMaterial(m2);
-                message = manager.updateRoofType(rooftype, name, material1, material2);
-            } else
-            {
-                message = manager.updateRoofTypeWith1Material(rooftype, name, material1);
+                material2 = manager.getMaterial(m2);
             }
+            
+            message = manager.updateRoofType(rooftype, name, material1, material2);
 
             request.setAttribute("message", message);
             return target;

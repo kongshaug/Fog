@@ -111,7 +111,7 @@ public class GenerateDrawing
      * @param carport object
      * @return drawing of shed seen from top
      */
-    public String drawShed(Carport carport)
+    private String drawShed(Carport carport)
     {
         int shedHight = carport.getShed().getDepth();
         int shedWidth = carport.getShed().getWidth();
@@ -152,7 +152,7 @@ public class GenerateDrawing
      * @param carport
      * @return returns the drawing of the carport seen from the side
      */
-    public String drawFront(Carport carport)
+    private String drawFront(Carport carport)
     {
         int hight = carport.getDepth();
         int width = carport.getWidth();
@@ -206,7 +206,7 @@ public class GenerateDrawing
      * @param carport
      * @return returns the drawing of the carport seen from the side
      */
-    public String drawSide(Carport carport)
+    private String drawSide(Carport carport)
     {
         int hight = carport.getDepth();
         int width = carport.getWidth();
