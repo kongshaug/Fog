@@ -563,7 +563,7 @@ public class FunctionManager
         {
             res += "Carporten må maksimum være 750 cm bred og 800 cm dyb\n";
         }
-        if (roofslope % 5 != 0)
+        if ( roofslope < 15 || roofslope > 45 || roofslope % 5 != 0)
         {
             res += "Vælg venligst en hældning fra menuen\n";
         }
@@ -578,6 +578,7 @@ public class FunctionManager
             carport.setWidth(carport_width);
             carport.getRoof().setSlope(roofslope);
             carport.getRoof().setType(rooftype);
+            
             if (carport.getShed() != null)
             {
                 if (shed_width == 0 && shed_depth == 0)
