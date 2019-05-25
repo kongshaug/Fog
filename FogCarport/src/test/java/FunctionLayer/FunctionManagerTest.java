@@ -772,6 +772,7 @@ public class FunctionManagerTest
     @Test
     public void testCalcShed() throws DataException
     {
+        //shed with sloped roof
         Roof roof = new Roof(15, fm.getRoofTypeById(2));
         Shed shed = new Shed(200, 200);
         Carport carport = new Carport(500, 450, roof, shed);
@@ -794,6 +795,20 @@ public class FunctionManagerTest
         assertEquals("Beklædning til skurets sider (skal skæres til efter ønsket placering)", carport.getShed().getParts().get(10).getDescription());
         assertEquals(56, carport.getShed().getParts().get(10).getQuantity());
         assertEquals(263, carport.getShed().getParts().get(10).getLength());
+        
+        //shed with flat roof
+        roof = new Roof(0, fm.getRoofTypeById(1));
+        shed = new Shed(200, 200);
+        carport = new Carport(500, 450, roof, shed);
+        
+        //The method calcShed has two methods, one for sloped roof and one for flat roof, each method puts 13 elements in the partlist,
+        fm.calcShed(carport);
+        assertEquals(13, carport.getShed().getParts().size());
+
+        //bekældning is same height as carport, so that the customer can choose where to place it
+        assertEquals("Beklædning til skurets sider", carport.getShed().getParts().get(10).getDescription());
+        assertEquals(56, carport.getShed().getParts().get(10).getQuantity());
+        assertEquals(200, carport.getShed().getParts().get(10).getLength());
     }
 
     /**
@@ -813,7 +828,7 @@ public class FunctionManagerTest
         drawingWithShed = fm.drawingOfRoof(carportWithShed);
         assertTrue(drawingWithShed.length() > 200);
 
-        roof = new Roof(15, fm.getRoofTypeById(2));
+        roof = new Roof(0, fm.getRoofTypeById(1));
         Carport carportWithoutShed = new Carport(500, 450, roof);
 
         String drawingWithoutShed = "";

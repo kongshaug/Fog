@@ -21,9 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -34,7 +32,7 @@ public class FunctionManager
 
     private static FunctionManager instance = null;
     private DataFacade db;
-    private Calculate c;
+    private CalculateCarport c;
     private CalculateRoof cr;
     private CalculatePackages cp;
     private CalculateShed cs;
@@ -48,9 +46,9 @@ public class FunctionManager
     {
         db = DataFacade.getInstance();
         cp = new CalculatePackages();
-        cr = new CalculateRoof(cp);
-        cs = new CalculateShed(cp);
-        c = new Calculate();
+        cr = new CalculateRoof(db, cp);
+        cs = new CalculateShed(db, cp);
+        c = new CalculateCarport(db);
         GD = new GenerateDrawing();
     }
 
@@ -67,7 +65,6 @@ public class FunctionManager
         }
         return instance;
     }
-
 
     /**
      *
@@ -103,7 +100,7 @@ public class FunctionManager
     {
         return db.getEmployeesAndAdmins();
     }
-    
+
     /**
      * finds the user in the database with the information passed
      *
@@ -227,7 +224,7 @@ public class FunctionManager
         }
         return res;
     }
-    
+
     /**
      * Updates information about a customer in the database
      *
@@ -459,12 +456,12 @@ public class FunctionManager
         }
         return res;
     }
-    
+
     public void GDPRCheck(List<Order> orders) throws ParseException, DataException
     {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.YEAR, -3); 
+        cal.add(Calendar.YEAR, -3);
         Date date3YearsAgo = cal.getTime();
         List<Order> oldOrders = new ArrayList<>();
 
@@ -478,7 +475,7 @@ public class FunctionManager
                 oldOrders.add(order);
             }
         }
-        
+
         for (Order oldOrder : oldOrders)
         {
             orders.remove(oldOrder);
@@ -494,9 +491,9 @@ public class FunctionManager
         db.removeOrder(order);
         db.removeCarport(order.getCarport());
         db.removeRoof(order.getCarport().getRoof());
-        
+
     }
-    
+
     /**
      * findes a order based on the id passed and returns the shipping status
      *
@@ -538,7 +535,7 @@ public class FunctionManager
     {
         db.updateStatusAndPaid(order_id, status, paid);
     }
-    
+
     /**
      * updates the information on a carport in the database
      *
@@ -563,7 +560,7 @@ public class FunctionManager
         {
             res += "Carporten må maksimum være 750 cm bred og 800 cm dyb\n";
         }
-        if ( roofslope < 15 || roofslope > 45 || roofslope % 5 != 0)
+        if (roofslope < 15 || roofslope > 45 || roofslope % 5 != 0)
         {
             res += "Vælg venligst en hældning fra menuen\n";
         }
@@ -578,7 +575,7 @@ public class FunctionManager
             carport.setWidth(carport_width);
             carport.getRoof().setSlope(roofslope);
             carport.getRoof().setType(rooftype);
-            
+
             if (carport.getShed() != null)
             {
                 if (shed_width == 0 && shed_depth == 0)
@@ -705,19 +702,35 @@ public class FunctionManager
 
         for (RoofType r : db.getRoofs())
         {
+            String name = r.getName();
             if (rooftype.getName().toLowerCase().equals(r.getName().toLowerCase()))
             {
                 res += "Tagtype med samme navn eksisterer allerede\n";
             }
-            if (rooftype.getM1() == r.getM1())
+            if (rooftype.getM1().getId() == r.getM1().getId())
             {
                 res += "Materialet er allerede tilknyttet en anden tagtype\n";
             }
-            if (r.getM2() != null)
+            if (rooftype.getM2() != null)
             {
-                if (rooftype.getM2() == r.getM2())
+                if (rooftype.getM2().getId() == r.getM1().getId())
                 {
                     res += "Materialet er allerede tilknyttet en anden tagtype\n";
+                }
+            }
+            if (r.getM2() != null)
+            {
+                if (rooftype.getM1().getId() == r.getM2().getId())
+                {
+                    res += "Materialet er allerede tilknyttet en anden tagtype\n";
+                }
+
+                if (rooftype.getM2() != null)
+                {
+                    if (rooftype.getM2().getId() == r.getM2().getId() || rooftype.getM2().getId() == r.getM1().getId())
+                    {
+                        res += "Materialet er allerede tilknyttet en anden tagtype\n";
+                    }
                 }
             }
         }
@@ -971,15 +984,7 @@ public class FunctionManager
     {
         if (carport.getWidth() <= 750 && carport.getDepth() <= 800)
         {
-            Map<Integer, Material> map = getMaterials();
-
-            Material pole = map.get(2);
-            Material rem = map.get(3);
-            Material bolts = map.get(26);
-            Material discs = map.get(27);
-
-            c.calculatepoles(carport, pole, bolts, discs);
-            c.calculateRem(carport, rem);
+            c.calcCarport(carport);
         }
     }
 
@@ -995,57 +1000,13 @@ public class FunctionManager
     {
         if (carport.getRoof().getType().getRoof_class().equals("flat"))
         {
-            calcFlatroof(carport);
+            cr.calculateFlatRoof(carport);
+            cr.calculatePlatsmo(carport);
+
         } else
         {
-            calcSlopeRoof(carport);
+            cr.calculateSlopeRoof(carport);
         }
-    }
-
-    private void calcFlatroof(Carport carport) throws DataException
-    {
-        Map<Integer, Material> map = getMaterials();
-
-        Material spær = map.get(3);
-        Material universalV = map.get(19);
-        Material universalH = map.get(18);
-        Material beslagSkruer = map.get(32);
-        Material lægte = map.get(7);
-        Material tagskruer = map.get(30);
-        Material understern = map.get(8);
-        Material overstern = map.get(9);
-        Material vandbræt = map.get(5);
-        Material skruer = map.get(23);
-        Material plastmo = map.get(12);
-        Material plastmotætning = map.get(42);
-
-        cr.calculateFlatRoof(carport, spær, universalV, universalH, beslagSkruer, lægte, tagskruer, understern, overstern, vandbræt, skruer);
-        cr.calculatePlatsmo(carport, plastmo, plastmotætning);
-    }
-
-    private void calcSlopeRoof(Carport carport) throws DataException
-    {
-        Map<Integer, Material> map = getMaterials();
-
-        Material spær = map.get(3);
-        Material taglægter = map.get(7);
-        Material spærbeslag = map.get(43);
-        Material beslagSkruerSpær = map.get(24);
-        Material skruer = map.get(25);
-        Material universalV = map.get(19);
-        Material universalH = map.get(18);
-        Material toplægteholder = map.get(15);
-        Material tegl = carport.getRoof().getType().getM2();
-        Material rygsten = carport.getRoof().getType().getM1();
-        Material rygstensbeslag = map.get(16);
-        Material beklædning = map.get(5);
-        Material vandbræt = map.get(5);
-        Material trykimpbræt = map.get(1);
-        Material skruerTotal = map.get(23);
-        Material skrue1 = map.get(28);
-        Material skrue2 = map.get(29);
-
-        cr.calculateSlopeRoof(carport, spær, taglægter, spærbeslag, beslagSkruerSpær, skruer, universalV, universalH, toplægteholder, tegl, rygsten, rygstensbeslag, beklædning, vandbræt, trykimpbræt, skruerTotal, skrue1, skrue2);
     }
 
     /**
@@ -1059,46 +1020,10 @@ public class FunctionManager
     {
         if (carport.getShed().getWidth() <= carport.getWidth() - 30 && carport.getShed().getDepth() <= carport.getDepth() - 30)
         {
-
-            Map<Integer, Material> map = getMaterials();
-
-            Material stolpe = map.get(2);
-            Material bræt = map.get(4);
-            Material vinkelbeslag = map.get(22);
-            Material skruer = map.get(32);
-            Material beklædning = map.get(5);
-            Material skrue1 = map.get(33);
-            Material skrue2 = map.get(34);
-            Material lægte = map.get(10);
-            Material stalddørsgrebene = map.get(20);
-            Material hængselet = map.get(21);
-            Material planker = map.get(5);
-
-            if (carport.getRoof().getSlope() == 0)
-
-            {
-                cs.calcShedFlatRoof(carport, stolpe, bræt, vinkelbeslag, skruer, beklædning, skrue1, skrue2, lægte, stalddørsgrebene, hængselet, planker);
-
-            } else
-            {
-                cs.calcShedSlopeRoof(carport, stolpe, bræt, vinkelbeslag, skruer, beklædning, skrue1, skrue2, lægte, stalddørsgrebene, hængselet, planker);
-            }
+           cs.calcShed(carport);
         }
     }
 
-    private Map<Integer, Material> getMaterials() throws DataException
-    {
-
-        Map<Integer, Material> map = new HashMap<>();
-
-        List<Material> materials = db.getMaterials();
-        for (Material material : materials)
-        {
-            map.put(material.getId(), material);
-        }
-        return map;
-    }
-    
     /**
      * Makes a drawing of a Roof for a Carport in SVG format
      *
