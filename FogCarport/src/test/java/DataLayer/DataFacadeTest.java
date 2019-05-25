@@ -495,17 +495,26 @@ public class DataFacadeTest
     public void testAddRoofTypeAndDeleteRoofType() throws DataException
     {
         List<RoofType> rooftypes = df.getRoofs();
+        //test 2 materials
         RoofType roof = new RoofType("TestRoof", "slope", df.getMaterial(1), df.getMaterial(2));
 
         assertTrue(roof.getId() == 0);
         df.addRoofType(roof);
         assertTrue(roof.getId() != 0);
-
+        
         //test deleteRoofType
         List<RoofType> rooftypesAfter = df.getRoofs();
         assertEquals(1 + rooftypes.size(), rooftypesAfter.size());
         df.deleteRoofType(roof);
         assertEquals(rooftypes.size(), df.getRoofs().size());
+        
+        //test 1 material
+        roof = new RoofType("TestRoof", "flat", df.getMaterial(1));
+        assertTrue(roof.getId() == 0);
+        df.addRoofType(roof);
+        assertTrue(roof.getId() != 0);
+        df.deleteRoofType(roof);
+        
     }
 
     /**

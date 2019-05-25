@@ -345,7 +345,7 @@ public class CalculateRoof implements Calculate
         parts.add(ToplægteHolder);
 
         //toplægte for the middle
-        Part toplægte = new Part(taglægte, depth, 1, "Toplægte til	montering af rygsten");
+        Part toplægte = new Part(taglægte, depth, 1, "Toplægte til montering af rygsten");
         parts.add(toplægte);
     }
 

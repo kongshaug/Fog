@@ -710,12 +710,14 @@ public class FunctionManager
             if (rooftype.getM1().getId() == r.getM1().getId())
             {
                 res += "Materialet er allerede tilknyttet en anden tagtype\n";
+                break;
             }
             if (rooftype.getM2() != null)
             {
                 if (rooftype.getM2().getId() == r.getM1().getId())
                 {
                     res += "Materialet er allerede tilknyttet en anden tagtype\n";
+                    break;
                 }
             }
             if (r.getM2() != null)
@@ -723,6 +725,7 @@ public class FunctionManager
                 if (rooftype.getM1().getId() == r.getM2().getId())
                 {
                     res += "Materialet er allerede tilknyttet en anden tagtype\n";
+                    break;
                 }
 
                 if (rooftype.getM2() != null)
@@ -730,6 +733,7 @@ public class FunctionManager
                     if (rooftype.getM2().getId() == r.getM2().getId() || rooftype.getM2().getId() == r.getM1().getId())
                     {
                         res += "Materialet er allerede tilknyttet en anden tagtype\n";
+                        break;
                     }
                 }
             }
@@ -792,23 +796,54 @@ public class FunctionManager
     {
         String res = "";
 
+        if (m1 == m2)
+        {
+            res += "Vælg venligst 2 forskellige materiale eller kun 1\n";
+        }
+        
         for (RoofType r : db.getRoofs())
         {
             if (name.toLowerCase().equals(r.getName().toLowerCase()) && rooftype.getId() != r.getId())
             {
                 res += "Tagtype med samme navn eksisterer allerede\n";
             }
-        }
-        if (m1 == rooftype.getM1())
-        {
-            res += "Materialet er allerede tilknyttet en anden tagtype\n";
-        }
-        if (m2 != null)
-        {
-            if (m2 == rooftype.getM2())
+
+            if (m2 != null)
             {
-                res += "Materialet er allerede tilknyttet en anden tagtype\n";
+                if (m1.getId() == r.getM1().getId() && rooftype.getId() != r.getId() || m2.getId() == r.getM1().getId() && rooftype.getId() != r.getId())
+                {
+                    res += "Materialet er allerede tilknyttet en anden tagtype\n";
+                    break;
+                }
+
+                if (r.getM2() != null)
+                {
+                    if (m1.getId() == r.getM2().getId() && rooftype.getId() != r.getId() || m2.getId() == r.getM2().getId() && rooftype.getId() != r.getId())
+                    {
+                        res += "Materialet er allerede tilknyttet en anden tagtype\n";
+                        break;
+                    }
+                }
+
+            } else
+            {
+                if (m1.getId() == r.getM1().getId() && rooftype.getId() != r.getId())
+                {
+                    res += "Materialet er allerede tilknyttet en anden tagtype\n";
+                    break;
+                }
+
+                if (r.getM2() != null)
+                {
+                    if (m1.getId() == r.getM2().getId() && rooftype.getId() != r.getId())
+                    {
+                        res += "Materialet er allerede tilknyttet en anden tagtype\n";
+                        break;
+                    }
+                }
+
             }
+
         }
 
         if (res.isEmpty())
@@ -956,7 +991,7 @@ public class FunctionManager
 
         if (price == 0)
         {
-            res += "Angiv venligst en ny pris for materialet\n";
+            res += "Angiv venligst en pris for materialet\n";
         }
 
         if (res.isEmpty())
@@ -1020,7 +1055,7 @@ public class FunctionManager
     {
         if (carport.getShed().getWidth() <= carport.getWidth() - 30 && carport.getShed().getDepth() <= carport.getDepth() - 30)
         {
-           cs.calcShed(carport);
+            cs.calcShed(carport);
         }
     }
 

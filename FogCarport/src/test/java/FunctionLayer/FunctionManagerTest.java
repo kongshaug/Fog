@@ -444,10 +444,10 @@ public class FunctionManagerTest
         //creating todays date from 3 years ago
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.YEAR, -3); 
+        cal.add(Calendar.YEAR, -3);
         Date date = cal.getTime();
         List<Order> orders = fm.getOrders();
- 
+
         User user = fm.getUser(1);
         RoofType rooftype = fm.getRoofTypeById(2);
         Roof roof = new Roof(15, rooftype);
@@ -455,7 +455,7 @@ public class FunctionManagerTest
         Order order = new Order(user, carport);
         order.setOrder_date(dateFormatter.format(date));
         orders.add(order);
-        
+
         int expResult = orders.size() - 1;
         fm.GDPRCheck(orders);
         assertEquals(expResult, orders.size());
@@ -463,12 +463,13 @@ public class FunctionManagerTest
 
     /**
      * Test of updateCarport method, of class FunctionManager.
+     *
      * @throws DataLayer.DataException
      */
     @Test
     public void testUpdateCarport() throws DataException
     {
-        
+
         Order order = fm.getOrder(1);
 
         int width = order.getCarport().getWidth();
@@ -476,38 +477,39 @@ public class FunctionManagerTest
         RoofType rooftype = order.getCarport().getRoof().getType();
         int slope = order.getCarport().getRoof().getSlope();
         Shed shed = order.getCarport().getShed();
-        
+
         //test updateCarport 
         String result = fm.updateCarport(order.getCarport(), 400, width, fm.getRoofTypeById(5), slope, 200, shed.getDepth());
         assertEquals("Carporten er opdateret", result);
         assertEquals(400, order.getCarport().getDepth());
         assertEquals(5, order.getCarport().getRoof().getType().getId());
-        
+
         //test updateCarport removing shed
         assertNotNull(order.getCarport().getShed());
         result = fm.updateCarport(order.getCarport(), depth, width, rooftype, slope, 0, 0);
         assertEquals("Carporten er opdateret og skuret er fjernet", result);
         assertNull(order.getCarport().getShed());
-        
+
         //test updateCarport 
-        result = fm.updateCarport(order.getCarport(), 400, width, fm.getRoofTypeById(5),slope, 0, 0);
+        result = fm.updateCarport(order.getCarport(), 400, width, fm.getRoofTypeById(5), slope, 0, 0);
         assertEquals("Carporten er opdateret", result);
         assertEquals(400, order.getCarport().getDepth());
         assertEquals(5, order.getCarport().getRoof().getType().getId());
-        
+
         //test updateCarport adding shed
         result = fm.updateCarport(order.getCarport(), depth, width, rooftype, slope, shed.getWidth(), shed.getDepth());
         assertEquals("Carporten er opdateret og skuret er tilføjet", result);
         assertNotNull(order.getCarport().getShed());
     }
-    
+
     /**
      * Test of updateCarport method, of class FunctionManager.
+     *
      * @throws DataLayer.DataException
      */
     @Test
     public void negativeTestUpdateCarport() throws DataException
-    {  
+    {
         Order order = fm.getOrder(1);
 
         int width = order.getCarport().getWidth();
@@ -515,26 +517,26 @@ public class FunctionManagerTest
         RoofType rooftype = order.getCarport().getRoof().getType();
         int slope = order.getCarport().getRoof().getSlope();
         Shed shed = order.getCarport().getShed();
-        
+
         //test depth must be < 800 and width must be < 750
         String result = fm.updateCarport(order.getCarport(), 900, 800, rooftype, slope, shed.getWidth(), shed.getDepth());
         assertEquals("Carporten må maksimum være 750 cm bred og 800 cm dyb\n", result);
-        
+
         //test slope can only be between 15 - 45 and divisible by 5
-        result = fm.updateCarport(order.getCarport(), depth, width,rooftype, 10 , shed.getWidth(), shed.getDepth());
+        result = fm.updateCarport(order.getCarport(), depth, width, rooftype, 10, shed.getWidth(), shed.getDepth());
         assertEquals("Vælg venligst en hældning fra menuen\n", result);
-        
-        result = fm.updateCarport(order.getCarport(), depth, width,rooftype, 50 , shed.getWidth(), shed.getDepth());
+
+        result = fm.updateCarport(order.getCarport(), depth, width, rooftype, 50, shed.getWidth(), shed.getDepth());
         assertEquals("Vælg venligst en hældning fra menuen\n", result);
-        
-        result = fm.updateCarport(order.getCarport(), depth, width,rooftype, 26 , shed.getWidth(), shed.getDepth());
+
+        result = fm.updateCarport(order.getCarport(), depth, width, rooftype, 26, shed.getWidth(), shed.getDepth());
         assertEquals("Vælg venligst en hældning fra menuen\n", result);
-        
+
         //test shedWidth and shedDepth must be least 30 less that the size of the carport 
-        result = fm.updateCarport(order.getCarport(), depth, width,rooftype, slope, width, depth);
+        result = fm.updateCarport(order.getCarport(), depth, width, rooftype, slope, width, depth);
         assertEquals("Skuret må minimum være 30 cm kortere end selve carporten på begge led\n", result);
     }
-    
+
     /**
      * Test of getSlopedRoofs method, of class FunctionManager.
      *
@@ -568,7 +570,9 @@ public class FunctionManagerTest
     }
 
     /**
-     * Test of addRoofType, addMaterial, deleteMaterial and deleteRoofType method, of class FunctionManager.
+     * Test of addRoofType, addMaterial, deleteMaterial and deleteRoofType
+     * method, of class FunctionManager.
+     *
      * @throws DataLayer.DataException
      */
     @Test
@@ -577,15 +581,15 @@ public class FunctionManagerTest
         //test addMaterial
         Material m1 = new Material("Testtagsten", "stk", "tag", 8);
         Material m2 = new Material("Testvinkelrygning", "stk", "tag", 8);
-        
+
         String expResult = "Materialet er tilføjet til listen";
         String result = fm.addMaterial(m1);
         assertEquals(expResult, result);
-        
+
         expResult = "Materialet er tilføjet til listen";
         result = fm.addMaterial(m2);
         assertEquals(expResult, result);
-        
+
         //test addRoofType
         RoofType rooftype = new RoofType("Testtag", "slope", m1, m2);
         expResult = "Tagtypen er tilføjet";
@@ -596,20 +600,21 @@ public class FunctionManagerTest
         expResult = "Tagtypen er slettet";
         result = fm.deleteRoofType(rooftype);
         assertEquals(expResult, result);
-        
+
         //test deleteMaterial
         expResult = "Materialet er slettet";
         result = fm.deleteMaterial(m1);
         assertEquals(expResult, result);
-        
+
         expResult = "Materialet er slettet";
         result = fm.deleteMaterial(m2);
         assertEquals(expResult, result);
-     
+
     }
-    
-     /**
+
+    /**
      * Test of addRoofType method, of class FunctionManager.
+     *
      * @throws DataLayer.DataException
      */
     @Test
@@ -617,7 +622,7 @@ public class FunctionManagerTest
     {
         Material m1 = new Material("Testtagsten", "stk", "tag", 8);
         Material m2 = new Material("Testvinkelrygning", "stk", "tag", 8);
-        
+
         //test RoofType name allready in use
         RoofType rooftype = new RoofType("Plasttrapezplader", "slope", m1, m2);
         String expResult = "Tagtype med samme navn eksisterer allerede\n";
@@ -629,48 +634,185 @@ public class FunctionManagerTest
         expResult = "Materialet er allerede tilknyttet en anden tagtype\n";
         result = fm.addRoofType(rooftype);
         assertEquals(expResult, result);
-        
+
         //test material allready in use (Material 2)
         rooftype = new RoofType("Testtag", "flat", m1, fm.getMaterial(12));
         expResult = "Materialet er allerede tilknyttet en anden tagtype\n";
         result = fm.addRoofType(rooftype);
         assertEquals(expResult, result);
-        
+
         //test roof class can only be "slope" or "flat"
         rooftype = new RoofType("Testtag", "test", m1, m2);
         expResult = "Vælg venligst imellem de to kategorier (fladt tag, tag med rejsning)\n";
         result = fm.addRoofType(rooftype);
         assertEquals(expResult, result);
-        
+
         //test must have two different materials, or just one
         rooftype = new RoofType("Testtag", "flat", m1, m1);
         expResult = "Vælg venligst to forskellige materialer eller kun en enkelt\n";
         result = fm.addRoofType(rooftype);
         assertEquals(expResult, result);
-     
     }
 
+    /**
+     * Test of updateRoofType method, of class FunctionManager.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testUpdateRoofType() throws DataException
+    {
+        RoofType roof = fm.getRoofTypeById(2);
 
-//    /**
-//     * Test of updateRoofType method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testUpdateRoofType() throws Exception
-//    {
-//       
-//    }
-//
-    //
+        String name = roof.getName();
+        Material m1 = roof.getM1();
+        Material m2 = roof.getM2();
 
-//    /**
-//     * Test of updateMaterial method, of class FunctionManager.
-//     */
-//    @Test
-//    public void testUpdateMaterial() throws Exception
-//    {
-//    
-//    }
-//
+        //test updateRoofType 
+        String result = fm.updateRoofType(roof, "Test", m1, fm.getMaterial(1));
+        assertEquals("Tagtypen er opdateret", result);
+        assertEquals("Test", roof.getName());
+        assertEquals(1, roof.getM2().getId());
+
+        fm.updateRoofType(roof, name, m1, m2);
+    }
+
+    /**
+     * Test of updateRoofType method, of class FunctionManager.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void negativeTestUpdateRoofType() throws DataException
+    {
+        RoofType roof = fm.getRoofTypeById(2);
+
+        String name = roof.getName();
+        Material m1 = roof.getM1();
+        Material m2 = roof.getM2();
+
+        //test m1 and m2 must not be the same
+        String expResult = "Vælg venligst 2 forskellige materiale eller kun 1\n";;
+        String result = fm.updateRoofType(roof, name, m1, m1);
+        assertEquals(expResult, result);
+
+        //test name must not allready be used
+        expResult = "Tagtype med samme navn eksisterer allerede\n";
+        result = fm.updateRoofType(roof, "Plasttrapezplader", m1, m2);
+        assertEquals(expResult, result);
+
+        //test material must not allready be in use
+        expResult = "Materialet er allerede tilknyttet en anden tagtype\n";
+        result = fm.updateRoofType(roof, name, m1, fm.getMaterial(12));
+        assertEquals(expResult, result);
+
+    }
+
+    /**
+     * Test of addRoofType method, of class FunctionManager.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void negativeTestAddMaterial() throws DataException
+    {
+        //test RoofType name allready in use
+        Material material = new Material("25x150 mm trykimp. bræt", "stk", "træ", 50);
+        String expResult = "Materiale med samme navn eksisterer allerede\n";
+        String result = fm.addMaterial(material);
+        assertEquals(expResult, result);
+
+        //test material name not empty
+        material = new Material("", "stk", "træ", 50);
+        expResult = "Udfyld venligst materialets navn\n";
+        result = fm.addMaterial(material);
+        assertEquals(expResult, result);
+
+        //test unit must only contain letters
+        material = new Material("Test", "1 stk", "træ", 50);
+        expResult = "Udfyld venligst en passende enhed for materialet\n";
+        result = fm.addMaterial(material);
+        assertEquals(expResult, result);
+
+        //test material class must only contain letters
+        material = new Material("Test", "stk", "1 træ", 50);
+        expResult = "Angiv venligst en passende kategori for materialet\n";
+        result = fm.addMaterial(material);
+        assertEquals(expResult, result);
+
+        //test price cant be 0
+        material = new Material("Test", "stk", "træ", 0);
+        expResult = "Angiv venligst en pris for materialet\n";
+        result = fm.addMaterial(material);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of updateMaterial method, of class FunctionManager.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testUpdateMaterial() throws DataException
+    {
+        Material m = fm.getMaterial(1);
+
+        String name = m.getName();
+        String unit = m.getUnit();
+        String m_class = m.getMaterial_class();
+        double price = m.getPrice();
+
+        //test updateMaterial
+        String result = fm.updateMaterial(m, "Test", unit, m_class, 13.0);
+        assertEquals("Materialet er opdateret", result);
+        assertEquals("Test", m.getName());
+        assertEquals(13.0, m.getPrice(), 0.01);
+
+        fm.updateMaterial(m, name, unit, m_class, price);
+    }
+
+    /**
+     * Test of updateRoofType method, of class FunctionManager.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void negativeTestUpdateMaterial() throws DataException
+    {
+        Material m = fm.getMaterial(1);
+
+        String name = m.getName();
+        String unit = m.getUnit();
+        String m_class = m.getMaterial_class();
+        double price = m.getPrice();
+
+        //test name must not allready be used
+        String expResult = "Materiale med samme navn eksisterer allerede\n";
+        String result = fm.updateMaterial(m, "Hulpladebeslag", unit, m_class, price);
+        assertEquals(expResult, result);
+
+        //test name must not be empty
+        expResult = "Udfyld venligst materialets nye navn\n";
+        result = fm.updateMaterial(m, "", unit, m_class, price);
+        assertEquals(expResult, result);
+
+        //test unit must only contain letters
+        expResult = "Udfyld venligst en passende enhed for materialet\n";
+        result = fm.updateMaterial(m, name, "1 stk", m_class, price);
+        assertEquals(expResult, result);
+
+        //test material class must only contain letters
+        expResult = "Angiv venligst en passende kategori for materialet\n";
+        result = fm.updateMaterial(m, name, unit, "1 træ", price);
+        assertEquals(expResult, result);
+
+        //test price cant be 0
+        expResult = "Angiv venligst en pris for materialet\n";
+        result = fm.updateMaterial(m, name, unit, m_class, 0);
+        assertEquals(expResult, result);
+
+    }
+
     /**
      * Test of calcCarport method, of class FunctionManager.
      *
@@ -743,6 +885,13 @@ public class FunctionManagerTest
         assertEquals(14, carport.getRoof().getParts().get(3).getQuantity());
         assertEquals(258, carport.getRoof().getParts().get(3).getLength());
 
+        roof = new Roof(15, fm.getRoofTypeById(6));
+        carport = new Carport(500, 450, roof);
+
+        fm.calcRoof(carport);
+        assertEquals("Eternit til montering på taget", carport.getRoof().getParts().get(11).getDescription());
+        assertEquals(65, carport.getRoof().getParts().get(11).getQuantity());
+
         roof = new Roof(0, fm.getRoofTypeById(1));
         carport = new Carport(500, 450, roof);
 
@@ -795,12 +944,12 @@ public class FunctionManagerTest
         assertEquals("Beklædning til skurets sider (skal skæres til efter ønsket placering)", carport.getShed().getParts().get(10).getDescription());
         assertEquals(56, carport.getShed().getParts().get(10).getQuantity());
         assertEquals(263, carport.getShed().getParts().get(10).getLength());
-        
+
         //shed with flat roof
         roof = new Roof(0, fm.getRoofTypeById(1));
         shed = new Shed(200, 200);
         carport = new Carport(500, 450, roof, shed);
-        
+
         //The method calcShed has two methods, one for sloped roof and one for flat roof, each method puts 13 elements in the partlist,
         fm.calcShed(carport);
         assertEquals(13, carport.getShed().getParts().size());
@@ -809,6 +958,24 @@ public class FunctionManagerTest
         assertEquals("Beklædning til skurets sider", carport.getShed().getParts().get(10).getDescription());
         assertEquals(56, carport.getShed().getParts().get(10).getQuantity());
         assertEquals(200, carport.getShed().getParts().get(10).getLength());
+    }
+
+    /**
+     * Test of calcCarport method, of class FunctionManager, test's if the
+     * carport's partlist is null if the mesurments is too big.
+     *
+     * @throws DataLayer.DataException
+     */
+    @Test
+    public void testTooBigCalcShed() throws DataException
+    {
+        Roof roof = new Roof(15, fm.getRoofTypeById(2));
+        Shed shed = new Shed(430, 480);
+        Carport carport = new Carport(500, 450, roof, shed);
+
+        //test shed must be 30cm less than the carport in depth and width
+        fm.calcShed(carport);
+        assertEquals(0, carport.getShed().getParts().size());
     }
 
     /**
@@ -822,6 +989,7 @@ public class FunctionManagerTest
         Roof roof = new Roof(15, fm.getRoofTypeById(2));
         Shed shed = new Shed(200, 200);
         Carport carportWithShed = new Carport(500, 450, roof, shed);
+        fm.calcCarport(carportWithShed);
 
         String drawingWithShed = "";
         assertEquals("", drawingWithShed);
@@ -830,6 +998,7 @@ public class FunctionManagerTest
 
         roof = new Roof(0, fm.getRoofTypeById(1));
         Carport carportWithoutShed = new Carport(500, 450, roof);
+        fm.calcCarport(carportWithoutShed);
 
         String drawingWithoutShed = "";
         assertEquals("", drawingWithoutShed);
