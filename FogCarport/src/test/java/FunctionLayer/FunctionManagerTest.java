@@ -609,42 +609,43 @@ public class FunctionManagerTest
     }
     
      /**
-     * Test of addRoofType, addMaterial, deleteMaterial and deleteRoofType method, of class FunctionManager.
+     * Test of addRoofType method, of class FunctionManager.
      * @throws DataLayer.DataException
      */
     @Test
-    public void negativeTestAddAndDeleteRoofTypeAndMaterial() throws DataException
+    public void negativeTestAddARoofType() throws DataException
     {
-        //test addMaterial
         Material m1 = new Material("Testtagsten", "stk", "tag", 8);
         Material m2 = new Material("Testvinkelrygning", "stk", "tag", 8);
         
-        String expResult = "Materialet er tilføjet til listen";
-        String result = fm.addMaterial(m1);
-        assertEquals(expResult, result);
-        
-        expResult = "Materialet er tilføjet til listen";
-        result = fm.addMaterial(m2);
-        assertEquals(expResult, result);
-        
-        //test addRoofType
-        RoofType rooftype = new RoofType("Testtag", "slope", m1, m2);
-        expResult = "Tagtypen er tilføjet";
-        result = fm.addRoofType(rooftype);
+        //test RoofType name allready in use
+        RoofType rooftype = new RoofType("Plasttrapezplader", "slope", m1, m2);
+        String expResult = "Tagtype med samme navn eksisterer allerede\n";
+        String result = fm.addRoofType(rooftype);
         assertEquals(expResult, result);
 
-        //test deleteRoofType
-        expResult = "Tagtypen er slettet";
-        result = fm.deleteRoofType(rooftype);
+        //test material allready in use (Material 1)
+        rooftype = new RoofType("Testtag", "flat", fm.getMaterial(12));
+        expResult = "Materialet er allerede tilknyttet en anden tagtype\n";
+        result = fm.addRoofType(rooftype);
         assertEquals(expResult, result);
         
-        //test deleteMaterial
-        expResult = "Materialet er slettet";
-        result = fm.deleteMaterial(m1);
+        //test material allready in use (Material 2)
+        rooftype = new RoofType("Testtag", "flat", m1, fm.getMaterial(12));
+        expResult = "Materialet er allerede tilknyttet en anden tagtype\n";
+        result = fm.addRoofType(rooftype);
         assertEquals(expResult, result);
         
-        expResult = "Materialet er slettet";
-        result = fm.deleteMaterial(m2);
+        //test roof class can only be "slope" or "flat"
+        rooftype = new RoofType("Testtag", "test", m1, m2);
+        expResult = "Vælg venligst imellem de to kategorier (fladt tag, tag med rejsning)\n";
+        result = fm.addRoofType(rooftype);
+        assertEquals(expResult, result);
+        
+        //test must have two different materials, or just one
+        rooftype = new RoofType("Testtag", "flat", m1, m1);
+        expResult = "Vælg venligst to forskellige materialer eller kun en enkelt\n";
+        result = fm.addRoofType(rooftype);
         assertEquals(expResult, result);
      
     }
