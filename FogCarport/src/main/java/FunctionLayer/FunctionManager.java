@@ -1066,8 +1066,8 @@ public class FunctionManager
      * @return a SVG format Drawing in a String format
      *
      */
-    public String drawingOfRoof(Carport carport)
+    public String drawCarport(Carport carport)
     {
-        return GD.drawRoofFromTop(carport);
+        return GD.drawCarport(carport);
     }
 }

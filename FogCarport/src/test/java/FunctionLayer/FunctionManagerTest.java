@@ -993,7 +993,7 @@ public class FunctionManagerTest
 
         String drawingWithShed = "";
         assertEquals("", drawingWithShed);
-        drawingWithShed = fm.drawingOfRoof(carportWithShed);
+        drawingWithShed = fm.drawCarport(carportWithShed);
         assertTrue(drawingWithShed.length() > 200);
 
         roof = new Roof(0, fm.getRoofTypeById(1));
@@ -1002,7 +1002,7 @@ public class FunctionManagerTest
 
         String drawingWithoutShed = "";
         assertEquals("", drawingWithoutShed);
-        drawingWithoutShed = fm.drawingOfRoof(carportWithoutShed);
+        drawingWithoutShed = fm.drawCarport(carportWithoutShed);
         assertTrue(drawingWithoutShed.length() < drawingWithShed.length());
     }
 }

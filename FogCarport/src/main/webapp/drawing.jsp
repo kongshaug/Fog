@@ -9,7 +9,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@include file = "header.jsp" %>
-<%    String roofDrawing = (String) session.getAttribute("roofDrawing");
+<%    String carportDrawing = (String) session.getAttribute("carportDrawing");
 %>
 <center id="partlist" class="partlist">
     <form action="Fog" method="POST">
@@ -21,7 +21,7 @@
         <br><br>
     </form>
     <div>
-        <%=roofDrawing%>
+        <%=carportDrawing%>
     </div>
 </center>
 <br><br><br>

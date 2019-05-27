@@ -20,7 +20,7 @@ public class GenerateDrawing
      * @param carport
      * @return
      */
-    public String drawRoofFromTop(Carport carport)
+    public String drawCarport(Carport carport)
     {
         int hight = carport.getDepth();
         int width = carport.getWidth();
@@ -275,40 +275,6 @@ public class GenerateDrawing
                 + "style=\"stroke:#000000; fill: #ffffff\"/>\n";
 
         drawing += "</svg>";
-        return drawing;
-    }
-
-    /**
-     * generates the svg drawing of the sloped roof for a carport seen from the
-     * side
-     *
-     * @param carport
-     * @return returns the slope roof drawing on top of the carport seen from
-     * the side
-     */
-    public String drawSlopeRoofSide(Carport carport)
-    {
-        int hight = carport.getDepth();
-        int width = carport.getWidth();
-        int roofHight = 0;
-
-        for (Part part : carport.getRoof().getParts())
-        {
-            if (3 == part.getId() && part.getDescription().equals("Midterstykker til spær"))
-            {
-                roofHight = part.getLength();
-            }
-        }
-
-        String drawing = "";
-
-        drawing += "<SVG viewBox=\"0 0 " + (roofHight) + " " + (width) + "\" width= \"100%\" hight= \"50%\">";
-
-        drawing += "<rect x=\"" + (0) + "\" y =\"0\" height=\"" + (roofHight) + "\" width=\"" + hight + "\""
-                + "style=\"stroke:#000000; fill: #ffffff\"/>\n";
-
-        drawing += "</svg>";
-
         return drawing;
     }
 }
