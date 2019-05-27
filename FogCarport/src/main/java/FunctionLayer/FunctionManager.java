@@ -524,16 +524,18 @@ public class FunctionManager
      * Updates the status of shippment and order status in the database of an
      * order
      *
-     * @param order_id int
+     * @param order
      * @param status enum
      * @param paid enum
      * @throws DataException
      * @see DataLayer.DataFacade#updateStatusAndPaid(int,
      * FunctionLayer.Enum.Status, FunctionLayer.Enum.Paid)
      */
-    public void updateStatusAndPaid(int order_id, Status status, Paid paid) throws DataException
+    public void updateStatusAndPaid(Order order, Status status, Paid paid) throws DataException
     {
-        db.updateStatusAndPaid(order_id, status, paid);
+        order.setPaid(paid);
+        order.setStatus(status);
+        db.updateStatusAndPaid(order.getOrder_id(), status, paid);
     }
 
     /**

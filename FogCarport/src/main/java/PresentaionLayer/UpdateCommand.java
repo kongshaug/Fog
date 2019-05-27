@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
  */
 public class UpdateCommand implements Command
 {
+
     private String target;
 
     public UpdateCommand(String target)
@@ -34,13 +35,11 @@ public class UpdateCommand implements Command
         Order order = (Order) session.getAttribute("order");
         String change_paid = request.getParameter("paid");
         String change_status = request.getParameter("status");
-        
+
         Paid paid = Paid.valueOf(change_paid);
         Status status = Status.valueOf(change_status);
-        
-        order.setPaid(paid);
-        order.setStatus(status);
-        manager.updateStatusAndPaid(order.getOrder_id(), status, paid);
+
+        manager.updateStatusAndPaid(order, status, paid);
 
         return target;
     }

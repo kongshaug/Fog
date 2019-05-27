@@ -33,7 +33,6 @@ public class PlaceOrderCommand implements Command
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
         HttpSession session = request.getSession();
-
         User user = (User) session.getAttribute("user");
         Carport carport = (Carport) session.getAttribute("carport");
 
