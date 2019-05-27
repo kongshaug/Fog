@@ -22,12 +22,31 @@ public class ViewPartlistCommand implements Command
     private String emptarget;
     private String custarget;
 
+    /**
+     * Ininitializing target and denied for the command
+     * 
+     * @param emptarget a String, reference to jsp
+     * @param custarget a String, reference to jsp
+     */
     public ViewPartlistCommand(String emptarget, String custarget)
     {
         this.emptarget = emptarget;
         this.custarget = custarget;
     }
 
+    /**
+     * 
+     * Retrieves attribute user from session 
+     * - forward to partlist.jsp if user is admin or employee
+     * - forward to customerpartlist.jsp if user is customer
+     * 
+     * @param request a HttpServletRequest
+     * @param response a HttpServletResponse
+     * @param manager an instance of FunctionManager
+     * @return emptarget or custarget
+     * @throws CommandException if an error occours
+     * @throws DataException if retrievel was not possible 
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {

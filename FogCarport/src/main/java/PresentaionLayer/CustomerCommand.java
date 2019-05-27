@@ -22,11 +22,29 @@ public class CustomerCommand implements Command
 {
     private String target;
 
+    /**
+     * Ininitializing target and denied for the command
+     * 
+     * @param target a String, reference to jsp
+     */
     public CustomerCommand(String target)
     {
         this.target = target;
     }
 
+    /**
+     * 
+     * Retrives the attribute User from session, a List of objects from the class
+     * Order with the user equal to the attribute user attached is also
+     * retrieved - forwards to customer.jsp
+     * 
+     * @param request a HttpServletRequest
+     * @param response a HttpServletResponse
+     * @param manager an instance of FunctionManager
+     * @return target
+     * @throws CommandException if an error occours
+     * @throws DataException if retrievel was not possible 
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {

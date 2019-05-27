@@ -20,11 +20,29 @@ public class CustomerOrderCommand implements Command
 {
     private String target;
 
+    /**
+     * Ininitializing target and denied for the command
+     * 
+     * @param target a String, reference to jsp
+     */
     public CustomerOrderCommand(String target)
     {
         this.target = target;
     }
 
+    /**
+     * 
+     * Retrieves parameter selected and uses this parameter as order_id for
+     * retrieval of an order for a specific User, and calculates the Carport -
+     * this order is saved in session as order, and forwards to customerorder.jsp.
+     * 
+     * @param request a HttpServletRequest
+     * @param response a HttpServletResponse
+     * @param manager an instance of FunctionManager
+     * @return target
+     * @throws CommandException if an error occours
+     * @throws DataException if retrievel was not possible 
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {

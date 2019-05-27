@@ -23,11 +23,33 @@ public class DrawingCommand implements Command
 {
     private String target;
 
+    /**
+     * Ininitializing target and denied for the command
+     * 
+     * @param target a String, reference to jsp
+     */
     public DrawingCommand(String target)
     {
         this.target = target;
     }
 
+    /**
+     * 
+     * Retrieves parameters depth, width, roof, type, slope, shedDepth, shedWidth and shed
+     * if an input is invalid - a String is returned as response - forwards to shop.jsp
+     * if input is valid - retrieves rooftype from database and generates a roof, the 
+     * carport is calculated a String (drawing of carport) is retuned as response
+     * - forward to drawing.jsp
+     * 
+     * 
+     * 
+     * @param request a HttpServletRequest
+     * @param response a HttpServletResponse
+     * @param manager an instance of FunctionManager
+     * @return target
+     * @throws CommandException if an error occours
+     * @throws DataException if retrievel was not possible 
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {

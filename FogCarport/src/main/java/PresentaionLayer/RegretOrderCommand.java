@@ -18,11 +18,27 @@ public class RegretOrderCommand implements Command
 {
     private String target;
 
+    /**
+     * Ininitializing target and denied for the command
+     * 
+     * @param target a String, reference to jsp
+     */
     public RegretOrderCommand(String target)
     {
         this.target = target;
     }
 
+    /**
+     * 
+     * The attribute carport is removed from session - forward to shop.jsp
+     * 
+     * @param request a HttpServletRequest
+     * @param response a HttpServletResponse
+     * @param manager an instance of FunctionManager
+     * @return target
+     * @throws CommandException if an error occours
+     * @throws DataException if retrievel was not possible  
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {

@@ -23,12 +23,32 @@ public class PlaceOrderCommand implements Command
     private String target;
     private String noUser;
 
+    /**
+     * Ininitializing target and denied for the command
+     * 
+     * @param target a String, reference to jsp
+     * @param noUser a String, reference to jsp
+     */
     public PlaceOrderCommand(String target, String noUser)
     {
         this.target = target;
         this.noUser = noUser;
     }
 
+    /**
+     * 
+     * Retrieves attributes user and carport from session creates object Order
+     * and adds object to the database, a string is returned as repsonse -
+     * forwards to placeorder.jsp 
+     * if nouser - forward to nouser.jsp
+     * 
+     * @param request a HttpServletRequest
+     * @param response a HttpServletResponse
+     * @param manager an instance of FunctionManager
+     * @return target or noUser
+     * @throws CommandException if an error occours
+     * @throws DataException if retrievel was not possible 
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {

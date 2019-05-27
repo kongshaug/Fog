@@ -23,12 +23,32 @@ public class AddRoofTypeCommand implements Command
     private String target;
     private String error;
 
+    /**
+     * Ininitializing target and denied for the command
+     * 
+     * @param target a String, reference to jsp
+     * @param error a String, reference to jsp
+     */
     public AddRoofTypeCommand(String target, String error)
     {
         this.error = error;
         this.target = target;
     }
 
+    /**
+     * 
+     * Retrieves parameters name, material1, material2 and roof_class creates, object RoofType
+     * and adds object to the database, a string is returned as repsonse -
+     * forwards to materials.jsp 
+     * If an error occurs a String is returnd as response - forwards to addrooftype.jsp 
+     * 
+     * @param request a HttpServletRequest
+     * @param response a HttpServletResponse
+     * @param manager an instance of FunctionManager
+     * @return target or error
+     * @throws CommandException if an error occours
+     * @throws DataException if retrievel was not possible 
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {

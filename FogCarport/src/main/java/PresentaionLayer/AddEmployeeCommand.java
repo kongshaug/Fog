@@ -23,11 +23,33 @@ public class AddEmployeeCommand implements Command
     private String target;
     private String denied;
 
+    /**
+     * Ininitializing target and denied for the command
+     * 
+     * @param target a String, reference to jsp
+     * @param denied a String, reference to jsp
+     */
     public AddEmployeeCommand(String target, String denied)
     {
         this.target = target;
+        this.denied = denied;
     }
 
+    /**
+     * 
+     * If access is denied, forwards to employee.jsp 
+     * Retrieves parameters email, name, address, zipcode, phone and role, creates object User
+     * and adds object as employee to the database, a string is returned as repsonse -
+     * forwards to addemployee.jsp 
+     * 
+     * @param request a HttpServletRequest
+     * @param response a HttpServletResponse
+     * @param manager an instance of FunctionManager
+     * @return target or denied
+     * @throws CommandException if an error occours
+     * @throws DataException if retrievel was not possible 
+     * @see FunctionLayer.FunctionManager#newUser(FunctionLayer.HelpingClasses.User) 
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
