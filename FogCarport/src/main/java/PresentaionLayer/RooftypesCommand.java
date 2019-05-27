@@ -40,7 +40,7 @@ public class RooftypesCommand implements Command
         if (user.getRole().equals(Role.ADMIN) || user.getRole().equals(Role.EMPLOYEE))
         {
             List<RoofType> rooftypes = manager.getRoofs();
-            session.setAttribute("rooftypes", rooftypes);
+            request.setAttribute("rooftypes", rooftypes);
             return target;
         } else
         {

@@ -9,7 +9,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@include file = "header.jsp" %>
-<%    String carportDrawing = (String) session.getAttribute("carportDrawing");
+<%    String carportDrawing = (String) request.getAttribute("carportDrawing");
 %>
 <center id="partlist" class="partlist">
     <form action="Fog" method="POST">

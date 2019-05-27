@@ -13,7 +13,8 @@
     <center class="order">
         <div>
             <h1>Order historik</h1>
-            <%                List<Order> orders = (List<Order>) session.getAttribute("orders");
+            <%                
+                List<Order> orders = (List<Order>) request.getAttribute("orders");
                 for (Order o : orders)
                 {
                     out.println("<button name=\"command\" value=\"customerorder\" onclick=\"setId(" + o.getOrder_id() + ")\">" + o + "</button>");

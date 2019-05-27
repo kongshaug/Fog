@@ -19,7 +19,7 @@
                     out.println(message + "<br><br>");
                 }
 
-                List<User> users = (List<User>) session.getAttribute("users");
+                List<User> users = (List<User>) request.getAttribute("users");
                 for (User u : users)
                 {
                     out.println("<button name=\"command\" value=\"employeeinfo\" onclick=\"setId(" + u.getId() + ")\">" + u + "</button>");

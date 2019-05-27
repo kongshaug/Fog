@@ -100,7 +100,7 @@ public class DrawingCommand implements Command
             String carportDrawing = manager.drawCarport(carport);
 
             session.setAttribute("carport", carport);
-            session.setAttribute("carportDrawing", carportDrawing);
+            request.setAttribute("carportDrawing", carportDrawing);
 
             return target;
 

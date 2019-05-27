@@ -29,7 +29,6 @@ public class DeleteMaterialCommand implements Command
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
-        HttpSession session = request.getSession();
         String material_str = request.getParameter("material");
 
         if (material_str == null)
@@ -47,7 +46,7 @@ public class DeleteMaterialCommand implements Command
         if (message.equals("Materialet er slettet"))
         {
             List<Material> materials = manager.getAllMaterials();
-            session.setAttribute("materials", materials);
+            request.setAttribute("materials", materials);
         }
         return target;
     }

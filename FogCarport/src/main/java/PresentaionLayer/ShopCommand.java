@@ -28,11 +28,10 @@ public class ShopCommand implements Command
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataLayer.DataException
     {
-        HttpSession session = request.getSession();
         List<RoofType> slopedRoofs = manager.getSlopedRoofs();
         List<RoofType> flatRoofs = manager.getFlatRoofs();
-        session.setAttribute("slopedroofs", slopedRoofs);
-        session.setAttribute("flatroofs", flatRoofs);
+        request.setAttribute("slopedroofs", slopedRoofs);
+        request.setAttribute("flatroofs", flatRoofs);
 
         return target;
     }

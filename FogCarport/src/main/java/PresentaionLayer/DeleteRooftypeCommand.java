@@ -29,7 +29,6 @@ public class DeleteRooftypeCommand implements Command
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
-        HttpSession session = request.getSession();
         String rooftype_str = request.getParameter("rooftype");
 
         if (rooftype_str == null)
@@ -47,7 +46,7 @@ public class DeleteRooftypeCommand implements Command
         if (message.equals("Tagtypen er slettet"))
         {
             List<RoofType> roofTypes = manager.getRoofs();
-            session.setAttribute("rooftypes", roofTypes);
+            request.setAttribute("rooftypes", roofTypes);
         }
         return target;
     }
