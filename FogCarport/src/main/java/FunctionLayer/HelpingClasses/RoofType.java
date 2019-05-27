@@ -121,15 +121,6 @@ public class RoofType
     {
         return roof_class;
     }
-    
-    /**
-     * Sets the class of the rooftype as a String
-     * @param roof_class String
-     */
-    public void setRoof_class(String roof_class)
-    {
-        this.roof_class = roof_class;
-    }
 
     /**
      *

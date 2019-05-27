@@ -25,19 +25,26 @@ public class CalculateCarport implements Calculate
     private DataFacade db;
     private Map<Integer, Material> map;
 
+    /**
+     *
+     * 
+     * @param db 
+     * @throws DataLayer.DataException
+     */
     public CalculateCarport(DataFacade db) throws DataException
     {
         this.db = db;
         this.map = getMaterials();
     }
-    
+
     public void calcCarport(Carport carport)
     {
         calculatepoles(carport);
         calculateRem(carport);
     }
+
     /**
-     * Valculates the amount of poles, bolts and discs for the poles needed to
+     * Calculates the amount of poles, bolts and discs for the poles needed to
      * bouild the carport and adds it to the list of materials needed.
      *
      * @param carport object
@@ -47,7 +54,7 @@ public class CalculateCarport implements Calculate
         Material pole = map.get(2);
         Material bolt = map.get(26);
         Material disc = map.get(27);
-        
+
         int depth = carport.getDepth();
 
         ArrayList<Part> parts = carport.getParts();
@@ -74,7 +81,7 @@ public class CalculateCarport implements Calculate
     private void calculateRem(Carport carport)
     {
         Material rem = map.get(3);
-        
+
         int depth = carport.getDepth();
 
         ArrayList<Part> parts = carport.getParts();

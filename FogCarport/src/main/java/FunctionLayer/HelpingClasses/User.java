@@ -23,7 +23,8 @@ public class User
     private Role role;
 
     /**
-     * constructor for user from database
+     * Initializes the values of a newly created User.
+     * 
      * @param id int
      * @param email String
      * @param password String
@@ -46,7 +47,9 @@ public class User
     }
 
     /**
-     * constructor for user
+     * 
+     * Initializes the values of a newly created User.
+     * 
      * @param email String
      * @param password String
      * @param name String
@@ -67,8 +70,8 @@ public class User
     }
 
     /**
-     * the role identifyes if the user is a customer, employee or admin
-     * @return the role of the user
+     * The user's role identifies as a customer, employee or admin
+     * @return the role of the User
      */
     public Role getRole()
     {
@@ -77,7 +80,7 @@ public class User
     
     /**
      *
-     * @return the id of the user
+     * @return the id
      */
     public int getId()
     {

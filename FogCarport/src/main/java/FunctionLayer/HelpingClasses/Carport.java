@@ -154,15 +154,6 @@ public class Carport
     }
 
     /**
-     * sets the roof of a carport on the carport object
-     * @param roof
-     */
-    public void setRoof(Roof roof)
-    {
-        this.roof = roof;
-    }
-
-    /**
      * 
      * @return the shed of  a carport
      */
@@ -238,12 +229,4 @@ public class Carport
         return total_price;
     }
     
-    /**
-     * Change the price of a carport
-     * @param total_price integer
-     */
-    public void setTotal_price(double total_price)
-    {
-        this.total_price = total_price;
-    }
 }

@@ -88,30 +88,12 @@ public class Order
     }
 
     /**
-     * sets the user associated with the order
-     * @param user
-     */
-    public void setUser(User user)
-    {
-        this.user = user;
-    }
-
-    /**
      * gets the carport associated with the order
      * @return user associated with order
      */
     public Carport getCarport()
     {
         return carport;
-    }
-
-    /**
-     * sets the carport associated with the order
-     * @param carport
-     */
-    public void setCarport(Carport carport)
-    {
-        this.carport = carport;
     }
 
     /**

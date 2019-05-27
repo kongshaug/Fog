@@ -135,7 +135,7 @@ public class DataFacade
     /**
      * Updates the information about a user in the database
      *
-     * @param user is used to detect the specific User
+     * @param user is used to detect the specific User - the User to be updated
      * @throws DataException if retrieval or update of user is not possible
      * @see DataLayer.UserMapper#updateUser(FunctionLayer.HelpingClasses.User)
      */
@@ -148,7 +148,7 @@ public class DataFacade
      * Updates the password of a specific User
      *
      * @param user_id is used to detect the specific User 
-     * @param password String
+     * @param password a String to be updated
      * @throws DataException if retrieval or update of user is not possible
      * @see DataLayer.UserMapper#updatePassword(int, java.lang.String)
      */
@@ -172,7 +172,7 @@ public class DataFacade
     /**
      * Retrieves all orders from the database
      *
-     * @return  a list of object from the class Order
+     * @return a list of object from the class Order
      * @throws DataException if retrieval not possible
      */
     public List<Order> getOrders() throws DataException
@@ -253,10 +253,9 @@ public class DataFacade
     }
 
     /**
-     * places an order in the database the method findes out if the order has a
-     * shed or not and puts it in the database accordingly
+     * The carport is inserted in the database with or without a shed
      *
-     * @param carport object
+     * @param carport - the carport to be inserted in database 
      * @throws DataException if initializing not possible
      * @see DataLayer.CarportMapper#orderCarportWithShed(FunctionLayer.HelpingClasses.Carport)
      * @see DataLayer.CarportMapper#orderCarportWithoutShed(FunctionLayer.HelpingClasses.Carport)
@@ -273,9 +272,8 @@ public class DataFacade
     }
 
     /**
-     * Removes a carport from the database
      *
-     * @param carport object
+     * @param carport the carport to be removed in database 
      * @throws DataException if execute is not possible
      * @see DataLayer.CarportMapper#removeCarport(FunctionLayer.HelpingClasses.Carport)
      */
@@ -285,11 +283,10 @@ public class DataFacade
     }
 
     /**
-     * *deletes the id of a shed in the database from the caport this method is
-     * used to remove the forain key in order to be able to delete the shed
-     * afterwards, and removes a shed from the database
+     * Removes the shed_id in the database from the carport,
+     * for thereafter to be able to remove the shed in database
      *
-     * @param carport
+     * @param carport - the carport where shed_id and shed are removed from in database 
      * @throws DataException if execute is not possible
      * @see DataLayer.CarportMapper#removeShed(FunctionLayer.HelpingClasses.Shed)
      * @see DataLayer.CarportMapper#removeShedId(FunctionLayer.HelpingClasses.Carport)
@@ -301,9 +298,8 @@ public class DataFacade
     }
 
     /**
-     * removes a roof in the database
      *
-     * @param roof object
+     * @param roof the carport to be removed in database 
      * @throws DataException if execute is not possible
      * @see DataLayer.CarportMapper#removeRoof(FunctionLayer.HelpingClasses.Roof)
      */
@@ -313,10 +309,10 @@ public class DataFacade
     }
 
     /**
-     * updates information on a carport in the database also updates information
-     * on the roof and shead associated with the carport
+     * Updates information on a carport in the database also updates information
+     * on the roof and shed connected with the carport
      *
-     * @param carport object
+     * @param carport an object from the class Carport - the Carport to be updated
      * @throws DataException if retrieval or update of carport is not possible
      * @see DataLayer.CarportMapper#updateCarport(FunctionLayer.HelpingClasses.Carport)
      */
@@ -331,11 +327,9 @@ public class DataFacade
     }
 
     /**
-     * Gets a single roof from the database Finds the roof with the same id as
-     * the paramater entered
      *
-     * @param id integer
-     * @return a single roof with a specific id
+     * @param id an integer - is used to detect the specific RoofType
+     * @return an object from the class RoofType
      * @throws DataException if retrieval not possible
      * @see DataLayer.MaterialMapper#getRoof(int)
      */
@@ -345,9 +339,8 @@ public class DataFacade
     }
 
     /**
-     * gets all the roofs from the database
      *
-     * @return list of roofs from the database
+     * @return a list of objects from the class RoofType
      * @throws DataException if retrieval not possible
      * @see DataLayer.MaterialMapper#getRoofs()
      */
@@ -357,12 +350,10 @@ public class DataFacade
     }
 
     /**
-     * adds a new roof type in the database
      *
-     * @param rooftype Object
+     * @param rooftype the RoofType to insert in database
      * @throws DataException if insert is not possible
-     * @see
-     * DataLayer.MaterialMapper#addRoofType(FunctionLayer.HelpingClasses.RoofType)
+     * @see DataLayer.MaterialMapper#addRoofType(FunctionLayer.HelpingClasses.RoofType)
      */
     public void addRoofType(RoofType rooftype) throws DataException
     {
@@ -370,9 +361,7 @@ public class DataFacade
     }
 
     /**
-     * deletes a roof type in the database
-     *
-     * @param rooftype Object
+     * @param rooftype the RoofType to remove in database
      * @throws DataException if execute is not possible
      * @see DataLayer.MaterialMapper#deleteRooftype(FunctionLayer.HelpingClasses.RoofType)
      */
@@ -382,9 +371,10 @@ public class DataFacade
     }
 
     /**
-     * Updates information on a roof rype in the database
-     *
-     * @param rooftype Object
+     * Checks if the rooftype has one or two materials, 
+     * and updates information on a rooftype in the database.
+     * 
+     * @param rooftype an object from the class RoofType - the RoofType to be updated
      * @throws DataException if retrieval or update of rooftype is not possible
      * @see DataLayer.MaterialMapper#updateRoofType(FunctionLayer.HelpingClasses.RoofType)
      */
@@ -400,11 +390,9 @@ public class DataFacade
     }
 
     /**
-     * Findes and returns a material from the database that has the same id as
-     * the paramater id passed when calling the method
      *
-     * @param material_id
-     * @return a singel material from the database
+     * @param material_id an integer - is used to detect the specific Material
+     * @return an object from the class Material
      * @throws DataException if retrieval not possible
      * @see DataLayer.MaterialMapper#getMaterial(int)
      */
@@ -414,11 +402,9 @@ public class DataFacade
     }
 
     /**
-     * findes and returns a material from the database that has the same name as
-     * the paramater name passed when calling the method
      *
-     * @param material_name String
-     * @return a singel material from the database
+     * @param material_name a String - is used to detect the specific Material
+     * @return an object from the class Material
      * @throws DataException if retrieval not possible
      * @see DataLayer.MaterialMapper#getMaterial(java.lang.String)
      */
@@ -428,9 +414,8 @@ public class DataFacade
     }
 
     /**
-     * Gets all the materials in the database in a list
-     *
-     * @return All materials from the database as a list
+     * 
+     * @return a list of objects from the class Material
      * @throws DataException if retrieval not possible
      * @see DataLayer.MaterialMapper#getMaterials()
      */
@@ -440,9 +425,8 @@ public class DataFacade
     }
 
     /**
-     * adds a new material in the database
      *
-     * @param newMaterial
+     * @param newMaterial the Material to insert in database
      * @throws DataException if insert is not possible
      * @see DataLayer.MaterialMapper#addMaterial(FunctionLayer.HelpingClasses.Material)
      */
@@ -452,9 +436,8 @@ public class DataFacade
     }
 
     /**
-     * Removes a material from the database
      *
-     * @param material object
+     * @param material the Material to delete in database
      * @throws DataException if execute is not possible
      * @see DataLayer.MaterialMapper#deleteMaterial(FunctionLayer.HelpingClasses.Material)
      */
@@ -464,9 +447,8 @@ public class DataFacade
     }
 
     /**
-     * updates information on the material passed in the database
-     *
-     * @param material object
+     * 
+     * @param material an object from the class Material - the Material to be updated
      * @throws DataException if retrieval or update of material is not possible
      * @see DataLayer.MaterialMapper#updateMaterial(FunctionLayer.HelpingClasses.Material)
      */
