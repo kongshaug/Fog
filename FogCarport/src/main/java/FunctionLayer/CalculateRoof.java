@@ -28,10 +28,13 @@ public class CalculateRoof implements Calculate
     private Map<Integer, Material> map;
 
     /**
-     *
-     * @param db
-     * @param cp
-     * @throws DataLayer.DataException
+     * Used for ininitializing parameter DataFacade 
+     * as db and CalculatesPackages as cp
+     * and create a map with all materials.
+     * 
+     * @param db an instance of the class DataFacade
+     * @param cp an object of the class CalculatePackages
+     * @throws DataLayer.DataException if initializing not possible
      */
     public CalculateRoof(DataFacade db, CalculatePackages cp) throws DataException
     {
@@ -41,10 +44,11 @@ public class CalculateRoof implements Calculate
     }
 
     /**
-     * Calculates all the materials needed to make a flat roof and puts it in
-     * the list of materials in the carport object
+     * Retrives the material from the map, calculate the amount 
+     * of used materials needed to build a flat roof and adds the materials
+     * to the ArrayList of parts to the roof.
      *
-     * @param carport Object
+     * @param carport an object - calculate the materials for a flat roof connected to the specific carport
      */
     public void calculateFlatRoof(Carport carport)
     {
@@ -154,10 +158,12 @@ public class CalculateRoof implements Calculate
     }
 
     /**
-     * if the roof of a carport is flat the palstsmo plates are calculatet to
-     * put on the roof of the carport
+     * 
+     * Retrives the material from the map, calculate the amount 
+     * of plastmo needed for a flat roof and adds the materials
+     * to the ArrayList of parts to the roof.
      *
-     * @param carport
+     * @param carport an object - calculate the materials for a flat roof connected to the specific carport
      */
     public void calculatePlatsmo(Carport carport)
     {
@@ -187,11 +193,11 @@ public class CalculateRoof implements Calculate
     }
 
     /**
-     * If the roof is sloped this method calculates all the materials needed to
-     * make the roof and puts it in the list of materials needed in the roof
-     * object
+     * Retrives the material from the map, calculate the amount 
+     * of materials needed to build a slope roof and adds the materials
+     * to the ArrayList of parts to the roof.
      *
-     * @param carport
+     * @param carport an object - calculate the materials for a sloped roof connected to the specific carport
      */
     public void calculateSlopeRoof(Carport carport)
     {
@@ -207,10 +213,6 @@ public class CalculateRoof implements Calculate
         ArrayList<Part> parts = carport.getRoof().getParts();
 
         //length of roof from edge to top
-        //which one? --- find out in next episode
-        //double angleinradians = slope * Math.PI / 180.0;
-        //  double halfRooff = (width / 2) / angleinradians;
-        //cos(A)/b=c HHHHEREre
         double cosAngle = Math.cos(Math.toRadians(slope));
         double halfRoofD = (width / 2) / cosAngle;
         int halfRoof = (int) halfRoofD;
@@ -448,6 +450,14 @@ public class CalculateRoof implements Calculate
         parts.add(inderbrætSkruer);
     }
 
+    /**
+     * Retrives a list of materials from the database 
+     * and puts the material_id of the material, 
+     * together with the material in a Hashmap
+     * 
+     * @return a materialMap
+     * @throws DataException if retrival is not possible
+     */
     @Override
     public Map<Integer, Material> getMaterials() throws DataException
     {

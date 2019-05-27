@@ -8,6 +8,11 @@ package FunctionLayer.Enum;
  *
  * @author aamandajuhl
  */
+
+/** 
+ * 
+ * Tells the status of the order.
+ */
 public enum Status
 {
     MODTAGET, BEHANDLES, AFBESTILT, SENDT, LEVERET

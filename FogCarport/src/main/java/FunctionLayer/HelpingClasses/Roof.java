@@ -58,8 +58,9 @@ public class Roof
     }
 
     /**
-     * Sets the id to id
-     * @param id
+     * Sets the id to id.
+     * 
+     * @param id an Integer
      */
     public void setId(int id)
     {
@@ -77,6 +78,7 @@ public class Roof
 
     /**
      * Sets an Arraylist of objects from the class Part.
+     * 
      * @param parts an ArrayList
      */
     public void setParts(ArrayList<Part> parts)
@@ -104,8 +106,9 @@ public class Roof
     }
 
     /**
-     * Sets the slope to slope
-     * @param slope
+     * Sets the slope to slope.
+     * 
+     * @param slope an Integer
      */
     public void setSlope(int slope)
     {
@@ -122,8 +125,9 @@ public class Roof
     }
 
     /**
-     * Sets the type to type
-     * @param type
+     * Sets the type to type.
+     * 
+     * @param type an object of the class RoofType
      */
     public void setType(RoofType type)
     {

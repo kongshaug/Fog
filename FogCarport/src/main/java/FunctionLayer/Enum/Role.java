@@ -8,6 +8,11 @@ package FunctionLayer.Enum;
  *
  * @author aamandajuhl
  */
+
+/**
+ * 
+ * Tells what role the user is.
+ */
 public enum Role
 {
     CUSTOMER, EMPLOYEE, ADMIN

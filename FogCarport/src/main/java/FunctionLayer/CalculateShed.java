@@ -28,10 +28,12 @@ public class CalculateShed implements Calculate
     private Map<Integer, Material> map;
 
     /**
-     *
-     * @param db
-     * @param cp
-     * @throws DataLayer.DataException
+     * Used for ininitializing parameter DataFacade as db, 
+     * CalculatePackages as cp and create a map with all materials.
+     * 
+     * @param db an instance of the class DataFacade
+     * @param cp an object of the class CalculatePackages
+     * @throws DataLayer.DataException if initializing not possible
      */
     public CalculateShed(DataFacade db, CalculatePackages cp) throws DataException
     {
@@ -41,10 +43,12 @@ public class CalculateShed implements Calculate
     }
 
     /**
-     * Calculates what materials needed to bouild the shead for a carport and
-     * puts it in the list of materials for the shed
+     * 
+     * Retrives the material from the map, calculate the amount 
+     * of used materials needed to build a shed and adds the materials
+     * to the ArrayList of parts to the shed.
      *
-     * @param carport Objecy
+     * @param carport an object - calculate the materials for a flat roof connected to the specific carport
      */
     public void calcShed(Carport carport)
     {
@@ -62,7 +66,6 @@ public class CalculateShed implements Calculate
         ArrayList<Part> parts = carport.getShed().getParts();
         ArrayList<Integer> skruerForDoor = calculatedoorForShed(carport);
 
-        // PUT HERE:  caluclatdoorForShed();
         //calculate poles, 1 in each corner and 1 by each side of the door
         Part poles = new Part(stolpe, 300, 6, "Stolper til hjørner af skur og siderne af døren til skuret");
         parts.add(poles);

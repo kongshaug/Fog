@@ -27,9 +27,11 @@ public class CalculateCarport implements Calculate
 
     /**
      *
+     * Used for ininitializing parameter DataFacade as db
+     * and create a map with all materials.
      * 
-     * @param db 
-     * @throws DataLayer.DataException
+     * @param db an instance of the class DataFacade
+     * @throws DataLayer.DataException if initializing not possible
      */
     public CalculateCarport(DataFacade db) throws DataException
     {
@@ -37,17 +39,24 @@ public class CalculateCarport implements Calculate
         this.map = getMaterials();
     }
 
-    public void calcCarport(Carport carport)
+    /**
+     * Calculates the materials used for a carport.
+     * 
+     * @param carport an object - calculate the materials for a specific carport 
+     * @throws DataLayer.DataException if initializing not possible
+     */
+    public void calcCarport(Carport carport) throws DataException
     {
         calculatepoles(carport);
         calculateRem(carport);
     }
 
     /**
-     * Calculates the amount of poles, bolts and discs for the poles needed to
-     * bouild the carport and adds it to the list of materials needed.
+     * Retrives the material from the map, calculate the amount 
+     * of used materials needed to build the carport and adds the materials
+     * to the ArrayList of parts to the carport.
      *
-     * @param carport object
+     * @param carport an object 
      */
     private void calculatepoles(Carport carport)
     {
@@ -75,8 +84,8 @@ public class CalculateCarport implements Calculate
      * Calculates the length of the rem needed to bouild the carport and adds it
      * to the list of materials needed.
      *
-     * @param carport object
-     * @param rem Material
+     * @param carport an object
+     * @param rem an Material
      */
     private void calculateRem(Carport carport)
     {
@@ -94,6 +103,14 @@ public class CalculateCarport implements Calculate
         carport.setParts(parts);
     }
 
+    /**
+     * Retrives a list of materials from the database 
+     * and puts the material_id of the material, 
+     * together with the material in a Hashmap
+     * 
+     * @return a materialMap
+     * @throws DataException if retrival is not possible
+     */
     @Override
     public Map<Integer, Material> getMaterials() throws DataException
     {

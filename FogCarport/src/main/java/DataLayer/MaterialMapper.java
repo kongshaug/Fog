@@ -25,7 +25,7 @@ public class MaterialMapper
      * Creates and initializes a newly created DBConnector for further use
      * in methods.
      *
-     * @param dbc
+     * @param dbc an object of the class DBConnector
      * @throws DataException DataException if initializing not possible
      */
     public MaterialMapper(DBConnector dbc) throws DataException

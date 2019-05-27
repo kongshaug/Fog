@@ -13,10 +13,10 @@ public class CalculatePackages
 {
 
     /**
-     * Calculates the number of packages of screws needed.
+     * Calculates the number of packages, that contains 100 screws.
      * 
-     * @param amount int
-     * @return Number of packages needed
+     * @param amount an Integer
+     * @return number of packages needed
      */
     public Integer calcPackage100(int amount)
     {
@@ -29,9 +29,10 @@ public class CalculatePackages
     }
 
     /**
-     *  Calculates the number of packages of screws needed.
-     * @param amount int
-     * @return Number of packages needed
+     * Calculates the number of packages, that contains 200 screws.
+     * 
+     * @param amount an Integer
+     * @return number of packages needed
      */
     public Integer calcPackage200(int amount)
     {
@@ -44,9 +45,10 @@ public class CalculatePackages
     }
 
     /**
-     * Calculates the number of packages of screws needed.
-     * @param amount int
-     * @return Number of packages needed
+     * Calculates the number of packages, that contains 250 screws.
+     * 
+     * @param amount an Integer
+     * @return number of packages needed
      */
     public Integer calcPackage250(int amount)
     {
@@ -59,9 +61,10 @@ public class CalculatePackages
     }
 
     /**
-     * Calculates the number of packages of screws needed.
-     * @param amount int
-     * @return Number of packages needed
+     * Calculates the number of packages, that contains 300 screws.
+     * 
+     * @param amount an Integer
+     * @return number of packages needed
      */
     public Integer calcPackage300(int amount)
     {
@@ -74,9 +77,10 @@ public class CalculatePackages
     }
 
     /**
-     * Calculates the number of packages of screws needed.
-     * @param amount int
-     * @return Number of packages needed
+     * Calculates the number of packages, that contains 350 screws.
+     * 
+     * @param amount an Integer
+     * @return number of packages needed
      */
     public Integer calcPackage350(int amount)
     {
@@ -89,9 +93,10 @@ public class CalculatePackages
     }
 
     /**
-     * Calculates the number of packages of screws needed.
-     * @param amount int
-     * @return Number of packages needed
+     * Calculates the number of packages, that contains 400 screws.
+     * 
+     * @param amount an Integer
+     * @return number of packages needed
      */
     public Integer calcPackage400(int amount)
     {

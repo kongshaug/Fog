@@ -23,7 +23,7 @@ public class Part
 
     /**
      * Initializes the values of a newly created Part
-     * as well as calculate the total_price of the part
+     * as well as calculate the total_price of the part.
      * 
      * @param material an object from the class Material
      * @param length an Integer

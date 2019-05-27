@@ -26,7 +26,7 @@ public class UserMapper
      * Creates and initializes a newly created DBConnector for further use
      * in methods.
      * 
-     * @param dbc
+     * @param dbc an object of the class DBConnector
      * @throws DataException if initializing not possible
      */
     public UserMapper(DBConnector dbc) throws DataException

@@ -8,6 +8,11 @@ package FunctionLayer.Enum;
  *
  * @author aamandajuhl
  */
+
+/**
+ * 
+ * Tells whether or not a order is paid.
+ */
 public enum Paid
 {
     BETALT, IKKE_BETALT

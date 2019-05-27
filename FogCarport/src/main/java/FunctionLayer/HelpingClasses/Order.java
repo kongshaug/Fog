@@ -153,7 +153,8 @@ public class Order
     }
 
     /**
-     * Sets shipped to shipped
+     * Sets shipped to shipped.
+     * 
      * @param shipped a String
      */
     public void setShipped(String shipped)
@@ -171,7 +172,8 @@ public class Order
     }
 
     /**
-     * Sets paid to paid
+     * Sets paid to paid.
+     * 
      * @param paid an object of the enum class Paid
      */
     public void setPaid(Paid paid)
@@ -198,7 +200,8 @@ public class Order
     }
 
     /**
-     * Sets the sales_price to sales_price
+     * Sets the sales_price to sales_price.
+     * 
      * @param sales_price a double
      */
     public void setSales_price(double sales_price)
@@ -208,7 +211,7 @@ public class Order
 
     /**
      * Calculates the profit based on the 
-     * sales_price and the carports total_price
+     * sales_price and the carports total_price.
      * 
      * @return the profit as a double
      */
