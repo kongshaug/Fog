@@ -31,9 +31,9 @@ public class ViewDrawingCommand implements Command
         HttpSession session = request.getSession();
         Order order = (Order) session.getAttribute("order");
 
-        String roofDrawing = manager.drawingOfRoof(order.getCarport());
+        String carportDrawing = manager.drawCarport(order.getCarport());
         session.setAttribute("carport", order.getCarport());
-        session.setAttribute("roofDrawing", roofDrawing);
+        session.setAttribute("carportDrawing", carportDrawing);
 
         return target;
     }

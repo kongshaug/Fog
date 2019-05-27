@@ -97,10 +97,10 @@ public class DrawingCommand implements Command
 
             manager.calcCarport(carport);
             manager.calcRoof(carport);
-            String roofDrawing = manager.drawingOfRoof(carport);
+            String carportDrawing = manager.drawCarport(carport);
 
             session.setAttribute("carport", carport);
-            session.setAttribute("roofDrawing", roofDrawing);
+            session.setAttribute("carportDrawing", carportDrawing);
 
             return target;
 
