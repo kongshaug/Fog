@@ -6,8 +6,8 @@
 package PresentaionLayer;
 
 import DataLayer.DataException;
+import FunctionLayer.Enum.Role;
 import FunctionLayer.FunctionManager;
-import FunctionLayer.HelpingClasses.Order;
 import FunctionLayer.HelpingClasses.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,31 +21,47 @@ import javax.servlet.http.HttpSession;
  */
 public class EmployeeListCommand implements Command
 {
-    private String target;
 
-    public EmployeeListCommand(String target)
+    private String target;
+    private String denied;
+
+    public EmployeeListCommand(String target, String denied)
     {
         this.target = target;
+        this.denied = denied;
     }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
-        String search = request.getParameter("search");
+        HttpSession session = request.getSession();
+        String password = request.getParameter("password");
+        User user = (User) session.getAttribute("user");
 
-        if (search == null || search.isEmpty())
+        if (password.equals(user.getPassword()) && user.getRole().equals(Role.ADMIN) || password.equals(user.getPassword()) && user.getRole().equals(Role.EMPLOYEE))
         {
-            List<User> users = manager.getEmployeesAndAdmins();
-            request.setAttribute("users", users);
+            String search = request.getParameter("search");
+
+            if (search == null || search.isEmpty())
+            {
+                List<User> users = manager.getEmployeesAndAdmins();
+                request.setAttribute("users", users);
+
+            } else
+            {
+                List<User> users = new ArrayList<>();
+                User employee = (User) manager.getEmployeeByEmail(search);
+                users.add(employee);
+                request.setAttribute("users", users);
+            }
+            return target;
 
         } else
         {
-            List<User> users = new ArrayList<>();
-            User employee = (User) manager.getEmployeeByEmail(search);
-            users.add(employee);
-            request.setAttribute("users", users);
+            request.setAttribute("message", "Adgang nægtet");
+            return denied;
         }
-        return target;
+
     }
 
 }

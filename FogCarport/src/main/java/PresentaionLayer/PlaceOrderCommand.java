@@ -42,15 +42,12 @@ public class PlaceOrderCommand implements Command
         }
 
         Order order = new Order(user, carport);
-        session.setAttribute("order", order);
-
         String message = manager.placeOrder(order);
         request.setAttribute("message", message);
 
         if (message.equals("Tak for din forespørgsel. Vi vil behandle den hurtigst muligt"))
         {
             session.removeAttribute("carport");
-            session.removeAttribute("orders");
         }
 
         return target;

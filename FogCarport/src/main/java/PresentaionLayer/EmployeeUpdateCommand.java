@@ -19,27 +19,40 @@ import javax.servlet.http.HttpSession;
  */
 public class EmployeeUpdateCommand implements Command
 {
-    private String target;
 
-    public EmployeeUpdateCommand(String target)
+    private String target;
+    private String denied;
+
+    public EmployeeUpdateCommand(String target, String denied)
     {
         this.target = target;
+        this.denied = denied;
     }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
         HttpSession session = request.getSession();
-        User employee = (User) session.getAttribute("employee");
-        String email = request.getParameter("email");
-        String name = request.getParameter("name");
-        String address = request.getParameter("address");
-        String zipcode = request.getParameter("zipcode");
-        String phone = request.getParameter("phone");
+        User user = (User) session.getAttribute("user");
 
-        String message = manager.updateEmployee(employee, email, name, address, zipcode, phone);
+        if (user.getRole().equals(Role.ADMIN))
+        {
+            User employee = (User) session.getAttribute("employee");
+            String email = request.getParameter("email");
+            String name = request.getParameter("name");
+            String address = request.getParameter("address");
+            String zipcode = request.getParameter("zipcode");
+            String phone = request.getParameter("phone");
 
-        request.setAttribute("message", message);
-        return target;
+            String message = manager.updateEmployee(employee, email, name, address, zipcode, phone);
+
+            request.setAttribute("message", message);
+            return target;
+            
+        } else
+        {
+            request.setAttribute("message", "Adgang nægtet");
+            return denied;
+        }
     }
 }

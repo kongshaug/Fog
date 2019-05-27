@@ -11,6 +11,7 @@ import FunctionLayer.FunctionManager;
 import FunctionLayer.HelpingClasses.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -18,9 +19,11 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class AddEmployeeCommand implements Command
 {
-    private String target;
 
-    public AddEmployeeCommand(String target)
+    private String target;
+    private String denied;
+
+    public AddEmployeeCommand(String target, String denied)
     {
         this.target = target;
     }
@@ -28,27 +31,39 @@ public class AddEmployeeCommand implements Command
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
-        String email = request.getParameter("email");
-        String name = request.getParameter("name");
-        String address = request.getParameter("address");
-        String zipcode = request.getParameter("zipcode");
-        String phone = request.getParameter("phone");
-        String choosen_role = request.getParameter("role");
-        Role role;
-        
-        if (choosen_role.equals("Administrator"))
+        HttpSession session = request.getSession();
+        String password = request.getParameter("password");
+        User user = (User) session.getAttribute("user");
+
+        if (password.equals(user.getPassword()) && user.getRole().equals(Role.ADMIN) || password.equals(user.getPassword()) && user.getRole().equals(Role.EMPLOYEE))
         {
-            role = Role.ADMIN;
+            String email = request.getParameter("email");
+            String name = request.getParameter("name");
+            String address = request.getParameter("address");
+            String zipcode = request.getParameter("zipcode");
+            String phone = request.getParameter("phone");
+            String choosen_role = request.getParameter("role");
+            Role role;
+
+            if (choosen_role.equals("Administrator"))
+            {
+                role = Role.ADMIN;
+            } else
+            {
+                role = Role.EMPLOYEE;
+            }
+
+            User employee = new User(email, "1234", name, address, zipcode, phone, role);
+            String message = manager.newUser(employee);
+
+            request.setAttribute("message", message);
+
+            return target;
         } else
         {
-            role = Role.EMPLOYEE;
+            request.setAttribute("message", "Adgang nægtet");
+            return denied;
         }
-
-        User user = new User(email, "1234", name, address, zipcode, phone, role);
-        String message = manager.newUser(user);
-
-        request.setAttribute("message", message);
-
-        return target;
     }
+
 }
