@@ -20,10 +20,12 @@ public class Shed
     private ArrayList<Part> parts;
 
     /**
-     * constructor for shed with id from database
-     * @param id int 
-     * @param depth int 
-     * @param width int
+     * Initializes the values of a newly created Shed 
+     * and creates a list for the parts to the shed.
+     * 
+     * @param id an Integer 
+     * @param depth an Integer 
+     * @param width an Integer
      */
     public Shed(int id, int depth, int width)
     {
@@ -34,9 +36,11 @@ public class Shed
     }
 
     /**
-     * constructor for new shed
-     * @param depth int
-     * @param width int
+     * Initializes the values of a newly created Shed
+     * and creates a list for the parts to the shed.
+     * 
+     * @param depth an Integer
+     * @param width an Integer
      */
     public Shed(int depth, int width)
     {
@@ -47,7 +51,7 @@ public class Shed
 
     /**
      *
-     * @return the id of the shed
+     * @return the id
      */
     public int getId()
     {
@@ -55,8 +59,9 @@ public class Shed
     }
 
     /**
-     * sets the id of the shead
-     * @param id
+     * Sets the id to id 
+     * 
+     * @param id - an Integer
      */
     public void setId(int id)
     {
@@ -65,7 +70,7 @@ public class Shed
 
     /**
      *
-     * @return the depth of a shead
+     * @return the depth
      */
     public int getDepth()
     {
@@ -73,8 +78,9 @@ public class Shed
     }
 
     /**
-     * sets the depth of the shed 
-     * @param depth int
+     * Sets the depth to depth
+     * 
+     * @param depth an Integer
      */
     public void setDepth(int depth)
     {
@@ -83,7 +89,7 @@ public class Shed
 
     /**
      *
-     * @return width of the shead
+     * @return the width 
      */
     public int getWidth()
     {
@@ -91,8 +97,8 @@ public class Shed
     }
 
     /**
-     * sets the width of the shead
-     * @param width int
+     * Sets the width to width
+     * @param width an Integer
      */
     public void setWidth(int width)
     {
@@ -101,7 +107,7 @@ public class Shed
 
     /**
      *
-     * @return a list of all the parts needed to make the shead
+     * @return an ArrayList of objects from the class Part
      */
     public ArrayList<Part> getParts()
     {
@@ -109,8 +115,8 @@ public class Shed
     }
 
     /**
-     * sets a list of all the parts needed to make the shead
-     * @param parts list
+     * Sets an Arraylist of objects from the class Part.
+     * @param parts an ArrayList
      */
     public void setParts(ArrayList<Part> parts)
     {
@@ -118,7 +124,9 @@ public class Shed
     }
 
     /**
-     * empties the list of parts needed to make the shead
+     * 
+     * Removes all parts, and creates a new empty ArrayList.
+     * 
      */
     public void resetParts()
     {

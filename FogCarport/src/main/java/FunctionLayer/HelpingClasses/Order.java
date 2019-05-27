@@ -24,15 +24,16 @@ public class Order
     private double sales_price;
 
     /**
-     * constructor for order from database with assigned id
-     * @param order_id int
-     * @param user object
-     * @param carport object
-     * @param order_date String
-     * @param status enum
-     * @param shipped enum
-     * @param paid enum
-     * @param sales_price double
+     * Initializes the values of a newly created Order.
+     * 
+     * @param order_id an Integer
+     * @param user an object from the class User 
+     * @param carport an object from the class Carport
+     * @param order_date a String
+     * @param status an object from the enum class Status
+     * @param shipped a String
+     * @param paid an object from the enum class Paid
+     * @param sales_price a double
      */
     public Order(int order_id, User user, Carport carport, String order_date, Status status, String shipped, Paid paid, double sales_price)
     {
@@ -47,9 +48,11 @@ public class Order
     }
 
     /**
-     * constructor for new order
-     * @param user object
-     * @param carport object
+     * Initializes the values of a newly created Order 
+     * as well as calculate the salesprice of the Order.
+     * 
+     * @param user an object from the class User 
+     * @param carport an object from the class Carport
      */
     public Order(User user, Carport carport)
     {
@@ -62,7 +65,7 @@ public class Order
 
     /**
      *
-     * @return the id of order
+     * @return the order_id
      */
     public int getOrder_id()
     {
@@ -70,8 +73,9 @@ public class Order
     }
 
     /**
-     * sets the id of an order
-     * @param order_id
+     * Sets the order_id to order_id.
+     * 
+     * @param order_id an Integer
      */
     public void setOrder_id(int order_id)
     {
@@ -80,7 +84,7 @@ public class Order
 
     /**
      *
-     * @return user associated with the order
+     * @return the user
      */
     public User getUser()
     {
@@ -88,8 +92,7 @@ public class Order
     }
 
     /**
-     * gets the carport associated with the order
-     * @return user associated with order
+     * @return the carport
      */
     public Carport getCarport()
     {
@@ -97,8 +100,7 @@ public class Order
     }
 
     /**
-     *gets the order date from the order
-     * @return order date
+     * @return order date as a String
      */
     public String getOrder_date()
     {
@@ -106,8 +108,9 @@ public class Order
     }
 
     /**
-     * sets the date of the order
-     * @param order_date
+     * Sets the order_date to order_date.
+     * 
+     * @param order_date a String
      */
     public void setOrder_date(String order_date)
     {
@@ -116,7 +119,7 @@ public class Order
 
     /**
      *
-     * @return status of order
+     * @return status 
      */
     public Status getStatus()
     {
@@ -124,8 +127,9 @@ public class Order
     }
 
     /**
-     * sets the status of the order
-     * @param status
+     * Sets the status to status.
+     * 
+     * @param status an object of the enum class Status
      */
     public void setStatus(Status status)
     {
@@ -133,8 +137,9 @@ public class Order
     }
 
     /**
-     *
-     * @return shipping status of the order
+     * Checks if the order is shipped.
+     * 
+     * @return shipped, as a String
      */
     public String getShipped()
     {
@@ -148,8 +153,8 @@ public class Order
     }
 
     /**
-     *sets the shipping status of the order
-     * @param shipped
+     * Sets shipped to shipped
+     * @param shipped a String
      */
     public void setShipped(String shipped)
     {
@@ -158,7 +163,7 @@ public class Order
 
     /**
      *
-     * @return payment status of the order
+     * @return paid
      */
     public Paid getPaid()
     {
@@ -166,8 +171,8 @@ public class Order
     }
 
     /**
-     * sets the payment status of the order
-     * @param paid
+     * Sets paid to paid
+     * @param paid an object of the enum class Paid
      */
     public void setPaid(Paid paid)
     {
@@ -175,7 +180,7 @@ public class Order
     }
 
     /**
-     * calculates the sales price of the order
+     * Calculates the sales_price of the order.
      */
     public void calcSalesPrice()
     {
@@ -185,7 +190,7 @@ public class Order
 
     /**
      *
-     * @return get the total price of the order for the customer
+     * @return sales_price as a double
      */
     public double getSales_price()
     {
@@ -193,8 +198,8 @@ public class Order
     }
 
     /**
-     * sets the total price of the order for the customer
-     * @param sales_price
+     * Sets the sales_price to sales_price
+     * @param sales_price a double
      */
     public void setSales_price(double sales_price)
     {
@@ -202,8 +207,10 @@ public class Order
     }
 
     /**
-     *
-     * @return the profit of the sale
+     * Calculates the profit based on the 
+     * sales_price and the carports total_price
+     * 
+     * @return the profit as a double
      */
     public double getProfit()
     {
@@ -215,6 +222,9 @@ public class Order
 
     }
 
+    /**
+     * @return a String with the values of order_id, order_date, status and paid 
+     */
     @Override
     public String toString()
     {

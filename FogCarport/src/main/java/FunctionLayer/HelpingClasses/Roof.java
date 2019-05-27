@@ -19,10 +19,12 @@ public class Roof
     private ArrayList<Part> parts;
 
     /**
-     * constructor of a roof from the database with an asigned id
-     * @param id int
-     * @param slope int
-     * @param type RoofType object
+     * Initializes the values of a newly created Roof 
+     * and creates a list for the parts to the roof.
+     * 
+     * @param id an Integer
+     * @param slope an Integer
+     * @param type an object from the class RoofType
      */
     public Roof(int id, int slope, RoofType type)
     {
@@ -33,9 +35,11 @@ public class Roof
     }
 
     /**
-     * constructor of a new roof
-     * @param slope int
-     * @param type RoofType object
+     * Initializes the values of a newly created Roof 
+     * and creates a list for the parts to the roof.
+     * 
+     * @param slope an Integer
+     * @param type an object from the class RoofType
      */
     public Roof(int slope, RoofType type)
     {
@@ -46,7 +50,7 @@ public class Roof
 
     /**
      *
-     * @return the id of the roof as a int
+     * @return the id 
      */
     public int getId()
     {
@@ -54,7 +58,7 @@ public class Roof
     }
 
     /**
-     * sets the id of the roof
+     * Sets the id to id
      * @param id
      */
     public void setId(int id)
@@ -64,7 +68,7 @@ public class Roof
 
     /**
      *
-     * @return a list of all the parts needed to make the roof
+     * @return an ArrayList of objects from the class Part
      */
     public ArrayList<Part> getParts()
     {
@@ -72,8 +76,8 @@ public class Roof
     }
 
     /**
-     * sets the list of materials needed to make the roof
-     * @param parts
+     * Sets an Arraylist of objects from the class Part.
+     * @param parts an ArrayList
      */
     public void setParts(ArrayList<Part> parts)
     {
@@ -82,6 +86,8 @@ public class Roof
 
     /**
      *
+     * Removes all parts, and creates a new empty ArrayList.
+     * 
      */
     public void resetParts()
     {
@@ -90,7 +96,7 @@ public class Roof
 
     /**
      *
-     * @return the slope of the roof as a int
+     * @return the slope
      */
     public int getSlope()
     {
@@ -98,7 +104,7 @@ public class Roof
     }
 
     /**
-     * sets the slope of the roof as a int
+     * Sets the slope to slope
      * @param slope
      */
     public void setSlope(int slope)
@@ -108,7 +114,7 @@ public class Roof
 
     /**
      *
-     * @return the roof type used to make the roof
+     * @return the type
      */
     public RoofType getType()
     {
@@ -116,7 +122,7 @@ public class Roof
     }
 
     /**
-     * set the type of the roof
+     * Sets the type to type
      * @param type
      */
     public void setType(RoofType type)

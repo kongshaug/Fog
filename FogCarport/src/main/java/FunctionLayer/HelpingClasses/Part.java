@@ -22,11 +22,13 @@ public class Part
     private double total_price;
 
     /**
-     * constructor for a part
-     * @param material Material object
-     * @param length int
-     * @param quantity int
-     * @param description String
+     * Initializes the values of a newly created Part
+     * as well as calculate the total_price of the part
+     * 
+     * @param material an object from the class Material
+     * @param length an Integer
+     * @param quantity an Integer
+     * @param description a String
      */
     public Part(Material material, int length, int quantity, String description)
     {
@@ -40,73 +42,28 @@ public class Part
         this.description = description;
         this.total_price = calcTotalPrice();
     }
-
+    
     /**
      *
-     * @return length of part
-     */
-    public int getLength()
-    {
-        return length;
-    }
-
-    /**
-     *
-     * @return quantity of part
-     */
-    public int getQuantity()
-    {
-        return quantity;
-    }
-
-    /**
-     *
-     * @return the material used for the part
-     */
-    public Material getMaterial()
-    {
-        return material;
-    }
-
-    /**
-     *
-     * @return the class of the material used for the part
-     */
-    public String getMaterial_class()
-    {
-        return material_class;
-    }
-
-    /**
-     *
-     * @return description of the part
-     */
-    public String getDescription()
-    {
-        return description;
-    }
-
-    /**
-     *
-     * @return the id of the part
+     * @return the id 
      */
     public int getId()
     {
         return id;
     }
-
+    
     /**
      *
-     * @return the name of the part as a string
+     * @return the name
      */
     public String getName()
     {
         return name;
     }
-
+    
     /**
      *
-     * @return the unit of the part
+     * @return the unit
      */
     public String getUnit()
     {
@@ -115,7 +72,52 @@ public class Part
 
     /**
      *
-     * @return the price of the part as a int
+     * @return the length
+     */
+    public int getLength()
+    {
+        return length;
+    }
+
+    /**
+     *
+     * @return the quantity
+     */
+    public int getQuantity()
+    {
+        return quantity;
+    }
+
+    /**
+     *
+     * @return an object from the class Material
+     */
+    public Material getMaterial()
+    {
+        return material;
+    }
+
+    /**
+     *
+     * @return the material_class
+     */
+    public String getMaterial_class()
+    {
+        return material_class;
+    }
+
+    /**
+     *
+     * @return the description 
+     */
+    public String getDescription()
+    {
+        return description;
+    }
+
+    /**
+     *
+     * @return a double, the total_price 
      */
     public double getTotal_price()
     {

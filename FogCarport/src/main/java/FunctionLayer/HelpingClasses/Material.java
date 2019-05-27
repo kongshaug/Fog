@@ -18,12 +18,13 @@ public class Material
     private double price;
 
     /**
-     * constructor for a material from the database with a id assigned
-     * @param id int
-     * @param name String
-     * @param unit String
-     * @param material_class String
-     * @param price dobble
+     * Initializes the values of a newly created Material.
+     * 
+     * @param id an Integer
+     * @param name a String
+     * @param unit a String
+     * @param material_class a String
+     * @param price a double
      */
     public Material(int id, String name, String unit, String material_class, double price)
     {
@@ -35,11 +36,12 @@ public class Material
     }
 
     /**
-     * constructor for a new material without a id assigned
-     * @param name int
-     * @param unit String
-     * @param material_class String
-     * @param price dobble
+     * Initializes the values of a newly created Material.
+     * 
+     * @param name a String
+     * @param unit a String
+     * @param material_class a String
+     * @param price a double
      */
     public Material(String name, String unit, String material_class, double price)
     {
@@ -50,8 +52,64 @@ public class Material
     }
 
     /**
-     * gets the price of the material
-     * @return price of material
+     *
+     * @return the id
+     */
+    public int getId()
+    {
+        return id;
+    }
+
+    /**
+     * Sets the id to id.
+     * 
+     * @param id an Integer
+     */
+    public void setId(int id)
+    {
+        this.id = id;
+    }
+    
+    /**
+     *
+     * @return the name
+     */
+    public String getName()
+    {
+        return name;
+    }
+
+    /**
+     * Sets the name to name.
+     * 
+     * @param name a String
+     */
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    /** 
+     * 
+     * @return the unit
+     */
+    public String getUnit()
+    {
+        return unit;
+    }
+
+    /**
+     * Sets the unit to unit.
+     * 
+     * @param unit a String
+     */
+    public void setUnit(String unit)
+    {
+        this.unit = unit;
+    }
+    
+    /**
+     * @return the price 
      */
     public double getPrice()
     {
@@ -59,8 +117,9 @@ public class Material
     }
 
     /**
-     * sets the price of a material
-     * @param price
+     * Sets the price to price.
+     * 
+     * @param price a double
      */
     public void setPrice(double price)
     {
@@ -69,43 +128,7 @@ public class Material
 
     /**
      *
-     * @return id of material
-     */
-    public int getId()
-    {
-        return id;
-    }
-
-    /**
-     * sets the id of the material
-     * @param id
-     */
-    public void setId(int id)
-    {
-        this.id = id;
-    }
-
-    /** 
-     * 
-     * @return unit of the material
-     */
-    public String getUnit()
-    {
-        return unit;
-    }
-
-    /**
-     * sets the unit of the material
-     * @param unit
-     */
-    public void setUnit(String unit)
-    {
-        this.unit = unit;
-    }
-
-    /**
-     *
-     * @return the class of the material
+     * @return the material_class
      */
     public String getMaterial_class()
     {
@@ -113,29 +136,13 @@ public class Material
     }
 
     /**
-     * sets the material class
-     * @param material_class
+     * Sets the material class to material_class.
+     * 
+     * @param material_class a String
      */
     public void setMaterial_class(String material_class)
     {
         this.material_class = material_class;
     }
 
-    /**
-     *
-     * @return the name of the material
-     */
-    public String getName()
-    {
-        return name;
-    }
-
-    /**
-     * sets the name of the material
-     * @param name
-     */
-    public void setName(String name)
-    {
-        this.name = name;
-    }
 }

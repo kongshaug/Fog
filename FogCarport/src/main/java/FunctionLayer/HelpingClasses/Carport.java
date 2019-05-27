@@ -23,11 +23,14 @@ public class Carport
     private double total_price;
 
     /**
-     * constructor for new carport with shed
-     * @param width int
-     * @param depth int 
-     * @param roof roof Object
-     * @param shed Roof Object
+     * Initializes the values of a newly created Carport
+     * with a shed, sets total_price to 0.0 and
+     * creates a list for the parts to the carport.
+     * 
+     * @param width an Integer
+     * @param depth an Integer 
+     * @param roof an object of the class Roof
+     * @param shed an object of the class Shed
      */
     public Carport(int width, int depth, Roof roof, Shed shed)
     {
@@ -40,10 +43,13 @@ public class Carport
     }
 
     /**
-     * Constructor for new carport without shed
-     * @param width int
-     * @param depth int
-     * @param roof roof object
+     * Initializes the values of a newly created Carport 
+     * without a shed, sets total_price to 0.0 and
+     * creates a list for the parts to the carport.
+     * 
+     * @param width an Integer
+     * @param depth an Integer
+     * @param roof an object of the class Roof
      */
     public Carport(int width, int depth, Roof roof)
     {
@@ -55,12 +61,15 @@ public class Carport
     }
 
     /**
-     * constructor for carport from database with id assigned with shed
-     * @param id int
-     * @param width int
-     * @param depth int
-     * @param roof roof object
-     * @param shed shed object
+     * Initializes the values of a newly created Carport
+     * with a shed, sets total_price to 0.0 and
+     * creates a list for the parts to the carport.
+     * 
+     * @param id an Integer
+     * @param width an Integer 
+     * @param depth an Integer
+     * @param roof an object of the class Roof
+     * @param shed an object of the class Shed
      */
     public Carport(int id, int width, int depth, Roof roof, Shed shed)
     {
@@ -74,11 +83,14 @@ public class Carport
     }
 
     /**
-     * constructor for carport object from database with id without shed
-     * @param id int
-     * @param width int
-     * @param depth int 
-     * @param roof roof object
+     * Initializes the values of a newly created Carport 
+     * without a shed, sets total_price to 0.0 and
+     * creates a list for the parts to the carport.
+     * 
+     * @param id an Integer
+     * @param width an Integer
+     * @param depth an Integer 
+     * @param roof an object of the class Roof
      */
     public Carport(int id, int width, int depth, Roof roof)
     {
@@ -92,7 +104,7 @@ public class Carport
 
     /**
      * 
-     * @return id of carport
+     * @return the id 
      */
     public int getId()
     {
@@ -100,8 +112,9 @@ public class Carport
     }
 
     /**
-     * sets the id of a carport
-     * @param id 
+     * Sets the id to id.
+     * 
+     * @param id an Integer
      */
     public void setId(int id)
     {
@@ -110,7 +123,7 @@ public class Carport
 
     /**
      *
-     * @return width of carport
+     * @return the width 
      */
     public int getWidth()
     {
@@ -118,8 +131,9 @@ public class Carport
     }
 
     /**
-     * sets the width of a carport
-     * @param width 
+     * Sets the width to width.
+     * 
+     * @param width an Integer
      */
     public void setWidth(int width)
     {
@@ -128,7 +142,7 @@ public class Carport
 
     /**
      *
-     * @return depth of a carport
+     * @return the depth 
      */
     public int getDepth()
     {
@@ -136,8 +150,9 @@ public class Carport
     }
 
     /**
-     * sets the depth of a carport
-     * @param depth
+     * Sets the depth to depth.
+     * 
+     * @param depth an Integer
      */
     public void setDepth(int depth)
     {
@@ -146,7 +161,7 @@ public class Carport
 
     /**
      *
-     * @return the roof of a carport
+     * @return the roof 
      */
     public Roof getRoof()
     {
@@ -155,7 +170,7 @@ public class Carport
 
     /**
      * 
-     * @return the shed of  a carport
+     * @return the shed
      */
     public Shed getShed()
     {
@@ -163,8 +178,9 @@ public class Carport
     }
 
     /**
-     * sets the shed of a carport on a carport
-     * @param shed 
+     * Sets the shed to shed.
+     * 
+     * @param shed an object from the class Shed
      */
     public void setShed(Shed shed)
     {
@@ -173,7 +189,7 @@ public class Carport
 
     /**
      *
-     * @return a list of the parts needed to make the carport
+     * @return an ArrayList of objects from the class Part
      */
     public ArrayList<Part> getParts()
     {
@@ -181,8 +197,8 @@ public class Carport
     }
 
     /**
-     * sets the list of materials needed to make a carport on a carport
-     * @param parts
+     * Sets an Arraylist of objects from the class Part.
+     * @param parts an ArrayList
      */
     public void setParts(ArrayList<Part> parts)
     {
@@ -190,7 +206,8 @@ public class Carport
     }
 
     /**
-     * Empty the list of parts needed to make the carport
+     * 
+     * Removes all parts, and creates a new empty ArrayList.
      */
     public void resetParts()
     {
@@ -219,8 +236,10 @@ public class Carport
     }
 
     /**
-     *
-     * @return The total price of the carport
+     * Calculates the total_price of an carport
+     * with a roof and possible shed.
+     * 
+     * @return The total price as a double
      */
     public double getTotal_price()
     {

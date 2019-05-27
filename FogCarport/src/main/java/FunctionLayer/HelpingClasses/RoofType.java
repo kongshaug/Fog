@@ -18,12 +18,14 @@ public class RoofType
     private Material m2;
 
     /**
-     * constructor for making a RoofType from the database with assigned id
-     * @param id int
-     * @param name String
-     * @param roof_class String
-     * @param m1 Material
-     * @param m2 Material
+     * Initializes the values of a newly 
+     * created RoofType with two materials
+     * 
+     * @param id an Integer
+     * @param name a String
+     * @param roof_class a String
+     * @param m1 an object from the class Material
+     * @param m2 an object from the class Material
      */
     public RoofType(int id, String name, String roof_class, Material m1, Material m2)
     {
@@ -35,11 +37,13 @@ public class RoofType
     }
 
     /**
-     * Constructor used to make Rooftype with assigned id, with only one material associated
-     * @param id int
-     * @param name String
-     * @param roof_class String
-     * @param m1 Material
+     * Initializes the values of a newly 
+     * created RoofType with one materials
+     * 
+     * @param id an Integer
+     * @param name a String
+     * @param roof_class a String
+     * @param m1 an object from the class Material
      */
     public RoofType(int id, String name, String roof_class, Material m1)
     {
@@ -50,10 +54,12 @@ public class RoofType
     }
 
     /**
-     * Constructor used to make rooftype object with one material associated wihout id assosiated with it
-     * @param name String
-     * @param roof_class String
-     * @param m1 Material
+     * Initializes the values of a newly 
+     * created RoofType with one materials
+     * 
+     * @param name a String
+     * @param roof_class a String
+     * @param m1 an object from the class Material
      */
     public RoofType(String name, String roof_class, Material m1)
     {
@@ -63,11 +69,13 @@ public class RoofType
     }
 
     /**
-     * Constructor to make Rooftype with 2 materials associated with it
-     * @param name Stirng
-     * @param roof_class String
-     * @param m1 Material
-     * @param m2 Material
+     *  Initializes the values of a newly 
+     * created RoofType with two materials
+     * 
+     * @param name a String
+     * @param roof_class a String
+     * @param m1 an object from the class Material
+     * @param m2 an object from the class Material
      */
     public RoofType(String name, String roof_class, Material m1, Material m2)
     {
@@ -79,7 +87,7 @@ public class RoofType
 
     /**
      *
-     * @return the id of the rooftype as a int
+     * @return the id
      */
     public int getId()
     {
@@ -87,8 +95,9 @@ public class RoofType
     }
     
     /**
-     * sets the id of the rooftype as a int
-     * @param id int
+     * Sets the id to id
+     * 
+     * @param id an Integer
      */
     public void setId(int id)
     {
@@ -97,7 +106,7 @@ public class RoofType
 
     /**
      *
-     * @return the name of the rooftype as a String
+     * @return the name 
      */
     public String getName()
     {
@@ -105,8 +114,9 @@ public class RoofType
     } 
     
     /**
-     * Sets the name of the rooftype
-     * @param name String
+     * Sets the name to name 
+     * 
+     * @param name a String
      */
     public void setName(String name)
     {
@@ -115,7 +125,7 @@ public class RoofType
 
     /**
      *
-     * @return the class of the roof type as a String
+     * @return the roof_class 
      */
     public String getRoof_class()
     {
@@ -124,7 +134,7 @@ public class RoofType
 
     /**
      *
-     * @return the first material associated with the rooftype
+     * @return material
      */
     public Material getM1()
     {
@@ -132,8 +142,8 @@ public class RoofType
     }
 
     /**
-     * sets the first material associated with the rooftype
-     * @param m1 Material
+     * Sets M1 to m1
+     * @param m1 an object from the class Material
      */
     public void setM1(Material m1)
     {
@@ -142,7 +152,7 @@ public class RoofType
 
     /**
      *
-     * @return the second material associated with the rooftype
+     * @return materail
      */
     public Material getM2()
     {
@@ -150,8 +160,8 @@ public class RoofType
     }
     
     /**
-     * sets the second material associated with the rooftype
-     * @param m2 Material
+     * Sets M2 to m2
+     * @param m2 an object from the class Material
      */
     public void setM2(Material m2)
     {

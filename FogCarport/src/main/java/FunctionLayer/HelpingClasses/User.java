@@ -25,14 +25,14 @@ public class User
     /**
      * Initializes the values of a newly created User.
      * 
-     * @param id int
-     * @param email String
-     * @param password String
-     * @param name String
-     * @param address String
-     * @param zipcode int
-     * @param phone int
-     * @param role enum
+     * @param id an Integer
+     * @param email a String
+     * @param password a String
+     * @param name a String
+     * @param address a String
+     * @param zipcode an String
+     * @param phone an String
+     * @param role an object from the enum Role
      */
     public User(int id, String email, String password, String name, String address, String zipcode, String phone, Role role)
     {
@@ -50,12 +50,12 @@ public class User
      * 
      * Initializes the values of a newly created User.
      * 
-     * @param email String
-     * @param password String
-     * @param name String
-     * @param address String
-     * @param zipcode int
-     * @param phone int
+     * @param email a String
+     * @param password a String
+     * @param name a String
+     * @param address a String
+     * @param zipcode a String
+     * @param phone a String
      * @param role enum
      */
     public User(String email, String password, String name, String address, String zipcode, String phone, Role role)
@@ -88,8 +88,9 @@ public class User
     }
     
     /**
-     *sets the id of a user
-     * @param id int
+     * Sets the id to id
+     * 
+     * @param id an Integer
      */
     public void setId(int id)
     {
@@ -98,7 +99,7 @@ public class User
 
     /**
      *
-     * @return the name of the user as a string
+     * @return the name
      */
     public String getName()
     {
@@ -106,8 +107,9 @@ public class User
     }
     
     /**
-     * sets the name of the user
-     * @param name String
+     * Sets the name to name
+     * 
+     * @param name a String
      */
     public void setName(String name)
     {
@@ -116,7 +118,7 @@ public class User
     
     /**
      *
-     * @return the zipcode of the user
+     * @return the zipcode
      */
     public String getZipcode()
     {
@@ -124,8 +126,9 @@ public class User
     }
 
     /**
-     * sets the zipcode of the user
-     * @param zipcode int
+     * Sets the zipcode to zipcode
+     * 
+     * @param zipcode a String
      */
     public void setZipcode(String zipcode)
     {
@@ -134,7 +137,7 @@ public class User
     
     /**
      *
-     * @return the email of the user
+     * @return the email
      */
     public String getEmail()
     {
@@ -142,8 +145,9 @@ public class User
     }
     
     /**
-     *
-     * @param email
+     * Sets the email to email
+     * 
+     * @param email a String 
      */
     public void setEmail(String email)
     {
@@ -151,8 +155,8 @@ public class User
     }
     
     /**
-     *
-     * @return the password of the user
+     * 
+     * @return the password
      */
     public String getPassword()
     {
@@ -160,8 +164,9 @@ public class User
     }
 
     /**
-     * sets the password of the user
-     * @param password
+     * Sets the password to password
+     * 
+     * @param password a String
      */
     public void setPassword(String password)
     {
@@ -170,7 +175,7 @@ public class User
 
     /**
      *
-     * @return the address of the user
+     * @return the address
      */
     public String getAddress()
     {
@@ -178,8 +183,9 @@ public class User
     }
     
     /**
-     *
-     * @param address String
+     * Sets the address to address 
+     * 
+     * @param address a String
      */
     public void setAddress(String address)
     {
@@ -188,7 +194,7 @@ public class User
 
     /**
      *
-     * @return the phonenumber of the user
+     * @return the phonenumber
      */
     public String getPhone()
     {
@@ -196,14 +202,18 @@ public class User
     }
 
     /**
-     * sets the phonenumber of the user
-     * @param phone
+     * Sets the phone to phone
+     * 
+     * @param phone a String
      */
     public void setPhone(String phone)
     {
         this.phone = phone;
     }
 
+    /**
+     * @return a String with the values of email, name, and phone
+     */
     @Override
     public String toString()
     {
