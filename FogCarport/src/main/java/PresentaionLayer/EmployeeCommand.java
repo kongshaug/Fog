@@ -41,7 +41,7 @@ public class EmployeeCommand implements Command
             {
                 List<Order> orders = manager.getOrders();
                 manager.GDPRCheck(orders);
-                session.setAttribute("orders", orders);
+                request.setAttribute("orders", orders);
 
             } catch (ParseException ex)
             {
@@ -51,7 +51,7 @@ public class EmployeeCommand implements Command
         } else
         {
             List<Order> orders = manager.getOrdersByEmail(search);
-            session.setAttribute("orders", orders);
+            request.setAttribute("orders", orders);
         }
         return target;
     }

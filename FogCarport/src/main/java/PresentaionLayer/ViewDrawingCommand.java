@@ -33,7 +33,7 @@ public class ViewDrawingCommand implements Command
 
         String carportDrawing = manager.drawCarport(order.getCarport());
         session.setAttribute("carport", order.getCarport());
-        session.setAttribute("carportDrawing", carportDrawing);
+        request.setAttribute("carportDrawing", carportDrawing);
 
         return target;
     }

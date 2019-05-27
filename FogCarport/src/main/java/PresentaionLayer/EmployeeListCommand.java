@@ -31,20 +31,19 @@ public class EmployeeListCommand implements Command
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
-        HttpSession session = request.getSession();
         String search = request.getParameter("search");
 
         if (search == null || search.isEmpty())
         {
             List<User> users = manager.getEmployeesAndAdmins();
-            session.setAttribute("users", users);
+            request.setAttribute("users", users);
 
         } else
         {
             List<User> users = new ArrayList<>();
             User employee = (User) manager.getEmployeeByEmail(search);
             users.add(employee);
-            session.setAttribute("users", users);
+            request.setAttribute("users", users);
         }
         return target;
     }

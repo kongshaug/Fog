@@ -22,7 +22,7 @@
             <input type="text" name="search" placeholder="Søg e-mail" value=""> 
             <br><br><button name="command" value="employee">Søg</button><br><br>
             <%
-                List<Order> orders = (List<Order>) session.getAttribute("orders");
+                List<Order> orders = (List<Order>) request.getAttribute("orders");
                 for (Order o : orders)
                 {
                     out.println("<button name=\"command\" value=\"employeeorder\" onclick=\"setId(" + o.getOrder_id() + ")\">" + o + "</button>");

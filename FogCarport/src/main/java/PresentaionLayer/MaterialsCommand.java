@@ -40,7 +40,7 @@ public class MaterialsCommand implements Command
         if (password.equals(user.getPassword()) && user.getRole().equals(Role.ADMIN) || password.equals(user.getPassword()) && user.getRole().equals(Role.EMPLOYEE))
         {
             List<Material> materials = manager.getAllMaterials();
-            session.setAttribute("materials", materials);
+            request.setAttribute("materials", materials);
             return target;
         } else
         {

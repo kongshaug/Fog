@@ -15,7 +15,8 @@
     <form action="Fog" method="POST">
         <div id="shop">
             <img src="images/logo.png" width="30%"><br>
-            <%            String errormessage = (String) request.getAttribute("errormessage");
+            <%            
+                String errormessage = (String) request.getAttribute("errormessage");
                 if (errormessage != null)
                 {
             %>
@@ -35,8 +36,8 @@
             <select name="type" id="type">
                 <option disabled selected value="0">Vælg tagtype</option>            
                 <%
-                    List<RoofType> slopedroofs = (List<RoofType>) session.getAttribute("slopedroofs");
-                    List<RoofType> flatroofs = (List<RoofType>) session.getAttribute("flatroofs");
+                    List<RoofType> slopedroofs = (List<RoofType>) request.getAttribute("slopedroofs");
+                    List<RoofType> flatroofs = (List<RoofType>) request.getAttribute("flatroofs");
 
                     for (RoofType ro : flatroofs)
                     {

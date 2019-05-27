@@ -40,21 +40,16 @@ public class LogoutCommand implements Command
         {
             if (user.getRole().equals(Role.EMPLOYEE) || user.getRole().equals(Role.ADMIN))
             {
-                session.removeAttribute("materials");
                 session.removeAttribute("marterial");
                 session.removeAttribute("material_classes");
                 session.removeAttribute("employee");
-                session.removeAttribute("users");
                 session.removeAttribute("rooftype");
-                session.removeAttribute("rooftypes");
+                session.removeAttribute("slopedroofs");
+                session.removeAttribute("flatroofs");
             }
 
             session.removeAttribute("order");
             session.removeAttribute("carport");
-            session.removeAttribute("orders");
-            session.removeAttribute("roofDrawing");
-            session.removeAttribute("slopedroofs");
-            session.removeAttribute("flatroofs");
             session.removeAttribute("user");
 
             return target;

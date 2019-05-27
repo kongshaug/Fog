@@ -14,7 +14,8 @@
     <br><br><br>
     <div>
         <img src="images/logo.png" width="30%"><br>
-        <%            List<RoofType> rooftypes = (List<RoofType>) session.getAttribute("rooftypes");
+        <%            
+            List<RoofType> rooftypes = (List<RoofType>) request.getAttribute("rooftypes");
             String message = (String) request.getAttribute("message");
             if (message != null)
             {

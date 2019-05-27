@@ -36,7 +36,7 @@ public class CustomerCommand implements Command
         if (session.getAttribute("orders") == null)
         {
             List<Order> orders = manager.getOrdersByEmail(user.getEmail());
-            session.setAttribute("orders", orders);
+            request.setAttribute("orders", orders);
         }
 
         return target;

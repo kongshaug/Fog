@@ -11,7 +11,8 @@
     <br><br><br>
     <div>
         <img src="images/logo.png" width="30%"><br>
-        <%            List<Material> materials = (List<Material>) session.getAttribute("materials");
+        <%            
+            List<Material> materials = (List<Material>) request.getAttribute("materials");
             String message = (String) request.getAttribute("message");
             if (message != null)
             {
