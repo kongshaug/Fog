@@ -28,10 +28,13 @@ import java.util.List;
 public class CarportMapper
 {
     private DBConnector dbc = new DBConnector();
+    
     /**
-     *
+     * Creates and initializes a newly created DBConnector for further use
+     * in methods.
+     * 
      * @param dbc
-     * @throws DataException
+     * @throws DataException if initializing not possible
      */
     public CarportMapper(DBConnector dbc) throws DataException
     {
@@ -175,11 +178,13 @@ public class CarportMapper
     }
 
     /**
-     * when a customer places an order for a carpot with shed it is put in the
+     * Executes the query in the database to insert 
+     * an object from the class Carport, with a shed 
+     * into the database with the newly retrieved carport_id
      * database with this method
      *
-     * @param carport object
-     * @throws DataException
+     * @param carport an object - the carport to insert in database
+     * @throws DataException if executing update is not possible
      */
     public void orderCarportWithShed(Carport carport) throws DataException
     {
@@ -224,10 +229,13 @@ public class CarportMapper
     }
 
     /**
-     * Puts a order for a carport without a shed in the database
+     * Executes the query in the database to insert 
+     * an object from the class Carport, without a shed 
+     * into the database with the newly retrieved carport_id
+     * database with this method
      *
-     * @param carport object
-     * @throws DataException
+     * @param carport an object - the carport to insert in database
+     * @throws DataException if executing update is not possible
      */
     public void orderCarportWithoutShed(Carport carport) throws DataException
     {
@@ -302,10 +310,11 @@ public class CarportMapper
     }
 
     /**
-     * removes a roof from a carport in the database
+     * Executes the query in the database to remove an object from the class
+     * Roof from the database.
      *
-     * @param roof object
-     * @throws DataException
+     * @param roof an object - to remove from the database
+     * @throws DataException if executing update is not possible
      */
     public void removeRoof(Roof roof) throws DataException
     {
@@ -330,10 +339,11 @@ public class CarportMapper
     }
 
     /**
-     * removes/deletes a shed in the database
+     * Executes the query in the database to remove an object from the class
+     * Shed from the database.
      *
-     * @param shed
-     * @throws DataException
+     * @param shed an object -to remove from the database
+     * @throws DataException if executing update is not possible
      */
     public void removeShed(Shed shed) throws DataException
     {
@@ -358,9 +368,12 @@ public class CarportMapper
     }
 
     /**
-     * removes the id from a shed in the database
-     * @param carport
-     * @throws DataException
+     * Executes the query in the database to remove a shed 
+     * with a specific shed_id from the object carport 
+     * in the class Carport from the database.
+     * 
+     * @param carport an object 
+     * @throws DataException if executing update is not possible
      */
     public void removeShedId(Carport carport) throws DataException
     {
@@ -384,10 +397,11 @@ public class CarportMapper
     }
 
     /**
-     * deletes a carport from the database
+     * Executes the query in the database to remove an object from the class
+     * Carport from the database.
      *
-     * @param carport
-     * @throws DataException
+     * @param carport an object - to remove from the database
+     * @throws DataException if executing update is not possible
      */
     public void removeCarport(Carport carport) throws DataException
     {
@@ -412,10 +426,11 @@ public class CarportMapper
     }
 
     /**
-     * updates the specifications of a carport in the database
+     * Executes the query in the database to update the attributes 
+     * depth, width and possible shed_id on a specific Carport.
      *
-     * @param carport
-     * @throws DataException
+     * @param carport is used to detect the specific Carport in the database
+     * @throws DataException if executing update is not possible
      */
     public void updateCarport(Carport carport) throws DataException
     {
@@ -467,10 +482,11 @@ public class CarportMapper
     }
 
     /**
-     * opdates a roof on a carport in the database
+     * Executes the query in the database to update the attributes 
+     * roof_slope and roof_type on a specific Roof.
      *
-     * @param roof object
-     * @throws DataException
+     * @param roof is used to detect the specific Roof in the database
+     * @throws DataException if executing update is not possible
      */
     public void updateRoof(Roof roof) throws DataException
     {
@@ -501,10 +517,11 @@ public class CarportMapper
     }
 
     /**
-     * updates the mesurments of a shed in the database
+     * Executes the query in the database to update the attributes 
+     * width and depth on a specific Shed.
      *
-     * @param shed object
-     * @throws DataException
+     * @param shed is used to detect the specific Shed in the database
+     * @throws DataException if executing update is not possible
      */
     public void updateShed(Shed shed) throws DataException
     {
@@ -606,9 +623,11 @@ public class CarportMapper
     }
 
     /**
-     * places an order in the database
-     * @param order object 
-     * @throws DataException
+     * Executes the query in the database to insert an object from the class
+     * Order into the database with the newly retrived order_id
+     * 
+     * @param order an object - the order to insert in database
+     * @throws DataException if executing update is not possible
      */
     public void placeOrder(Order order) throws DataException
     {
@@ -682,11 +701,13 @@ public class CarportMapper
     }
 
     /**
-     * chages the status of a order to shipped in the database
+     * Executes the query in the database to insert CURRENT_TIMESTAMP
+     * when the order is shipped
+     * Executes the query2 in the database to collect 'shipped' with a specific order_id.
      *
-     * @param order_id
-     * @return
-     * @throws DataException
+     * @param order_id is used to detect the specific Order in the database
+     * @return a String 
+     * @throws DataException if executing is not possible
      */
     public String orderShipped(int order_id) throws DataException
     {
@@ -726,11 +747,12 @@ public class CarportMapper
     }
 
     /**
-     * findes orders in the database
+     * Executes the query in the database to collect an object from the class
+     * Order with a specific order_id.
      *
-     * @param order_id integer
-     * @return order from database connected to the id
-     * @throws DataException
+     * @param order_id an integer - is used to detect the specific order in the database
+     * @return an object from the class Order
+     * @throws DataException if executing of query is not possible
      */
     public Order getOrder(int order_id) throws DataException
     {
@@ -777,9 +799,11 @@ public class CarportMapper
     }
 
     /**
-     * finds all orders in the database and returns them
-     * @return all the orders in the database
-     * @throws DataException
+     * Executes the query in the database to collect a 
+     * list of objects from the class Order 
+     * 
+     * @return an arraylist of object from the class Order
+     * @throws DataException if executing of query is not possible
      */
     public List<Order> getOrders() throws DataException
     {
@@ -825,11 +849,12 @@ public class CarportMapper
     }
 
     /**
-     *finds orders related to a specific email, used by employees to find orders related to a specific client 
-     * and by clients to show them all their orders
-     * @param email
-     * @return all the orders in the database connected to a client
-     * @throws DataException
+     * Executes the query in the database to collect a list of objects from the
+     * class Order with a specific user attached.
+     * 
+     * @param email used to detect tne user
+     * @return an arraylist of objects from the class Order
+     * @throws DataException if executing of query is not possible
      */
     public List<Order> getOrdersByEmail(String email) throws DataException
     {
@@ -912,11 +937,12 @@ public class CarportMapper
     }
 
     /**
-     * changes the price of a order in the database
+     * Executes the query in the database to update the attribute 
+     * salesprice on an Order with a specific order_id.
      *
-     * @param order_id integer
-     * @param salesprice integer
-     * @throws DataException
+     * @param order_id is used to detect the specific Order in the database
+     * @param salesprice the new value to insert on salesprice
+     * @throws DataException if executing update is not possible
      */
     public void updateSalesPrice(int order_id, double salesprice) throws DataException
     {
@@ -944,12 +970,13 @@ public class CarportMapper
     }
 
     /**
-     * updates the status of the order and changes the paied state 
-     * used by eployees to update order status and change the status of payment
-     * @param order_id integer
-     * @param status enum
-     * @param paid enum
-     * @throws DataException
+     * Executes the query in the database to update the attributs 
+     * status and paid on an Order with a specific order_id.
+     * 
+     * @param order_id is used to detect the specific User in the database
+     * @param status an enum - the new value to insert on status
+     * @param paid an enum - the new value to insert on paid
+     * @throws DataException if executing update is not possible
      */
     public void updateStatusAndPaid(int order_id, Status status, Paid paid) throws DataException
     {
@@ -980,10 +1007,11 @@ public class CarportMapper
     }
 
     /**
-     * deletes a order in the database
+     * Executes the query in the database to remove an object from the class
+     * Order from the database.
      * 
-     * @param order object
-     * @throws DataException
+     * @param order an object - to remove from the database
+     * @throws DataException if executing update is not possible
      */
     public void removeOrder(Order order) throws DataException
     {

@@ -22,9 +22,11 @@ public class MaterialMapper
     private DBConnector dbc;
 
     /**
+     * Creates and initializes a newly created DBConnector for further use
+     * in methods.
      *
      * @param dbc
-     * @throws DataException
+     * @throws DataException DataException if initializing not possible
      */
     public MaterialMapper(DBConnector dbc) throws DataException
     {
@@ -32,10 +34,12 @@ public class MaterialMapper
     }
 
     /**
-     *
-     * @param material_id int
-     * @return a material from the database with the id passed 
-     * @throws DataException
+     * Executes the query in the database to collect an object from the class
+     * Material with a specific material_id.
+     * 
+     * @param material_id an integer - is used to detect the specific material in the database
+     * @return an object from the class Material
+     * @throws DataException if executing of query is not possible
      */
     public Material getMaterial(int material_id) throws DataException
     {
@@ -72,10 +76,12 @@ public class MaterialMapper
     }
     
     /**
+     * Executes the query in the database to collect an object from the class
+     * Material with a specific material_name.
      * 
-     * @param material_name String
-     * @return return a material from the database with the name passed
-     * @throws DataException
+     * @param material_name a String - is used to detect the specific material in the database
+     * @return an object from the class Material
+     * @throws DataException if executing of query is not possible
      */
     public Material getMaterial(String material_name) throws DataException
     {
@@ -145,9 +151,11 @@ public class MaterialMapper
     }
 
     /**
-     *
-     * @return a list of all the mateirals from the database
-     * @throws DataException
+     * Executes the query in the database to collect a 
+     * list of objects from the class Material 
+     * 
+     * @return an arraylist of object from the class Order
+     * @throws DataException if executing of query is not possible
      */
     public List<Material> getMaterials() throws DataException
     {
@@ -182,9 +190,10 @@ public class MaterialMapper
     }
 
     /**
-     * Adds the passed material in the database
-     * @param newMaterial object
-     * @throws DataException
+     * Executes the query in the database to insert an object from the class Material.
+     * 
+     * @param newMaterial the Material to insert in database
+     * @throws DataException if executing update is not possible
      */
     public void addMaterial(Material newMaterial) throws DataException
     {
@@ -225,9 +234,11 @@ public class MaterialMapper
     }
 
     /**
-     * deletes a material from the database
-     * @param material object
-     * @throws DataException
+     * Executes the query in the database to remove an object from the class
+     * Material from the database.
+     * 
+     * @param material an object - to remove from the database
+     * @throws DataException if executing update is not possible
      */
     public void deleteMaterial(Material material) throws DataException
     {
@@ -253,9 +264,11 @@ public class MaterialMapper
     }
 
     /**
-     * updates information on a material in the database
-     * @param material object
-     * @throws DataException
+     * Executes the query in the database to update the attributes 
+     * material_name, unit, material_class and price on a specific Material.
+     * 
+     * @param material is used to detect the specific Material in the database
+     * @throws DataException if executing update is not possible
      */
     public void updateMaterial(Material material) throws DataException
     {
@@ -291,10 +304,12 @@ public class MaterialMapper
     }
     
     /**
-     * gets a roof from the database with the id passed
-     * @param theId int
-     * @return roof from database with passed id
-     * @throws DataException
+     * Executes the query in the database to collect an object from the class
+     * RoofType with a specific rooftype_id.
+     * 
+     * @param theId an integer - is used to detect the specific RoofType in the database
+     * @return an object from the class RoofType
+     * @throws DataException if executing of query is not possible
      */
     public RoofType getRoof(int theId) throws DataException
     {
@@ -337,9 +352,11 @@ public class MaterialMapper
     }
     
     /**
-     *
-     * @return a list of all the roofs in the database
-     * @throws DataException
+     * Executes the query in the database to collect a 
+     * list of objects from the class RoofType
+     * 
+     * @return an arraylist of object from the class RoofType
+     * @throws DataException if executing of query is not possible
      */
     public List<RoofType> getRoofs() throws DataException
     {
@@ -382,9 +399,11 @@ public class MaterialMapper
     }
     
     /**
-     * adds a roof type in the database
-     * @param rooftype object
-     * @throws DataException
+     * Executes the query in the database to insert an object from the class
+     * RoofType into the database, with a newly retrived roof_type_id
+     * 
+     * @param rooftype the RoofType to insert in database
+     * @throws DataException if executing update is not possible
      */
     public void addRoofType(RoofType rooftype) throws DataException
     {
@@ -438,9 +457,11 @@ public class MaterialMapper
     }
     
     /**
-     * Deletes a roof type in the database
-     * @param rooftype object
-     * @throws DataException
+     * Executes the query in the database to remove an object from the class
+     * RoofType from the database.
+     * 
+     * @param rooftype an object - to remove from the database
+     * @throws DataException if executing update is not possible
      */
     public void deleteRooftype(RoofType rooftype) throws DataException
     {
@@ -466,9 +487,11 @@ public class MaterialMapper
     }
     
     /**
-     * updates information on a roof type in the database
-     * @param rooftype object
-     * @throws DataException
+     * Executes the query in the database to update the attributes 
+     * roof_type_name, roof_material1 and roof_material2 on a specific RoofType.
+     * 
+     * @param rooftype is used to detect the specific RoofType in the database
+     * @throws DataException if executing update is not possible
      */
     public void updateRoofType(RoofType rooftype) throws DataException
     {
@@ -502,9 +525,11 @@ public class MaterialMapper
     }
 
     /**
-     * updates the information on a material with one material asosiated with it in the database
-     * @param rooftype object
-     * @throws DataException
+     * Executes the query in the database to update the attributes 
+     * roof_type_name and roof_material1 on a specific RoofType.
+     * 
+     * @param rooftype is used to detect the specific RoofType in the database
+     * @throws DataException if executing update is not possible
      */
     public void updateRoofTypeWith1Material(RoofType rooftype) throws DataException
     {

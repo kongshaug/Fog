@@ -31,7 +31,7 @@ public class DataFacade
 
     /**
      *
-     * @throws DataException
+     * @throws DataException if initializing not possible
      */
     public DataFacade() throws DataException
     {
@@ -39,10 +39,10 @@ public class DataFacade
     }
 
     /**
-     * call to get a instance of DataFacade
+     * Creates and initializes an instance of DataFacade
      *
-     * @return an instance of DataFacade as a singelton
-     * @throws DataException
+     * @return an instance of DataFacade as a singleton
+     * @throws DataException if initializing not possible
      */
     public static DataFacade getInstance() throws DataException
     {
@@ -55,9 +55,10 @@ public class DataFacade
 
     /**
      *
-     * @param user_id
-     * @return
-     * @throws DataException
+     * @param user_id is used to detect the specific User
+     * @return an object from the class User with the specific user_id
+     * @throws DataException if retrieval not possible
+     * @see DataLayer.UserMapper#getUser(int) 
      */
     public User getUser(int user_id) throws DataException
     {
@@ -65,10 +66,8 @@ public class DataFacade
     }
 
     /**
-     * gets a list of all the users in the database
-     *
-     * @return all users in the database
-     * @throws DataException
+     * @return a list of object from the class User
+     * @throws DataException if retrieval not possible
      * @see DataLayer.UserMapper#getUsers()
      */
     public List<User> getUsers() throws DataException
@@ -77,10 +76,10 @@ public class DataFacade
     }
 
     /**
-     *
-     * @param email String
-     * @return employee with the email passed
-     * @throws DataException
+     * 
+     * @param email is used to detect the specific User
+     * @return an object from the class User with the specific email
+     * @throws DataException if retrieval not possible
      * @see DataLayer.UserMapper#getEmployeeByEmail(java.lang.String)
      */
     public User getEmployeeByEmail(String email) throws DataException
@@ -89,10 +88,9 @@ public class DataFacade
     }
 
     /**
-     * gets all the employees and admins from the database
      *
-     * @return list of all the employees and admins
-     * @throws DataException
+     * @return a list of object from the class User, with all the employees and admins
+     * @throws DataException if retrieval not possible
      * @see DataLayer.UserMapper#getEmployeesAndAdmins()
      */
     public List<User> getEmployeesAndAdmins() throws DataException
@@ -101,14 +99,12 @@ public class DataFacade
     }
 
     /**
-     * this method is used to check if a user enters the correct information
-     * finds the user associated with the information passed
+     * Retrieve a User associated with the specific email and password in database
      *
-     * @param email String
-     * @param password String
-     * @return a user if the correct email and password is passed otherwise it
-     * returns null
-     * @throws DataException
+     * @param email is used to detect the specific User
+     * @param password a String
+     * @return an object from the class User
+     * @throws DataException if retrieval not possible
      * @see DataLayer.UserMapper#login(java.lang.String, java.lang.String)
      */
     public User login(String email, String password) throws DataException
@@ -117,10 +113,9 @@ public class DataFacade
     }
 
     /**
-     * puts a new user in the database
      *
-     * @param newUser
-     * @throws DataException
+     * @param newUser is used to detect the specific User
+     * @throws DataException if insert is not possible
      * @see DataLayer.UserMapper#addUser(FunctionLayer.HelpingClasses.User)
      */
     public void newUser(User newUser) throws DataException
@@ -129,10 +124,8 @@ public class DataFacade
     }
 
     /**
-     * removes a user from the database
-     *
-     * @param user object
-     * @throws DataException
+     * @param user is used to detect the specific User, and remove from the database
+     * @throws DataException if execute is not possible
      */
     public void removeUser(User user) throws DataException
     {
@@ -140,10 +133,10 @@ public class DataFacade
     }
 
     /**
-     * updates the information about a user in the database
+     * Updates the information about a user in the database
      *
-     * @param user object
-     * @throws DataException
+     * @param user is used to detect the specific User
+     * @throws DataException if retrieval or update of user is not possible
      * @see DataLayer.UserMapper#updateUser(FunctionLayer.HelpingClasses.User)
      */
     public void updateUser(User user) throws DataException
@@ -152,11 +145,11 @@ public class DataFacade
     }
 
     /**
-     * updates the password of a user assosiated with the id passed
+     * Updates the password of a specific User
      *
-     * @param user_id int
+     * @param user_id is used to detect the specific User 
      * @param password String
-     * @throws DataException
+     * @throws DataException if retrieval or update of user is not possible
      * @see DataLayer.UserMapper#updatePassword(int, java.lang.String)
      */
     public void updatePassword(int user_id, String password) throws DataException
@@ -165,11 +158,11 @@ public class DataFacade
     }
 
     /**
-     * findes and gets the order in the database with the passed id
+     * Retrieve a specific order from the database 
      *
-     * @param order_id int
-     * @return order associated with the id passed
-     * @throws DataException
+     * @param order_id is used to detect the specific order
+     * @return an object from the class Order
+     * @throws DataException if retrieval not possible
      */
     public Order getOrder(int order_id) throws DataException
     {
@@ -177,10 +170,10 @@ public class DataFacade
     }
 
     /**
-     * gets all the orders in the database
+     * Retrieves all orders from the database
      *
-     * @return a list with all the orders in the database
-     * @throws DataException
+     * @return  a list of object from the class Order
+     * @throws DataException if retrieval not possible
      */
     public List<Order> getOrders() throws DataException
     {
@@ -189,9 +182,9 @@ public class DataFacade
 
     /**
      *
-     * @param email String
-     * @return all the orders with the passed email
-     * @throws DataException
+     * @param email a String - is used to detect a list of order made by a user with the specific email
+     * @return a list of object from the class Order
+     * @throws DataException if retrieval not possible
      * @see DataLayer.CarportMapper#getOrdersByEmail(java.lang.String)
      */
     public List<Order> getOrdersByEmail(String email) throws DataException
@@ -200,12 +193,10 @@ public class DataFacade
     }
 
     /**
-     * puts an order in the database
      *
-     * @param order object
-     * @throws DataException
-     * @see
-     * DataLayer.CarportMapper#placeOrder(FunctionLayer.HelpingClasses.Order)
+     * @param order the Order to be inserted in database 
+     * @throws DataException if insert or update is not possible
+     * @see DataLayer.CarportMapper#placeOrder(FunctionLayer.HelpingClasses.Order)
      */
     public void placeOrder(Order order) throws DataException
     {
@@ -213,12 +204,10 @@ public class DataFacade
     }
 
     /**
-     * Deletes an order from the database
      *
-     * @param order
-     * @throws DataException
-     * @see
-     * DataLayer.CarportMapper#removeOrder(FunctionLayer.HelpingClasses.Order)
+     * @param order is used to detect the specific Order, and remove from the database
+     * @throws DataException if execute is not possible
+     * @see DataLayer.CarportMapper#removeOrder(FunctionLayer.HelpingClasses.Order)
      */
     public void removeOrder(Order order) throws DataException
     {
@@ -226,11 +215,9 @@ public class DataFacade
     }
 
     /**
-     * findes a order based on the id passed and returns the shipping status
-     *
-     * @param order_id integer
-     * @return status of shipping
-     * @throws DataException
+     * @param order_id an integer - is used to detect the specific Order
+     * @return a String with status of shipping
+     * @throws DataException if initializing not possible
      * @see DataLayer.CarportMapper#orderShipped(int)
      */
     public String orderShipped(int order_id) throws DataException
@@ -239,11 +226,11 @@ public class DataFacade
     }
 
     /**
-     * update the price of an order in the database
-     *
-     * @param order_id int
-     * @param salesprice int
-     * @throws DataException
+     * Updates salesprice in the database
+     * 
+     * @param order_id an integer - is used to detect the specific Order
+     * @param salesprice a double - the new value to insert on salesprice
+     * @throws DataException if retrieval or update of order is not possible
      * @see DataLayer.CarportMapper#updateSalesPrice(int, double)
      */
     public void updateSalesPrice(int order_id, double salesprice) throws DataException
@@ -252,14 +239,13 @@ public class DataFacade
     }
 
     /**
-     * updates the enum status and enum paid in the database
+     * Updates Status and Paid in the database
      *
-     * @param order_id int
-     * @param status enum
-     * @param paid enum
-     * @throws DataException
-     * @see DataLayer.CarportMapper#updateStatusAndPaid(int,
-     * FunctionLayer.Enum.Status, FunctionLayer.Enum.Paid)
+     * @param order_id an integer - is used to detect the specific Order
+     * @param status enum - the new value to insert on Status
+     * @param paid enum - the new value to insert on Paid
+     * @throws DataException if retrieval or update of order is not possible
+     * @see DataLayer.CarportMapper#updateStatusAndPaid(int, FunctionLayer.Enum.Status, FunctionLayer.Enum.Paid)
      */
     public void updateStatusAndPaid(int order_id, Status status, Paid paid) throws DataException
     {
@@ -271,11 +257,9 @@ public class DataFacade
      * shed or not and puts it in the database accordingly
      *
      * @param carport object
-     * @throws DataException
-     * @see
-     * DataLayer.CarportMapper#orderCarportWithShed(FunctionLayer.HelpingClasses.Carport)
-     * @see
-     * DataLayer.CarportMapper#orderCarportWithoutShed(FunctionLayer.HelpingClasses.Carport)
+     * @throws DataException if initializing not possible
+     * @see DataLayer.CarportMapper#orderCarportWithShed(FunctionLayer.HelpingClasses.Carport)
+     * @see DataLayer.CarportMapper#orderCarportWithoutShed(FunctionLayer.HelpingClasses.Carport)
      */
     public void orderCarport(Carport carport) throws DataException
     {
@@ -292,9 +276,8 @@ public class DataFacade
      * Removes a carport from the database
      *
      * @param carport object
-     * @throws DataException
-     * @see
-     * DataLayer.CarportMapper#removeCarport(FunctionLayer.HelpingClasses.Carport)
+     * @throws DataException if execute is not possible
+     * @see DataLayer.CarportMapper#removeCarport(FunctionLayer.HelpingClasses.Carport)
      */
     public void removeCarport(Carport carport) throws DataException
     {
@@ -307,11 +290,9 @@ public class DataFacade
      * afterwards, and removes a shed from the database
      *
      * @param carport
-     * @throws DataException
-     * @see
-     * DataLayer.CarportMapper#removeShed(FunctionLayer.HelpingClasses.Shed)
-     * @see
-     * DataLayer.CarportMapper#removeShedId(FunctionLayer.HelpingClasses.Carport)
+     * @throws DataException if execute is not possible
+     * @see DataLayer.CarportMapper#removeShed(FunctionLayer.HelpingClasses.Shed)
+     * @see DataLayer.CarportMapper#removeShedId(FunctionLayer.HelpingClasses.Carport)
      */
     public void removeShed(Carport carport) throws DataException
     {
@@ -323,9 +304,8 @@ public class DataFacade
      * removes a roof in the database
      *
      * @param roof object
-     * @throws DataException
-     * @see
-     * DataLayer.CarportMapper#removeRoof(FunctionLayer.HelpingClasses.Roof)
+     * @throws DataException if execute is not possible
+     * @see DataLayer.CarportMapper#removeRoof(FunctionLayer.HelpingClasses.Roof)
      */
     public void removeRoof(Roof roof) throws DataException
     {
@@ -337,9 +317,8 @@ public class DataFacade
      * on the roof and shead associated with the carport
      *
      * @param carport object
-     * @throws DataException
-     * @see
-     * DataLayer.CarportMapper#updateCarport(FunctionLayer.HelpingClasses.Carport)
+     * @throws DataException if retrieval or update of carport is not possible
+     * @see DataLayer.CarportMapper#updateCarport(FunctionLayer.HelpingClasses.Carport)
      */
     public void updateCarport(Carport carport) throws DataException
     {
@@ -357,7 +336,7 @@ public class DataFacade
      *
      * @param id integer
      * @return a single roof with a specific id
-     * @throws DataException
+     * @throws DataException if retrieval not possible
      * @see DataLayer.MaterialMapper#getRoof(int)
      */
     public RoofType getRoof(int id) throws DataException
@@ -369,7 +348,7 @@ public class DataFacade
      * gets all the roofs from the database
      *
      * @return list of roofs from the database
-     * @throws DataException
+     * @throws DataException if retrieval not possible
      * @see DataLayer.MaterialMapper#getRoofs()
      */
     public List<RoofType> getRoofs() throws DataException
@@ -381,7 +360,7 @@ public class DataFacade
      * adds a new roof type in the database
      *
      * @param rooftype Object
-     * @throws DataException
+     * @throws DataException if insert is not possible
      * @see
      * DataLayer.MaterialMapper#addRoofType(FunctionLayer.HelpingClasses.RoofType)
      */
@@ -394,9 +373,8 @@ public class DataFacade
      * deletes a roof type in the database
      *
      * @param rooftype Object
-     * @throws DataException
-     * @see
-     * DataLayer.MaterialMapper#deleteRooftype(FunctionLayer.HelpingClasses.RoofType)
+     * @throws DataException if execute is not possible
+     * @see DataLayer.MaterialMapper#deleteRooftype(FunctionLayer.HelpingClasses.RoofType)
      */
     public void deleteRoofType(RoofType rooftype) throws DataException
     {
@@ -407,9 +385,8 @@ public class DataFacade
      * Updates information on a roof rype in the database
      *
      * @param rooftype Object
-     * @throws DataException
-     * @see
-     * DataLayer.MaterialMapper#updateRoofType(FunctionLayer.HelpingClasses.RoofType)
+     * @throws DataException if retrieval or update of rooftype is not possible
+     * @see DataLayer.MaterialMapper#updateRoofType(FunctionLayer.HelpingClasses.RoofType)
      */
     public void updateRoofType(RoofType rooftype) throws DataException
     {
@@ -428,7 +405,7 @@ public class DataFacade
      *
      * @param material_id
      * @return a singel material from the database
-     * @throws DataException
+     * @throws DataException if retrieval not possible
      * @see DataLayer.MaterialMapper#getMaterial(int)
      */
     public Material getMaterial(int material_id) throws DataException
@@ -442,7 +419,7 @@ public class DataFacade
      *
      * @param material_name String
      * @return a singel material from the database
-     * @throws DataException
+     * @throws DataException if retrieval not possible
      * @see DataLayer.MaterialMapper#getMaterial(java.lang.String)
      */
     public Material getMaterial(String material_name) throws DataException
@@ -454,7 +431,7 @@ public class DataFacade
      * Gets all the materials in the database in a list
      *
      * @return All materials from the database as a list
-     * @throws DataException
+     * @throws DataException if retrieval not possible
      * @see DataLayer.MaterialMapper#getMaterials()
      */
     public List<Material> getMaterials() throws DataException
@@ -466,9 +443,8 @@ public class DataFacade
      * adds a new material in the database
      *
      * @param newMaterial
-     * @throws DataException
-     * @see
-     * DataLayer.MaterialMapper#addMaterial(FunctionLayer.HelpingClasses.Material)
+     * @throws DataException if insert is not possible
+     * @see DataLayer.MaterialMapper#addMaterial(FunctionLayer.HelpingClasses.Material)
      */
     public void addMaterial(Material newMaterial) throws DataException
     {
@@ -479,9 +455,8 @@ public class DataFacade
      * Removes a material from the database
      *
      * @param material object
-     * @throws DataException
-     * @see
-     * DataLayer.MaterialMapper#deleteMaterial(FunctionLayer.HelpingClasses.Material)
+     * @throws DataException if execute is not possible
+     * @see DataLayer.MaterialMapper#deleteMaterial(FunctionLayer.HelpingClasses.Material)
      */
     public void deleteMaterial(Material material) throws DataException
     {
@@ -492,9 +467,8 @@ public class DataFacade
      * updates information on the material passed in the database
      *
      * @param material object
-     * @throws DataException
-     * @see
-     * DataLayer.MaterialMapper#updateMaterial(FunctionLayer.HelpingClasses.Material)
+     * @throws DataException if retrieval or update of material is not possible
+     * @see DataLayer.MaterialMapper#updateMaterial(FunctionLayer.HelpingClasses.Material)
      */
     public void updateMaterial(Material material) throws DataException
     {

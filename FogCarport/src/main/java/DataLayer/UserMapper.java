@@ -23,21 +23,25 @@ public class UserMapper
     private DBConnector dbc;
 
     /**
-     *
+     * Creates and initializes a newly created DBConnector for further use
+     * in methods.
+     * 
      * @param dbc
+     * @throws DataException if initializing not possible
      */
-    public UserMapper(DBConnector dbc)
+    public UserMapper(DBConnector dbc) throws DataException
     {
         this.dbc = dbc;
     }
 
     /**
-     * used to varify the identity of a user when logging in
+     * Executes the query in the database, 
+     * to varify the identity of a user when logging in
      *
-     * @param email String
+     * @param email String - is used to detect the specific User in the database
      * @param password String
-     * @return the user with the asociated email and password
-     * @throws DataException
+     * @return the user with the associated email and password
+     * @throws DataException executing of query is not possible
      */
     public User login(String email, String password) throws DataException
     {
@@ -82,11 +86,12 @@ public class UserMapper
     }
 
     /**
-     * Gets a specific user from the database
+     * Executes the query in the database to collect an object from the class
+     * User with a specific user_id
      *
-     * @param user_id String
-     * @return user from database
-     * @throws DataException
+     * @param user_id is used to detect the specific User in the database
+     * @return an object from the class User
+     * @throws DataException if executing of query is not possible
      */
     public User getUser(int user_id) throws DataException
     {
@@ -129,9 +134,11 @@ public class UserMapper
     }
 
     /**
-     *
-     * @return All the users from the database
-     * @throws DataException
+     * Executes the query in the database to collect a list of objects from the
+     * class User.
+     * 
+     * @return an arraylist of object from the class User
+     * @throws DataException if executing of query is not possible
      */
     public List<User> getUsers() throws DataException
     {
@@ -174,9 +181,11 @@ public class UserMapper
     }
 
     /**
-     *
-     * @return All the users working for fog
-     * @throws DataException
+     * Executes the query in the database to collect a list of objects from the
+     * class User, where role is either ADMIN or EMPLOYEE
+     * 
+     * @return an arraylist of object from the class User, which role is either ADMIN or EMPLOYEE
+     * @throws DataException if executing of query is not possible
      */
     public List<User> getEmployeesAndAdmins() throws DataException
     {
@@ -226,11 +235,12 @@ public class UserMapper
     }
 
     /**
-     * Finds a specific employee in the database
+     * Executes the query in the database to collect an object from the class
+     * User with a specific email.
      *
-     * @param email String
-     * @return employee user with associated email that is passed
-     * @throws DataException
+     * @param email a String - is used to detect the specific User in the database
+     * @return an object from the class User
+     * @throws DataException if executing of query is not possible
      */
     public User getEmployeeByEmail(String email) throws DataException
     {
@@ -274,10 +284,11 @@ public class UserMapper
     }
 
     /**
-     * creates a new user in the database
+     * Executes the query in the database to insert an object from the class
+     * User.
      *
-     * @param newUser
-     * @throws DataException
+     * @param newUser the User to insert in database
+     * @throws DataException if executing update is not possible
      */
     public void addUser(User newUser) throws DataException
     {
@@ -324,10 +335,11 @@ public class UserMapper
     }
 
     /**
-     * Change the info on a user in the database
+     * Executes the query in the database to update the attributes 
+     * email, password, user_name, address, zipcode and phone_number on a specific User.
      *
-     * @param user object
-     * @throws DataException
+     * @param user is used to detect the specific User in the database
+     * @throws DataException if executing update is not possible
      */
     public void updateUser(User user) throws DataException
     {
@@ -365,11 +377,11 @@ public class UserMapper
     }
 
     /**
-     * change the password for a user in the database
+     * Executes the query in the database to update the attribute password on a specific User.
      *
-     * @param user_id
-     * @param password
-     * @throws DataException
+     * @param user_id is used to detect the specific User in the database
+     * @param password the new value to insert on password
+     * @throws DataException if executing update is not possible
      */
     public void updatePassword(int user_id, String password) throws DataException
     {
@@ -395,10 +407,11 @@ public class UserMapper
     }
 
     /**
-     * Deletes a user in the database
+     * Executes the query in the database to remove an object from the class
+     * User from the database.
      *
-     * @param user obhect
-     * @throws DataException
+     * @param user an object - to remove from the database
+     * @throws DataException if executing update is not possible
      */
     public void removeUser(User user) throws DataException
     {
