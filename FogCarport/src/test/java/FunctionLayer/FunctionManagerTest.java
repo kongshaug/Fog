@@ -377,13 +377,14 @@ public class FunctionManagerTest
      * Test of placeOrder, isShipped and removeOrder method, of class
      * FunctionManager.
      *
+     * @throws java.text.ParseException
      * @see DataFacadeTest#testOrderCarportAndPlaceOrderAndOrderShipped()
      * @throws DataLayer.DataException
      */
     @Test
-    public void testPlaceOrderAndIsShipped() throws DataException
+    public void testPlaceOrderAndIsShipped() throws DataException, ParseException
     {
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         RoofType rooftype = fm.getRoofTypeById(2);
         Roof roof = new Roof(15, rooftype);
         Shed shed = new Shed(470, 270);
@@ -412,7 +413,8 @@ public class FunctionManagerTest
         assertEquals("Ordren er endnu ikke afsendt", order.getShipped());
         fm.isShipped(order);
         Date today = new Date();
-        //assertEquals(dateFormatter.format(today), order.getShipped());
+        Date shipped = dateFormatter.parse(order.getShipped());
+        assertEquals(dateFormatter.format(today), dateFormatter.format(shipped));
 
         //test removeOrder
         fm.removeOrder(order);
