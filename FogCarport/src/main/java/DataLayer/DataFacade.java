@@ -25,17 +25,23 @@ public class DataFacade
     private static DataFacade instance = null;
     private DBConnector dbc = new DBConnector();
     private DataSourceMysql dataSource = new DataSourceMysql();
-    private MaterialMapper mm = new MaterialMapper(dbc);
-    private CarportMapper cm = new CarportMapper(dbc);
-    private UserMapper um = new UserMapper(dbc);
+    private MaterialMapper mm;
+    private CarportMapper cm;
+    private UserMapper um;
 
     /**
+     * Initializes a newly created UserMapper, MaterialMapper 
+     * and CarportMapper for further use in methods 
+     * and sets datasource for the connector.
      *
      * @throws DataException if initializing not possible
      */
     public DataFacade() throws DataException
     {
         dbc.setDataSource(dataSource.getDataSource());
+        mm = new MaterialMapper(dbc);
+        cm = new CarportMapper(dbc);
+        um = new UserMapper(dbc);
     }
 
     /**
@@ -182,7 +188,7 @@ public class DataFacade
 
     /**
      *
-     * @param email a String - is used to detect a list of order made by a user with the specific email
+     * @param email a String - is used to detect a list of orders made by a user with the specific email
      * @return a list of object from the class Order
      * @throws DataException if retrieval not possible
      * @see DataLayer.CarportMapper#getOrdersByEmail(java.lang.String)

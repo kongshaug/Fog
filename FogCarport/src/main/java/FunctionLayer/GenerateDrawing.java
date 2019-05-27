@@ -14,11 +14,15 @@ import FunctionLayer.HelpingClasses.Part;
 public class GenerateDrawing
 {
     /**
-     * draws the roof of a carport seen from the top and calls the other
-     * functions to create drawings of the carport seen from the other sides
+     * Drawing of the a specific carport seen from top and calls the other
+     * methods to create drawing of the carport seen from the side and front
      *
-     * @param carport
-     * @return
+     * @param carport an object of the class Carport, that is showed on the drawing
+     * @return a String including the measurments of the carport and materials used 
+     * 
+     * @see #drawShed(FunctionLayer.HelpingClasses.Carport) 
+     * @see #drawFront(FunctionLayer.HelpingClasses.Carport) 
+     * @see #drawSide(FunctionLayer.HelpingClasses.Carport) 
      */
     public String drawCarport(Carport carport)
     {
@@ -105,11 +109,10 @@ public class GenerateDrawing
     }
 
     /**
-     * drawes the sheed for a carport seen from the top and puts it inside the
-     * svg drawing of the carport seen from the top
+     * Drawing of shed for a specific carport seen from the top as SVG format
      *
-     * @param carport object
-     * @return drawing of shed seen from top
+     * @param carport an object of the class Carport, that is showed on the drawing
+     * @return a String containing the drawing of shed seen from top
      */
     private String drawShed(Carport carport)
     {
@@ -146,11 +149,10 @@ public class GenerateDrawing
     }
 
     /**
-     * drawes the carport seen from the front in svg format, both with and
-     * without a slope roof.
-     *
-     * @param carport
-     * @return returns the drawing of the carport seen from the side
+     * Drawing of the carport with the roof (either sloped or flat) seen from the front as svg format
+     * 
+     * @param carport an object of the class Carport, that is showed on the drawing
+     * @return a String containing the drawing of carport seen from the front
      */
     private String drawFront(Carport carport)
     {
@@ -201,10 +203,10 @@ public class GenerateDrawing
     }
 
     /**
-     * drawes the side of a carport in svg
+     * Drawing of the carport seen from the side as svg format
      *
-     * @param carport
-     * @return returns the drawing of the carport seen from the side
+     * @param carport an object of the class Carport, that is showed on the drawing
+     * @return a String containing the drawing of carport seen from the side
      */
     private String drawSide(Carport carport)
     {

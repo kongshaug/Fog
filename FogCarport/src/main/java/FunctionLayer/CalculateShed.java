@@ -132,7 +132,6 @@ public class CalculateShed implements Calculate
         parts.add(inderbrætSkruer);
     }
 
-
     private ArrayList<Integer> calculatedoorForShed(Carport carport)
     {
         Material lægte = map.get(10);
@@ -169,6 +168,14 @@ public class CalculateShed implements Calculate
         return skruer;
     }
 
+    /**
+     * Retrives a list of materials from the database 
+     * and puts the material_id of the material, 
+     * together with the material in a Hashmap
+     * 
+     * @return a materialMap
+     * @throws DataException if retrival is not possible
+     */
     @Override
     public Map<Integer, Material> getMaterials() throws DataException
     {

@@ -39,8 +39,12 @@ public class FunctionManager
     private GenerateDrawing GD;
 
     /**
+     * Initializes the instance of DataFacade as db and
+     * a newly created CalcualtePackages, CalculateRoof,
+     * CalculateShed, CalculateCarport and GenerateDrawing,
+     * for further use in methods 
      *
-     * @throws DataException
+     * @throws DataException if initializing not possible
      */
     public FunctionManager() throws DataException
     {
@@ -53,9 +57,10 @@ public class FunctionManager
     }
 
     /**
+     * Creates and initializes an instance of FunctionManager
      *
-     * @return instance of Function Manager as a singelton
-     * @throws DataException
+     * @return an instance of FunctionManager as a singelton
+     * @throws DataException if initializing is not possible
      */
     public static FunctionManager getInstance() throws DataException
     {
@@ -67,10 +72,11 @@ public class FunctionManager
     }
 
     /**
-     *
-     * @param user_id
-     * @return
-     * @throws DataException
+     * 
+     * @param user_id is used to detect the specific User
+     * @return an object from the class User with the specific user_id
+     * @throws DataException if retrieval not possible
+     * @see DataLayer.DataFacade#getUser(int) 
      */
     public User getUser(int user_id) throws DataException
     {
@@ -79,9 +85,9 @@ public class FunctionManager
 
     /**
      *
-     * @param email String
-     * @return a employee user with the passed email
-     * @throws DataException
+     * @param email is used to detect the specific User
+     * @return an object from the class User with the specific email
+     * @throws DataException if retrieval not possible
      * @see DataLayer.DataFacade#getEmployeeByEmail(java.lang.String)
      */
     public User getEmployeeByEmail(String email) throws DataException
@@ -90,10 +96,9 @@ public class FunctionManager
     }
 
     /**
-     * findes all the employees and admins in the database and returnes them
      *
-     * @return a list of all users that are employees and admins
-     * @throws DataException
+     * @return a list of object from the class User, with all the employees and admins
+     * @throws DataException if retrieval not possible
      * @see DataLayer.DataFacade#getEmployeesAndAdmins()
      */
     public List<User> getEmployeesAndAdmins() throws DataException
@@ -102,12 +107,12 @@ public class FunctionManager
     }
 
     /**
-     * finds the user in the database with the information passed
+     * Retrieve a User associated with the specific email and password in database
      *
-     * @param email String
-     * @param password String
-     * @return User with the given login input or null if not exists
-     * @throws DataException
+     * @param email is used to detect the specific User
+     * @param password a String
+     * @return an object from the class User
+     * @throws DataException if retrieval not possible
      * @see DataLayer.DataFacade#login(java.lang.String, java.lang.String)
      */
     public User login(String email, String password) throws DataException
@@ -116,12 +121,13 @@ public class FunctionManager
     }
 
     /**
-     * creates a new user in the database
+     * 
+     * The User is inserted into the database, if and only if the User is not null 
+     * and the User object does not represents the same email as an User from the database.
      *
-     * @param user object
-     * @return if information entered is wrong the String returned tells the
-     * user what they did wrong, else it returns sayting that everything ok
-     * @throws DataException
+     * @param user the User to insert in database
+     * @return a string telling whether the insert is succesful or not
+     * @throws DataException if insert is not possible
      * @see DataLayer.DataFacade#newUser(FunctionLayer.HelpingClasses.User)
      */
     public String newUser(User user) throws DataException
@@ -197,11 +203,12 @@ public class FunctionManager
     }
 
     /**
-     * Removes a user from the database
+     * 
+     * The User is deleted in the database, if the User is not null 
      *
-     * @param user Object
-     * @return information on how the database call whent
-     * @throws DataException
+     * @param user the User to delete in database
+     * @return a string telling whether the delete is succesful or not
+     * @throws DataException if delete is not possible
      * @see DataLayer.DataFacade#removeOrder(FunctionLayer.HelpingClasses.Order)
      */
     public String removeUser(User user) throws DataException
@@ -226,19 +233,21 @@ public class FunctionManager
     }
 
     /**
-     * Updates information about a customer in the database
      *
-     * @param user Object
-     * @param email String
-     * @param name String
-     * @param oldpassword String
-     * @param newpassword String
-     * @param address String
-     * @param zipcode int
-     * @param phone int
-     * @return status for update, if wrong information was entered the string
-     * contains the mistake
-     * @throws DataException
+     * The User (customer) information will be updated in the database, 
+     * if and only if the User is not null and the User object does 
+     * not represents the same email as an User from the database.
+     * 
+     * @param user the User to update in database
+     * @param email a String
+     * @param name a String
+     * @param oldpassword a String
+     * @param newpassword a String
+     * @param address a String
+     * @param zipcode a String
+     * @param phone a String
+     * @return a String telling whether the update is succesful or not
+     * @throws DataException if update is not possible
      * @see DataLayer.DataFacade#updateUser(FunctionLayer.HelpingClasses.User)
      */
     public String updateCustomer(User user, String email, String name, String oldpassword, String newpassword, String address, String zipcode, String phone) throws DataException
@@ -302,16 +311,19 @@ public class FunctionManager
     }
 
     /**
-     * updates the information of a employee in the database
+     * 
+     * The User (employee) information will be updated in the database, 
+     * if and only if the User is not null and the User object does 
+     * not represents the same email as an User from the database.
      *
-     * @param user Object
-     * @param email String
-     * @param name String
-     * @param address String
-     * @param zipcode int
-     * @param phone int
-     * @return status of opdate, or mistake if data entered is wrong
-     * @throws DataException
+     * @param user the User to update in database
+     * @param email a String
+     * @param name a String
+     * @param address a String
+     * @param zipcode a String
+     * @param phone a String
+     * @return a String telling whether the update is succesful or not
+     * @throws DataException if update is not possible
      * @see DataLayer.DataFacade#updateUser(FunctionLayer.HelpingClasses.User)
      */
     public String updateEmployee(User user, String email, String name, String address, String zipcode, String phone) throws DataException
@@ -366,12 +378,14 @@ public class FunctionManager
 
     /**
      *
-     * @param user Object
-     * @param oldpassword String
-     * @param newpassword String
-     * @return Status for update, if wrong information was entered the string
-     * contains the mistake
-     * @throws DataException
+     * The password for a specific User will be updated in the database, 
+     * if and only if the new password is not null and is longer than four digits 
+     * 
+     * @param user the User, which password to update in database
+     * @param oldpassword a String
+     * @param newpassword a String
+     * @return a String telling whether the update is succesful or not
+     * @throws DataException  if update is not possible
      * @see DataLayer.DataFacade#updatePassword(int, java.lang.String)
      */
     public String updatePassword(User user, String oldpassword, String newpassword) throws DataException
@@ -398,11 +412,11 @@ public class FunctionManager
     }
 
     /**
-     * Findes the order with the id passed in the datbase
+     * Retrieve a specific order from the database 
      *
-     * @param order_id int
-     * @return a order from the database
-     * @throws DataException
+     * @param order_id is used to detect the specific order
+     * @return an object from the class Order
+     * @throws DataException if retrieval not possible
      * @see DataLayer.DataFacade#getOrder(int)
      */
     public Order getOrder(int order_id) throws DataException
@@ -411,8 +425,12 @@ public class FunctionManager
     }
 
     /**
+     * 
+     * Retrieves all orders from the database
      *
-     * @return @throws DataException
+     * @return a list of object from the class Order
+     * @throws DataException if retrieval not possible
+     * @see DataLayer.DataFacade#getOrders() 
      */
     public List<Order> getOrders() throws DataException
     {
@@ -420,11 +438,11 @@ public class FunctionManager
     }
 
     /**
-     * Gets all the orders that is from a client with the email passed
+     * Retrieves a list of orders from a User with a specific email 
      *
-     * @param email String
-     * @return a list of all the orders with the email passed
-     * @throws DataException
+     * @param email a String - is used to detect a list of orders made by a user with the specific email
+     * @return a list of object from the class Order
+     * @throws DataException if retrieval not possible
      * @see DataLayer.DataFacade#getOrdersByEmail(java.lang.String)
      */
     public List<Order> getOrdersByEmail(String email) throws DataException
@@ -433,12 +451,12 @@ public class FunctionManager
     }
 
     /**
-     * places an order in the database
+     * The wanted Carport is inserted in the database, thereafter the 
+     * order is inserted in the database with the specific carport
      *
-     * @param order object
-     * @return if information entered is wrong the String returned tells the
-     * user what they did wrong, else it returns sayting that everything ok
-     * @throws DataException
+     * @param order the Order to insert in database
+     * @return a String telling whether the insert is succesful or not
+     * @throws DataException if insert not possible
      * @see DataLayer.DataFacade#placeOrder(FunctionLayer.HelpingClasses.Order)
      */
     public String placeOrder(Order order) throws DataException
@@ -457,6 +475,14 @@ public class FunctionManager
         return res;
     }
 
+    /**
+     * Retrieves a list of orders and checks the date for each order
+     * if the order is older than 3 years, the order is removed in the database.
+     * 
+     * @param orders a list of the object Order
+     * @throws ParseException if parsing a String to Date not possible
+     * @throws DataException if remove not possible
+     */
     public void GDPRCheck(List<Order> orders) throws ParseException, DataException
     {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -482,6 +508,13 @@ public class FunctionManager
         }
     }
 
+    /**
+     * 
+     * The Order, carport, roof and possible shed is deleted in the database 
+     * 
+     * @param order the Order to delete in database
+     * @throws DataException if delete is not possible
+     */
     public void removeOrder(Order order) throws DataException
     {
         if (order.getCarport().getShed() != null)
@@ -495,11 +528,11 @@ public class FunctionManager
     }
 
     /**
-     * findes a order based on the id passed and returns the shipping status
-     *
-     * @param order Object
-     * @throws DataException
-     * @see DataLayer.DataFacade#
+     * Updates an Order with a specific order_id if it is shipped.
+     * 
+     * @param order the Order to update in database
+     * @throws DataException if update is not possible
+     * @see DataLayer.DataFacade#orderShipped(int) 
      */
     public void isShipped(Order order) throws DataException
     {
@@ -508,11 +541,11 @@ public class FunctionManager
     }
 
     /**
-     * Changes the price of a order in the database
+     * Updates salesprice in the database
      *
-     * @param order_id int
-     * @param salesprice double
-     * @throws DataException
+     * @param order_id an integer - is used to detect the specific Order
+     * @param salesprice a double - the new value to insert on salesprice
+     * @throws DataException if update is not possible
      * @see DataLayer.DataFacade#updateSalesPrice(int, double)
      */
     public void updateSalesPrice(int order_id, double salesprice) throws DataException
@@ -521,15 +554,14 @@ public class FunctionManager
     }
 
     /**
-     * Updates the status of shippment and order status in the database of an
+     * Update Status and Paid in the database for a specific Order
      * order
      *
-     * @param order
-     * @param status enum
-     * @param paid enum
-     * @throws DataException
-     * @see DataLayer.DataFacade#updateStatusAndPaid(int,
-     * FunctionLayer.Enum.Status, FunctionLayer.Enum.Paid)
+     * @param order - the order, which status and paid, to update in database
+     * @param status - an object of the enum class Status
+     * @param paid - an object of the enum class Paid
+     * @throws DataException if update is not possible
+     * @see DataLayer.DataFacade#updateStatusAndPaid(int, FunctionLayer.Enum.Status, FunctionLayer.Enum.Paid)
      */
     public void updateStatusAndPaid(Order order, Status status, Paid paid) throws DataException
     {
@@ -539,20 +571,22 @@ public class FunctionManager
     }
 
     /**
-     * updates the information on a carport in the database
+     * The Carport's measurments will be updated in the database, 
+     * if the measurments is not null - a shed can be removed and will
+     * in that case be removed from the database, if a shed is wanted
+     * a shed will be inserted in the database - when the carport is 
+     * updated succesfully, the list of parts will reset and calculated again.
      *
-     * @param carport object
-     * @param carport_depth int
-     * @param carport_width int
-     * @param rooftype rooftype object
-     * @param roofslope int
-     * @param shed_width int
-     * @param shed_depth int
-     * @return status for update, if wrong information was entered the string
-     * contains the mistake
-     * @throws DataException
-     * @see
-     * DataLayer.DataFacade#updateCarport(FunctionLayer.HelpingClasses.Carport)
+     * @param carport the carport to update in database 
+     * @param carport_depth an Integer
+     * @param carport_width an Integer
+     * @param rooftype an object of the class RoofType
+     * @param roofslope an Integer
+     * @param shed_width an Integer
+     * @param shed_depth an Integer
+     * @return a String telling whether the update is succesful or not
+     * @throws DataException if insert is not possible
+     * @see DataLayer.DataFacade#updateCarport(FunctionLayer.HelpingClasses.Carport)
      */
     public String updateCarport(Carport carport, int carport_depth, int carport_width, RoofType rooftype, int roofslope, int shed_width, int shed_depth) throws DataException
     {
@@ -621,10 +655,10 @@ public class FunctionManager
     }
 
     /**
-     * Gets all the roofs from the database
+     * Retrieves a list of RoofType from database 
      *
-     * @return list of all roofs contains the mistake
-     * @throws DataException
+     * @return a list of objects from the class RoofType
+     * @throws DataException if retrieval is not possible
      * @see DataLayer.DataFacade#getRoofs()
      */
     public List<RoofType> getRoofs() throws DataException
@@ -633,8 +667,11 @@ public class FunctionManager
     }
 
     /**
+     * Retrieves a list of RoofType from database and saves the rooftypes
+     * which are sloped in a new list
      *
-     * @return @throws DataException
+     * @return a list of slopedRoofs 
+     * @throws DataException if retrieval is not possible
      */
     public List<RoofType> getSlopedRoofs() throws DataException
     {
@@ -654,10 +691,11 @@ public class FunctionManager
     }
 
     /**
-     * gets a list of all the flat roofs in the database
+     * Retrieves a list of RoofType from database and saves the rooftypes
+     * which are flat in a new list
      *
-     * @return a list of all the Falt Roofs
-     * @throws DataException
+     * @return a list of flatRoofs 
+     * @throws DataException if retrieval is not possible
      */
     public List<RoofType> getFlatRoofs() throws DataException
     {
@@ -676,11 +714,11 @@ public class FunctionManager
     }
 
     /**
-     * Gets a roof in the database with the id passed
+     * Retrieve a RoofType from the database with a specific id
      *
-     * @param typeId int
-     * @return a roof with the id passed
-     * @throws DataException
+     * @param typeId an Integer - to detect a specific RoofType
+     * @return an object of the class RoofType
+     * @throws DataException if retrieval is not possible
      * @see DataLayer.DataFacade#getRoof(int)
      */
     public RoofType getRoofTypeById(int typeId) throws DataException
@@ -689,14 +727,15 @@ public class FunctionManager
     }
 
     /**
-     * Adds a rooftype in the database
+     * A rooftype is inserted in the database if the rooftype object does
+     * not represents the same name as a rooftype from the database or
+     * if the selected materials to create a rooftype are not already used
+     * on an existing rooftype in the database.
      *
-     * @param rooftype object
-     * @return Status for update, if wrong information was entered the string
-     * contains the mistake
-     * @throws DataException
-     * @see
-     * DataLayer.DataFacade#addRoofType(FunctionLayer.HelpingClasses.RoofType)
+     * @param rooftype the rooftype to insert in database 
+     * @return a String telling whether the insert is succesful or not
+     * @throws DataException if insert is not possible
+     * @see DataLayer.DataFacade#addRoofType(FunctionLayer.HelpingClasses.RoofType)
      */
     public String addRoofType(RoofType rooftype) throws DataException
     {
@@ -758,14 +797,12 @@ public class FunctionManager
     }
 
     /**
-     * deletes a rooftype from the database
+     * Removes a specific rooftype from the database
      *
-     * @param rooftype object
-     * @return Status for update, if wrong information was entered the string
-     * contains the mistake
-     * @throws DataException
-     * @see
-     * DataLayer.DataFacade#deleteRoofType(FunctionLayer.HelpingClasses.RoofType)
+     * @param rooftype the rooftype to delete in database
+     * @return a String telling whether the delete is succesful or not
+     * @throws DataException if delete is not possible
+     * @see DataLayer.DataFacade#deleteRoofType(FunctionLayer.HelpingClasses.RoofType)
      */
     public String deleteRoofType(RoofType rooftype) throws DataException
     {
@@ -782,17 +819,18 @@ public class FunctionManager
     }
 
     /**
-     * updates a roof type in the database
+     * A rooftype is updated in the database if the rooftype object does
+     * not represents the same name as a rooftype from the database or
+     * if the selected materials to create a rooftype are not already used
+     * on an existing rooftype in the database.
      *
-     * @param rooftype object
-     * @param name String
-     * @param m1 Material
-     * @param m2 Material
-     * @return status for update, if wrong information was entered the string
-     * contains the mistake
-     * @throws DataException
-     * @see
-     * DataLayer.DataFacade#updateRoofType(FunctionLayer.HelpingClasses.RoofType)
+     * @param rooftype the rooftype to update in database
+     * @param name a String
+     * @param m1 an object of the class Material
+     * @param m2 an object of the class Material
+     * @return a String telling whether the update is succesful or not
+     * @throws DataException if update is not possible
+     * @see DataLayer.DataFacade#updateRoofType(FunctionLayer.HelpingClasses.RoofType)
      */
     public String updateRoofType(RoofType rooftype, String name, Material m1, Material m2) throws DataException
     {
@@ -860,11 +898,12 @@ public class FunctionManager
     }
 
     /**
-     * Gets a material with the passed id
+     * Retrieves a specific material from database
      *
-     * @param material_id int
-     * @return material from database with same id as passed
-     * @throws DataException
+     * @param material_id an Integer - to detect a speicific material 
+     * @return an object of the class Material
+     * @throws DataException if retrieval is not possible
+     * @see DataLayer.DataFacade#getMaterial(int) 
      */
     public Material getMaterial(int material_id) throws DataException
     {
@@ -872,10 +911,11 @@ public class FunctionManager
     }
 
     /**
-     * gets all the materials from the database
+     * Retrieves a list of materials from database
      *
-     * @return all materials in a list
-     * @throws DataException
+     * @return a list of objects from the class Material
+     * @throws DataException if retrieval is not possible
+     * @see DataLayer.DataFacade#getMaterials() 
      */
     public List<Material> getAllMaterials() throws DataException
     {
@@ -883,14 +923,13 @@ public class FunctionManager
     }
 
     /**
-     * adds a material in the database
+     * A material is inserted in the database if the material object is not
+     * null and does not represents the same name as a material from the database.
      *
-     * @param newMaterial Material
-     * @return status for update, if wrong informations is added String contains
-     * mistake
-     * @throws DataException
-     * @see
-     * DataLayer.DataFacade#addMaterial(FunctionLayer.HelpingClasses.Material)
+     * @param newMaterial the material to update in database
+     * @return a String telling whether the insert is succesful or not
+     * @throws DataException if insert is not possible
+     * @see DataLayer.DataFacade#addMaterial(FunctionLayer.HelpingClasses.Material)
      */
     public String addMaterial(Material newMaterial) throws DataException
     {
@@ -917,7 +956,7 @@ public class FunctionManager
             res += "Angiv venligst en passende kategori for materialet\n";
         }
 
-        if (newMaterial.getPrice() == 0)
+        if (newMaterial.getPrice() <= 0)
         {
             res += "Angiv venligst en pris for materialet\n";
         }
@@ -932,13 +971,12 @@ public class FunctionManager
     }
 
     /**
+     * Deletes a material from database
      *
-     * @param material
-     * @return status for update, if wrong information was entered the string
-     * contains the mistake
-     * @throws DataException
-     * @see
-     * DataLayer.DataFacade#deleteMaterial(FunctionLayer.HelpingClasses.Material)
+     * @param material the material to delete from database
+     * @return a String telling whether the delete is succesful or not
+     * @throws DataException if delete is not possible
+     * @see DataLayer.DataFacade#deleteMaterial(FunctionLayer.HelpingClasses.Material)
      */
     public String deleteMaterial(Material material) throws DataException
     {
@@ -955,16 +993,17 @@ public class FunctionManager
     }
 
     /**
+     * A material is updated in the database if the material object is not
+     * null and does not represents the same name as a material from the database.
      *
-     * @param material
-     * @param material_name
-     * @param unit
-     * @param material_class
-     * @param price
-     * @return
-     * @throws DataException
-     * @see
-     * DataLayer.DataFacade#updateMaterial(FunctionLayer.HelpingClasses.Material)
+     * @param material an object to update from the class Material
+     * @param material_name a String
+     * @param unit a String
+     * @param material_class a String 
+     * @param price a String 
+     * @return a String telling whether the update is succesful or not
+     * @throws DataException if update is not possible
+     * @see DataLayer.DataFacade#updateMaterial(FunctionLayer.HelpingClasses.Material)
      */
     public String updateMaterial(Material material, String material_name, String unit, String material_class, double price) throws DataException
     {
@@ -991,7 +1030,7 @@ public class FunctionManager
             res += "Angiv venligst en passende kategori for materialet\n";
         }
 
-        if (price == 0)
+        if (price <= 0)
         {
             res += "Angiv venligst en pris for materialet\n";
         }
@@ -1011,13 +1050,13 @@ public class FunctionManager
     }
 
     /**
-     * calculates the Materials needed to bouild the carport and puts the
-     * Materials in a list on the carport
+     * Calculates the materials for a specific carport and checks its measurments
      *
-     * @param carport object
-     * @throws DataException
+     * @param carport an object of the class Carport
+     * @throws DataException if retrieval of carport is not possible
+     * @see FunctionLayer.CalculateCarport#calcCarport(FunctionLayer.HelpingClasses.Carport) 
      */
-    public void calcCarport(Carport carport) throws DataException
+    public void calcCarport(Carport carport) throws DataException 
     {
         if (carport.getWidth() <= 750 && carport.getDepth() <= 800)
         {
@@ -1026,12 +1065,13 @@ public class FunctionManager
     }
 
     /**
-     * Calculates the materials needed to build the roofe and puts them in a
-     * list on the roof object
+     * Calculates the materials for a flat or sloped roof for a specific carport
      *
-     * @param carport object
-     * @throws DataException
-     *
+     * @param carport an object of the class Carport
+     * @throws DataException if retrieval of carport is not possible
+     * @see FunctionLayer.CalculateRoof#calculateFlatRoof(FunctionLayer.HelpingClasses.Carport) 
+     * @see FunctionLayer.CalculateRoof#calculatePlatsmo(FunctionLayer.HelpingClasses.Carport) 
+     * @see FunctionLayer.CalculateRoof#calculateSlopeRoof(FunctionLayer.HelpingClasses.Carport) 
      */
     public void calcRoof(Carport carport) throws DataException
     {
@@ -1047,11 +1087,11 @@ public class FunctionManager
     }
 
     /**
-     * calculates the materials needed to build the shed and puts the Materials
-     * in a list on the shead
+     * Calculates the materials for a shed and checks its the measurments
      *
-     * @param carport Object
-     * @throws DataException
+     * @param carport an object of the class Carport
+     * @throws DataException if retrieval of carport is not possible
+     * @see FunctionLayer.CalculateShed#calcShed(FunctionLayer.HelpingClasses.Carport) 
      */
     public void calcShed(Carport carport) throws DataException
     {
@@ -1062,10 +1102,12 @@ public class FunctionManager
     }
 
     /**
-     * Makes a drawing of a Roof for a Carport in SVG format
+     * Generates a drawing of a Carport seen from the front, side and top
+     * - the drawing is in SVG format.
      *
-     * @param carport Object
-     * @return a SVG format Drawing in a String format
+     * @param carport an object of the class Carport, that is showed as a drawing
+     * @return SVG format Drawing as a String
+     * @see FunctionLayer.GenerateDrawing#drawCarport(FunctionLayer.HelpingClasses.Carport) 
      *
      */
     public String drawCarport(Carport carport)
