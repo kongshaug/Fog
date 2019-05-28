@@ -113,6 +113,12 @@ public class FunctionManagerTest
         expResult = "Din bruger er nu slettet";
         result = fm.removeUser(user);
         assertEquals(expResult, result);
+        
+        //test cant delete if null
+        user = null;
+        expResult = "Brugeren kunne ikke slettes";
+        result = fm.removeUser(user);
+        assertEquals(expResult, result);
     }
 
     /**
@@ -621,6 +627,12 @@ public class FunctionManagerTest
         expResult = "Tagtypen er slettet";
         result = fm.deleteRoofType(rooftype);
         assertEquals(expResult, result);
+        
+        //test cant delete if null
+        rooftype = null;
+        expResult = "Tagtypen kunne ikke slettes";
+        result = fm.deleteRoofType(rooftype);
+        assertEquals(expResult, result);
 
         //test deleteMaterial
         expResult = "Materialet er slettet";
@@ -629,6 +641,12 @@ public class FunctionManagerTest
 
         expResult = "Materialet er slettet";
         result = fm.deleteMaterial(m2);
+        assertEquals(expResult, result);
+        
+        //test cant delete if null
+        m1 = null;
+        expResult = "Materialet kunne ikke slettes";
+        result = fm.deleteMaterial(m1);
         assertEquals(expResult, result);
 
     }
@@ -656,11 +674,25 @@ public class FunctionManagerTest
         result = fm.addRoofType(rooftype);
         assertEquals(expResult, result);
 
+        //test material allready in use (Material 1)
+        rooftype = new RoofType("Testtag", "slope", fm.getMaterial(36), m2);
+        expResult = "Materialet er allerede tilknyttet en anden tagtype\n";
+        result = fm.addRoofType(rooftype);
+        assertEquals(expResult, result);
+        
         //test material allready in use (Material 2)
         rooftype = new RoofType("Testtag", "flat", m1, fm.getMaterial(12));
         expResult = "Materialet er allerede tilknyttet en anden tagtype\n";
         result = fm.addRoofType(rooftype);
         assertEquals(expResult, result);
+        
+        //test material allready in use (Material 2)
+        rooftype = new RoofType("Testtag", "slope", m1, fm.getMaterial(36));
+        expResult = "Materialet er allerede tilknyttet en anden tagtype\n";
+        result = fm.addRoofType(rooftype);
+        assertEquals(expResult, result);
+        
+        
 
         //test roof class can only be "slope" or "flat"
         rooftype = new RoofType("Testtag", "test", m1, m2);
@@ -726,7 +758,23 @@ public class FunctionManagerTest
         expResult = "Materialet er allerede tilknyttet en anden tagtype\n";
         result = fm.updateRoofType(roof, name, m1, fm.getMaterial(12));
         assertEquals(expResult, result);
+        
+         //test material must not allready be in use
+        expResult = "Materialet er allerede tilknyttet en anden tagtype\n";
+        result = fm.updateRoofType(roof, name, fm.getMaterial(37), m2);
+        assertEquals(expResult, result);
+        
+        //test material must not allready be in use
+        roof = fm.getRoofTypeById(1);
+        name = roof.getName();
+        
+        expResult = "Materialet er allerede tilknyttet en anden tagtype\n";
+        result = fm.updateRoofType(roof, name, fm.getMaterial(37), null);
+        assertEquals(expResult, result);
 
+        expResult = "Materialet er allerede tilknyttet en anden tagtype\n";
+        result = fm.updateRoofType(roof, name, fm.getMaterial(40), null);
+        assertEquals(expResult, result);
     }
 
     /**
@@ -1005,7 +1053,7 @@ public class FunctionManagerTest
      * @throws DataLayer.DataException
      */
     @Test
-    public void testDrawingOfRoof() throws DataException
+    public void testDrawCarport() throws DataException
     {
         Roof roof = new Roof(15, fm.getRoofTypeById(2));
         Shed shed = new Shed(200, 200);

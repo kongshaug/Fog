@@ -843,7 +843,7 @@ public class FunctionManager
         
         for (RoofType r : db.getRoofs())
         {
-            if (name.toLowerCase().equals(r.getName().toLowerCase()) && rooftype.getId() != r.getId())
+            if (rooftype.getId() != r.getId() && name.toLowerCase().equals(r.getName().toLowerCase()))
             {
                 res += "Tagtype med samme navn eksisterer allerede\n";
             }
