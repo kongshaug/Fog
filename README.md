@@ -22,19 +22,14 @@ The combined purpose is to have a system, that can generate an applicable answer
 There are 5 users in the database
 
 3 customer:
-
-Email: customer@hotmail.dk  password: 1234
-
-Email: hans@hotmail.dk      password: 1234
-
-Email: poul@hotmail.dk      password: 1234
+* Email: customer@hotmail.dk  password: 1234
+* Email: hans@hotmail.dk      password: 1234
+* Email: poul@hotmail.dk      password: 1234
 
 1 employee:
-
-Email: employee@hotmail.dk         password: 1234
+* Email: employee@hotmail.dk         password: 1234
 
 1 Admin:
-
-Email: admin@hotmail.dk            password: 1234
+* Email: admin@hotmail.dk            password: 1234
 
 
