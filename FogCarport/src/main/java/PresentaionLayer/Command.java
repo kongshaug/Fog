@@ -5,6 +5,7 @@
  */
 package PresentaionLayer;
 
+import DataLayer.DataException;
 import FunctionLayer.FunctionManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +14,14 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author sofieamalielandt
  */
+
+/**
+ * Interface which ensures that the String will
+ * always be executed
+ *
+ */
 public interface Command
 {
-    String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataLayer.DataException;
+
+    String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException;
 }

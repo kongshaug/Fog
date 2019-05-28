@@ -22,12 +22,31 @@ public class AddMaterialCommand implements Command
     private String target;
     private String error;
 
+    /**
+     * Ininitializing target and denied for the command
+     * 
+     * @param target a String, reference to jsp
+     * @param error a String, reference to jsp
+     */
     public AddMaterialCommand(String target, String error)
     {
         this.target = target;
         this.error = error;
     }
 
+    /**
+     * If access is denied, forwards to addmaterial.jsp 
+     * Retrieves parameters name, unit, material_class and price and creates object Materisl
+     * and adds object to the database, a string is returned as repsonse -
+     * forwards to materials.jsp 
+     * 
+     * @param request a HttpServletRequest
+     * @param response a HttpServletResponse
+     * @param manager an instance of FunctionManager
+     * @return target or error
+     * @throws CommandException if an error occours
+     * @throws DataException if retrievel was not possible 
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {

@@ -20,11 +20,29 @@ public class noUserCommand implements Command
 {
     private String target;
 
+    /**
+     * Ininitializing target and denied for the command
+     * 
+     * @param target a String, reference to jsp
+     */
     public noUserCommand(String target)
     {
         this.target = target;
     }
 
+    /**
+     * 
+     * Retrieves attributes email and password from request, 
+     * the user with the email and password is retrieved from database and is
+     * saved on session, forward to drawing.jsp , else forward to nouser.jsp
+     * 
+     * @param request a HttpServletRequest
+     * @param response a HttpServletResponse
+     * @param manager an instance of FunctionManager
+     * @return target
+     * @throws CommandException if an error occours
+     * @throws DataException if retrievel was not possible 
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {

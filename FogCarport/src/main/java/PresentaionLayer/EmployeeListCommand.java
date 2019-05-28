@@ -25,12 +25,33 @@ public class EmployeeListCommand implements Command
     private String target;
     private String denied;
 
+    /**
+     * Ininitializing target and denied for the command
+     * 
+     * @param target a String, reference to jsp
+     * @param denied a String, reference to jsp
+     */
     public EmployeeListCommand(String target, String denied)
     {
         this.target = target;
         this.denied = denied;
     }
 
+    /**
+     * 
+     * Retrieves the parameter search from request, if search is empty a list
+     * of employees as users is retrieved from database and saved on request, otherwise a
+     * list of users by an employee email is retrieved and saved on request 
+     * - forwards to employeelist.jsp
+     * If access is denied, forwards to employee.jsp 
+     * 
+     * @param request a HttpServletRequest
+     * @param response a HttpServletResponse
+     * @param manager an instance of FunctionManager
+     * @return target or denied
+     * @throws CommandException if an error occours
+     * @throws DataException if retrievel was not possible 
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {

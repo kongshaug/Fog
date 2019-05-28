@@ -20,11 +20,29 @@ public class UpdateMaterialCommand implements Command
 {
     private String target;
     
+    /**
+     * Ininitializing target and denied for the command
+     * 
+     * @param target a String, reference to jsp
+     */
     public UpdateMaterialCommand(String target)
     {
         this.target = target;
     }
 
+    /**
+     * 
+     * Retrieves attribute material from session and parameters name, unit, material_class and price
+     * from request, the material is updated in database and a String is returned as response 
+     * - forward to material.jsp
+     * 
+     * @param request a HttpServletRequest
+     * @param response a HttpServletResponse
+     * @param manager an instance of FunctionManager
+     * @return target
+     * @throws CommandException if an error occours
+     * @throws DataException if retrievel was not possible 
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {

@@ -20,11 +20,29 @@ public class PasswordCommand implements Command
 {
     private String target;
     
+    /**
+     * Ininitializing target and denied for the command
+     * 
+     * @param target a String, reference to jsp
+     */
     public PasswordCommand(String target)
     {
         this.target = target;
     }
 
+    /**
+     * 
+     * Retrieves attribute user from session, oldpassword and newpassword from request,
+     * updates the password of the object User in database, a String is returned in response
+     * - forward to employeeprofile.jsp
+     * 
+     * @param request a HttpServletRequest
+     * @param response a HttpServletResponse
+     * @param manager an instance of FunctionManager
+     * @return target
+     * @throws CommandException if an error occours
+     * @throws DataException if retrievel was not possible 
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {

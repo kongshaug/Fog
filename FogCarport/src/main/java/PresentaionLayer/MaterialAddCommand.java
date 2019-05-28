@@ -23,10 +23,29 @@ public class MaterialAddCommand implements Command
 {
     private String target;
 
+    /**
+     * Ininitializing target and denied for the command
+     * 
+     * @param target a String, reference to jsp
+     */
     public MaterialAddCommand(String target)
     {
         this.target = target;
     }
+
+    /**
+     * 
+     * Retrieves attribute user from session and a list of added material_classes is saved
+     * in session and forward to addmaterials.jsp
+     * If access denied - forward to shop.jsp
+     * 
+     * @param request a HttpServletRequest
+     * @param response a HttpServletResponse
+     * @param manager an instance of FunctionManager
+     * @return target
+     * @throws CommandException if an error occours
+     * @throws DataException if retrievel was not possible 
+     */
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException

@@ -11,7 +11,6 @@ import FunctionLayer.HelpingClasses.RoofType;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -21,11 +20,30 @@ public class DeleteRooftypeCommand implements Command
 {
     private String target;
 
+    /**
+     * Ininitializing target and denied for the command
+     * 
+     * @param target a String, reference to jsp
+     */
     public DeleteRooftypeCommand(String target)
     {
         this.target = target;
     }
 
+    /**
+     * 
+     * Retrieves and checks, parameter rooftype from request, if rooftype null 
+     * a String is returned as response - forward to rooftypes.jsp
+     * An object of RoofType is recieved and deleted from the database
+     * a String is retuned as response and the new list of rooftypes is retrieved - forward to rooftypes.jsp
+     * 
+     * @param request a HttpServletRequest
+     * @param response a HttpServletResponse
+     * @param manager an instance of FunctionManager
+     * @return target
+     * @throws CommandException if an error occours
+     * @throws DataException if retrievel was not possible 
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
@@ -34,7 +52,7 @@ public class DeleteRooftypeCommand implements Command
         if (rooftype_str == null)
         {
             request.setAttribute("message", "Vælg venligst et tagtype");
-            return "rooftypes.jsp";
+            return target;
         }
 
         int material_id = Integer.parseInt(rooftype_str);

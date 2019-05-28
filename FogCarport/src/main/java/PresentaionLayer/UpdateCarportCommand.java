@@ -21,11 +21,32 @@ public class UpdateCarportCommand implements Command
 {
     private String target;
 
+    /**
+     * Ininitializing target and denied for the command
+     * 
+     * @param target a String, reference to jsp
+     */
     public UpdateCarportCommand(String target)
     {
         this.target = target;
     }
 
+    /**
+     * 
+     * Retrieves the order from session and the parameters roof, type, slope, depth, width
+     * shedDepth, shedWidth and shed from request, if input invalid a String is returned as
+     * response and forward to employeeorder.jsp
+     * if input is valid - retrieves rooftype from database and generates a roof, the 
+     * carport and salesprice are recalculated and a String is retuned as response 
+     * - forward to employeeorder.jsp
+     * 
+     * @param request a HttpServletRequest
+     * @param response a HttpServletResponse
+     * @param manager an instance of FunctionManager
+     * @return target
+     * @throws CommandException if an error occours
+     * @throws DataException if retrievel was not possible 
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {

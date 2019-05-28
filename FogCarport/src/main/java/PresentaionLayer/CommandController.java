@@ -72,6 +72,12 @@ public class CommandController
         commands.put("deleterooftype", new DeleteRooftypeCommand("rooftypes.jsp"));
     }
 
+    /**
+     * Checks the path and instance for null
+     * 
+     * @param path a String - the path that the command executes from
+     * @return an instance of Command with the recieved path
+     */
     public static synchronized Command from(String path)
     {
         if (path == null)

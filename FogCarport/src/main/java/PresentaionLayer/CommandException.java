@@ -13,6 +13,12 @@ public class CommandException extends Exception
 {
     private final String target;
 
+    /**
+     * This is a customized Exception class that executes target as
+     * error.jsp, if an error occurs
+     * 
+     * @param message the message that will be shown, if an error occurs
+     */
     public CommandException(String message)
     {
         super(message);

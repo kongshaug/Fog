@@ -20,11 +20,29 @@ public class ViewDrawingCommand implements Command
 {
     private String target;
 
+    /**
+     * Ininitializing target and denied for the command
+     * 
+     * @param target a String, reference to jsp
+     */
     public ViewDrawingCommand(String target)
     {
         this.target = target;
     }
 
+    /**
+     * 
+     * Retrieves attribute order from session and the carport drawing is generated based on
+     * the details from the order - the carport is saved on session, while carportDrawing is 
+     * saved on request - forward to viewdrawing.jsp
+     * 
+     * @param request a HttpServletRequest
+     * @param response a HttpServletResponse
+     * @param manager an instance of FunctionManager
+     * @return target
+     * @throws CommandException if an error occours
+     * @throws DataException if retrievel was not possible 
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {

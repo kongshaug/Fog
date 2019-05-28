@@ -22,11 +22,29 @@ public class UpdateRooftypeCommand implements Command
 
     private String target;
 
+    /**
+     * Ininitializing target and denied for the command
+     * 
+     * @param target a String, reference to jsp
+     */
     public UpdateRooftypeCommand(String target)
     {
         this.target = target;
     }
 
+    /**
+     * 
+     * Retrieves attribute from session and parameters name, material1 and material2 from request
+     * the two materials are retrieved from database and the rooftype is updated in the database
+     * as well, a String is returned as response and forward to rooftype.jsp
+     * 
+     * @param request a HttpServletRequest
+     * @param response a HttpServletResponse
+     * @param manager an instance of FunctionManager
+     * @return target
+     * @throws CommandException if an error occours
+     * @throws DataException if retrievel was not possible 
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {

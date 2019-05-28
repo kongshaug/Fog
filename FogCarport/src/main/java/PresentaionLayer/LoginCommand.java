@@ -23,12 +23,30 @@ public class LoginCommand implements Command
     String CustomerTarget;
     String EmployeeTarget;
 
+    /**
+     * Ininitializing target and denied for the command
+     * 
+     * @param CustomerTarget a String, reference to jsp
+     * @param EmployeeTarget a String, reference to jsp
+     */
     public LoginCommand(String CustomerTarget, String EmployeeTarget)
     {
         this.CustomerTarget = CustomerTarget;
         this.EmployeeTarget = EmployeeTarget;
     }
 
+    /**
+     * 
+     * Retrieves parameters email and password, the user is retrieved from database
+     * and forwards to either shop.jsp as customer or employee.jsp as employee 
+     * 
+     * @param request a HttpServletRequest
+     * @param response a HttpServletResponse
+     * @param manager an instance of FunctionManager
+     * @return CustomerTarget or EmpoloyeeTarget
+     * @throws CommandException if an error occours
+     * @throws DataException if retrievel was not possible 
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {

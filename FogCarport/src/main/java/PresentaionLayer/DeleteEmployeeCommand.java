@@ -21,11 +21,30 @@ public class DeleteEmployeeCommand implements Command
 {
     private String target;
 
+    /**
+     * Ininitializing target and denied for the command
+     * 
+     * @param target a String, reference to jsp
+     */
     public DeleteEmployeeCommand(String target)
     {
         this.target = target;
     }
 
+    /**
+     * 
+     * Retrieves employee as User from session, removes employee and a string 
+     * is returned as repsonse - a list of users are retrieved from the database
+     * and saved in session as users
+     * - forwards to employeelist.jsp 
+     * 
+     * @param request a HttpServletRequest
+     * @param response a HttpServletResponse
+     * @param manager an instance of FunctionManager
+     * @return target
+     * @throws CommandException if an error occours
+     * @throws DataException if retrievel was not possible 
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
