@@ -1,4 +1,4 @@
-# Fog
+# Exam project - FOG 
 
 ### Authors
 
