@@ -7,7 +7,6 @@
 <%@page import="FunctionLayer.HelpingClasses.User"%>
 <%@page import="FunctionLayer.HelpingClasses.RoofType"%>
 <%@page import="java.util.List"%>
-<%@page import="javafx.scene.control.RadioButton"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@include file = "header.jsp" %>
 
@@ -36,8 +35,8 @@
             <select name="type" id="type">
                 <option disabled selected value="0">Vælg tagtype</option>            
                 <%
-                    List<RoofType> slopedroofs = (List<RoofType>) request.getAttribute("slopedroofs");
-                    List<RoofType> flatroofs = (List<RoofType>) request.getAttribute("flatroofs");
+                    List<RoofType> slopedroofs = (List<RoofType>) session.getAttribute("slopedroofs");
+                    List<RoofType> flatroofs = (List<RoofType>) session.getAttribute("flatroofs");
 
                     for (RoofType ro : flatroofs)
                     {

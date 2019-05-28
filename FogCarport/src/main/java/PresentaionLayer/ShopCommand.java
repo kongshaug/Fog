@@ -11,6 +11,7 @@ import FunctionLayer.HelpingClasses.RoofType;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -45,10 +46,11 @@ public class ShopCommand implements Command
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, FunctionManager manager) throws CommandException, DataException
     {
+        HttpSession session = request.getSession();
         List<RoofType> slopedRoofs = manager.getSlopedRoofs();
         List<RoofType> flatRoofs = manager.getFlatRoofs();
-        request.setAttribute("slopedroofs", slopedRoofs);
-        request.setAttribute("flatroofs", flatRoofs);
+        session.setAttribute("slopedroofs", slopedRoofs);
+        session.setAttribute("flatroofs", flatRoofs);
 
         return target;
     }
