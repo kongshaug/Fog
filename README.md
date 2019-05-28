@@ -1,17 +1,23 @@
 # Exam project - FOG 
 
 Link til droplet: [Fog](http://157.230.97.130/Fog/)
+
 There are 5 users in the database
 
 3 customer:
+
 Email: customer@hotmail.dk  password: 1234
+
 Email: hans@hotmail.dk      password: 1234
+
 Email: poul@hotmail.dk      password: 1234
 
 1 employee:
+
 employee@hotmail.dk         password: 1234
 
 1 Admin:
+
 admin@hotmail.dk            password: 1234
 
 ### Authors
