@@ -14,11 +14,11 @@ Email: poul@hotmail.dk      password: 1234
 
 1 employee:
 
-employee@hotmail.dk         password: 1234
+Email: employee@hotmail.dk         password: 1234
 
 1 Admin:
 
-admin@hotmail.dk            password: 1234
+Email: admin@hotmail.dk            password: 1234
 
 ### Authors
 
