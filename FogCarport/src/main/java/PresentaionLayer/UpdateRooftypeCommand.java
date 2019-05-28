@@ -34,6 +34,10 @@ public class UpdateRooftypeCommand implements Command
 
     /**
      * 
+     * Retrieves attribute from session and parameters name, material1 and material2 from request
+     * the two materials are retrieved from database and the rooftype is updated in the database
+     * as well, a String is returned as response and forward to rooftype.jsp
+     * 
      * @param request a HttpServletRequest
      * @param response a HttpServletResponse
      * @param manager an instance of FunctionManager

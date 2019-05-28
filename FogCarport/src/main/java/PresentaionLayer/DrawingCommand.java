@@ -40,9 +40,7 @@ public class DrawingCommand implements Command
      * if input is valid - retrieves rooftype from database and generates a roof, the 
      * carport is calculated a String (drawing of carport) is retuned as response
      * - forward to drawing.jsp
-     * 
-     * 
-     * 
+     *
      * @param request a HttpServletRequest
      * @param response a HttpServletResponse
      * @param manager an instance of FunctionManager

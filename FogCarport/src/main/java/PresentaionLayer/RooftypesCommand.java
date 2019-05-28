@@ -38,6 +38,10 @@ public class RooftypesCommand implements Command
 
     /**
      * 
+     * Retrieves the user from session and a list of objects from RoofType from
+     * the database and saves the attribute in request as rooftypes - forward to rooftypes.jsp
+     * If access is denied forward to employee.jsp
+     * 
      * @param request a HttpServletRequest
      * @param response a HttpServletResponse
      * @param manager an instance of FunctionManager

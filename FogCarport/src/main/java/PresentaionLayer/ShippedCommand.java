@@ -32,6 +32,9 @@ public class ShippedCommand implements Command
 
     /**
      * 
+     * Retrieves an object from Order and changes the status of shipped 
+     * for the order in the database - forward to employeeorder.jsp
+     * 
      * @param request a HttpServletRequest
      * @param response a HttpServletResponse
      * @param manager an instance of FunctionManager

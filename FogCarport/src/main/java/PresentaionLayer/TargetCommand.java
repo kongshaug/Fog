@@ -29,7 +29,8 @@ public class TargetCommand implements Command
     }
 
     /**
-     *
+     * 
+     * This command return to a jsp.
      * 
      * @param request a HttpServletRequest
      * @param response a HttpServletResponse

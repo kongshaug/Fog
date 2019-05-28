@@ -32,6 +32,10 @@ public class noUserCommand implements Command
 
     /**
      * 
+     * Retrieves attributes email and password from request, 
+     * the user with the email and password is retrieved from database and is
+     * saved on session, forward to drawing.jsp , else forward to nouser.jsp
+     * 
      * @param request a HttpServletRequest
      * @param response a HttpServletResponse
      * @param manager an instance of FunctionManager

@@ -35,6 +35,9 @@ public class UpdateCommand implements Command
 
     /**
      * 
+     * Retrieves attribute order from session and parameters paid and status from request
+     * - paid and ststua are updated in database and forward to employeeorder.jsp
+     * 
      * @param request a HttpServletRequest
      * @param response a HttpServletResponse
      * @param manager an instance of FunctionManager

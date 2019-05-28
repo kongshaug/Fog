@@ -32,6 +32,9 @@ public class ShopCommand implements Command
 
     /**
      * 
+     * Retrieves the rooftypes slopedRoofs and flatRoofs from database as two lists
+     * - these two list are saved on request - forward to shop.jsp
+     * 
      * @param request a HttpServletRequest
      * @param response a HttpServletResponse
      * @param manager an instance of FunctionManager

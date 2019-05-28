@@ -30,8 +30,8 @@ public class FrontController extends HttpServlet
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
-     * @param response servlet response
+     * @param request servlet HttpServletrequest
+     * @param response servlet HttpServletresponse
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */

@@ -34,6 +34,12 @@ public class RooftypeInfoCommand implements Command
 
     /**
      * 
+     * Retrieves the user from session and checks the role of user, if the rooftype
+     * from request is empty a String is returned and forwatd to rooftypes.jsp
+     * else the specific rooftype with a rooftype_id is retrieved from the database
+     * and saved on session - forward to rooftype.jsp 
+     * if access is denied forward to shop.jsp
+     * 
      * @param request a HttpServletRequest
      * @param response a HttpServletResponse
      * @param manager an instance of FunctionManager
